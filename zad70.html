@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Използвана литература</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Анимирани вертикални полета */
+        .sidebar {
+            position: absolute;
+            width: 80px;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(128, 128, 128, 0.8),
+                rgba(255, 255, 255, 0.8),
+                rgba(192, 192, 192, 0.8),
+                rgba(255, 255, 255, 0.8)
+            );
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .sidebar.left {
+            left: 0;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .sidebar.right {
+            right: 0;
+            border-radius: 0 20px 20px 0;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Анимирани картинки в страничните полета */
+        .floating-icon {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0.5s;
+        }
+
+        .floating-icon:nth-child(3) {
+            top: 55%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 1s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 75%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0px);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            margin: 0 80px;
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            to {
+                text-shadow: 2px 2px 20px rgba(102, 126, 234, 0.5);
+            }
+        }
+
+        .bibliography-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .book-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-images {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .book-img {
+            width: 60px;
+            height: 75px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            animation: bookPulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-img:nth-child(odd) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes bookPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .book-list {
+            list-style: none;
+        }
+
+        .book-item {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .book-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+
+        .book-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .book-author {
+            color: #666;
+            font-style: italic;
+        }
+
+        .home-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .home-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive дизайн */
+        @media (max-width: 768px) {
+            .bibliography-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .main-content {
+                margin: 0 40px;
+                padding: 20px;
+            }
+            
+            .sidebar {
+                width: 40px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Ляво вертикално поле с анимирани картинки -->
+        <div class="sidebar left">
+            <div class="floating-icon">📚</div>
+            <div class="floating-icon">🔬</div>
+            <div class="floating-icon">🌟</div>
+            <div class="floating-icon">🚂</div>
+       
+<td valign="top" bgcolor="#fffff">
+
+
+ 
+<td valign="top" bgcolor="#fffff">
+
+<table dlign=”center” border=”1” width=”90%”>
+
+<tr>
+<td> 
+</td>
+</tr>
+
+
+
+
+<tr>
+<td><a href="Upr1.html">Начало</a>  </td>
+</tr>
+</table>
+
+
+</html> </div>
+
+        <!-- Дясно вертикално поле с анимирани картинки -->
+        <div class="sidebar right">
+            <div class="floating-icon">🌌</div>
+            <div class="floating-icon">⚛️</div>
+            <div class="floating-icon">🎯</div>
+            <div class="floating-icon">📖</div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <h1 class="title">Използвана литература</h1>
+            
+            <div class="bibliography-grid">
+                <!-- Лява колона -->
+                <div class="book-section">
+                    <div class="book-images">
+                        <div class="book-img">📘</div>
+                        <div class="book-img">📙</div>
+                        <div class="book-img">📗</div>
+                        <div class="book-img">📕</div>
+                    </div>
+                    
+                    <ul class="book-list">
+                        <li class="book-item">
+                            
+                        
+                        
+                        <li class="book-item">
+                            <div class="book-title">"Астрономи"</div>
+                            <div class="book-author">И.Г. Колчински</div>
+                        </li>
+                        
+                        <li class="book-item">
+                            <div class="book-title">"Летящият цирк на физиката"</div>
+                            <div class="book-author">Джърл Уокър</div>
+                        </li>
+                        
+                        <li class="book-item">
+                            <div class="book-title">"Илюстрована история на света"</div>
+                            <div class="book-author">Нийл Морис, Нийл Грант, Лайза Иземан, Хейзъл Мери Мартел, Лин Макрей, Джон Малам, Майкъл Полард</div>
+                        </li>
+                        
+                        <li class="book-item">
+                            <div class="book-title">"Моята първа енциклопедия за космоса"</div>
+                            <div class="book-author">енциклопедия "Британика"</div>
+                        </li>
+                        
+                        <li class="book-item">
+                            <div class="book-title">"История на физиката" - първа и втора част</div>
+                            <div class="book-author">Яков Григориевич Дорфман</div>
+                        </li>
+                        
+                       
+
+                      <li class="book-item">
+                            <div class="book-title">"Справочник по елементарна физика"</div>
+                            <div class="book-author">Н.Кошкин, М. Шикеревич</div>
+                        </li>
+                        
+                        <li class="book-item">
+                            <div class="book-title">"Космическото пространство"</div>
+                            <div class="book-author">енциклопедия "Британика"</div>
+                        </li>
+                        
+                        <li class="book-item">
+                            <div class="book-title">"100-те най-влиятелни личности в историята на човечеството"</div>
+                            <div class="book-author">Майкъл Харт</div>
+                        </li>
+                        
+                        <li class="book-item">
+                            <div class="book-title">"Световните изобретения в дати"</div>
+                            <div class="book-author">Франтишек Илек, Йозеф Куба, Ярослава Илкова</div>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- Дясна колона -->
+                <div class="book-section">
+                    <div class="book-images">
+                        <div class="book-img">📚</div>
+                        <div class="book-img">🌌</div>
+                        <div class="book-img">👥</div>
+                        <div class="book-img">⚡</div>
+                    </div>
+                    
+
+
+
+
+
+
+
+<td valign="top" bgcolor="#fffff">
+
+<table dlign=”center” border=”1” width=”90%”>
+<tr>
+<td> <img src ="2002[1].jpg" align="left" width="180" border="7"height="220"></td>
+<td><img src ="22226.jpg" align="left" width="180" border="7"height="220"></td>
+</tr>
+
+<tr>
+<td> <img src ="2006[1].jpg" align="left" width="180" border="7"height="220"></td>
+<td><img src ="22227.jpg" align="left" width="180" border="7"height="220"> </td>
+</tr>
+
+<tr>
+<td><img src ="22223.jpg" align="left" width="180" border="7"height="220"></td>
+ <td><img src ="22222.jpg" align="left" width="180" border="7"height="220"> </td>
+</tr>
+<tr>
+<td><img src ="2007[1].jpg" align="left" width="180" border="7"height="220"></td>
+<td><img src ="22228.jpg" align="left" width="180" border="7"height="220"> </td>
+</tr>
+<tr>
+<td><img src ="22224.jpg" align="left" width="180" border="7"height="220"></td>
+ <td><img src ="2010[1].jpg" align="left" width="180" border="7"height="220"> </td>
+</tr>
+
+
+
+
+</table>
+                    
+
+
+ <li class="book-item">
+                            
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="home-link">
+                <a href="Upr1.html" class="home-btn">🏠 Начало</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

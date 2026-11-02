@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интересни факти от древността</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимирани странични полета */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            width: 150px;
+            height: 100vh;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff, #f0f0f0, #e8e8e8);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            z-index: 1;
+        }
+
+        .sidebar-left {
+            left: 0;
+        }
+
+        .sidebar-right {
+            right: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимирани елементи в страничните полета */
+        .animated-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(102, 126, 234, 0.7);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animated-element:nth-child(1) { top: 10%; left: 20px; animation-delay: 0s; }
+        .animated-element:nth-child(2) { top: 30%; right: 20px; animation-delay: 2s; }
+        .animated-element:nth-child(3) { top: 50%; left: 30px; animation-delay: 4s; }
+        .animated-element:nth-child(4) { top: 70%; right: 30px; animation-delay: 6s; }
+        .animated-element:nth-child(5) { top: 90%; left: 15px; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Електрически мълнии анимация */
+        .lightning {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffff00, #ff6600);
+            animation: lightning 3s ease-in-out infinite;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+        }
+
+        .lightning:nth-child(6) { top: 15%; left: 50px; animation-delay: 1s; }
+        .lightning:nth-child(7) { top: 45%; right: 50px; animation-delay: 3s; }
+        .lightning:nth-child(8) { top: 75%; left: 60px; animation-delay: 5s; }
+
+        @keyframes lightning {
+            0%, 90%, 100% { opacity: 0; transform: scaleY(0); }
+            5%, 85% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Основен контейнер */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-left: 150px;
+            margin-right: 150px;
+        }
+
+        /* Заглавие с мигане */
+        .main-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #764ba2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Основно съдържание */
+        .content-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .theory-panel {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .theory-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .formula {
+            background: #e8f2ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .test-panel {
+            flex: 2;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-panel h1 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question {
+            background: #f8f9ff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e8ff;
+        }
+
+        .question b {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .question p {
+            margin: 5px 0;
+            padding-left: 15px;
+        }
+
+        /* Долна навигация */
+        .bottom-navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .bottom-navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-navigation a:hover {
+            color: #764ba2;
+        }
+
+        /* Пулсиращи частици във фона */
+        .particle {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+            z-index: 0;
+        }
+
+        .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            left: 20%;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            left: 90%;
+            animation-delay: 10s;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 1300px) {
+            .sidebar { display: none; }
+            .container {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фонови частици -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- Лява странична лента -->
+    <div class="sidebar sidebar-left">
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <!-- Дясна странична лента -->
+    <div class="sidebar sidebar-right">
+
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <div class="container">
+        <!-- Заглавие -->
+        <div class="main-title">
+            Интересни факти от древността
+        </div>
+
+        <!-- Навигация -->
+        <div class="navigation">
+              <a href="#Vavilfnski tablichki">Вавилонски таблички</a>
+            <a href="#Eratosten">Ератостен</a>
+            <a href="#Hiparh">Хипарх</a>
+           
+            <a href="Upr1.html">Начало</a>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Теоретична част -->
+            <div class="theory-panel">
+              
+
+  Xронологична линия на времето:
+<h2>📜 Древност и Античност (Преди н.е.)</h2>
+<h4>•	ок. 970 – 931 пр.н.е. | Цар Соломон</h4>
+o	Легендарен владетел на Израел, символ на мъдростта, ранното правосъдие и събирач на притчи.</br>
+<h4>•	ок. VIII в. пр.н.е. | Омир</h4>
+o	Епически поет, чиито произведения „Илиада“ и „Одисея“ полагат основите на древногръцката култура и образование.</br>
+<h4>•	ок. 624 – 546 пр.н.е. | Талес от Милет</h4>
+o	Първият древногръцки философ и учен. Търси естествени причини за явленията вместо митологични обяснения; баща на геометрията.</br>
+<h4>•	ок. 570 – 495 пр.н.е. | Питагор</h4>
+o	Математик и мистик, доказал известната Питагорова теорема и открил математическите съотношения в музиката.</br>
+<h4>•	ок. 480 – 420 пр.н.е. | Левкип</h4>
+o	Философ, смятан за основоположник на атомизма – идеята, че светът е съставен от неделими частици.</br>
+<h4>•	ок. 460 – 370 пр.н.е. | Демокрит</h4>
+o	Ученик на Левкип, който доразвива атомната теория за строежа на материята и въвежда понятието „атом“.</br>
+<h4>•	469 – 399 пр.н.е. | Сократ</h4>
+o	Философ, преобърнал мисленето чрез своя „Сократов метод“ на диалог и въпроси, поставящ човека и етиката в центъра.</br>
+<h4>•	384 – 322 пр.н.е. | Аристотел</h4>
+o	Енциклопедичен ум, ученик на Платон и учител на Александър Велики. Създава формалната логика и класифицира науките.</br>
+<h4>•	ок. 300 пр.н.е. | Евклид</h4>
+o	Бащата на геометрията. Неговият труд „Елементи“ остава основен учебник по математика в продължение на над 2000 години.</br>
+<h4>•	ок. 287 – 212 пр.н.е. | Архимед</h4>
+o	Математик, физик и инженер. Открива закона за хидростатичното изтласкване (Архимедов закон) и изчислява числото Пи.</br>
+     
+</div>
+ 
+     
+
+
+
+
+
+
+
+
+
+  
+
+            <!-- Тестова част -->
+            <div class="test-panel">
+                
+ <div class="scientist-card" id="Vavilfnski tablichki">
+
+  <h3> Вавилонските глинени таблички</h3>Те са едни от най-старите писмени паметници в човешката история, създадени в Древна Месопотамия (днешен Ирак).</br>
+ Те представляват плочки от влажна глина, върху които се е писало с помощта на остра тръстика (стилус), оставяща отпечатъци с формата на клинове – откъдето идва и наименованието на писмеността: клинопис. 
+След изписването табличките са били изпичани на слънце или в пещи, за да се запазят трайно.</br>
+Ето най-важните аспекти, свързани с тях:
+<h4>1. Тематика и съдържание</h4>
+Противно на очакванията, че древните текстове съдържат само митове, по-голямата част от откритите таблички имат практическо приложение:</br>
+<h4>Администрация и търговия:</h4> Сметки, разписки за стоки (зърно, добитък), договори за продажба, завещания и съдебни решения.</br>
+<img src ="17.jpg" align="left" width="900" border="7"height="480"></br>
+<h4>Математика и астрономия:</h4> </h4>Вавилонците са използвали шестдесетична бройна система (база 60), която използваме и днес за измерване на времето (60 минути/секунди) и 
+кръга (360 градуса). Някои таблички (като известната Plimpton 322) показват напреднали познания по тригонометрия и Питагоровата теорема векове преди Питагор.</br>
+<h4>Литература и религия:</h4> Върху глина са записани епоси (като Епоса за Гилгамеш), молитви, химни към боговете и сътворението на света (Енума Елиш).</br>
+<h4>Закони:</h4> Най-известният правен кодекс – Кодексът на Хамурапи – е записан на каменна стела, но много от законите и прецедентите са се разпространявали и 
+съхранявали именно върху глинени таблички.</br>
+<h4>2. Как са се съхранили?</h4>
+Глината се оказва изключително издръжлив материал. Докато папирусът и пергаментът гният и изчезват, изпечената глина може да оцелее хилядолетия под земята. 
+Парадоксално, много архиви са се запазили благодарение на пожари при превземането на древните градове – огънят буквално е изпичал и консервирал табличките завинаги.</br>
+<h4>3. Значими открития</h4>
+Библиотеката на Ашурбанипал: Макар и асирийска (в Ниневия), тази библиотека съдържа десетки хиляди таблички, много от които са копия на по-стари вавилонски и шумерски текстове.</br>
+Табличката Plimpton 322: Вавилонска табличка от около 1800 г. пр.н.е., съдържаща таблица с питагорови тройки, което доказва невероятното ниво на вавилонската математика.</br>
+Ако проявявате интерес към конкретен аспект, мога да ви разкажа повече за вавилонската математика, как точно е бил разчетен клинописът или за съдържанието на Епоса за Гилгамеш. </br>
+ <div class="scientist-card" id="Eratosten">                       
+<h2>Ератостен</h2>
+<img src="16[1].jpg" alt="." width="900" height="480">
+
+Ератостен от Кириней е един от най-великите умове на Античността, наричан от съвременниците си „Бета“, защото бил вторият най-добър във всяка научна сфера на своето време.</br>
+ Въпреки това неговото най-голямо постижение е абсолютно първокласно: той изчислява обиколката на Земята още през III в. пр.н.е. само с помощта на едно дървено колче, 
+сянката му и елементарна геометрия, като грешката му е била под 2%!</br>
+Освен като баща на географията, той остава в историята и с гениалния си математически метод за намиране на прости числа.</br>
+
+<h4>Сито на Ератостен</h4>
+
+Това е древен алгоритъм за бързо намиране на всички прости числа до определено число \(n\). Методът работи чрез механично „пресяване“ (задраскване) на сложните числа.</br>
+Как работи методът (напр. до 30):</br>
+1. Записват се всички числа от 2 до 30.</br>
+2. Започва се с първото просто число – 2. Оставя се, а всички негови кратни (4, 6, 8...) се задраскват.</br>
+3. Отива се на следващото незадраскано число – 3. То е просто. Оставя се, а всички негови кратни (6, 9, 12...) се задраскват.</br>
+4. Следващото свободно число е 5. Процесът се повтаря за неговите кратни.</br>
+5. Това продължава, докато се стигне до число, чийто квадрат е по-голям от 30 </br>
+Всички числа, които останат незадраскани, са прости.</br>
+
+<p>.</p>
+ <div class="scientist-card" id="Hiparh">          
+<h2>Хипарх Никейски – човекът, който подреди звездите</h2>
+<img src="22.jpg" alt="." width="900" height="480">
+
+
+
+
+Хипарх Никейски бил древногръцки астроном, математик и географ, живял през II век пр.н.е. 
+Той обичал да наблюдава нощното небе и с голямо търпение изучавал движението на звездите и планетите.
+ Работил предимно на остров Родос, където правел точни наблюдения и сравнявал резултатите си.</br>
+
+Едно от най-големите му постижения било съставянето на каталог на звездите, в който ги подреждал според тяхната яркост. 
+Хипарх открил и, че положението на звездите бавно се променя през вековете. Неговите изследвания помогнали на следващите поколения учени да разбират по-добре Вселената.</br>
+
+Интересно за личността: Хипарх бил известен със своето трудолюбие и стремеж към истината.
+ Той вярвал, че природата може да бъде разбрана чрез внимателни наблюдения, точни измервания и математически изчисления. Затова често е смятан за един от най-великите астрономи на Античността.
+
+
+
+
+
+            </div></div>
+            </div>
+        
+
+        <!-- Долна навигация -->
+        <div class="bottom-navigation">
+           
+            <a href="zad31.html">Назад</a> |
+            <a href="Upr1.html">Начало</a>
+        </div>
+    </div>
+</body>
+</html>

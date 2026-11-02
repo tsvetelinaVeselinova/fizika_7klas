@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ключ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eeeeee;
+            line-height: 1.6;
+        }
+
+        /* Заглавие с анимация */
+        #blink {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Навигационна лента */
+        .nav-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+
+        .nav-bar a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Основен контейнер */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Лява странична лента с градиент */
+        .left-sidebar {
+            width: 250px;
+            background: linear-gradient(45deg, #f0f0f0 0%, #ffffff 50%, #e0e0e0 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            min-height: 800px;
+        }
+
+        /* Дясна странична лента с градиент */
+        .right-sidebar {
+            width: 250px;
+            background: linear-gradient(-45deg, #f0f0f0 0%, #ffffff 50%, #e0e0e0 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        /* Стилове за информационните кутии */
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .info-box h3 {
+            color: #ffeb3b;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .info-box p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .info-box sup {
+            font-size: 0.7em;
+        }
+
+        /* Изображения в страничните ленти */
+        .sidebar-image {
+            width: 100%;
+            max-width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #ddd;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-image:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+
+        /* Тестове */
+        .test-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            font-size: 1.5em;
+        }
+
+        .test-section h4 {
+            color: #667eea;
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .task {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .task b {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Навигационни връзки */
+        .nav-links {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Зелена разделителна линия */
+        .green-separator {
+            height: 8px;
+            background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+            margin: 20px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Responsive дизайн */
+        @media (max-width: 1200px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .left-sidebar, .right-sidebar {
+                width: 100%;
+                position: relative;
+            }
+            
+            .right-sidebar {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .sidebar-image {
+                width: 140px;
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 10px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            #blink {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="blink">Ключ</h1>
+    
+    <div class="nav-bar">
+        <a href="Upr1.html">Начало</a> |
+        <a href="zad63.html">Справочник</a>
+    </div>
+    
+    <div class="green-separator"></div>
+    
+    <div class="main-container">
+       <h3>Внимание!</h3>
+                <p>За част от въпросите можете да потърсите информация от преговора към урока, който се намира в страничните леви полета. Можете също да направите справка със справочника, който се отваря от всяка страница.</p>
+                <p>Накрая можете просто да проверите верния отговор. Отворете ключа и потърсите съответния тест и задача.</p>
+                
+              
+           </div>
+
+    
+
+
+
+
+   <div class="test-section">
+                    <h2>ТЕСТ №24: Атом</h2>
+                    <div class="test-answers">
+                        Зад.1) а | Зад.2) 92 протона и 143 и 146 неутрона Зад.3.|  16;17;18 | Зад.4) г | Зад.5) в | Зад.6) г | Зад.7) а | Зад.8) б
+                    </div>
+                    <div class="back-links">
+                        <a href="zad5.html">Назад</a> | <a href="zad51.html">Упътване</a>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <h2>ТЕСТ №25: Радиоактивност</h2>
+                    <div class="test-answers">
+                        Зад.1) а | Зад.2) в | Зад.3) б | Зад.4) г | Зад.5) При ядрената реакция ядрото се превръща в ядро на друг елемент, а при химичната-не | Зад.6) б | Зад.7) б | Зад.8. 143 неутрона
+                    </div>
+                    <div class="back-links">
+                        <a href="zad40.html">Назад</a> | <a href="zad51.html">Упътване</a>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <h2>ТЕСТ №26: Слънчева система</h2>
+                    <div class="test-answers">
+                        Зад.1) в | Зад.2) в | Зад.3) г | Зад.4) б | Зад.5) в | Зад.6) б | Зад.7) б | Зад.8) в
+                    </div>
+                    <div class="back-links">
+                        <a href="zad41.html">Назад</a> | <a href="zad51.html">Упътване</a>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <h2>ТЕСТ №27: Слънце и звезди</h2>
+                    <div class="test-answers">
+                        Зад.1) б | Зад.2) в | Зад.3) б | Зад.4) а | Зад.5) б | Зад.6) 150 000 000 000 kg | Зад.7) 1 000 000 000 000 kg
+                    </div>
+                    <div class="back-links">
+                        <a href="zad42.html">Назад</a> | <a href="zad51.html">Упътване</a>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <h2>ТЕСТ №28: Галактики</h2>
+                    <div class="test-answers">
+                        Зад.1) в | Зад.2) а | Зад.3) в | Зад.4) г | Зад.5) в | Зад.6) в
+                    </div>
+                    <div class="back-links">
+                        <a href="zad43.html">Назад</a> | <a href="zad51.html">Упътване</a>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <h2>Обобщителен тест</h2>
+                    <div class="test-answers">
+                        Зад.1) в | Зад.2) б | Зад.3) в | Зад.4) г | Зад.5) в | Зад.6) б | Зад.7) б | Зад.8) в | Зад.9) г | Зад.10) а | Зад.11) в,г | Зад.12) г
+                    </div>
+                    <div class="back-links">
+                        <a href="zad44.html">Назад</a>
+                    </div>
+                </div>
+
+                <div class="test-section">
+                    <h2>Изходно равнище</h2>
+                    <table>
+                        <tr>
+                            <th>Величина</th>
+                            <th>Означение</th>
+                            <th>Осн. мерна ед.</th>
+                            <th>Дробни</th>
+                            <th>Кратни</th>
+                        </tr>
+                        <tr>
+                            <td>Големина на ел. ток</td>
+                            <td>I</td>
+                            <td>A</td>
+                            <td>mA</td>
+                            <td>kA</td>
+                        </tr>
+                        <tr>
+                            <td>Количество топлина</td>
+                            <td>Q</td>
+                            <td>J</td>
+                            <td>-</td>
+                            <td>kJ; MJ</td>
+                        </tr>
+                        <tr>
+                            <td>Оптична сила</td>
+                            <td>D</td>
+                            <td>D</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Разстояние до звездите</td>
+                            <td>r</td>
+                            <td>m</td>
+                            <td>-</td>
+                            <td>km; ly</td>
+                        </tr>
+                    </table>
+                    
+                    <div class="test-answers" style="margin-top: 20px;">
+                        Зад.2) в | Зад.3) а-4; б-3; в-1; г-2 | Зад.4) а-2; б-4; в-1; г-3 | Зад.5) г | Зад.6) г | Зад.7) 6 kW | Зад.8) в | Зад.9) 2h 39 min 20s | Зад.10) г | Зад.11) б | Зад.12) в
+                    </div>
+                    
+                    <div class="back-links">
+                        <a href="#back">Назад</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+       

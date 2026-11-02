@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Речник на физичните термини</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        #blink {
+            text-align: center;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .navigation {
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navigation a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background-color: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #bdc3c7 0%, #2c3e50 50%, #bdc3c7 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .sidebar-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sidebar-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .sidebar-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 3px solid #3498db;
+        }
+
+        .sidebar-item h3 {
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .content {
+            flex: 1;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .content h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        .term {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .term:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .term b {
+            color: #e74c3c;
+            font-size: 1.1em;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .term-definition {
+            color: #2c3e50;
+            font-size: 1em;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                padding: 15px;
+            }
+            
+            .sidebar-item {
+                min-width: 150px;
+                margin-right: 15px;
+                margin-bottom: 0;
+            }
+            
+            #blink {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Анимация за появяване на термините */
+        .term {
+            opacity: 0;
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .term:nth-child(1) { animation-delay: 0.1s; }
+        .term:nth-child(2) { animation-delay: 0.2s; }
+        .term:nth-child(3) { animation-delay: 0.3s; }
+        .term:nth-child(4) { animation-delay: 0.4s; }
+        .term:nth-child(5) { animation-delay: 0.5s; }
+        .term:nth-child(6) { animation-delay: 0.6s; }
+        .term:nth-child(7) { animation-delay: 0.7s; }
+        .term:nth-child(8) { animation-delay: 0.8s; }
+        .term:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="blink">Речник на физичните термини</h1>
+    
+    <div class="navigation">
+        <a href="Upr1.html">Начало</a> | <a href="zad1.html">Начална страница</a>
+    </div>
+
+    <div class="main-container">
+
+  <div class="sidebar">
+            
+                <img src="7781.jpg" width="180" height="180">
+                <h3>Вместимост</h3>
+            <p>.</p>
+        <div class="sidebar">
+            
+                <img src="961[1].jpeg" width="180" height="180">
+                <h3>Катер</h3>
+            <p>.</p>
+
+                <img src="510[1].jpeg"width="180" height="180" >
+                <h3>Манометър</h3>
+           <p>.</p>
+            
+                <img src="890[1].jpg"width="180" height="180" >
+                <h3>Едностранен лост</h3>
+           <p>.</p>
+
+                <img src="999.jpg"width="180" height="180" >
+                <h3>Измерения на паралелепипед:</h3> дължина(a), широчина(b), височина(c)
+            
+        <p>.</p>
+                <img src="941[1].jpg" width="180" height="180">
+                <h3>Силомер</h3>
+        
+          </div>
+</div>
+
+        <div class="content">
+            <h1>Начален преговор</h1>
+            
+            <div class="term">
+                <b>ареометър</b>
+                <div class="term-definition">- уред за измерване на плътността на течности</div>
+            </div>
+<div class="term">
+                <b>вместимост</b>
+                <div class="term-definition">-максимално количество от нещо, което може да побере някакъв съд, резервоар, бутилка и т.н. </div>
+            </div>
+
+            <div class="term">
+                <b>измерения на геометрично тяло</b>
+                <div class="term-definition">- за паралелепипед - дължина, широчина и височина (напр. 2 cm х 4 cm х 5 cm); за цилиндър - радиус и височина; за сфера - радиус</div>
+            </div>
+
+            <div class="term">
+                <b>катер</b>
+                <div class="term-definition">- моторна лодка</div>
+            </div>
+
+            <div class="term">
+                <b>лост</b>
+                <div class="term-definition">- неогъваем прът, който може да се върти около опорната си ос</div>
+            </div>
+
+            <div class="term">
+                <b> макара</b>
+                <div class="term-definition">- колело с жлеб, по който минава въже</div>
+            </div>
+   <div class="term">
+                <b>макара</b>
+                <div class="term-definition">- колело с жлеб, по който минава въже</div>
+            </div>
+            <div class="term">
+                <b>манометър</b>
+                <div class="term-definition">- измервателен уред за налягане</div>
+            </div>
+ <div class="term">
+                <b>менискус</b> <div class="term-definition">- при отчитане нивото на течност менискус е кривата, която се образува на
+ повърхността на течността в тесен съд (епруветка) вследствие на повърхностното напрежение.
+ При вдлъбнат менискус стойността се отчита по най-ниската точка (дъното на кривата).</div>
+            </div>
+
+
+            <div class="term">
+                <b>мочурлива площ (мочур)</b>
+                <div class="term-definition">- блатисто, влажно място с трева</div>
+            </div>
+
+            <div class="term">
+                <b>налягане</b>
+                <div class="term-definition">- величина, която е числено равна на силата на натиск, действаща на единица площ</div>
+            </div>
+
+            <div class="term">
+                <b>тегло</b>
+                <div class="term-definition">- силата, действаща на опората, върху която са поставени телата или силата, с която се опъва нишката, на която са окачени</div>
+            </div>
+
+            <div class="term">
+                <b>силомер</b>
+                <div class="term-definition">- уред, предназначен за измерване на големината на сила или тегло на телата</div>
+            </div>
+
+
+
+            <div class="term">
+                <b>полиспаст</b>
+                <div class="term-definition">- уред, състоящ се от  подвижни и неподвижни макари</div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+              <img src="972[1].jpg" width="160" height="180">
+                <h3>Неподвижна макара</h3>
+            
+<p>.</p>
+
+<div class="sidebar">
+              <img src="972.jpg" width="160" height="180">
+                <h3> Подвижна макара</h3>
+            
+<p>.</p>
+  <img src="998.jpg" width="160" height="180">
+                <h3>Лост</h3>
+<p>.</p>
+                <img src="722.jpg" width="180" height="180">
+              <h3>Мочурлива площ</br>(мочурище)</h3> 
+       <p>.</p>   
+            
+                <img src="509[1].jpg" width="180" height="180">
+                <h3>Полиспаст</h3>
+           <p>.</p> 
+               
+            
+           <p>.</p>
+                <img src="1128[1].jpg" width="180" height="180">
+                <h3>Ареометър</h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
