@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Развитие на теорията за атома</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-left, .sidebar-right {
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar-right {
+            border-right: none;
+            border-left: 1px solid #ddd;
+        }
+
+        .main-content {
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin: 30px 0 20px 0;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #7f8c8d;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        h5 {
+            color: #2980b9;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .scientist-section {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .scientist-image {
+            float: left;
+            margin: 0 20px 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .timeline-section {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .timeline-section h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .navigation {
+            text-align: center;
+            padding: 20px;
+            background: #ecf0f1;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .navigation a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: 2px solid #3498db;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .sidebar-nav {
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover {
+            color: #3498db;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item {
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .quote-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 60px;
+            color: #fdcb6e;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar-left, .sidebar-right {
+                display: none;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+                                                                                                                                        
+    <div class="container">
+        <div class="sidebar-left">
+            <div class="sidebar-nav">
+                <a href="#timeline">Хронология</a><br>
+                
+            </div>
+            
+            <div class="timeline-section">
+                
+                <div class="timeline-item">1873 - Максуел</div> <img src="921[1].jpg" alt="." width="100" height="100"> <p>развива теорията на електромаг-</br>нитното поле, разработва класическата електродинамика</p>
+<p>.</p>
+                <h5>1886-89 г. — Хенрих Херц</h5> <img src="928[1].jpg" alt="." width="100" height="100">
+                <p>експериментално доказва съществуването на електромагнитни вълни</p>
+<p>.</p>
+             <h5>1895 г. — Вилхелм Конрад Рьонтген</h5><img src="3333.png" alt="." width="100" height="100"> 
+              </p><p>открива Х-лъчите (рентгеновите лъчи)</p>
+<p>.</p>
+<h5>1896 г. — Анри Бекерел</h5>
+                <p>открива естествената радиоактивност</p>
+<p>.</p>
+
+                 <div class="timeline-item">1897г. -  английският физик Джоузеф Джон Томсън</div><img src="920[1].png" alt="." width="100" height="100"> <p>открива електрона</p>
+<p>.</p>
+
+<p>	<i>Думата „атом“  се използва за обозначаване на основната частица на даден химичен елемент, защото по онова време химиците смятат, 
+че това е най-малката неделима частица на веществото.	</p>
+<p>След откриването наелектрона Томсън смята, че  леките и отрицателно заредени електрони са разпределени в целия обем на атома или може би се 
+въртят по кръгови орбити, като електрическият им заряд се уравновесява от наличието на облак от положителен заряд, разпределен в пространството. </p>
+По-късно този модел е наречен „пудинг със стафиди“</i>
+ <img src="3335.png" alt="." width="100" height="150"></div>
+                <div class="timeline-item">1900 - Планк</div> <p>предлага обяснение на закона за излъчване на абсолютно черното тяло с това, че обмените на енергия стават на малки пакети - по-късно наречени кванти. Тази хипотеза поставя началото на квантовата механика.</p>
+               
+            </div>
+        
+                                                                                                                                               
+        <div class="main-content">
+            <h1>Развитие на теорията за атома</h1>
+ 
+
+
+            <div class="intro-box">
+                <p>Физиката на XX век се развива въз основа на квантовата механика. Осигурила средство за проникване в микросвета, тя води до създаването на редица нови технологии като транзистора, силиконовия чип и ядрената енергия; обяснява много по-изчерпателно химичните връзки и дава ключ за ново разбиране на биологичните явления, а оттук и за разработка на актуални методи за управление на природата.</p>
+            </div>
+
+         
+
+            <h2>Великите учени</h2>
+
+            <div class="scientist-section">
+              <h1>Създаване на периодичната система</h1>
+ <img src="480[2].jpg" alt="." width="700" height="360">
+                <h3>(1834-1907)</h3>
+                <p>Дмитрий Иванович Менделеев е роден в село Верхни Аремзяни, недалече от Тоболск. Той е седемнадесетото и последно дете в семейството. В 1890 напуска Петербургския университет заради конфликт с министъра на образованието. От 1892 г. става учен-пазител в Главната палата за мерки и теглилки. Неговото име носи всеизвестната периодична таблица на химичните елементи.</p>
+            </div>
+
+            <div class="scientist-section">
+
+<h1>Откриване на радиоактивността</h1>
+                 <img src="6669.jpg" alt="." width="700" height="360">
+                
+                <p>Антоан Анри Бекерел е френски физик, носител на Нобелова награда за физика от 1903г., откривател на естествената радиоактивност. Откритието на радиоактивността става случайно. Бекерел изучава фосфоресценцията на уранови соли и достига до извода, че урановите соли излъчват спонтанно силно лъчение.</p>
+            </div>
+
+            <div class="scientist-section">
+<h1>Откриване на нови химични елементи</h1>
+                 <img src="120[1].jpg" alt="." width="700" height="360">
+                
+                <p>Мария Склодовска-Кюри е родена във Варшава (Полша). Тя и нейният съпруг Пиер Кюри пречистили няколко тона уранинит и накрая изолирали два
+ нови химични елемента - полоний и радий. 
+Мария и Пиер Кюри заедно с Анри Бекерел са наградени с Нобелова награда за физика през 1903 г.Мария Кюри става първата жена, носителка на престижната награда.След 8 години, през 1911 г., Мария получава Нобелова награда за химия </p>
+          </div>
+
+            <div class="scientist-section">
+<h1>Създаване на планетарния модел на атома</h1>
+                <img src="133[1].jpg" alt="." width="700" height="360"> 
+             <h3> Ърнест Ръдърфорд (1871 – 1937) </h3>
+                <p>Ръдърфорд е смятан за най-големият експериментатор на XX век. Той е централна фигура, довела до познанията ни за радиоактивността и човекът, поставил началото на изучаването на ядрената физика. Ръдърфорд създава т. нар. планетарен модел на атома като прави аналогия със Слънчевата система.</p>
+            </div>
+
+            <div class="scientist-section">
+<h1>Структура на атома</h1>
+                <img src="115[2].jpg" alt="." width="700" height="360"> 
+                
+                <p>Нилс Бор е роден в Копенхаген. През 1913 година Бор работи с Ръдърфорд в Англия и публикува три научни статии за структурата на атома, които разкриват нови перспективи пред развитието на физиката.</p>
+            </div>
+
+            <div class="scientist-section">
+<h1>Откриване на неутрона</h1>
+                <img src="6667[1].jpg" alt="." width="700" height="360"> 
+               
+                <p>Сър Джеймс Чадуик завършва Манчестърския и Кеймбриджкия университети. Голяма заслуга на Чадуик е откриването на неутрона при облъчване на берилиева мишена с поток от алфа-частици през 1932 г. Чадуик получава Нобелова награда за физика през 1935 г.</p>
+            </div>
+
+            <div class="scientist-section">
+               
+                
+                
+            </div>
+      <h3>Модел на атомното ядро</h3>
+
+  <img src="6668[1].jpg" alt="." width="700" height="360">   
+            <div class="scientist-section">
+            <p>Вернер Хайзенберг е роден през 1901 г. във Вюрцбург. За създаването на квантовата механика през 1932 г. Хайзенберг получава Нобелова награда за физика. През 1927 г., на 26 години, става професор в Университета в Лайпциг.</p>
+          
+                <p>Дмитрий Иваненко е роден през 1904 г.Той е професор на Московския държавен университет. Работи в областта на ядрената физика, теория на гравитацията, история на физиката. Той и Хайзенберг са първите, които предполагат, че ядрото на атома се състои от протони и неутрони (1932).</p>
+            </div>
+
+         
+                 
+            <div class="navigation">
+ <a href="zad23.html">Начална страница</a>
+                <a href="zad34.html">Назад</a>
+ <a href="zad67.html">Напред</a>
+               
+            </div>
+        </div>
+<body>
+        <div class="sidebar-right">
+            <div class="timeline-section">
+                <h4>Квантовата революция</h4>
+                <p style="font-size: 0.9em;">.</p>
+                
+                <div class="timeline-item">1905 г. — Алберт Айнщайн разработва специалната теория на относителността</div>  <img src="955[1].jpeg" alt="." width="100" height="100">  
+                <p>.</p><div class="timeline-item">1911 г. — Ърнст Ръдърфорд предлага планетарния модел на атома</div>
+
+<i>    Опитът на Ръдърфорд представлява обстрелване на тънко златно фолио с алфа-частици. Той доказва, че атомът има малко, плътно и положително заредено ядро в центъра си, а останалата му част е празно пространство.
+<h4>Как се провежда опитът</h4>
+Източник:</br> Радиоактивен елемент излъчва сноп от положителен сноп алфа-частици.</br>
+	Мишена:</br> Много тънък лист от златно фолио.</br>
+Детектор:</br> Екран, покрит с цинков сулфид, който светва при удар от алфа-частица.</br>
+</i>
+                <p>.</p><div class="timeline-item">1913 г. — Нилс Бор разработва квантовата теория на атома</div>
+                <p>.</p><div class="timeline-item">1915-16 г. — Алберт Айнщайн разработва общата теория на относителността</div>
+                <p>.</p><div class="timeline-item">1926 г. — Шрьодингер разработва вълновата интерпретация на квантовата механика</div>
+               <p>.</p> <div class="timeline-item">1927 г. — Вернер Хайзенберг формулира принципа на неопределеността</div>
+               <p>.</p> <div class="timeline-item">1932 г. — Дж. Чадуик открива неутрона</div>
+                <p>.</p><div class="timeline-item">1932 г. — Вернер Хайзенберг и Иваненко създават модела на атомното ядро</div>
+
+<p>.</p><img src="3334.png" alt="." width="100" height="150"><h3>"Физиците се шегуват"</h3>
+                <p>.</p>
+<p>.</p>
+<p>Ръдърфорд демонстрирал на слушателите разпадането на радия. Екранът ту светвал, ту потъмнявал. 
+"Сега Вие виждате - казал Ръдърфорд, - че нищо не виждате. А защо нищо не се вижда, сега ще видите."</p>
+
+</div>
+         
+
+            </div>
+        
+    
+</body>
+</html>

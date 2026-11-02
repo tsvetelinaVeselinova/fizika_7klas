@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Плътност и плаване на телата</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navigation {
+            grid-column: 1 / -1;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .navigation a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .navigation a:hover {
+            color: #2980b9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .sidebar {
+            background: linear-gradient(45deg, #bdc3c7 0%, #ffffff 50%, #bdc3c7 100%);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .sidebar-table {
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .sidebar-content {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .sidebar-content:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-content h4 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .main-content {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,240,240,0.95) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .test-title {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .question b {
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .options {
+            margin-top: 10px;
+            line-height: 1.8;
+        }
+
+        .input-section {
+            background: rgba(241, 196, 15, 0.1);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 5px solid #f1c40f;
+            font-style: italic;
+            color: #8e44ad;
+        }
+
+        .right-sidebar img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .right-sidebar img:hover {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+        }
+
+        .bottom-nav {
+            grid-column: 1 / -1;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .bottom-nav a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .bottom-nav a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        sup {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Плътност. Плаване на телата</h1>
+        </div>
+
+        <div class="navigation">
+<a href="zad1.html">Начална страница</a>|
+            <a href="Upr1.html">Начало</a>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-table">
+                <div class="sidebar-header">Преговор</div>
+                
+                <div class="sidebar-content">
+                    <h4>Плътност на телата (означававме с ρ)  </h4>
+                    <p>Плътността е равна на масата разделена на обема на едно тяло.</p>
+ <p><b> ρ = m / V </b></p>
+                </div>
+
+                <div class="sidebar-content">
+                    <h4>Мерни единици за плътност</h4>
+                </div>
+
+                <div class="sidebar-content">
+                    <strong>Основна:</strong> <big>kg/m<sup>3</sup></big>
+                </div>
+
+                <div class="sidebar-content">
+                    <strong>Друга:</strong> <big>g/cm<sup>3</sup></big>
+                </div>
+<h2>Задача:</h2><p>Намерете изтласкващата сила, която действа на топка с обем 200 dm <sup>3</sup>, ако е потопена във вода.  </p>
+<p>Дадено:  </br>V = 200 dm <sup>3</sup> : 1000 = 0,2 m <sup>3</sup></br> (превръщане в основна мерна единица) </br>
+             ρ = 1000 kg / m <sup>3</sup></br> (от таблица) <a href="zad63.html">Справочник</a> </br>
+             g = 9,8 m/s<sup>2</sup></br>
+<p>.</p>
+Търси се: F<sub>A</sub> = ?</br>
+<p>.</p>
+Решение: </br>F<sub>A</sub> = ρ .  g . V</br>
+             F<sub>A</sub> = 1000 .  9,8 . 0,2 </br>= 1960 N  </br>
+                    <img src="1128[1].jpg" alt="Ареометър">
+                    
+<p>Ареометър - уред за измерване плътността на течности</p>
+                
+ 
+<p>.</p>
+                <div class="sidebar-content">
+<h2> ПОМИСЛЕТЕ:  </h2> 
+
+                    <p>Ако се измери със силомер теглото на тяло (напр. 5N), а после същото тяло се потопи във вода и отново се отчете теглото му, то ще бъде по-малко. Защо?</p>
+                </div>
+<h2> Обърнете внимание:  </h2><p>.</p>
+1)Колкото по-голяма е силата или натискът, който се упражнява върху една площ - толкова по-голямо е налягането. </br><p>.</p>
+2)Ако една и съща сила действа върху различни площи, то налягането намалява при нарастване на площите.Защо? </br><p>.</p>
+3) Мерната единица N/cm<sup>2</sup></br> е 10 000 пъти по-голяма от мерната единица N/m<sup>2</sup>. </br> (1m<sup>2</sup> = 10 000 сm<sup>2</sup>)</br><p>.</p>
+
+<h2>   УЧЕНИЧЕСКИ ХУМОР   </h2> 
+<p> На въпроса:</br>
+– При какви условия телата потъват?</br>
+Ученикът отговаря:</br>
+– При неблагоприятни.</p>
+                <div class="sidebar-content">
+                    
+                    <p>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h1 class="test-title">Тест №5</h1>
+
+            <div class="question">
+                <b>Зад.1. Коя е основната мерна единица за плътност на телата?</b><br/>
+                <div class="options">
+                    а) Pa;<br/>
+                    б) g/cm<sup>3</sup>;<br/>
+                    в) g;<br/>
+                    г) kg/m<sup>3</sup>.<br/>
+                </div>
+            </div>
+
+            <div class="question">
+                <b>Зад.2. Колко пъти стъклено топче е по-тежко от дървено, ако дървото е бял бор? Топчетата са с еднакви размери.</b><br/>
+                <div class="options">
+                    а) 5;<br/>
+                    б) 100;<br/>
+                    в) 9;<br/>
+                    г) 12.<br/>
+                </div>
+            </div>
+
+            <div class="question">
+                <b>Зад.3. Намерете масата на алуминиево топче с обем 15 cm<sup>3</sup>?</b><br/>
+                <div class="input-section">
+                    Дадено: ........ Търси се: ........ Решение: ........
+                </div>
+            </div>
+
+            <div class="question">
+                <b>Зад.4. Намерете масата на дъбов паралелепипед с измерения:<br/>10 cm × 6 cm × 5 cm.</b><br/>
+                <div class="input-section">
+                    Дадено: ......... Търси се: ......... Решение: ...........
+                </div>
+                <a href="zad69.html">Речник</a> | <a href="zad63.html">Справочник</a>
+            </div>
+
+            <div class="question">
+                <b>Зад.5. Кое от изброените кубчета ще потъне във вода?</b><br/>
+                <div class="options">
+                    а) дъбово;<br/>
+                    б) алуминиево;<br/>
+                    в) ледено.<br/>
+                </div>
+            </div>
+
+            <div class="question">
+                <b>Зад.6. Намерете масата на златно кубче с измерения 20 mm</b><br/>
+                <div class="input-section">
+                    Дадено: ......... Търси се: ......... Решение: ...........
+                </div>
+            </div>
+
+            <div class="question">
+                <b>Зад.7. Определете вида на веществото, от което е изработен паралелепипед с измерения:<br/>4 dm × 20 cm × 100 mm, ако масата му е 7,2 kg</b><br/>
+                <div class="options">
+                    а) мед;<br/>
+                    б) алуминий;<br/>
+                    в) лед;<br/>
+                    г) злато.<br/>
+                </div>
+            </div>
+<div class="question">
+                <b>Зад.8. Три съда с форма на паралелепипед и измерения съответно:
+<br/>40 cm × 20 cm × 80cm ; <br/> 60 cm × 15 cm × 20cm ;<br/>100 cm × 10 cm × 100cm, <br/> са напълнени с вода.
+Определете най-голямото налягане върху дъното на кой от трите съда се упражнява.<br/> </b><a href="zad13.html">Сили и налягане</a> 
+               <div class="input-section">
+                    Дадено: ......... Търси се: ......... Решение: ...........
+                </div>
+            </div>
+
+<div class="question">
+                <b>Зад.9. Какъв натиск упражнява налягане 5N/cm<sup>2</sup> върху пластина с площ  40 mm<sup>2</sup>? </b><br/>
+              <div class="input-section">
+                    Дадено: ......... Търси се: ......... Решение: ...........
+                </div>  
+            </div>
+            <div class="question">
+                <b>Зад.10. Бутилка с вместимост 1,5 l е пълна с мляко. Колко килограма е масата на млякото?</b><br/><a href="zad69.html">Речник</a> |
+                <div class="input-section">
+                    Дадено: ......... Търси се: ......... Решение: ...........
+
+
+                </div>
+            </div><img src="1128.jpg" width="480" border="7"height="320">
+        </div>
+
+        <div class="sidebar right-sidebar">
+            <div class="sidebar-table">
+                <div class="sidebar-header"......</div>
+                 <!-- Увери се, че GIF файлът се намира в същата папка -->
+  <img src="82.gif" alt="." class="sun-gif">
+                <div class="sidebar-content">
+                    <img src="1160[1].jpg" width="180" border="7"height="310">
+                    <div class="image-caption">
+                        <a href="zad31.html">Архимед</a> открива, че изтласкващата сила зависи от 
+обема на потопената част на тялото и от плътността на течността.</br>
+                    F<sub>A</sub> = ρ .  g . V</div>
+
+<h5>Насочената вертикално нагоре сила, с която водата и другите 
+течности действат на потопените в тях тела, се нарича изтласкваща сила.</h5>
+                </div>
+
+                <div class="sidebar-content">
+                    <img src="1161[1].jpg" alt="Корабоплаване">
+                    <div class="image-caption">Корабоплаване</div>
+                </div>
+
+                <div class="sidebar-content">
+                    <img src="1127[1].jpg" alt="Въздухоплаване">
+                    <div class="image-caption">Въздухоплаване</div>
+                </div>
+ <h5>  
+Силата на тежестта <br/> G = m . g <br/>е насочена надолу,  перпендикулярно на земната повърхност.<br/>
+       <h5>   Условие за плаване на телата:  <br/>  
+         F<sub>A</sub> = G <br/>
+        Телата потъват,<br/> ако F<sub>A</sub> < G   <br/>
+            Телата изплуват,<br/> ако F<sub>A</sub> > G  <br/>   </h5>   
+</div>
+        </div>
+<img src="4495.jpg" alt="Корабоплаване">
+
+<h3>Как подводниците потъват и изплуват?</h3> 
+ Те променят теглото и плътността си с помощта на специални резервоари, наречени баластни цистерни.<br/>
+ Приемат морска вода, за да се спускат надолу, или я изтласкват с въздушен натиск, за да се издигат нагоре.<br/>
+
+<h4>Как става потапянето</h4>
+ Екипажът отваря клапаните на цистерните.<br/>Пълнене с вода:<br/> Водата влиза вътре и измества въздуха.
+Повече тегло: <br/>Подводницата става по-тежка от водата и потъва.<br/>
+<h4>Как става изплуването</h4>
+Подводницата пуска силна струя въздух под налягане в цистерните.<br/>
+Изхвърляне на водата: <br/>Въздухът бързо избутва водата навън през отворените отдолу клапи.<br/>Повече лекота: <br/>
+Корабът става по-лек и излиза на повърхността.<br/> </div>
+            
+
+        <div class="bottom-nav">
+           <a href="zad1.html">Начална страница</a>
+ <a href="zad13.html">Предишен</a> |
+            <a href="zad7.html">Упътване</a> |
+            <a href="zad9.html">Ключ</a> |
+            <a href="zad12.html">Следващ</a>
+        </div>
+    </div>
+</body>
+</html>

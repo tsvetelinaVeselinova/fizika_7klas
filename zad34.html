@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учените, положили основите на физиката</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%);
+            padding: 20px;
+            border-right: 2px solid #ddd;
+        }
+
+        .sidebar-right {
+            border-right: none;
+            border-left: 2px solid #ddd;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f6f8fa 0%, #e1e8ed 100%);
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+
+        .author {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #2c3e50;
+        }
+
+        .navigation {
+            background-color: #34495e;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: #2c3e50;
+        }
+
+        .scientist {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .scientist h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .scientist h3 {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .scientist img {
+            float: left;
+            margin: 0 20px 20px 0;
+            border: 5px solid #bdc3c7;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .scientist p {
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        .thoughts {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .thoughts h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .thoughts ul {
+            list-style: none;
+        }
+
+        .thoughts li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .thoughts li:before {
+            content: "💭";
+            position: absolute;
+            left: 0;
+        }
+
+        .equation {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(45deg, #f1f2f6 0%, #ddd 100%);
+            border-radius: 10px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .anecdote {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .anecdote h4 {
+            color: #d35400;
+            margin-bottom: 10px;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .back-forward {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-forward a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 20px;
+            padding: 10px 20px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .back-forward a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .sidebar-content {
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-content">
+               
+                
+<img src="50.jpg" width="220" border="7" height="180">Всички са чували историята за ябълката и Нютон.Но тя  води началото си от разказа на един съвременникна Нютон,
+ който  си спомня неговия разказ как му е дошла на ум идеята за гравитацията.
+ Това станало при падането на една ябълка, докато той се бил замислил нещо. Запитал се защо ябълката пада винаги перпендикулярно на земята,
+ а не се отклонява настрани или нагоре, а винаги сочи центъра на Земята. Историята се среща и при други автори, но днес се счита, че вероятно е измислена от самия Нютон.
+
+<div class="thoughts">
+                    <h3>Мисли на Айнщайн</h3>
+                    <ul>
+                        <li>Ако A е успехът в живота, то тогава A е равно на x + y + z. x е работата, y е забавлени-</br>ето, а z е да си държиш устата затворена.</li>
+                        <li>Въображе-</br>нието е по-важно от знанието.</li>
+                        <li>Великите мисли идват в главата на човека толкова рядко, че никак не е трудно да се запомнят.</li>
+                    </ul>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+
+  <img src="461[1].jpg" alt=".">
+                    <div style="font-weight: bold;">Детето Айнщайн</div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h1 id="blink">Учените, положили основите на физиката</h1>
+            
+            <div class="quote">
+                "Вселената на Птолемей от древна Гърция оцеля 1400 години. Вселената на Нютон оцеля 300 години. Колко ли време ще оцелее вселената на Айнщайн? Като оставя до известна степен настрана съществуването на Бог, бележитият учен дава възможни отговори за мистерията на неговото сътворение, обяснява законите, управляващи времето, и отваря на човечеството прозорче към разбирането на Вселената. 'Единственото ми желание е да разгадая тайната на Бог', казва Айнщайн"
+                <div class="author">— Бърнард Шоу</div>
+            </div>
+
+            <div class="navigation">
+                <a href="zad60.html">Речник</a> |
+                <a href="zad23.html">Начална страница</a> |
+                <a href="Upr1.html">Начало</a>
+            </div>
+
+            <div class="scientist clearfix">
+                <h2>Исак Нютон</h2>
+                <h3>(1642-1727)</h3>
+                 <img src="116[1].jpg" alt=".">
+                
+                
+                <p>Нютон е най-влиятелната личност в историята на западната наука. Признат за голям интелект още приживе, той и до ден днешен е все така възхваляван от научната общност.</p>
+                
+                <p>Когато Нютон се ражда, физичния свят е слабо познат; когато умира, благодарение на откритията му вече се знае, че този свят се подчинява на математически точни закони. Приносът на Нютон в развитието на математиката и различни области на физиката изиграва важна роля в Научната революция.</p>
+                
+                <p>В областта на механиката Нютон открива закона за всемирното привличане и чрез предложените Закони за движение поставя основите на класическата механика. Освен това той формулира принципа за запазване на импулса и момента на импулса и пръв показва, че движението на небесните тела и на предметите на Земята се подчинява на общи закони.</p>
+                 <p> 1665г. в Лондон избухва бубонната чума(тя убива 100 000 души за две години).<img src="606[1].jpg" alt=".">
+                 Нютон е студент по това време и се спасява от епидемията като бяга в родното си село. Там прави  опити с тънък сноп светлина, който пада върху стъклена призма и попада върху бял екран. Върху екрана се виждат редуващи се цветни снопове.</p>
+                <p>Работейки над проблемите на физиката, Исак Нютон поставя началото на математическия анализ, който е в основата на развитието на науката до наши дни.</p>
+            </div>
+
+            <div class="scientist clearfix" id="einstein">
+                <h2>Алберт Айнщайн</h2>
+                <h3>(14 март 1879 – 18 април 1955)</h3>
+                 <img src="955[1].jpg" alt=".">
+                
+                
+                <p>Алберт Айнщайн е немски физик теоретик от еврейски произход, живял и работил в Германия, Швейцария и САЩ, известен като създател на теорията на относителността и допринесъл значително за развитието на релативистката космология. Неговото име се отъждествява с популярното уравнение E = mc² за еквивалентност на маса и енергия.</p>
+
+                <div class="equation">E = mc²</div>
+                
+                <p>През 1921 година получава Нобелова награда за приноса си към теоретичната физика и откриването на закона за фотоелектричния ефект. Айнщайн доразвива теорията на Нютон, който е представял светлината като поток от частици-корпускули, но през 17-ти век е било невъзможно да се докаже. В началото на 20-ти век и развитието на науката това е станало възможно. Айнщайн дава име на тези частици - фотони.</p>
+                
+                <p>Алберт Айнщайн се обявява категорично против войната, а по-късно и против производството и употребата на ядрени оръжия. Той е един от инициаторите за създаване на държавата Израел.</p>
+                
+                <p>Алберт Айнщайн е роден в Улм, Германия на 14 март 1879 година. Расте като затворено и необщително дете. Много негови изследователи твърдят, че прохожда и проговаря доста късно. Когато е на 5 години, неговият баща му подарява компас. Алберт е дълбоко впечатлен и по-късно признава, че може би в този момент е осъзнал влечението си към науката и техниката.</p>
+            </div>
+
+            <div class="anecdote">
+                <h4>Физиците се шегуват</h4>
+
+<img src="52.jpg" alt="."> 
+                <p>Алберт Айнщайн обичал филмите на Чарли Чаплин и се отнасял с голяма симпатия към създадения от него герой. Веднъж той написал писмо до Чаплин: "Вашият филм 'Златна треска' е разбираем за всички и Вие ще станете велик човек. Айнщайн"</p>
+                <p>На това писмо Чаплин отговорил: "Аз се възхищавам от Вас още повече. Вашата теория на относителността никой в света не я разбира, а Вие все пак станахте Велик човек. Чаплин"</p>
+            </div>
+
+            <div class="back-forward">
+                <a href="zad57.html">Назад</a>
+                <a href="zad37.html">Напред</a>
+            </div>
+        </div>
+
+        <div class="sidebar sidebar-right">
+            <div class="sidebar-content">
+                <div class="thoughts">
+ <img src="51.jpg"  width="220" border="7" height="120"> 
+<h3>Символи-</br>ката на трите ябълки</h3> <big>1)(на Ева):</big> Свързана с библейското познание, грехопадението и избора да се потърси забравеното знание за доброто и злото.</br>
+<big>2)(на Нютон):</big> Свързана с падащия плод, който според легендата вдъхновява учения да формулира закона за всеобщото привличане и слага началото на съвременната научна мисъл.</br>
+<big>3)(на Стив Джобс):</big> Свързана с логото на Apple и технологичната революция, пренесла човечеството в ерата на персоналните компютри и дигитализацията.
+                    <h3>Мисли на Айнщайн</h3>
+                    <ul>
+                        <li>Гравитаци-</br>ята не е отговорна за тези, които падат в капана на любовта.</li>
+                        <li>Две неща са безгранич-</br>ни: Вселената и човешката глупост. За Вселената все пак не съм сигурен.</li>
+                        <li>Животът е като карането на колело: трябва да се движим напред, за да не загубим равновесие.</li>
+                        
+                    </ul>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <img src="421[1].jpg" alt="."> 
+                    <div style="font-size: 12px; margin-top: 10px;">Уравнението на Айнщайн E=mc² изписано на кулата в Тайпей, Тайван през 2005 година (годината на физиката)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

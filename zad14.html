@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физика - Входно равнище</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Странични полета с градиент */
+        .sidebar {
+            background: linear-gradient(180deg, #e0e0e0 0%, #f5f5f5 50%, #ffffff 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .sidebar-left {
+            background: linear-gradient(180deg, #d0d0d0 0%, #e8e8e8 50%, #ffffff 100%);
+        }
+
+        .sidebar-right {
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Заглавие */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Навигация */
+        .nav-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #2980b9;
+        }
+
+        /* Таблици */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Задачи */
+        .task {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .task b {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .task-options {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .task-options div {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+
+        .task-options div:hover {
+            background-color: #e3f2fd;
+        }
+
+        /* Оценяване */
+        .scoring {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .scoring h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .grade-scale {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .grade-item {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            border-left: 4px solid #3498db;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .task {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Специални стилове за формули и входни данни */
+        .formula-input {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #ffc107;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8ff78 0%, #78ffd6 100%);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Ляво странично поле -->
+        <div class="sidebar sidebar-left">
+            <div class="scoring">
+                <h3>Оценяване на задачите:</h3>
+                <p><b>1 зад.</b> - всеки попълнен ред от таблицата носи по 0,5 точки; цялата таблица - 2 точки</p>
+                <p><b>2.зад.</b> - 1 точка</p>
+                <p><b>3.зад.</b> - всяка вярна формула по 0,5 точки. Общо - 2 точки</p>
+                <p><b>4.зад.</b> - за всеки вярно определен уред по 0,5 точки. Общо 2 точки</p>
+                <p><b>5.зад.</b> - 1 точка</p>
+                <p><b>6.зад.</b> - 1 точка</p>
+                <p><b>7.зад.</b> - за съкратен запис на условието - 1 точка; за вярно написана формула - 1 точка; за вярно превръщане на мерните единици - 1 точка и за вярно пресмятане и написване на мерната единица на получената величина - 1 точка. ОБЩО - 4 точки</p>
+                <p><b>8.зад.</b> - 1 точка</p>
+                <p><b>9.зад.</b> - за съкратен запис на условието - 1 точка; за вярно написана формула - 1 точка; за вярно превръщане на мерните единици - 1 точка и за вярно пресмятане и написване на мерната единица на получената величина - 1 точка. ОБЩО - 4 точки</p>
+                <p><b>10.зад.</b> - 1 точка</p>
+                <p><b>11.зад.</b> - за съкратен запис на условието - 1 точка; за вярно написана формула - 1 точка; за вярно превръщане на мерните единици - 1 точка, за вярно изразяване на търсената величина - 1 точка и за вярно пресмятане и написване на мерната единица на получената величина - 1 точка. ОБЩО - 5 точки</p>
+                <p><b>12.зад.</b> - за съкратен запис на условието - 1 точка; за вярно написана формула - 1 точка; за вярно превръщане на мерните единици - 1 точка, за вярно изразяване на търсената величина - 1 точка и за вярно пресмятане и написване на мерната единица на получената величина - 1 точка. ОБЩО - 5 точки</p>
+            </div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <h1>Входно равнище</h1>
+            
+            <p><a href="Upr1.html" class="nav-link">Начало</a></p>
+
+            <div class="task">
+                <b>Зад.1. Попълнете таблицата:</b>
+                <table>
+                    <tr>
+                        <th>Величина</th>
+                        <th>Означение</th>
+                        <th>Осн. мерна ед.</th>
+                        <th>Дробни</th>
+                        <th>Кратни</th>
+                    </tr>
+                    <tr>
+                        <td>Време</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">...</td>
+                        <td>V</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td>dm</td>
+                        <td class="highlight">...</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td class="highlight">...</td>
+                        <td>MPa</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="task">
+                <b>Зад.2. Кое от посочените понятия е пример за физична величина?</b>
+                <div class="task-options">
+                    <div>а) лост;</div>
+                    <div>б) тегло;</div>
+                    <div>в) силомер;</div>
+                    <div>г) електрон.</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.3. Срещу всяка физична величина запишете номера на формулата, по която може да се пресметне:</b>
+                <div class="task-options">
+                    <div>а) тегло (...) 1) V=a.b.c</div>
+                    <div>б) обем (...) 2) P=m.g</div>
+                    <div>в) път (...) 3) v=s/t</div>
+                    <div>г) скорост (...) 4) s=v.t</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.4. Срещу всяка физична величина запишете номера на нейния измервателен уред:</b>
+                <div class="task-options">
+                    <div>а) тегло (...) 1) везна</div>
+                    <div>б) маса (...) 2) рулетка</div>
+                    <div>в) дължина (...) 3) хронометър</div>
+                    <div>г) време (...) 4) силомер</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.5. Теслата е вид:</b>
+                <div class="task-options">
+                    <div>а) неподвижна макара</div>
+                    <div>б) двустранен лост</div>
+                    <div>в) подвижна макара</div>
+                    <div>г) едностранен лост</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.6. На автомобил действат две сили: силата на двигателя и силата на триене. В кой случай двете сили ще се уравновесяват?</b>
+                <div class="task-options">
+                    <div>а) при потегляне;</div>
+                    <div>б) при равномерно движение;</div>
+                    <div>в) не се уравновесяват;</div>
+                    <div>г) при спиране.</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.7. Колко километра ще измине автомобил за 3 минути, ако се движи със скорост 20 m/s?</b>
+                <div class="formula-input">
+                    Дадено: ....... Търси се: ....... Решение: ......
+                </div>
+                <p><a href="zad63.html" class="nav-link">Справочник</a></p>
+            </div>
+
+            <div class="task">
+                <b>Зад.8. Може ли верижният трактор да премине през мочурлива площ?</b>
+                <div class="task-options">
+                    <div>а) да, защото е по-лек;</div>
+                    <div>б) да, защото има по-малка допирна площ;</div>
+                    <div>в) да, защото има по-голяма допирна площ;</div>
+                    <div>г) не може да премине.</div>
+                </div>
+                <p><a href="zad69.html" class="nav-link">Речник</a></p>
+            </div>
+
+            <div class="task">
+                <b>Зад.9. За колко време автомобил ще измине 90 m, ако се движи със скорост 108 km/h?</b>
+                <div class="formula-input">
+                    Дадено: .... Търси се: ...... Решение: ....
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.10. Кое от изброените понятия не е елемент на сила?</b>
+                <div class="task-options">
+                    <div>а) големина;</div>
+                    <div>б) площ;</div>
+                    <div>в) посока;</div>
+                    <div>г) приложна точка.</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.11. Колко килограма е масата на тяло с тегло 50 N?</b>
+                <div class="formula-input">
+                    Дадено: .... Търси се: ...... Решение: ....
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Зад.12. Кубче, изработено от сребро има обем 200 cm³. Определете масата му.</b>
+                <div class="formula-input">
+                    Дадено: .... Търси се: ...... Решение: ....
+                </div>
+                <p><a href="zad63.html" class="nav-link">Справочник</a></p>
+            </div>
+
+            <p><a href="zad9.html" class="nav-link">Ключ</a></p>
+        </div>
+
+        <!-- Дясно странично поле -->
+        <div class="sidebar sidebar-right">
+            <div class="grade-scale">
+                <h3>Оценка</h3>
+                <div class="grade-item">От 0 до 7 точки - Слаб (2)</div>
+                <div class="grade-item">От 8 до 12 точки - Среден (3)</div>
+                <div class="grade-item">От 13 до 17 точки - Добър (4)</div>
+                <div class="grade-item">От 18 до 22 точки - Много добър (5)</div>
+                <div class="grade-item">От 23 до 29 точки - Отличен (6)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

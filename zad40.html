@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Радиоактивност. Използване на ядрената енергия</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        /* Странични полета с градиент */
+        .sidebar-left, .sidebar-right {
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .sidebar-left {
+            background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+        }
+        
+        .sidebar-right {
+            background: linear-gradient(-45deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+        }
+        
+        /* Основно съдържание */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #9db0b0;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navigation {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .navigation a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            color: white;
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.3);
+        }
+        
+        .info-card img {
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .radiation-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .radiation-card {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(253, 121, 168, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .radiation-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .radiation-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .test-section {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            color: white;
+            box-shadow: 0 8px 25px rgba(85, 239, 196, 0.3);
+        }
+        
+        .test-section h1 {
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
+        }
+        
+        .question {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .question b {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .sidebar-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-content {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-content p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        
+        .sidebar-content a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .sidebar-content a:hover {
+            color: #2980b9;
+        }
+        
+        /* Адаптивност */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 200px 1fr 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .sidebar-left, .sidebar-right {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .info-card, .radiation-card, .test-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Ляво странично поле -->
+        <div class="sidebar-left">
+            <div class="sidebar-content">
+                <img src="447[1].jpg"align="left" width="230" height="300">
+<p>.</p>
+                <p><strong>Радиоактивността</strong> е открита от <strong>Анри Бекерел</strong>. Това е явление, при което някои ядра 
+на химични елементи изпускат невидими лъчи, наречени радиоактивни лъчи.</p><p>.</p>
+                <p>Тези лъчи са три вида: <strong>Алфа-лъчи</strong> (частици), <strong>Бета-лъчи</strong> (частици), <strong>Гама-лъчи</strong>.</p>
+               <p>.</p> <p><em>Защо и лъчи, и частици?</em> Светлината и другите лъчения имат двойствен характер - "държат" се и като вълни, и като частици.</p>
+            <div class="info-card"><p>.</p>
+                <h3>Природа на радиоактивните лъчи:</h3>
+            </div>
+            
+            <div class="radiation-types">
+                <div class="radiation-card">
+                    <h4>Алфа-лъчи или частици:</h4>
+                    <p>Поток от хелиеви ядра (т.е. положително заредени). Имат силно йонизиращо действие.</p>
+                </div>
+                <p>.</p>
+                <div class="radiation-card">
+                    <h4>Бета-лъчи или частици:</h4>
+                    <p>Поток от електрони (т.е. отрицателно заредени частици). Имат значителна проникваща способност.</p>
+                </div><p>.</p>
+                
+                <div class="radiation-card">
+                    <h4>Гама-лъчи:</h4>
+                    <p>Електронеутрални частици (не се отклоняват в магнитно поле), подобни на светлината. Скорост 300 000 km/s и голяма проникваща способност.</p>
+                </div>
+            </div></div>
+        </div>
+        
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <h1>Радиоактивност. Използване на ядрената енергия</h1>
+            
+            <div class="navigation">
+               <a href="zad60.html">Речник</a>|
+                <a href="zad37.html">История на физиката</a>|
+                <a href="Upr1.html">Начало</a> 
+            </div>
+            
+            
+            
+            <div class="test-section">
+                <h1>Тест № 25</h1>
+                
+                <div class="question">
+                    <b>Зад.1. Кое радиоактивно лъчение се състои от положително заредени частици?</b>
+                    а) алфа-лъчи (частици);<br/>
+                    б) гама-лъчи;<br/>
+                    в) бета-лъчи (частици);<br/>
+                    г) рентгенови лъчи.
+                </div>
+                
+                <div class="question">
+                    <b>Зад.2. Кое радиоактивно лъчение има най-силно йонизиращо действие?</b>
+                    а) гама-лъчи;<br/>
+                    б) бета-лъчи (частици);<br/>
+                    в) алфа-лъчи (частици);<br/>
+                    г) инфрачервени лъчи.
+                </div>
+                
+                <div class="question">
+                    <b>Зад.3. Кое лъчение не може да премине през дрехите и кожата на човека?</b>
+                    а) рентгенови лъчи;<br/>
+                    б) алфа-лъчи (частици);<br/>
+                    в)гама-лъчи;<br/>
+                    г) бета-лъчи (частици).
+                </div>
+                
+                <div class="question">
+                    <b>Зад.4. Кой учен е открил радиоактивните лъчи?</b>
+                    а) Мария Кюри;<br/>
+                    б) Алберт Айнщайн;<br/>
+                    в) Ърнст Ръдърфорд;<br/>
+                    г) Анри Бекерел.
+                </div>
+                
+                <div class="question">
+                    <b>Зад.5. Каква е разликата между химична реакция и ядрена реакция?</b>
+                </div>
+                
+                <div class="question">
+                    <b>Зад.6. Как се контролира ядрената реакция в реактора?</b>
+                   а) поставя се по-малко количество уран;<br/>
+                   б) поставят се специални (кадмиеви) пръчки;<br/>
+                   в) използват се специални корпуси.
+                </div>
+                
+                <div class="question">
+                    <b>Зад.7. Как се осъществява защитата на околната среда от вредните лъчения на ядрения реактор и ядрените отпадъци?</b>
+                    а) използват се бетонни стени;<br/>
+                    б) използват се оловни контейнери;<br/>
+                    в) използват се железни контейнери.
+                </div>
+                
+<div class="question">
+                    <b>Зад.8. Колко неутрона има в ядрото на радиоактивния изотоп на урана(уран 235)?</b>
+                   <p>.</p>  <a href="zad72.html">Менделеева таблица</a> |
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="zad62.html">Начална страница</a> |
+                    <a href="zad5.html">Предишен урок</a> |
+                    <a href="zad51.html">Упътване</a> |
+                    <a href="zad68.html">Ключ</a> |
+                    <a href="zad41.html">Следващ урок</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Дясно странично поле -->
+        <div class="sidebar-right">
+            <div class="sidebar-content">
+               <img src="516[1].jpg"align="left" width="230" height="180">
+               
+                <p>Това е атомна електроцентрала. Ясно се вижда водната пара, излизаща от охладителните кули. Реакторите са разположени в изолираните цилиндрични постройки.</p>
+                <p>Атомна електрическа централа (съкратено АЕЦ) е съоръжение за производство на електричество с използване на енергия, отделяна при разпад на атомното ядро.</p>
+            </div>
+            
+            <div class="sidebar-content">
+                <img src="514[1].jpg"align="left" width="230" height="130">
+                <p><a href="#chain-reaction">Верижна реакция</a></p></div>
+<p>Един неутрон удря ядро.  </br>          
+Делене:</br> Ядрото се цепи на две и отделя голяма енергия плюс нови 2 или 3 свободни неутрона.</br>
+Продължение:</br> Тези нови неутрони удрят следващи атоми.</br>
+Лавина:</br>
+ Процесът се повтаря сам и за части от секундата обхваща милиарди атоми.</p>
+
+<div class="sidebar-content">
+                <img src="623[1].jpg"align="left" width="310" height="220">
+                <p><a href="#chain-reaction"> Ядрен реактор</a></p>
+
+
+
+<h3>Реакторът се състои от:</h3> 
+
+1 – херметична защитна обвивка</br>
+2 – управляващи пръти</br>
+3 –  ядрено гориво (уран 235)</br>
+4 – реакторен съд</br>
+5 – парогенератор (топлообменник)</br>
+6 – помпа</br>
+7 – тръба за пара под високо налягане</br>
+8 – турбина</br>
+9 – кондензатор</br>
+10 – генератор</br>
+11 – охладителна кула </br>
+12 - далекопровод</br>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

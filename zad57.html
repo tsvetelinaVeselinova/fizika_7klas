@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изобретатели</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #cccfff;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(to bottom, #f0f0f0, #d0d0d0, #f0f0f0);
+            padding: 20px;
+            border-right: 2px solid #ccc;
+        }
+
+        .sidebar-right {
+            width: 200px;
+            background: linear-gradient(to bottom, #e8e8e8, #c8c8c8, #e8e8e8);
+            padding: 20px;
+            border-left: 2px solid #ccc;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        .intro {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+
+        .inventor-card {
+            margin-bottom: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .inventor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .inventor-card h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        .inventor-card h3 {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .inventor-card img {
+            float: left;
+            margin: 0 20px 15px 0;
+            border: 3px solid #3498db;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .sidebar h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .sidebar h4 {
+            color: #34495e;
+            margin: 15px 0 5px 0;
+            font-size: 1em;
+        }
+
+        .sidebar p {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .sidebar b {
+            color: #2980b9;
+        }
+
+        .navigation {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .navigation a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            transform: translateY(-2px);
+        }
+
+        .laser-diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+        }
+
+        .laser-diagram h2, .laser-diagram h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar, .sidebar-right {
+                width: 100%;
+            }
+            
+            .inventor-card img {
+                float: none;
+                display: block;
+                margin: 0 auto 15px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Изобретенията на ХІХ век</h2>
+            <h4>1803 г.</h4>
+            <p>Ричард Тревитик създава първия локомотив.</p>
+             <img src="6010[1].jpg" width="300" height="250" alt=".">
+           
+            <p>Началото на  IX век е изобретен  дървеният велосипед</p>
+            
+                <img src="70.png" width="210" height="200" alt=".">
+            <h4>1834 г.</h4>
+            <p>Луи Брайл разработва релефен шрифт за писане и четене от слепи.</p>
+            <img src="71.jpg" width="210" height="200" alt=".">
+            <h4>1836 г.</h4>
+            <p>Самюел Колт проектира револвер.</p>
+            <img src="73.jpg" width="210" height="200" alt=".">
+            <h4>1837 г.</h4>
+            <p>Самюел Морз изобретява електромеханичен телеграфен апарат.</p>
+              <img src="430[2].jpg" width="210" height="200" alt=".">
+            <h4>1839 г.</h4>
+            <p>Френският изобретател Луи Дагер разработва фотографски метод.</p>
+             <img src="75.jpg" width="210" height="200" alt=".">
+            <h4>1847 г.</h4>
+            <p>Британският учен Чарлз Бабидж изобретява аналитичната машина - предшественикът на компютъра.</p>
+            <img src="76[1].jpg" width="210" height="200" alt=".">
+            <h4>1872 г.</h4>
+            <p>Изобретена е първата пералня.</p>
+            <img src="424.jpg" width="210" height="200" alt=".">
+
+
+ <h4>1876 г.</h4>
+            <p>Александър Греъм Бел изобретява телефона.</p>
+            <img src="1170[2].jpg" width="210" height="200" alt=".">
+            <h4>1877 г.</h4>
+            <p>Томас Алва Едисон прави опит с първия фонограф.</p>
+            <img src="80[1].jpg" width="210" height="200" alt=".">
+            <h4>1895 г.</h4>
+            <p>Луи Люмиер и Огюст Люмиер създават кинематографа.</p>
+            <img src="6[1].jpg" width="210" height="200" alt=".">
+            <h4>1896 г.</h4>
+            <p>Гулиелмо Маркони изобретява радиоприемника.</p>
+<img src="6670[1].jpg" width="210" height="200" alt=".">
+        </div>
+
+        <div class="main-content">
+            <h1 id="blink">Изобретатели</h1>
+            
+            <div class="intro">
+                <p>Изобретение е предмет, процес или техника, които съдържат елемент от иновация (нововъведение). В определени случаи дадено изобретение е под правна защита по силата на патент. През различните времена човечеството е изобретявало предмети и методи за осъществяване на задачи, които са водели до даден резултат по нов или различен начин, като обикновено целта е била резултатът да бъде достигнат по-бързо, по-ефикасно, по-лесно или по-евтино.</p>
+            </div>
+
+ <h2>Телеграф</h2>
+                <img src="430[1].jpg" width="660" height="400" alt="Морз">
+            <div class="inventor-card clearfix">
+ <h2>Фотоапарат</h2>
+                <img src="459[1].jpg" width="660" height="400" alt="Луи Дагер">
+            <div class="inventor-card clearfix">
+               
+             
+                <p>Роден в град Шалон-сюр-Саон в Бургундия в аристократично семейство. Баща му е бил съветник на Луи XV, майка - дъщеря на известен адвокат. През 1816 г., Ниепс започва да работи върху производството на фотографски изображения. Първоначално се използва сребърна сол, която се превръща черно при излагане на дневна светлина. През 1829 г., 64-годишният Ниепс е бил болен. Той и брат му Клод похарчили всичките си пари, получени по наследство, на различни изобретения, но никой не ги е направил богати. Ниепс умира през 1833 г.</p>
+            </div>
+
+            <div class="inventor-card clearfix">
+              
+                
+                <p>Луи Дагер е човекът, който към края на 30-те години на 19-ти век успява да разработи първия практически начин за фотографиране. Дагер е роден в град Кормей, Северна Франция. Като младеж е художник. Когато става на 35 години той създава т. нар. ДИОРАМА, фантастична поредица от панорамна живопис, изложена със специални светлинни ефекти. В 1837 година вече е успял да разработи практически метод за фотографиране.</p>
+          <p> Първите фотоапарати се появяват на пазара през 1839 г. </p></div>
+
+ <h2>Телефон</h2>
+ <img src="1170[1].jpg" width="660" height="400" alt="Телефон на Бел">
+            <div class="inventor-card clearfix">
+               
+                
+               
+               
+                <p>Александър Бел е роден в шотландския град Единбург. Още в Шотландия Бел започва да се интересува от възможността да се предават сигнали по електрическите проводници. През 1876 г. той получава патент на САЩ No 174465, описващ «метод и апарат… за предаване на говор и други звуци по телеграфа с помощта на електрически вълни». Фактически става дума за телефона.</p>
+            </div>
+
+<h2>Фонограф</h2>
+<img src="80.jpg" width="660" height="400" alt="Томас Едисон">
+            <div class="inventor-card clearfix">
+                
+            
+                
+               
+                <p>Всестранно развитият изобретател Томас Алва Едисон е роден в градчето Милано в американския щат Охайо. Едисон създава първото си изобретение - гласозаписващ уред, когато е само на двадесет и една години. Може би най-оригиналното му изобретение е ФОНОГРАФЪТ (първообразът на грамофона), който патентова през 1877 г. Много по-същественo за бита е изобретяването на електрическата лампа в 1879г.</p>
+            </div>
+
+<h2>Киномашина</h2>
+ <img src="6.jpg" width="660" height="400" alt="Братя Люмиер">
+            <div class="inventor-card clearfix">
+                
+                
+               
+                <p>Братята Люмиер (на френски lumière означава светлина) са считани за основоположници на киното и едни от първите сценаристи, режисьори и оператори. Първият филм, направен от тях се нарича <strong>"Работници напускат фабриката в края на работното време"</strong>, трае 46 секунди и се прожектира за първи път на 21 март 1895 г.</p>
+            </div>
+ <h2>Радио</h2>
+                <img src="6670.jpg" width="660" height="400" alt=".">
+<div class="inventor-card clearfix">
+                
+               
+                <p>Братята Люмиер (на френски lumière означава светлина) са считани за основоположници на киното и едни от първите сценаристи, режисьори и оператори. Първият филм, направен от тях се нарича <strong>"Работници напускат фабриката в края на работното време"</strong>, трае 46 секунди и се прожектира за първи път на 21 март 1895 г.</p>
+            </div>
+
+
+ <h2>Компютър</h2>
+<div class="inventor-card clearfix">
+               
+                <h3></h3>
+                <img src="5583[1].jpg" width="660" height="400" alt=".">
+                <p></p>
+            </div>
+<h2>Лазер</h2>
+                
+<img src="5585.jpg" width="660" height="400" alt="Лазер">
+            <div class="inventor-card clearfix">
+
+
+                <h3>Теодор Майман(1927-2007)</h3>
+                <img src="5581.jpg" width="160" height="150" alt="Теодор Майман">
+                
+                <p>Теодор Майман е американски физик, създател на първия работещ лазер. Първият лазер заработва на 16 май 1960 г. и е създаден в лабораторията на компанията Hughes Aircraft на Хауърд Хюз, в Малибу, щат Калифорния и е рубинов кристал с оптично напомпване.</p>
+                
+                <div class="laser-diagram">
+                    <h3>Схема на лазер - Компоненти:</h3>
+                    <p><strong>1</strong> - активна среда;</p>
+                    <p><strong>2</strong> - източник на напомпване;</p>
+                    <p><strong>3</strong> - 100% огледало;</p>
+                    <p><strong>4</strong> - полупропускливо огледало;</p>
+                    <p><strong>5</strong> - лазерен лъч.</p>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="zad33.html">Назад</a>
+                <a href="zad34.html">Напред</a>
+                <a href="zad23.html">Начална страница</a>
+            </div>
+        </div>
+  </div>
+        <div class="sidebar-right">
+            <h2>Изобретенията на ХХ век</h2>
+
+
+
+
+
+
+            <p> Двайсетият век променя света с нови машини, лекарства и технологии. </p>
+<h4>Транспорт и съобщения</h4>
+	<b>Самолет: </b>Братя Райт правят първия успешен полет през 1903 година.</br>
+	<b>Автомобил:</b> Навлиза масово в началото на века благодарение на поточната линия на Форд.</br>
+	<b>Радио и телевизия:</b> Свързват хората от разстояние чрез глас и картина.</br>
+	<b>Мобилен телефон: </b>Първите преносими клетъчни апарати се появяват през 1979 година.</br>
+<h4>Медицина и наука</h4>
+	<b>Пеницилин:</b> Александър Флеминг открива първия антибиотик през 1928 година и спасява милиони животи.</br>
+	<b>Ваксини: </b>Разработени са редица ваксини срещу опасни болести като полиомиелит.</br>
+	<b>ДНК структура:</b> Учените разкриват кода на наследствеността през 1953 година.</br>
+<h4>Технологии и компютри</h4>
+	<b>Транзистор:</b> Основа на цялата съвременна микроелектроника, създаден през 1947 година.</br>
+	<b>Първи компютри:</b> Развиват се бързо по време и след Втората световна война.</br>
+	<b>Интернет:</b> Създаден е като военна и научна мрежа (ARPANET), преди да стане достъпен за всички. </br>
+ <p>.</p>
+<h3> <u>По дати:</u></h3> 
+
+
+
+            <h4>1901г.</h4>
+<p>Кинг Кемп Жилет изобретява безопасната самобръсначка.</p>
+  <p> <img src=".jpg" width="160" height="150" alt="."></p>
+            <p><b>Прахосмукачката</b> - Хъбърт Бут (Великобритания)</p>
+             <p> <img src="61.jpg" width="160" height="150" alt="."></p>
+
+<p>1902: Уилис Кариър изобретява климатика. </p>
+ <p> <img src=".jpg" width="160" height="150" alt="."></p>
+            <h4>1903г.</h4>
+            <p><b>Самолетът</b> - Уилбър и Орвил Райт (САЩ)</p>
+            <p>.</p>
+ <h4>1908г.</h4>
+<p> Хенри Форд въвежда поточната линия за масово производство на автомобила Model T.</p>
+ <p> <img src=".jpg" width="160" height="150" alt="."></p>
+            <h4>1913 г.</h4>
+<p>Адвин Армстронг или развитието на радиовериги; Форд разгръща масовото производство.</p>
+<p> <img src=".jpg" width="160" height="150" alt="."></p>
+            <p><b>Ципът</b> - Гидеон Съндбек (Канада)</p>
+ <p> <img src="60.jpg" width="160" height="150" alt="."></p>
+
+             
+            <h4>1925г.</h4>
+            <p><b>Телевизията</b> - Владимир Зворикин и Фило Фарнсуърт (САЩ)</p>
+           <p> <img src="56.jpg" width="160" height="150" alt="."></p>
+            <h4>1942г.</h4>
+            <p><b>Компютърът</b> - Джон Атанасов и Клифърд Бери(САЩ)</p>
+              <p></p>
+            <h4>1947г.</h4>
+            <p><b>Транзисторът</b> - Джон Бардийн, Уолтър Братейн и Уилям Шокли (САЩ)</p>
+              <p> <img src="58.jpg" width="160" height="150" alt="."></p>
+            <h4>1960г.</h4>
+            <p><b>Лазерът</b> - Теодор Майман (САЩ)</p>
+              <p>.</p>
+            <h4>1969г.</h4>
+            <p><b>Интернет</b> (В началото потребителите са били 4.</br> 10 години по-късно - 50 000)</p>
+              <p> <img src="9.jpg" width="160" height="150" alt="."></p>
+            <h4>1971г.</h4>
+            <p><b>Дискетата</b> (Първата дискета е изобретена от Алън Шугърт в IBM)</p>
+  <img src="57.jpg" width="160" height="150" alt=".">
+             <h4>1973г.</h4>
+            <p><b>Мобифон</b> </p>
+ <img src="55.jpg" width="160" height="150" alt=".">
+        </div>
+    </div>
+</body>
+</html>

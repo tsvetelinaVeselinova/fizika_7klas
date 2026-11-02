@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галактики. Развитие на Вселената</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eeccff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            grid-column: 1 / -1;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .navigation {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            color: #4a4a4a;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background: rgba(255,255,255,1);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .sidebar-box {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .sidebar h2 {
+            color: #4a4a4a;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .sidebar h3 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 15px 0 10px 0;
+        }
+
+        .sidebar img {
+            width: 100%;
+            max-width: 140px;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+        }
+
+        .test-title {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .diagram-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .diagram-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .galaxy-types {
+            margin: 20px 0;
+        }
+
+        .galaxy-types h3 {
+            color: #4a4a4a;
+            margin-bottom: 15px;
+        }
+
+        .galaxy-types ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .galaxy-types li {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 25px;
+            color: #4a4a4a;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .galaxy-types li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .question {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-options {
+            margin-left: 20px;
+        }
+
+        .question-options br {
+            margin-bottom: 8px;
+        }
+
+        .bottom-nav {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+
+        .bottom-nav a {
+            color: #4a4a4a;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .bottom-nav a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Галактики. Развитие на Вселената</h1>
+        
+        <div class="navigation">
+            <a href="Upr1.html">Начало</a> | <a href="zad60.html">Речник</a>
+        </div>
+
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-box">
+                <h2>Космическият телескоп Хъбъл</h2>
+                <p>Автоматична обсерватория на орбита около Земята. Първоначално се е предвиждало извеждането на телескопа на орбита да стане през 1986 г., но заради катастрофата на "Чаланджър" той е качен на орбита на 25 април 1990 година от совалката "Дискавъри".</p>
+                
+                <p>След поправка на оптическата система през 1993 г. телескопът започва да дава висококачествени изображения. Разполагането на телескопа в космоса дава възможност да се регистрират електромагнитни излъчвания в диапазоните, в които земната атмосфера не е прозрачна.</p>
+                
+                <p>Телескопът е изведен на орбита на височина 575 км с период 97 минути. Дължина на космическия апарат — 13,3 м, диаметър — 4,3 м, слънчеви батерии — 12,0 м, маса 11000 кг. Телескопът е от рефлекторен тип с диаметър на огледалото 2,4 м.</p>
+                
+                <img src="475[1].jpg" alt="Телескоп Хъбъл">
+
+
+   <h2> Космическият телескоп „Джеймс Уеб“</h2>  <p> (на английски: James Webb Space Telescope или JWST) е космическа обсерватория,
+ предназначена основно за провеждане на инфрачервена астрономия.</p>  <p> Като най-мощният телескоп, изстрелван някога в космоса, 
+неговата значително подобрена инфрачервена резолюция и чувствителност му позволят да вижда обекти, които са твърде стари, далечни или слаби за космическия телескоп Хъбъл.</p>
+ <img src="42.jpg" alt="Телескоп Джеймс Уеб">
+  <p> Това позволява широк спектър от изследвания в областите на астрономията и космологията,
+ като наблюдение на първите звезди и образуването на първите галактики, както и подробна атмосферна характеристика на потенциално обитаеми екзопланети.</p>
+
+ <p>.</p>
+                
+                <img src="488[1].jpg" >
+                 <p>.</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="test-title">Тест №28</h1>
+
+            <div class="diagram-section">
+                <img src="471[1].jpg" alt="Камертонна диаграма на Хъбъл">
+                <h3><strong>Камертонна диаграма на Хъбъл (класификация на видовете галактики)</strong></h3>
+                
+                <div class="galaxy-types">
+                    <h3>Видове галактики:</h3>
+                    <ul>
+                        <li>спирални</li>
+                        <li>спирални пресечени</li>
+                        <li>елиптични</li>
+                        <li>неправилни</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.1. Каква е формата на нашата Галактика?</p>
+                <div class="question-options">
+                    а) елиптична<br>
+                    б) неправилна<br>
+                    в) спирална<br>
+                    г) сферична
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.2. Кой вид галактика има ръкави?</p>
+                <div class="question-options">
+                    а) спирална<br>
+                    б) елиптична<br>
+                    в) сферична<br>
+                    г) няма такива галактики
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.3. В кои галактики рядко се раждат нови звезди?</p>
+                <div class="question-options">
+                    а) спирални<br>
+                    б) спирални пресечени<br>
+                    в) елиптични<br>
+                    г) неправилни
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.4. На какво разстояние от центъра на галактиката се намира Слънцето?</p>
+                <div class="question-options">
+                    а) 10 000 ly<br>
+                    б) 5 ly<br>
+                    в) 700 ly<br>
+                    г) 25 000 ly
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.5. Коя звезда има огромна маса и изключително малък радиус?</p>
+                <div class="question-options">
+                    а) червен гигант<br>
+                    б) бяло джудже<br>
+                    в) черна дупка<br>
+                    г) няма такава звезда
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.6. Местна група е:</p>
+                <div class="question-options">
+                    а) ярки звезди<br>
+                    б) астероиди<br>
+                    в) галактики<br>
+                    г) планети
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-box">
+                <h2>Галактики и мъглявини</h2>
+                
+                <h3>Нашата Галактика - Млечният път:</h3>
+                <p>Това е гигантска система от около 400 милиарда звезди, междузвездна среда и прах. При поглед отгоре тя представлява диск, от който излизат спираловидни ръкави.</p>
+                <img src="44.jpg" alt="Художествено изображение на Млечния път"><p><strong>Художествено изображение на Млечния път</strong></p><p>.</p><p>.</p>
+                <p>Съществуват групи и купове от галактики. През своята еволюция звездите преминават през различни етапи. </p><img src="46.jpg" alt=" Млечният път"> <p>
+След изчерпването на водорода, те избухват и се превръщат в червени гиганти, по късно правят колапс и се
+ свиват до бели джуджета или неутронни звезди и накрая се превръщат в черни джуджета или черни дупки.</p>
+                
+                <img src="486[1].jpg" >
+                
+                 <p>.</p>
+                
+                <img src="487[1].jpg">
+                <p>.</p>
+                
+                <img src="112[1].jpg">
+                
+               
+                
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="zad62.html">Начална страница</a>
+            <a href="zad42.html">Предишен урок</a>
+            <a href="zad51.html">Упътване</a>
+            <a href="zad68.html">Ключ</a>
+             <a href="zad44.html">Обобщителен тест</a>
+        </div>
+    </div>
+</body>
+</html>

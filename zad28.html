@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Огледала и лещи - Тест № 20</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 30px;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+            to { text-shadow: 2px 2px 20px rgba(255,255,255,0.5); }
+        }
+
+        .navigation {
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 8px 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .sidebar {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .sidebar h4 {
+            color: #764ba2;
+            margin: 15px 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .main-content {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .test-title {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .question {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .question-text {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .option {
+            margin: 8px 0;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+        }
+
+        .diagram-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #e8f4f8, #d4f1f9);
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .bottom-nav {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .nav-link {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Огледала и лещи</h1>
+            <nav class="navigation">
+                <a href="zad26.html" class="nav-link" >Отражение и пречупване</a>
+                <a href="zad54.html" class="nav-link">Речник</a>
+                <a href="Upr1.html" class="nav-link">Начало</a>
+            </nav>
+        </header>
+
+        <aside class="sidebar">
+            
+
+<h3>Двойно изпъкнала леща</h3>
+<h4>Формула за изпъкнала леща: </h4>
+<h4>1/f =  1/a + 1/b, </h4> където <br>
+f - фокусно разстояние на лещата<br>
+a - разстоянието от предмета до оптичния център<br>
+b  - разстоянието от оптичния център до образа на предмета<br>
+<img src ="32.jpg"  border="7"height="210"> . 
+<h4>Правила, които трябва да се спазват при построяване на образи:</h4>
+            <p>1) Лъч през оптичния център не променя посоката</p>
+            <p>2) Успореден лъч се насочва към фокуса</p>
+<h3>Видове огледала</h3>
+            <div>
+                <strong>1) Плоски</strong><br>
+                <strong>2) Сферични:</strong><br>
+                • Вдлъбнати<br>
+                • Изпъкнали
+            </div>
+
+
+ 
+             <h2>Приложение</h2>
+
+<p><b>Вдлъбнатите</b> събират светлинните лъчи във фокус и дават увеличен образ, </br>
+докато <b>изпъкналите</b> разсейват лъчите и дават умален, но по-широк обзор.</br> (те се използват на кръстовица) </p>
+
+<p>Автомобилни фарове и прожектори:</p>
+ Отразяват светлината от крушката в тънък, насочен и силен сноп лъчи.</br>
+<h3>Медицина:</h3>
+ Използват се от зъболекари за преглед на зъби, защото дават уголемен образ на малка площ.
+<h3>Козметика:</h3> Поставят се в малки настолни огледала за гримиране или бръснене.
+<h3>Астрономия: </h3>
+Големи вдлъбнати огледала се ползват 
+в огледалните телескопи (рефлектори)</br> за улавяне на слаба светлина от далечни звезди.
+            <h4>Сферично огледало:</h4>
+            <p>Представлява част от сфера със следните характерни елементи:</p>
+            <ul style="margin-left: 20px;">
+                <li>Главна оптична ос</li>
+                <li>Фокус</li>
+                <li>Връх</li>
+                <li>Център</li>
+                <li>Фокусно разстояние</li>
+            </ul>
+            
+            <div class="image-placeholder">
+
+                <img src ="501[1].jpg"  width="180" border="7"height="210"> . 
+
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1 class="test-title">Тест № 20</h1>
+
+            <div class="question">
+                <div class="question-text">Зад.1. Получаването на образ в плоско огледало се дължи на явлението:</div>
+                <div class="option">а) пречупване на светлината</div>
+                <div class="option">б) отражение на светлината</div>
+                <div class="option">в) поглъщане на светлината</div>
+                <div class="option">г) пълно вътрешно отражение</div>
+            </div>
+
+            <div class="question">
+                <div class="question-text">Зад.2. За какво служи перископа?</div>
+                <div class="option">а) за увеличаване на образа</div>
+                <div class="option">б) за приближаване на образа</div>
+                <div class="option">в) за наблюдаване на обекти върху земната повърхност от места, които са по-ниско разположени от тях</div>
+                <div class="option">г) за разлагане на светлината</div>
+            </div>
+
+            <div class="question">
+                <div class="question-text">Зад.3. Образът получен в плоско огледало е:</div>
+                <div class="option">а) действителен, умален и обърнат</div>
+                <div class="option">б) недействителен, прав и със същите размери</div>
+                <div class="option">в) недействителен, прав и уголемен</div>
+                <div class="option">г) действителен, прав и уголемен</div>
+            </div>
+
+            <div class="question">
+                <div class="question-text">Зад.4. Изпъкналото сферично огледало преобразува успоредния сноп светлина в:</div>
+                <div class="option">а) разходящ</div>
+                <div class="option">б) успореден</div>
+                <div class="option">в) сходящ</div>
+            </div>
+
+            <div class="question">
+                <div class="question-text">Зад.5. Образът на предмет, който се намира на разстояние по-голямо от двойното фокусно разстояние на лещата е:</div>
+                <div class="option">а) действителен, уголемен и обърнат</div>
+                <div class="option">б) действителен, умален и обърнат</div>
+                <div class="option">в) недействителен, прав и уголемен</div>
+                <div class="option">г) действителен, уголемен и прав</div>
+            </div>
+
+            <div class="question">
+                <div class="question-text">Зад.6. Колко диоптъра е оптичната сила на леща с фокусно разстояние 20 cm?</div>
+                <P>Дадено:..........           Търси се: ..........     Решение:............... </P>
+            </div>
+
+            <div class="question">
+                <div class="question-text">Зад.7. Постройте образа на предмет (стрелка), отдалечен на разстояние 9 cm от оптичния център на лещата, 
+ако фокусното разстояние е 4 cm.Измерете разстоянието от оптичния център на лещата до образа (т.е. до екрана). Успоредно с това направете пресмятане по формулата и сравнете двата резултата.
+</br>
+
+</div>
+                
+                <div class="diagram-placeholder">
+                   <img src ="33.jpg" align="left" width="700" border="7"height="250"> .
+                </div>
+                
+                <div>
+             
+                 <a href="zad35.html" class="nav-link">Видео: Чертане на действителен образ с изпъкнала леща</a></br>
+
+                    
+                    <a href="zad55.html" class="nav-link">Видео: Чертане на недействителен образ с изпъкнала леща</a>
+                    
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <h3>ЛЕЩИ</h3>
+            <p>Прозрачни тела, ограничени от части на сферични повърхности.</p>
+            
+            <h4>Видове лещи:</h4>
+            <ul style="margin-left: 20px;">
+                <li>Вдлъбнати</li>
+ <img src ="434[2].jpg" align="left" width="180" border="7"height="210">
+                <li>Изпъкнали</li>
+ <img src ="434[1].jpg" align="left" width="180" border="7"height="210">
+            </ul>
+            
+            <h4>Елементи на леща:</h4>
+            <ul style="margin-left: 20px;">
+                <li>Главна оптична ос</li>
+                <li>Фокуси (F₁, F₂)</li>
+                <li>Оптичен център (т.О)</li>
+                <li>Фокусни разстояния (f₁, f₂)</li>
+                <li>Двойно фокусно разстояние (2f)</li>
+            </ul>
+            
+            <div class="formula">
+                Оптична сила на леща:<br>D = 1/f
+            </div>
+            
+            <div class="image-placeholder">
+               <img src ="1150[1].jpg" align="left" width="180" border="7"height="210"> .
+            </div>
+<h2>Посетете:</h2>
+<p>.</p>
+           <p> Залата на смеха е местна забележителностите в Стара Загора. Намира се на територията на Парк „Митрополит Методий Кусев“, 
+в близост до Старозагорската зоологическа градина.</p>
+<p>.</p>
+<p>В залата има 10 криви огледала, които отразяват в причудливи форми всеки, застанал пред тях.</p> 
+<p>.</p>
+
+<img src ="36.jpg" align="left" width="180" border="7"height="210"> 
+Друга такава атракция има в  „Дом на хумора“ в Габрово, който разполага само с две огледала. </p>
+<p>.</p>
+<p>Планове от 2022 г. има за възстановяване на неработещата от десетилетия „Зала на смеха“ в Русе.</p>
+<p>.</p>
+            <div class="image-placeholder">
+               <img src ="528[1].jpg" align="left" width="180" border="7"height="210"> 
+
+            </div>
+       
+        <nav class="bottom-nav">
+            <a href="zad63.html" class="nav-link">Справочник</a>
+            <a href="zad56.html" class="nav-link">Начална страница</a>
+            <a href="zad27.html" class="nav-link">Предишен</a>
+            <a href="zad50.html" class="nav-link">Упътване</a>
+            <a href="zad52.html" class="nav-link">Ключ</a>
+            <a href="zad29.html" class="nav-link">Следващ</a>
+        </nav>
+    </div>
+</body>
+</html>

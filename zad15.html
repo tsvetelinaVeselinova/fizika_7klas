@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Електричен заряд и електричен ток</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            background-color: #E6F3FF;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #f0f0f0 0%, #e0e0e0 50%, #d0d0d0 100%);
+            padding: 20px;
+            border-right: 2px solid #ccc;
+        }
+
+        .sidebar-right {
+            background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 50%, #e8e8e8 100%);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            background-color: #ffffff;
+        }
+
+        .blink {
+            text-align: center;
+            color: #2c5282;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .navigation {
+            background: linear-gradient(90deg, #e0e0e0, #f0f0f0);
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            color: #2c5282;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: rgba(44, 82, 130, 0.1);
+        }
+
+        .sidebar-content {
+            background: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #2c5282;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar h3 {
+            color: #4a5568;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        .sidebar img {
+            border: 4px solid #ccc;
+            border-radius: 8px;
+            margin: 10px 0;
+            float: left;
+            margin-right: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .test-section h1 {
+            color: #c53030;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-left: 4px solid #4299e1;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .question p {
+            margin: 8px 0;
+        }
+
+        .question b {
+            color: #2d3748;
+            font-size: 1.1em;
+        }
+
+        .options {
+            margin-left: 20px;
+        }
+
+        .options p {
+            background: rgba(66, 153, 225, 0.1);
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .options p:hover {
+            background: rgba(66, 153, 225, 0.2);
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #fed7d7, #fbb6ce);
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px solid #e53e3e;
+        }
+
+        .instruments-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .instruments-table td {
+            border: 2px solid #ccc;
+            padding: 15px;
+            text-align: center;
+            background: linear-gradient(135deg, #f0fff4, #e6fffa);
+        }
+
+        .instruments-table img {
+            border: 3px solid #666;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .instruments-table img:hover {
+            transform: scale(1.05);
+        }
+
+        .interesting-facts {
+            background: linear-gradient(135deg, #fef5e7, #fed7aa);
+            border: 2px solid #d69e2e;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .interesting-facts h1 {
+            color: #b7791f;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .interesting-facts h2 {
+            color: #975a16;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav {
+            background: linear-gradient(90deg, #e2e8f0, #cbd5e0);
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .footer-nav a {
+            color: #2d3748;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s;
+        }
+
+        .footer-nav a:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .blink {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <!-- Лява странична лента -->
+        <div class="sidebar">
+            <div class="navigation">
+                
+            </div>
+
+            <div class="sidebar-content">
+                <h2>Електричен заряд</h2>
+                <h3>Видове електрични заряди:</h3>
+                <p>положителен и отрицателен.</p>
+                <p>Например в атома електроните са отрицателни, а протоните - положителни
+При взаимодействие на две едноименно заредени тела, те се отблъскват.</p>
+                
+                <img src="942[1].jpeg" alt="Електрични заряди" width="194" height="192">
+                
+                <p>Разноименно заредените се привличат.</p>
+                <img src="954[1].jpg" alt="Електрични заряди" width="194" height="192">
+                 <p>Телата в природата се наелектризират например чрез допир.</p>
+                <p>Мерната единица за големина на ел. заряд се нарича кулон (означава се "С")</p>
+                <p><b>Други мерни единици са:</b></p>
+                <p>кС = 1 000С;</p>
+                <p>mС = 0,001 С;</p>
+                <p>μC = 0,000 001 C</p>
+                
+                <p>Електричните сили са толкова по-големи, колкото по-големи са зарядите на телата.</p>
+                <p>Електричните сили са толкова по-големи, колкото по-малко е разстоянието между зарядите</p>
+            </div>
+
+            <div class="sidebar-content">
+                <img src="1111[1].jpg"alt="Електроскоп" width="194" height="192">
+                <p style="text-align: center; margin-top: 10px;"><strong>Електроскоп</strong></p>
+            </div>
+
+           
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <h1 class="blink">Електричен заряд и електричен ток</h1>
+...<a href="zad12.html">Електричен ток - Начален преговор</a> ...
+                <a href="zad3.html">Начална страница на раздела</a>...
+                <a href="Upr1.html">Начало на сайта</a>...
+            <div class="test-section">
+                <h1>Тест №7</h1>
+              <p>  <img src="505[1].jpg" alt="Атом модел" width="320" height="220" style="float: left; margin-right: 20px;"></p>
+
+                <div class="question">
+                    <p><b>Зад.1.</b> В коя част от атома са разположени протоните и в коя-електроните? Колко протона има електронеутрален атом със шест електрона?Кой химичен елемент има шест протона?</p>
+                </div>
+ <a href="zad72.html">Периодична система</a>
+                <div class="question">
+                    <p><b>Зад.2. При какви условия атомите са електронеутрални?</b></p>
+                    <div class="options">
+                        <p>а) когато се откъсне електрон;</p>
+                        <p>б) когато броят на електроните е равен на броя на протоните;</p>
+                        <p>в) когато са приели електрон;</p>
+                        <p>г) не могат да бъдат неутрални.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.3.</b> Колко кулона е зарядът преминал за 8 секунди през напречното сечение на проводник, по който тече ток 6 А?</p>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.4.</b> За 2 минути през напречното сечение на проводник преминава електричен заряд 60 С. Колко ампера е токът по проводника?</p>
+                </div>
+ <div class="sidebar-content">
+                <a href="zad53.html">Речник</a>
+            </div>
+                <div class="question">
+                    <p><b>Зад.5.</b> Какво представлява мерната единица АМПЕРЧАС? Мерна единица за: <a href="zad63.html">Справочник>></a></p>
+                    <div class="options">
+                        <p>а) големина на електричния ток;</p>
+                        <p>б) големина на електричния заряд;</p>
+                        <p>в) напрежение;</p>
+                        <p>г) енергия</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.6.</b> Превърнете 1 амперчас в основната му мерна единица</p>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.7.</b> Колко кулона и амперчаса е зарядът преминал през акумулатор на автомобил за 1 час и 30 минути, ако токът е 4 А?</p>
+                </div>
+
+               
+                   
+                        <img src="980[1].jpg" alt="Амперметър" width=600" height="280">
+
+                    
+                   
+
+                <div class="footer-nav">
+                    <a href="zad3.html">Начална страница</a> |
+                    <a href="zad49.html">Упътване</a> |
+                    <a href="zad66.html">Ключ</a> |
+                    <a href="zad16.html">Следващ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дясна странична лента -->
+        <div class="sidebar sidebar-right">
+            <div class="sidebar-content">
+                <h2>Електричен ток</h2>
+                <p>Големината на електричния ток е равна на заряда преминал през сечението на проводник за една секунда.</p>
+                
+                <div class="formula">I = q / t</div>
+                
+                <p>Основна мерна единица за големина на ел. ток е А(ампер). Токът има големина 1А, ако за 1 секунда през напречното сечение на проводника е преминал заряд 1С.</p>
+                <p>т.е. 1А = 1С/1s</p>
+                <p>Следователно 1С = 1А.1s, а какво ще представлява мерната единица Аh(амперчас)?</p>
+            </div>
+
+            <div class="interesting-facts">
+                <h1>Интересни факти</h1>
+                <h2>Удар от ток при ходене по килим</h2><img src="419.jpg" alt="." width="194" height="192">
+                <p>Нещо обикновено е да ни удари ток, след като направим няколко крачки по килим или се размърдаме върху автомобилната седалка. Всички знаем, че по някакъв начин в нас се натрупва електричен заряд. Как става това?</p>
+                <p>Например защо е необходимо непременно да ходим по килима, не е ли достатъчно да стоим върху него, за да се натрупа електричен заряд?</p>
+<p>Припомни си <a href="zad12.html">интересните явления,</a> свързани с наелектризирането.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

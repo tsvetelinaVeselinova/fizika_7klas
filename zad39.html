@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Звук. Слух. Приложение на звука и ултразвука</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            min-height: 100vh;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Заглавие */
+        .header {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Лява странична лента със сиво-бял градиент */
+        .left-sidebar {
+            background: linear-gradient(180deg, #e8e8e8 0%, #ffffff 50%, #f5f5f5 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Дясна странична лента със сиво-бял градиент */
+        .right-sidebar {
+            background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 50%, #e8e8e8 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Главно съдържание */
+        .main-content {
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .main-content h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2, h3 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(102,126,234,0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .formula-box h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .formula-box p {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .sound-types {
+            background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 6px solid #3498db;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .sound-types h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .sound-types p {
+            margin: 12px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sound-types p:hover {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .test-question {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0 15px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(116,185,255,0.3);
+        }
+
+        .test-options {
+            margin: 15px 0 30px 25px;
+        }
+
+        .test-options p {
+            margin: 10px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .test-options p:hover {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            transform: translateX(10px);
+            border-color: #2196f3;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #e74c3c;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .info-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-card p {
+            margin: 10px 0;
+            color: #34495e;
+        }
+
+        .bottom-nav {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .bottom-nav a {
+            color: #74b9ff;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .bottom-nav a:hover {
+            color: white;
+            background: #74b9ff;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 250px 1fr 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .left-sidebar, .right-sidebar {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+                padding: 25px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .main-content h1 {
+                font-size: 2.2em;
+            }
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-card, .formula-box, .test-question {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Заглавие -->
+        <div class="header">
+            <h1>Звук. Слух. Приложение на звука и ултразвука</h1>
+            <div class="nav-links">
+                <a href="zad54.html">Речник</a>
+                <a href="Upr1.html">Начало</a>
+                <a href="zad50.html">Упътване</a>
+                <a href="zad63.html">Справочник</a>
+            </div>
+        </div>
+
+        <!-- Лява странична лента -->
+        <div class="left-sidebar">
+            <div class="info-card">
+                <p><strong>Източници на звук са трептящите тела.</strong></p>
+                <p><strong>Звукова вълна</strong> е предаването на трептенето от частица на частица в дадена среда.</p>
+                <p><strong>Във вакуум няма звук.</strong></p>
+            </div>
+
+            <div class="sound-types">
+                <h3>Видове звук:</h3>
+                <p><strong>1) Инфразвук</strong> - честоти по-малки от 20 Hz</p>
+                <p><strong>2) Звук възприеман от човешкото ухо</strong> - честотите му са от 20 Hz до 20 000 Hz</p>
+                <p><strong>3) Ултразвук</strong> - честоти по-големи от 20 000 Hz</p>
+            </div>
+
+            <div class="formula-box">
+                <h3>Формули</h3>
+                <p>λ = u.T</p>
+                <p>u = λ.ν</p>
+<p>λ – дължина на вълната</p>
+ <p>u – скорост на вълната</p>
+<p>ν  – честота</p>
+<p>Т – период</p>
+            </div>
+
+            <div class="info-card"><img src="603[1].jpg"align="left" width="230" height="230">
+                <p><strong>Ехограф</strong> - медицински уред за изследване на вътрешните органи на човешкото тяло. Работи с ултразвук.</p>
+            </div>
+        </div>
+
+        <!-- Главно съдържание -->
+        <div class="main-content">
+            <h1>Тест № 23</h1>
+
+            <div class="test-question">
+                Зад. 1. Във вакуум може да се разпространява:
+            </div>
+            <div class="test-options">
+                <p>а) инфразвук;</p>
+                <p>б) светлина;</p>
+                <p>в) звук, възприеман от човешкото ухо;</p>
+                <p>г) ултразвук.</p>
+            </div>
+
+            <div class="test-question">
+                Зад. 2. При разпространение на звукова вълна има пренос на:
+            </div>
+            <div class="test-options">
+                <p>а) енергия;</p>
+                <p>б) вещество;</p>
+                <p>в) енергия и вещество.</p>
+            </div>
+
+            <div class="test-question">
+                Зад. 3. Кое от изброените тела не е източник на звук?
+            </div>
+            <div class="test-options">
+                <p>а) струни на китара;</p>
+                <p>б) гласни струни;</p>
+                <p>в) електрична лампа;</p>
+                <p>г) мембрана.</p>
+            </div>
+
+            <div class="test-question">
+                Зад. 4. Защо при буря първо виждаме мълнията, а после чуваме гръм?
+            </div>
+
+            <div class="test-question">
+                Зад. 5. Височината на тона се определя от:
+            </div>
+            <div class="test-options">
+                <p>а) амплитудата на звука;</p>
+                <p>б) честотата;</p>
+                <p>в) периода;</p>
+                <p>г) средата, в която се разпространява звукът.</p>
+            </div>
+
+            <div class="test-question">
+                Зад. 6. Колко е честотата на звука от високоговорител, ако за 4 секунди мембраната му извършва 2000 трептения?
+            </div>
+
+            <div class="test-question">
+                Зад. 7. Военен кораб изпраща ултразвуков сигнал и след 2 секунди приема отразеното от подводна лодка ехо. На какво разстояние се намира лодката?
+            </div>
+
+            <div class="test-question">
+                Зад. 8. Каква е честотата на звукова вълна с дължина на вълната 25 cm, ако се разпространява във:
+            </div>
+            <div class="test-options">
+                <p>а) вода;</p>
+                <p>б) въздух;</p>
+                <p>в) стъкло;</p>
+                <p>г) каучук.</p>
+            </div>
+        </div>
+
+        <!-- Дясна странична лента -->
+        <div class="right-sidebar">
+            <div class="info-card">
+                <h4>Качества на звука</h4>
+                <p><strong>Височина на тона</strong> - зависи от честотата на звука;</p>
+                <p><strong>Обертонове</strong> - Няколко тона с пропорционални честоти (напр. 200 Hz, 400 Hz, 600 Hz);</p>
+                <p><strong>Тембър</strong> - Определя се от вида и броя на обертоновете;</p>
+                <p><strong>Сила на звука</strong> - зависи от амплитудата на звуковата вълна;</p>
+            </div>
+
+            <div class="info-card">
+                <p><strong>Ехо</strong> - слухово възприятие, което получаваме от звук, който сме произвели и след отражението му в преграда се е върнал при нас.</p>
+            </div>
+
+            <div class="info-card"><img src="777[1].jpg"align="left" width="130" height="130">
+                <p><strong>Ехолот</strong> - уред използван на корабите за измерване на дълбочината на водата. Разстоянието до морското дъно (или до подводница) се определя от времето, за което ултразвуков сигнал отива до дъното и се връща до кораба.</p>
+            </div>
+
+            <div class="info-card"><img src="88899.jpg"align="left" width="130" height="130">
+                <p><strong>Въпрос за размисъл:</strong></p>
+                <p>Защо говорната тръба (известна още като рупор) засилва гласа в дадена посока?</p>
+            </div>
+        </div>
+
+        <!-- Долна навигация -->
+        <div class="bottom-nav">
+            <a href="zad56.html">Начална страница</a>
+            <a href="zad38.html">Предишен</a>
+            <a href="zad50.html">Упътване</a>
+            <a href="zad52.html">Ключ</a>
+            <a href="zad5.html">Следващ</a>
+        </div>
+    </div>
+</body>
+</html>

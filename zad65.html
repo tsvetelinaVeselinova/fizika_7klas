@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интересни явления</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимирани странични полета */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            width: 150px;
+            height: 100vh;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff, #f0f0f0, #e8e8e8);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            z-index: 1;
+        }
+
+        .sidebar-left {
+            left: 0;
+        }
+
+        .sidebar-right {
+            right: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимирани елементи в страничните полета */
+        .animated-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(102, 126, 234, 0.7);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animated-element:nth-child(1) { top: 10%; left: 20px; animation-delay: 0s; }
+        .animated-element:nth-child(2) { top: 30%; right: 20px; animation-delay: 2s; }
+        .animated-element:nth-child(3) { top: 50%; left: 30px; animation-delay: 4s; }
+        .animated-element:nth-child(4) { top: 70%; right: 30px; animation-delay: 6s; }
+        .animated-element:nth-child(5) { top: 90%; left: 15px; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Електрически мълнии анимация */
+        .lightning {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffff00, #ff6600);
+            animation: lightning 3s ease-in-out infinite;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+        }
+
+        .lightning:nth-child(6) { top: 15%; left: 50px; animation-delay: 1s; }
+        .lightning:nth-child(7) { top: 45%; right: 50px; animation-delay: 3s; }
+        .lightning:nth-child(8) { top: 75%; left: 60px; animation-delay: 5s; }
+
+        @keyframes lightning {
+            0%, 90%, 100% { opacity: 0; transform: scaleY(0); }
+            5%, 85% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Основен контейнер */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-left: 150px;
+            margin-right: 150px;
+        }
+
+        /* Заглавие с мигане */
+        .main-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #764ba2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Основно съдържание */
+        .content-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .theory-panel {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .theory-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .formula {
+            background: #e8f2ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .test-panel {
+            flex: 2;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-panel h1 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question {
+            background: #f8f9ff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e8ff;
+        }
+
+        .question b {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .question p {
+            margin: 5px 0;
+            padding-left: 15px;
+        }
+
+        /* Долна навигация */
+        .bottom-navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .bottom-navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-navigation a:hover {
+            color: #764ba2;
+        }
+
+        /* Пулсиращи частици във фона */
+        .particle {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+            z-index: 0;
+        }
+
+        .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            left: 20%;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            left: 90%;
+            animation-delay: 10s;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 1300px) {
+            .sidebar { display: none; }
+            .container {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фонови частици -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- Лява странична лента -->
+    <div class="sidebar sidebar-left">
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <!-- Дясна странична лента -->
+    <div class="sidebar sidebar-right">
+
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <div class="container">
+        <!-- Заглавие -->
+        <div class="main-title">
+          <h1>  Интересни явления</h1>
+        </div>
+<h2> Земята е гигантски магнит (благодарение на течен океан от желязо)</h2>
+<p>Магнитното поле на Земята не е статично, а се генерира дълбоко под краката ни – във външното ядро на планетата, на около 3000 км дълбочина. 
+Там се намира огромен океан от разтопено желязо и никел. Тъй като Земята се върти, този течен метал се движи и създава мощни електрически токове.
+ Този процес се нарича геодинамо и превръща планетата ни в гигантски магнит с два полюса.</p>
+<h2> Магнитният щит е нашата космическа броня</h2>
+<p>Слънцето постоянно бълва т.нар. „слънчев вятър“ – поток от високоенергийни и опасни заредени частици. Ако Земята нямаше магнитно поле (магнитосфера), този вятър отдавна щеше да е издухал атмосферата ни и да е изпепелил океаните, превръщайки планетата в безжизнена пустиня като Марс.
+Когато слънчевият вятър достигне Земята, нашето магнитно поле действа като космически щит – то улавя тези частици и ги отклонява далеч от планетата, спасявайки живота на нея.</p>
+<h2> Полярните сияния са „белезите“ от тази космическа битка</h2>
+<p>Полярните сияния (Аврора) са единствената видима част от тази невидима битка между Слънцето и земния щит.
+<p>•	Как се раждат: Магнитното поле е най-слабо и най-близо до повърхността на Земята при северния и южния магнитен полюс. 
+Част от уловените слънчеви частици се „плъзват“ по магнитните линии и навлизат в горните слоеве на атмосферата именно там.
+<p>•	Светлинното шоу: Когато тези слънчеви частици се сблъскат с газовете в нашата атмосфера, те ги „възбуждат“ и ги карат да светят.
+
+
+<video controls playsinline preload="metadata" style="vidth: 100%;max - width:900px; height:auto;">      
+                
+<source src = "91.mp4" type = "video/mp4">
+                                                                                                   
+Вашият браузър не поддържа <video>
+            <div class="rule-item">
+                <div class="rule-image">
+                   
+
+                </div>
+ Това е същият принцип, по който работят неоновите лампи.</p>
+<h2>Какво ни казват цветовете на Аврора?</h2>
+<p>Цветовете на полярното сияние зависят от това кой газ е ударен от слънчевите частици и на каква височина:
+<p>•	🟢 Зелено (най-често срещаното): Получава се при сблъсък с кислород на височина до 150 км.
+<p>•	🔴 Червено (рядко и красиво): Сблъсък с кислород, но на много голяма височина (над 240 км).</p>
+<p>•	🔵 Синьо и лилаво: Получава се при сблъсък с азот.
+
+
+<h2>Магнитните полюси постоянно „бягат“</h2>
+<p>Северният магнитен полюс (мястото, накъдето сочи стрелката на компаса) не съвпада с географския Северен полюс. Нещо повече – той постоянно се движи.</p>
+<p>•	През XIX век, когато е локализиран за първи път, той се е движил съвсем бавно – с около 10-15 км на година.</p>
+<p>•	През последните десетилетия обаче той буквално „заприпка“ към Сибир, ускорявайки движението си до близо 50-60 км на година. </p>
+Това принуждава учените постоянно да обновяват Световния магнитен модел, който се използва за навигация от корабите, самолетите и дори от GPS-а на нашите смартфони.</p>
+<h2>Голямата рокада: Когато Северът стане Юг</h2>
+<p>В историята на Земята магнитните полюси не просто се движат – те периодично сменят местата си. Този процес се нарича геомагнитна инверсия (обръщане).</p>
+<p>Ако бяхте живели преди около 800 000 години, вашият компас щеше да сочи на юг, а не на север. </p>
+През последните 20 милиона години планетата ни е преживявала това обръщане средно веднъж на всеки 200 000 до 300 000 години. 
+Тъй като последното голямо обръщане е било преди близо 780 000 години, някои учени смятат, че вече закъсняваме за следващото.</p>
+<h2>Какво се случва по време на обръщането?</h2>
+<p>Противно на апокалиптичните сценарии във филмите, обръщането на полюсите не се случва за един ден и не предизвиква масови земетресения или изригвания на вулкани. </p>
+
+<p>То е бавен процес, който отнема между няколкостотин и няколко хиляди години. Ето какво се случва тогава:</p>
+<p>•	Отслабване на щита: По време на прехода магнитното поле отслабва значително (понякога с до 90%).</p>
+<p>•	Поява на многобройни полюси: Магнитното поле става хаотично. Земята може временно да има не два, а четири или повече магнитни полюса, разпръснати из планетата.</p>
+<p>•	Сияния навсякъде: Тъй като магнитното поле е отслабено и объркано, слънчевите частици ще проникват на много повече места. 
+Това означава, че полярни сияния ще могат да се наблюдават от всяка точка на Земята, включително над Екватора!</p>
+<h2>Има ли опасност за нас?</h2>
+<p>За хората и животните най-големият риск по време на такова отслабване на полето е повишеното ниво на космическа радиация.</p>
+<p> Нашата гъста атмосфера обаче все пак осигурява много добра защита. 
+Най-застрашена би била модерната ни технология – сателитите в орбита и електрическите мрежи на Земята ще станат изключително уязвими на слънчеви бури.</p>
+
+
+        <!-- Навигация -->
+        <div class="navigation">
+                        <a href="Upr1.html">Начало</a>  <a href="zad22.html">Назад</a>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Теоретична част -->
+            <div class="theory-panel">
+               
+             
+    
+           
+                 
+
+
+
+
+
+                
+                </div>
+            </div>
+        </div>
+
+        <!-- Долна навигация -->
+         
+    </div>
+</body>
+</html>

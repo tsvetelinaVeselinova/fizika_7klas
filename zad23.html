@@ -1,0 +1,439 @@
+                                                           <!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История на физиката</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: fadeInSlide 2s ease-out;
+        }
+
+        @keyframes fadeInSlide {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-wrapper {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(to bottom, #gray 0%, #ffffff 50%, #gray 100%);
+            background: linear-gradient(to bottom, #888888 0%, #ffffff 50%, #888888 100%);
+            padding: 20px 10px;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar-left {
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar-right {
+            border-left: 1px solid #ddd;
+        }
+
+        .sidebar-item {
+            margin-bottom: 20px;
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .sidebar-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #3498db;
+        }
+
+        .sidebar-item p {
+            margin-top: 8px;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            background: #fefefe;
+        }
+
+        .main-content h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .main-content h2 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+        }
+
+        .main-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #555;
+        }
+
+        .main-content a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .main-content a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .section-images {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .section-images img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #ecf0f1;
+            transition: transform 0.3s ease;
+        }
+
+        .section-images img:hover {
+            transform: scale(1.05);
+            border-color: #3498db;
+        }
+
+        .navigation-links {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .navigation-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .navigation-links a:hover {
+            background: linear-gradient(45deg, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .image-gallery img {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.1);
+            border-color: #3498db;
+            z-index: 10;
+            position: relative;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .image-gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .section-images {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>История на физиката</h1>
+            <a href="index.html" class="home-link">🏠 НАЧАЛО</a>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="sidebar sidebar-left">
+                <div class="sidebar-item">
+                    <img src="472[1].jpg" alt="Съзвездие Касиопея">
+                    <p>Съзвездието Касиопея</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="476[1].jpg" alt="Съзвездие Лебед">
+                    <p>Съзвездието Лебед</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="473[1].jpg" alt="Съзвездие Козирог">
+                    <p>Съзвездието Козирог</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="453[1].jpg" alt="Съзвездие Водолей">
+                    <p>Съзвездието Водолей</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="522[1].jpg" alt="Планети">
+                    <p>Планетите от Слънчевата система</p>
+                </div>
+                  <div class="sidebar-item">
+                    <img src="13.jpg" alt="Спутник 1">
+                    <p>Първият космически апарат "Спутник 1 "</p>
+                </div>
+ <div class="sidebar-item">
+                    <img src="734[1].jpg" alt="Юрий Гагарин">
+                    <p>Юрий Гагарин </p>
+                </div>
+                <div class="sidebar-item">
+                    <img src="802[1].png" alt="Космическа станция">
+                    <p>Космическата станция "Мир"</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="475[1].jpg" alt="Телескоп Хъбъл">
+                    <p>Космическият телескоп "Хъбъл"</p>
+                </div>
+
+ <div class="sidebar-item">
+                    <img src="42.jpg" alt="Телескоп Джеймс Уеб">
+                    <p>Космическият телескоп "Джеймс Уеб"</p>
+                </div>
+                <div class="sidebar-item">
+                    <img src="10[1].jpg" alt=".">
+                    <p>Космическа совалка </p>
+                </div>
+
+ <div class="sidebar-item">
+                    <img src="730[1].jpg" alt="Луноход">
+                    <p>Луноход</p>
+                </div>
+                <div class="sidebar-item">
+                    <img src="7778.jpg" alt="Марсоход">
+                    <p>Марсоход</p>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h1>С какво се занимава историята на физиката?</h1>
+                
+                <p>Тази междинна наука изучава развитието на физиката още от древни времена. Като се проследяват биографиите на учените става ясно как в различните периоди от време се е развивала науката. Добре са познати идеите на древните хора, че Земята се крепи на кит, или по-късно, че е в центъра на света. Хиляди години се е смятало, че атомът е най-малката и практически неделима частица, изграждаща веществото. Историята на физиката разказва всички тези теории независимо от това, че те вече са отречени. Така се проследява развитието на науката физика.</p>
+
+                <h2><a href="zad31.html">Учените от древността</a></h2>
+                
+                <div class="section-images">
+                   <img src="490.jpg" alt="Древен учен">
+ <img src="491.jpg" alt="Древен учен">
+                    <img src="465.jpg" alt="Древен учен">
+                    
+                    <img src="449.jpg" alt="Древен учен">
+                </div>
+                
+                <p>Още в древни времена хората са се вглеждали в красивото нощно небе и са виждали в струпаните звезди титани и различни животни. Интересен е факта, че от древността до наши дни (повече от две хилядолетия), разположението на звездите в съзвездията не е променено. Всички тези звезди, които изглеждат близо една до друга са звезди от различни галактики и са различно отдалечени от нас (като наблюдатели). Има звезди, от които излъчената светлина пътува хиляди години до нас. Колко дълъг период за човешката история са четири хилядолетия, а за нашето Слънце например този период е около 15 галактични минути.</p>
+
+                <h2><a href="zad32.html">Развитие на астрономията</a></h2>
+                
+                <div class="section-images">
+                    <img src="116[1].jpg" alt="Астрономия">
+                    <img src="474.jpg" alt="Астрономия">
+                    <img src="457.jpg" alt="Астрономия">
+                    <img src="470.jpg" alt="Астрономия">
+                    <img src="146[1].jpg" alt="Астрономия">
+                </div>
+                
+                <p>През средновековието и Ренесанса се развиват основните теории за движението на планетите. Още древните хора, познавайки добре съзвездията забелязали, че има звезди, които си променят положението спрямо другите (т.нар. неподвижни звезди-основните звезди в съзвездията). Те нарекли тези звезди-блуждаещи звезди (планети). Наблюдавайки ги внимателно те забелязали, че блуждаещите звезди образуват "примки"(траекторията на тези звезди е крива линия наподобяваща примка). Това е било необяснимо дълго време и за първи път Коперник обяснява причините за тези "примки" като създава хелиоцентричната система.</p>
+
+                <h2><a href="zad33.html">Развитие на електричеството</a></h2>
+                
+                <div class="section-images">
+                    <img src="149[1].jpg" alt="Електричество">
+                    <img src="444.jpg" alt="Електричество">
+                    <img src="458[1].jpg" alt="Електричество">
+                    <img src="446.jpg" alt="Електричество">
+                    <img src="462.jpg" alt="Електричество">
+                </div>
+                
+                <p>За да стигне човечеството до идеята за електричния ток са били нужни хилядолетия, а за да направи крачката от първите лабораторни опити за произвеждане на ток до мощните електроцентрали са били необходими 100 години. За тока, без който днес животът ни е немислим, учените са започнали да работят още през 18-ти век. Техните опити и резултати днес може би изглеждат нищожни, но без тях развитието на този дял от науката и приложението му в техниката и бита биха били невъзможни.</p>
+
+                <h1>Бурното развитие на науката и техниката през 19-ти и 20-ти век</h1>
+
+                <div class="navigation-links">
+                    <a href="zad57.html">Изобретатели</a>
+                    <a href="zad34.html">Основоположници на физиката</a>
+                    <a href="zad37.html">Развитие на теорията за атома</a>
+                    <a href="zad67.html">Развитие на транспортните средства</a>
+                </div>
+
+                <div class="image-gallery">
+                    <img src="139[1].jpg" alt="Учен">
+                     <img src="1170.jpg" alt="Учен">
+                    <img src="133.jpg" alt="Учен">
+                    <img src="955[1].jpg" alt="Учен">
+                   
+                    <img src="479[1].jpg" alt="Учен">
+                    <img src="5583.jpg" alt="Учен">
+                </div>
+
+                <p>"В цялостното развитие на човечеството 20-ти век е период, белязан от трагедии и зрелищен прогрес. 
+Големите трагедии са двете световни войни, както и измислянето и създаването на атомната бомба, която донася на човешкия вид ужаса на самоунищожението.
+ Зрелищното развитие, през 20-ти век е моментът, в който човек се доближава най-много до разкриването на голямата тайна:
+ РАЗБИРАНЕТО НА ВСЕЛЕНАТА. Тези два аспекта в развитието на науката са свързани с гениалността на Алберт Айнщайн. 
+Неговите проучвания допринасят за развитието на теорията на относителността, довела до дълбокото преразглеждане на наблюденията, 
+които Нютон прави през 17-ти век, и в резултат - до научна революция.
+ От друга страна, откритията и напредъкът във физиката правят възможно създаването на атомната бомба, но и космическите полети,
+ и атомните централи, и лазерното лъчение и т.н."</p><img src="2004[1].jpg" alt=".">
+                    
+<p> Списание "100 личности - хората, променили света"</p>
+
+                <p><a href="zad31.html">Напред</a></p>
+            </div>
+
+            <div class="sidebar sidebar-right">
+                <div class="sidebar-item">
+                    <img src="883[2].jpg" alt="Първи автомобил">
+                    <p>Първият автомобил с вътрешно горене</p>
+                </div>
+
+<div class="sidebar-item">
+                    <img src="37.jpg" alt="автомобил">
+                    <p>Автомобил от средата на ХХ век</p>
+                </div>
+<div class="sidebar-item">
+                    <img src="35.jpg" alt="автомобил">
+                    <p>Автомобил от края на ХХ век</p>
+                </div>
+               <div class="sidebar sidebar-right">
+                <div class="sidebar-item">
+                    <img src="7000.jpg" alt="Летящ автомобил">
+                    <p>Летящ автомобил</p>
+                </div> 
+                <div class="sidebar-item">
+                    <img src="4451.jpg" alt="Парен локомотив">
+                    <p>Парен локомотив</p>
+                </div>
+<div class="sidebar-item">
+                    <img src="7790.jpg" alt="ел. влак">
+                    <p>Електрически влак</p>
+                </div>
+<div class="sidebar-item">
+                    <img src="523[1].jpg" alt="Влак - стрела">
+                    <p> Влаковете в Япония</p>
+                </div>
+                <div class="sidebar-item">
+                    <img src="7001.jpg" alt="Водороден влак">
+                    <p>Водороден влак</p>
+                </div>
+                <div class="sidebar-item">
+                    <img src="524[1].jpg" alt="Магнитни влакове">
+                    <p>Магнитни влакове</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="4502.jpg" alt="Първи самолет">
+                    <p>Първият самолет</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="2223[1].jpg" alt="Boeing 747">
+                    <p>Самолет Boeing 747</p>
+                </div>
+                
+                <div class="sidebar-item">
+                    <img src="7777.jpg" alt="Ракета">
+                    <p>Изстрелване на ракета</p>
+                </div>
+                
+                
+
+ <div class="sidebar-item">
+                    <img src="521[1].jpg" alt=".">
+                    <p>Космическата станция "Вояджър"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+          
+        </div>
+    </div>
+</body>
+</html>

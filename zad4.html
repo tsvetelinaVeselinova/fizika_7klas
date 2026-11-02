@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Светлина - Урок по физика</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+ 
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        #blink {
+            animation: blink 2s linear infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+        
+        .navigation {
+           background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+ 
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .navigation a {
+            text-decoration: none;
+            color: #0066cc;
+            margin: 0 5px;
+        }
+        
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .sidebar-left {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .content-center {
+            flex: 2;
+            min-width: 400px;
+            background-color: #ffffff;
+            padding: 15px;
+        }
+        
+        .sidebar-right {
+            flex: 1;
+            min-width: 300px;
+            background-color: #eeeeee;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .test-question {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .answer-option {
+            margin: 5px 0;
+            padding: 5px;
+        }
+        
+        .experiment-box {
+            border: 2px solid #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #f0f8ff;
+        }
+        
+        .speed-table {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        h3 {
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        
+        .image-placeholder {
+            width: 194px;
+            height: 270px;
+            background-color: #ddd;
+            border: 7px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 id="blink">Светлина</h1>
+    </div>
+    
+    <div class="navigation">
+        <a href="zad12.html">Начален преговор</a> |
+        <a href="zad54.html">Речник</a> |
+        <a href="Upr1.html">Начало</a>
+    </div>
+    
+    <div class="main-content">
+        <div class="sidebar-left">
+            <h3>Източник на светлина:</h3>
+            <p>всяко тяло, което излъчва светлина</p>
+            
+            <h3>Видове източници:</h3>
+            <ul>
+                <li><strong>Топли:</strong> Слънце, звезди, електрическа лампа, свещ</li>
+                <li><strong>Студени:</strong> калкулатор, кинескоп, луминесцентна лампа</li>
+                <li><strong>Естествени:</strong> Слънце, звезди</li>
+                <li><strong>Изкуствени:</strong> електрическа лампа, калкулатор, кинескоп, луминесцентна лампа</li>
+            </ul>
+          <p> <i> Топлите и студените източници на светлина се различават по температурата, която ги създава, като топлите 
+източници (напр. слънце, огън) излъчват светлина чрез нагряване до високи температури, а студените (напр. светодиоди, светулки) 
+излъчват светлина без нужда от нагряване, често чрез други процеси като биолуминесценция или електрически разряди.</i> </p>
+            <h3>Видове среди:</h3>
+            <ul>
+                <li><strong>Прозрачни</strong> (в които се разпространява светлината): въздух, вода, стъкло, рубин, диамант и други</li>
+                <li><strong>Непрозрачни</strong> (в които не се разпространява светлината): дърво, бетон, метал и други</p>
+            </ul>
+   <p> <b> Новости:   </b> </p><b><i> Соларни прозорци</b></p>  Това са прозрачни панели със слънчеви клетки, инсталирани в прозорците, за да улавят 
+енергията от светлината, като позволяват преминаването на светлина през тях.  </i></p>   
+            <div class="speed-table">
+                <h3>Скорост на светлината в различните прозрачни среди:</h3>
+                <p><strong>Въздух:</strong> 300 000 km/s</p>
+                <p><strong>Стъкло:</strong> 225 000 km/s</p>
+                <p><strong>Вода:</strong> 200 000 km/s</p>
+                <p><strong>Рубин:</strong> 177 000 km/s</p>
+                <p><strong>Диамант:</strong> 125 000 km/s</p>
+            </div>
+        </div>
+        
+        <div class="content-center">
+            <h1>Тест № 16</h1>
+            
+            <div class="test-question">
+                <div class="question-text">Зад. 1. Кой източник на светлина НЕ е топлинен?</div>
+                <div class="answer-option">а) лазер</div>
+                <div class="answer-option">б) електрична лампа</div>
+                <div class="answer-option">в) свещ</div>
+                <div class="answer-option">г) Слънце</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">Зад. 2. Кое тяло е непрозрачно?</div>
+                <div class="answer-option">а) въздух</div>
+                <div class="answer-option">б) водата в морето</div>
+                <div class="answer-option">в) диамант</div>
+                <div class="answer-option">г) морска вода в чаша</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">Зад. 3. С кое свойство на светлината се обяснява образуването на сянка?</div>
+                <div class="answer-option">а) преминаване на светлината през прозрачна среда</div>
+                <div class="answer-option">б) праволинейно разпространение на светлината</div>
+                <div class="answer-option">в) свойството на светлината да заобикаля непрозрачни тела</div>
+                <div class="answer-option">г) проникване на светлината през непрозрачни тела</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">Зад. 4. Най-голяма е скоростта на светлината в:</div>
+                <div class="answer-option">а) диамант</div>
+                <div class="answer-option">б) вода</div>
+                <div class="answer-option">в) стъкло</div>
+                <div class="answer-option">г) вакуум</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">Зад. 5. Електричната лампа излъчва:</div>
+                <div class="answer-option">а) сходящ сноп светлина</div>
+                <div class="answer-option">б) разходящ сноп светлина</div>
+                <div class="answer-option">в) успореден сноп светлина</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">Зад. 6. За колко време слънчевата светлина достига до:</div>
+                <div class="answer-option">а) планетата Юпитер, която е на разстояние 778 000 000 km от Слънцето?</div>
+                <div class="answer-option">б) планетата Сатурн, която е на разстояние 1 428 000 000 km от Слънцето?</div>
+            </div>
+            
+            <div class="test-question">
+                <div class="question-text">Зад. 7. Колко пъти скоростта на светлината е по-голяма от:</div>
+                <div class="answer-option">а) скоростта на изкуствен спътник на Земята, която е 7,9 km/s</div>
+                <div class="answer-option">б) скоростта на изкуствен спътник на Слънцето, която е 11 500 m/s</div>
+                <div class="answer-option">в) скоростта на изкуствен спътник, напуснал Слънчевата система, а тази скорост е 16 500 m/s</div>
+            </div>
+            
+            <div class="navigation" style="margin-top: 30px;">
+                <a href="zad63.html">Справочник</a> |
+                <a href="zad56.html">Начална страница</a> |
+                <a href="zad50.html">Упътване</a> |
+                <a href="zad52.html">Ключ</a> |
+                <a href="zad26.html">Следващ</a>
+            </div>
+        </div>
+        
+        <div class="sidebar-right">
+            <div class="experiment-box">
+  <h3>Шоу на сенките</h3>
+<img src="525[1].jpg" width="250" height="200">
+
+                <h1>Направете си вкъщи</h1>
+              
+                
+                <p><strong>1)</strong> За да направите екран, вземете голям лист бяла хартия и нарисувайте с черен флумастер стволовете на дърветата в краищата на листа.</p>
+                
+                <p><strong>2)</strong> Нарисувайте палмови листа по върховете на клоните. Нарисувайте цветя и треви в основата на листа.</p>
+                
+                <p><strong>3)</strong> Направете различни фигурки на животни от картон. Например крокодил, маймуна, лъв и т.н. От едната страна на всяка фигурка залепете по една сламка. Така ще направите кукли за театъра на сенките.</p>
+                
+                <p><strong>4)</strong> В затъмнено помещение и стената (вместо екран) осветявайте с фенерче фигурите и ще направите театър на сенките.</p>
+            </div>
+            
+            <h3>Театър на сенките</h3>
+            <img src="527[1].jpg" width="250" height="200">
+
+            <p><i>ЮНЕСКО се ангажира да опази това древно изкуство в една от страните, където традиционно се е представяло по кафенетата.</p>
+<p>Спорни са данните за това коя е родината на Театъра на сенките. Смята се, че е Китай. </p>
+<p>Там кукленият театър съществува от 1000 г. пр. Хр.</p>
+<p> Предполага се, че китайските традиции са основата, върху която е създаден уаянг –
+ кукленият театър на сенките, разпространен в Индонезия. </i></p>
+        
+            
+        </div>
+    </div>
+</body>
+</html>

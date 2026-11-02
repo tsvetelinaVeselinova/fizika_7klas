@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отражение и пречупване на светлината</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Странични вертикални полета с градиент */
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #e0e0e0 100%);
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar.right {
+            border-right: none;
+            border-left: 1px solid #ddd;
+            background: linear-gradient(225deg, #f0f0f0 0%, #ffffff 50%, #e0e0e0 100%);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        /* Заглавие */
+        .title {
+            text-align: center;
+            color: #2c5282;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.7; }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Дефиниции в страничното поле */
+        .definition-box {
+            background: rgba(255,255,255,0.8);
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .definition-box h3 {
+            color: #2c5282;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .definition-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Тест секция */
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .test-section h1 {
+            color: #2c5282;
+            border-bottom: 3px solid #4a90e2;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .question {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4a90e2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .question b {
+            color: #2c5282;
+            font-size: 1.1em;
+        }
+
+        .question br + a,
+        .question br + b {
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        /* Информационна кутия за миражи */
+        .mirage-info {
+            background: linear-gradient(135deg, #fff7e6, #ffe4b3);
+            border: 2px solid #f4a460;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .mirage-info h3 {
+            color: #d2691e;
+            margin-bottom: 10px;
+        }
+
+        .mirage-info h5 {
+            color: #8b4513;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        /* Хумор секция */
+        .humor-section {
+            background: linear-gradient(135deg, #e6f3ff, #b3d9ff);
+            border: 2px solid #87ceeb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .humor-section h3 {
+            color: #4682b4;
+            margin-bottom: 10px;
+        }
+
+        /* Подвал навигация */
+        .footer-navigation {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .footer-navigation a {
+            color: #4a90e2;
+            text-decoration: none;
+            margin: 0 8px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .footer-navigation a:hover {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        /* Responsive дизайн */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Лява странична лента -->
+        <div class="sidebar">
+
+<div class="definition-box">
+
+ <b>Електрично напрежение:</b> мярката за енергията, която всеки електрон отдава на консуматора. Напрежението е толкова по-високо,
+ колкото е по-голяма отделената (преобразуваната) енергия.
+<p>.</p>
+ Уредът, с който се измерва напрежението се нарича<b> волтметър</b> и се свързва успоредно 
+<p><br/><b>U </b>- напрежение между краищата на консуматора;<br/><b>W</b> -преобразувана електрическа енергия;<p>.</p>
+<b><br/> q</b>- пренесен електрически заряд
+
+<p>.</p>
+
+
+    <big>U=W / q</big>     
+
+<p>.</p>
+
+
+ <b>Слънчевите батерии </b> са друг източник на напрежение. Те не вредят на околната среда и са основен източник на енергия в космическите кораби.
+Техен недостатък е високата цена и фактът, че преобразуват малка част от светлинната енергия в електрическа.</p>
+
+<p>.</p>
+
+ <img src ="776[1].jpg" align="left" width="230" border="7" height="180">  
+
+   </div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <h1 class="title">Електрично напрежение</h1>
+            
+            <div class="navigation">
+                <a href="zad3.html">Начална страница</a> |
+                <a href="Upr1.html">Начало</a>
+<a href="zad63.html" onclick="alert('Справочник')">Справочник</a>
+<a href="zad53.html" onclick="alert('Речник')">Речник</a>
+            </div>
+
+            <div class="test-section">
+               
+<h1> Тест №8</h1>
+<p>.</p>
+<b>Зад.1.Kоя е причината за протичане на ток през един консуматор? </b><br/>
+ а) наличие на проводник; <br/>
+ б) наличие на свободни електрични заряди; <br/> 
+ в) наличие на проводник и създадено между краищата му напрежение;<br/> 
+<p>.</p>
+ г) гравитационно привличане.<br/> 
+<p><b>Зад.2.Коя е мерната единица за напрежение?</b> <br/>
+ <b>а)</b> ампер;<br/>  
+<b> б)</b> ват ;<br/>
+<b>в)</b> кулон;<br/>
+<b> г)</b> волт.<br/> 
+<p>.</p>
+<b> Зад.3.  0,08 V са равни на:</b> <br/>
+а) 800 mV;<br/>
+ б) 8kV ;<br/>
+в) 80mV;<br/>
+г) 8mV .<br/> 
+
+
+
+<p>.</p>
+
+<table dlign=”center” border=”1” width=”90%”>
+<tr>
+<td> <img src ="1130[1].jpg" align="left" width="194" border="7" height="192"> </td>
+<td> Зад.4.Какъв е обхватът на волтметъра ? </b><br/>
+ а) 5 V;<br/>
+б) 30 V;<br/>
+<b>в)</b> 10 V ; <br/>
+ <b> г)</b>10 mV. <br/>
+
+</tr>
+
+
+
+</table>
+
+<p>.</p>
+
+<p><b>Зад.5.В каква енергия  консуматор не може да превърне електрическата енергия? </b> <br/>
+а) светлинна;<br/>  
+б) слънчева; <br/> 
+в) механична; <br/> 
+г) топлинна. <br/> <p>.</p>
+<p><b>Зад.6.Електричното напрежение върху един консуматор е мярка за:</b> <br/>
+ а) броят на електроните, преминали за 1 секунда през консуматора; <br/>
+б) енергията, която всеки електрон отдава на консуматора. <p>.</p>
+<p><b>Зад.7.Превърнете:  </b> <br/>  
+
+ а) 720 kV =.....V  <br/>  
+б) 720mV =......V  <br/>   
+   B) 4kV =.....mV
+<p>.</p>
+ <a href="zad63.html"> Справочник</a> <br/>  <p>.</p>
+
+<a href="zad3.html"> Начална страница</a>|
+
+<a href="zad15.html"> Предишен</a>|
+<a href="zad17.html"> Следващ</a>
+<p>.</p>
+ <a href="zad49.html">Упътване</a> |
+
+<a href="zad66.html"> Ключ</a>
+
+            </div>
+        </div>
+
+        <!-- Дясна странична лента -->
+        <div class="sidebar right">
+            <div class="mirage-info">
+              
+ <h2> Любопитни факти </h2><h3>Био-</br>електричество</h3>
+ <p> Работата на сърцето се управлява с електрични сигнали. Електродиаграмата на сърдечната дейност позволява да се открият отклоненията от нормалната 
+дейност на напрежението между отделните точки на сърдечния мускул.Тези напрежения са от порядъка на 1 mV.
+Енцефалограмите информират за напреженията в мозъка, свързани с протичането на нищожни токове през нервните клетки. </p> 
+
+
+
+
+
+<img src ="902[1].jpg" align="left" width="194" border="7" height="192"> 
+
+
+
+
+ Електрическите органи на повече от 300 вида риби представляват видоизменени мускулни клетки, които са сплеснати като пластинки и са подредени подобно на клетките в суха батерия.  
+
+
+  <img src ="901[1].jpg" align="left" width="194" border="7" height="192">
+
+  
+            </div>
+        </div>
+    </div>
+</body>
+</html>

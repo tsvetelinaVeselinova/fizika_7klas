@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Начален преговор</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-title {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .navigation {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-links a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .rules-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .rules-title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .rules-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .rule-item:hover {
+            transform: translateX(10px);
+        }
+
+        .rule-image {
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+
+        .rule-image img {
+            width: 130px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .rule-content {
+            flex: 1;
+        }
+
+        .rule-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .rule-number {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .formula {
+            background: #e8f4fd;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #2980b9;
+            display: inline-block;
+        }
+
+        .home-link {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .home-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .rule-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .rule-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">НАЧАЛЕН ПРЕГОВОР</h1>
+            <a href="index.html" class="home-link">🏠 НАЧАЛО НА САЙТА</a>
+        </header>
+
+        <nav class="navigation">
+            <div class="nav-links">
+                <a href="zad2.html">📝 Тест №1: Движение на телата</a>
+                <a href="zad11.html">⚡ Тест №2:Сили  </a>
+                <a href="zad10.html">🔧 Тест №3:Действие на силите </a>
+                <a href="zad13.html">🔋 Тест №4: Сили и налягане</a>
+                <a href="zad36.html">🔌 Тест №5:Плътност.Плаване на телата</a>
+                <a href="zad12.html">💡 Тест №6: Електричен ток</a>
+                <a href="zad14.html">⚡  Входно равнище</a>
+                 <a href="zad63.html">🎮 Справочник</a>
+                <a href="zad71.html">🎮 Забавна страница</a>
+            </div>
+        </nav>
+
+        <section class="rules-section">
+            <h2 class="rules-title">Основни правила при решаване на задачи по физика</h2>
+            
+            <div class="rule-item">
+                <div class="rule-image">
+                    <img src="35.jpg"width="294" height="190" >
+
+                </div>
+                <div class="rule-content">
+                    <div class="rule-number">.</div>
+
+
+<h3>За да решите правилно една задача, следвайте следните стъпки:</br>
+
+1. Прочетете внимателно условието.</br>
+Уверете се, че разбирате какво е дадено и какво се търси.</br>
+
+2. Запишете дадените величини с техните означения и мерни единици.</br>
+Използвайте общоприетите означения във физиката.</br>
+
+3. Запишете търсената величина.</br>
+
+4. Изберете подходящата формула.</br>
+Помислете коя физична зависимост свързва дадените и търсената величина.</br>
+
+5. Заместете числените стойности с техните мерни единици.</br>
+
+6. Изчислете резултата и запишете отговора с правилната мерна единица.</br>
+
+<i>Пример</br>
+
+<big>Задача:</big> Автомобил се движи със скорост 20 m/s. Какъв път ще измине за 15 s?</br>
+
+Дадено:</br>
+
+v=20m/s</br>
+
+t=15s</br>
+
+Да се намери:</br>
+
+s=?</br>
+
+Формула:</br>
+
+s=v⋅t</br>
+
+Решение:</br>
+
+s=20⋅15=300m</br>
+
+Отговор: Автомобилът ще измине 300 m.</i>
+
+                    
+                </div>
+            </div>
+
+            
+          
+
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Електричество и Магнетизъм - Обобщителен тест</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            min-height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Главен заглавен блинкащ ефект */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        .main-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: linear-gradient(45deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: blink 2s infinite;
+        }
+
+        /* Ляво странично поле с градиент */
+        .left-sidebar {
+            background: linear-gradient(180deg, #f5f5f5, #e0e0e0, #bdbdbd, #9e9e9e);
+            padding: 20px 15px;
+            border-right: 2px solid #ddd;
+        }
+
+        .left-sidebar h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            border-bottom: 2px solid #666;
+            padding-bottom: 5px;
+        }
+
+        .left-sidebar p {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #444;
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            background: white;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .main-content h1 {
+            color: #1976d2;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2.2em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #1976d2;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        /* Стилизиране на таблицата */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table td, table th {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        table tr:hover {
+            background: #e3f2fd;
+            transition: background 0.3s ease;
+        }
+
+        /* Опции за въпросите */
+        .options {
+            padding-left: 20px;
+        }
+
+        .options > * {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        /* Дясно странично поле с градиент */
+        .right-sidebar {
+            background: linear-gradient(180deg, #f5f5f5, #e0e0e0, #bdbdbd, #9e9e9e);
+            padding: 20px 15px;
+            border-left: 2px solid #ddd;
+        }
+
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .grade-table td {
+            padding: 8px;
+            border: 1px solid #999;
+            background: rgba(255,255,255,0.8);
+            font-size: 0.9em;
+        }
+
+        .grade-table h2 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+
+        /* Линкове */
+        a {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #42a5f5;
+            text-decoration: underline;
+        }
+
+        /* Навигационни линкове */
+        .nav-links {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(25, 118, 210, 0.1);
+            border-radius: 5px;
+        }
+
+        /* Формули и математически символи */
+        sup {
+            font-size: 0.8em;
+            vertical-align: super;
+        }
+
+        /* Адаптивност */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto;
+            }
+
+            .left-sidebar, .right-sidebar {
+                padding: 15px;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .main-title {
+                font-size: 1.5em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-title" id="blink">Електричество и магнетизъм</div>
+        
+        <div class="left-sidebar">
+            <h3>Оценяване на задачите:</h3>
+            <p><strong>1 зад.</strong> - всеки попълнен ред от таблицата носи по 0,5 точки; цялата таблица -2 точки</p>
+            <p><strong>2.зад.</strong> - 1 точка</p>
+            <p><strong>3.зад.</strong> - за всяка вярна формула по 0,5 точки. Общо-2 точки</p>
+            <p><strong>4.зад.</strong> - за всеки вярно определен уред по 0,5 точки. Общо 2 точки</p>
+            <p><strong>5.Зад.</strong> - 1 точка</p>
+            <p><strong>6.зад.</strong> - 1 точка</p>
+            <p><strong>7.зад.</strong> - за съкратен запис на условието-1 точка; за вярно написана формула -1 точка; за вярно превръщане на мерните единици-1 точка и за вярно пресмятане и написване на мерната единица на получената величина-1 точка. ОБЩО-4 точки</p>
+            <p><strong>8.зад.</strong> - 1 точка</p>
+            <p><strong>9.зад.</strong> - за съкратен запис на условието-1 точка; за вярно написана формула -1 точка; за вярно превръщане на мерните единици-1 точка и за вярно пресмятане и написване на мерната единица на получената величина-1 точка. ОБЩО-4 точки</p>
+            <p><strong>10зад.</strong> - 1 точка</p>
+            <p><strong>11зад.</strong> - за съкратен запис на условието-1 точка; за вярно написана формула -1 точка; за вярно превръщане на мерните единици-1 точка, за вярно изразяване на търсената величина-1 точка и за вярно пресмятане и написване на мерната единица на получената величина-1 точка. ОБЩО-5 точки</p>
+            <p><strong>12зад.</strong> - 1 точка</p>
+        </div>
+ 
+                        
+                    
+        <div class="main-content">
+            <div class="nav-links">
+                <a href="zad53.html">Речник</a> | <a href="Upr1.html">Начало</a>
+            </div>
+
+            <h1>Обобщителен тест</h1>
+
+            <div class="question">
+                <p>Зад.1. Попълнете таблицата:</p>
+                <table>
+                    <tr>
+                        <th>Величина</th>
+                        <th>Означение</th>
+                        <th>Основна мерна единица</th>
+                        <th>Дробни</th>
+                        <th>Кратни</th>
+                    </tr>
+                    <tr>
+                        <td>Съпротивление</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>P</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>mV</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>kWh</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="question">
+                <p>Зад.2. Кое от посочените понятия е пример за физична величина?</p>
+                <div class="options">
+                    <div>а) мощност;</div>
+                    <div>б) ватметър;</div>
+                    <div>в) ват;</div>
+                    <div>г) електрон.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.3. Срещу всяка физична величина запишете номера на формулата, по която може да се пресметне:</p>
+                <div class="options">
+                    <div>а) количество топлина (...) 1) U=I.R</div>
+                    <div>б) мощност на ел.ток (...) 2) P=I<sup>2</sup>.R</div>
+                    <div>в) напрежение на консуматора (...) 3) I=q/t</div>
+                    <div>г) големина на ел. ток (...) 4) Q=I.U.t</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.4. Срещу всяка физична величина запишете номера на уреда, с който се измерва:</p>
+                <div class="options">
+                    <div>а) големина на електричния заряд (...) 1) електромер</div>
+                    <div>б) напрежение (...) 2) ватметър</div>
+                    <div>в) мощност (...) 3) волтметър</div>
+                    <div>г) преобразувана електрична енергия (...) 4) електроскоп</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.5. Металите са проводници на електричен ток, защото в тях има свободни:</p>
+                <div class="options">
+                    <div>а) положителни йони;</div>
+                    <div>б) електрони;</div>
+                    <div>в) отрицателни йони;</div>
+                    <div>г) протони.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.6. Кое от изброените устройства НЕ е източник на електричен ток и електрично напрежение?</p>
+                <div class="options">
+                    <div>а) слънчева батерия;</div>
+                    <div>б) генератор;</div>
+                    <div>в) резистор;</div>
+                    <div>г) динамо.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.7. Колко кулона е електричният заряд, който преминава за 4 минути през напречното сечение на проводник, по който тече ток 550 mА?</p>
+                <div>Дадено:....... Търси се:....... Решение:......</div>
+            </div>
+
+            <div class="question">
+                <p>Зад.8. Стойността на коя от изброените величини няма да се промени, ако променим напрежението, приложено между краищата на даден проводник?</p>
+                <div class="options">
+                    <div>а) мощност;</div>
+                    <div>б) количество топлина;</div>
+                    <div>в) съпротивление;</div>
+                    <div>г) големина на тока.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.9. Определете големината на тока, който консумира прахосмукачка, на която е написано:"220V ; 1,1кW"?</p>
+                <div>Дадено:.... Търси се...... Решение:....</div>
+                <div><a href="zad63.html">Справочник</a></div>
+            </div>
+
+            <div class="question">
+                <p>Зад.10. Върху електрически предпазител (бушон) се означава:</p>
+                <div class="options">
+                    <div>а) максималното допустимо напрежение;</div>
+                    <div>б) максималната допустима мощност;</div>
+                    <div>в) максималният допустим ток;</div>
+                    <div>г) максималното съпротивление.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.11. През нагревател със съпротивление 4кΩ тече ток 800mА. За колко минути ще се отдели 614,4 кJ топлина?</p>
+                <div>Дадено:.... Търси се...... Решение:....</div>
+            </div>
+
+            <div class="question">
+                <p>Зад.12. Намотка, по която тече ток, създава същото магнитно поле както:</p>
+                <div class="options">
+                    <div>а) намагнитено топче;</div>
+                    <div>б) П-образен магнит;</div>
+                    <div>в) токовете не създават магнитно поле;</div>
+                    <div>г) прав магнит.</div>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="zad3.html">Начална страница</a> | <a href="zad66.html">Ключ</a>
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <table class="grade-table">
+                <tr>
+                    <td>
+                        <h2>Оценка:</h2>
+                        <p>0-6т. - Слаб (2)</p>
+                        <p>7-10т. - Среден (3)</p>
+                        <p>11-15т. - Добър (4)</p>
+                        <p>16-20т. - Мн. добър (5)</p>
+                        <p>21-25т. - Отличен (6)</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

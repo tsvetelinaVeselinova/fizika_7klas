@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Речник на физичните термини</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        #blink {
+            text-align: center;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .navigation {
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navigation a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background-color: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #bdc3c7 0%, #2c3e50 50%, #bdc3c7 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .sidebar-item {
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sidebar-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .sidebar-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 3px solid #3498db;
+        }
+
+        .sidebar-item h3 {
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .content {
+            flex: 1;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .content h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        .term {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .term:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .term b {
+            color: #e74c3c;
+            font-size: 1.1em;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .term-definition {
+            color: #2c3e50;
+            font-size: 1em;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                padding: 15px;
+            }
+            
+            .sidebar-item {
+                min-width: 150px;
+                margin-right: 15px;
+                margin-bottom: 0;
+            }
+            
+            #blink {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Анимация за появяване на термините */
+        .term {
+            opacity: 0;
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .term:nth-child(1) { animation-delay: 0.1s; }
+        .term:nth-child(2) { animation-delay: 0.2s; }
+        .term:nth-child(3) { animation-delay: 0.3s; }
+        .term:nth-child(4) { animation-delay: 0.4s; }
+        .term:nth-child(5) { animation-delay: 0.5s; }
+        .term:nth-child(6) { animation-delay: 0.6s; }
+        .term:nth-child(7) { animation-delay: 0.7s; }
+        .term:nth-child(8) { animation-delay: 0.8s; }
+        .term:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="blink">Речник на физичните термини</h1>
+    
+    <div class="navigation">
+        <a href="Upr1.html">Начало</a> | <a href="zad3.html">Начална страница</a>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="sidebar-item">
+                <img src="533[1].jpg" alt=".">
+                <h3>Акумулатор</h3>
+            </div>
+ <div class="sidebar-item">
+                <img src="533.jpg" alt=".">
+                <h3>Параметри на акумулатор</h3>
+            </div>
+            <div class="sidebar-item">
+                <img src="7006.jpg" alt=".">
+                <h3>Наелектризиране</h3>
+            </div>
+
+<div class="sidebar-item">
+                <img src="1111[1].jpg" alt=".">
+                <h3>Електроскоп</h3>
+            </div>
+<div class="sidebar-item">
+                <img src="141[2].jpg" alt=".">
+                <h3>Електромагнит</h3>
+            </div>
+
+
+
+<div class="sidebar-item">
+                <img src="958[1].jpg" alt=".">
+                <h4>Правило на свитите пръсти</h4>
+            </div>
+
+<div class="sidebar-item">
+                <img src="959[1].jpeg" alt=".">
+                <h4>Правило на опънатите пръсти</h4>
+            </div>
+ 
+
+
+ <div class="sidebar-item">
+                <img src="901[1].jpg" alt=".">
+                <h4>Биоелектричество</h4>
+            </div> 
+            <div class="sidebar-item">
+                <img src="962[2].jpg" alt=".">
+                <h4>Последователно свързване на резистори</h4>
+            </div>
+<div class="sidebar-item">
+                <img src="962[1].jpg" alt=".">
+                <h4>Успоредно свързване на резистори</h4>
+            </div>
+
+        </div>
+
+        
+           
+
+
+  <!-- Централно съдържание -->
+            <div class="content">
+                <h1>Електричество и магнетизъм</h1>
+
+                <div class="term">
+                    <div class="term-name">Акумулатор</div>
+                    <div class="term-definition">Химичен източник на ток. Процесите в него са обратими, така че след изтощаване може да се презареди.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Амперчас</div>
+                    <div class="term-definition">Неосновна мерна единица за големина на електричен заряд, която е равна на 3600 С.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Амперметър</div>
+                    <div class="term-definition">Уред за измерване големината на електричния ток.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Батерия</div>
+                    <div class="term-definition">Устройство, съдържащо един или няколко химични източника, свързани по подходящ начин.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Биоелектричество</div>
+                    <div class="term-definition">Повече от 300 вида риби имат електрически органи, които представляват видоизменени мускулни клетки, които са сплеснати като пластинки и са подредени подобно на клетките в суха батерия.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Волтметър</div>
+                    <div class="term-definition">Уред за измерване на напрежение.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Електромер</div>
+                    <div class="term-definition">Електроизмервателен уред за отчитане на преобразуваната (изразходена) електроенергия.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Електрометър</div>
+                    <div class="term-definition">Уред, с който се отчита (количествено) големината на електричния заряд.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Електроскоп</div>
+                    <div class="term-definition">Уред, с който се отчита (качествено) големината на електричния заряд.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Еквивалентно съпротивление</div>
+                    <div class="term-definition">Съпротивление на резистор, при включване на който, вместо група свързани успоредно или последователно резистори не се променя общият ток във веригата.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Електромагнитно реле</div>
+                    <div class="term-definition">Устройство, което с помощта на електромагнит позволява чрез по-слаб ток да се пропуска и спира по-силен ток.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Киловатчас</div>
+                    <div class="term-definition">Неосновна мерна единица за преобразувана електроенергия равна на 3 600 000 J.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Намагнитване</div>
+                    <div class="term-definition">Когато магнитните материали придобиват свойствата на постоянни магнити.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Постоянен ток</div>
+                    <div class="term-definition">Електричен ток, чиято големина и посока не се променят с времето.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Променлив ток</div>
+                    <div class="term-definition">Електричен ток, чиято големина и посока се променят с времето.</div>
+                </div>
+
+                <div class="highlight-rule">
+                    <div class="term-name">Правило на свитите пръсти на дясната ръка</div>
+                    <div class="term-definition">Ако мислено обхванем с дясната ръка намотка с ток свитите пръсти сочат посоката на тока, а палецът - северния полюс на намотката.</div>
+                </div>
+<p>. </p>
+<p>. </p>
+                <div class="highlight-rule">
+                    <div class="term-name">Правило на опънатите пръсти на дясната ръка</div>
+                    <div class="term-definition">Палецът сочи посоката на тока, опънатите пръсти - магнитното поле (величината се нарича магнитна индукция), а магнитната сила е перпендикулярна на дланта и навън от нея.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Резистор</div>
+                    <div class="term-definition">Проводник с точно определено съпротивление.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Ротор</div>
+                    <div class="term-definition">Намотка с ток, която представлява въртящата се част на електромотор.</div>
+                </div>
+
+                <div class="term">
+                    <div class="term-name">Статор</div>
+                    <div class="term-definition">Неподвижната част на електромотор, която представлява П-образен магнит.</div>
+                </div>
+            </div>
+            
+           
+
+        <div class="sidebar">
+           
+
+
+ <div class="sidebar-item">
+                <img src="1130[1].jpg" alt=".">
+                <h3>Волтметър</h3>
+            </div>
+ <div class="sidebar-item">
+                <img src="980.jpg" alt=".">
+                <h3>Амперметър</h3>
+            </div>
+
+<div class="sidebar-item">
+                <img src="512[1].jpg" alt=".">
+                <h3>Ватметър</h3>
+            </div> 
+ <div class="sidebar-item">
+                <img src="968[1].jpg" alt="">
+              <h3>Електромер</h3> 
+            </div>
+            <div class="sidebar-item">
+                <img src="570[1].jpg" alt=".">
+                <h3>Електромотор</h3>
+            </div>
+
+ 
+<div class="sidebar-item">
+                <img src="970[1].jpg" alt="">
+                <h3>Резистори</h3>
+            </div>
+
+ <div class="sidebar-item">
+                <img src="964.jpg" alt=".">
+                <h3>Динамо</h3>
+            </div> 
+
+<div class="sidebar-item">
+                <img src="530[1].png" alt="">
+                <h3>Батерия (сух елемент)</h3>
+            </div>
+<div class="sidebar-item">
+                <img src="531[1].jpg" alt="">
+                <h3>Литиево-йонна батерия</h3>
+            </div>
+            <div class="sidebar-item">
+                <img src="966.jpg" alt=".">
+                <h3>Генератор</h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

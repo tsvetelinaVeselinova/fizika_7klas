@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ключ - Физика тестове</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, 
+                #808080 0%, 
+                #ffffff 15%, 
+                #ffffff 85%, 
+                #808080 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #blink {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-content {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .sidebar {
+            flex: 0 0 200px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sidebar td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        .sidebar img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.05);
+        }
+
+        .content {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .content h3 {
+            color: #27ae60;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+            border-left: 4px solid #27ae60;
+            padding-left: 15px;
+        }
+
+        .content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .content a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .content a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .units-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .units-table th,
+        .units-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .units-table th {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            font-weight: bold;
+        }
+
+        .units-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .units-table tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: none;
+                width: 100%;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            #blink {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="blink">Ключ</h1>
+        
+        <div class="navigation">
+            <a href="Upr1.html">Начало</a>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <table>
+                    <tr>
+                        <td><img src="95.jpg" alt="Круизен кораб"></td>
+                    </tr>
+                    <tr>
+                        <td>Круизен кораб</td>
+                    </tr>
+                    <tr>
+                        <td><img src="972[1].jpg" alt="."></td>
+                    </tr>
+ <td>Подвижна макара</td>
+
+ <tr>
+                        <td><img src="891[1].jpg" alt="Траектория"></td>
+                    </tr>
+<td>Траектория</td>
+ <tr>
+                        <td><img src="7006.jpg" alt="Наелектризиране"></td>
+                    </tr> 
+
+<td>Наелектризиране</td>
+
+
+<tr>
+                        <td><img src="884.jpg" alt="."></td>
+                    </tr>
+                    <tr>
+                        <td>Снегоходки</td>
+                    </tr>
+                    <tr>
+                      
+                    </tr>
+                    <tr>
+                        <td><img src="1127[1].jpg" alt="Цепелин"></td>
+                    </tr>
+                    <tr>
+                        <td>Цепелин</td>
+                    </tr>
+                    <tr>
+                        <td><img src="1128[1].jpg" alt="Ареометър"></td>
+                    </tr>
+                    <tr>
+                        <td>Ареометър</td>
+                    </tr>
+                    <tr>
+                        <td><img src="941[1].jpg" alt="Силомер"></td>
+                    </tr>
+                    <tr>
+                        <td>Силомер</td>
+                    </tr>
+<tr>
+                        <td><img src="7781.jpg" alt="."></td>
+                    </tr>
+                    <tr>
+                        <td>Вместимост</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="content">
+                <h1>НАЧАЛЕН ПРЕГОВОР</h1>
+
+                <div class="test-section">
+                    <h3>Тест №1: ДВИЖЕНИЕ НА ТЕЛАТА</h3>
+                    <p><strong>Зад.1)</strong> 240 m <strong>Зад.2)</strong> б <strong>Зад.3)</strong> 30 min <strong>Зад.4)</strong> 1200 m <strong>Зад.5.</strong> а) права; б) крива; в) крива<br/>
+                    <strong>Зад.6.</strong> в) <strong>Зад.7.</strong> 1256 s = 20 min 56 s</p>
+                    <p><a href="zad2.html">Назад</a> | <a href="zad7.html">Упътване</a></p>
+                </div>
+
+                <div class="test-section">
+                    <h3>Тест №2: СИЛИ</h3>
+                    <p><strong>Зад.1)</strong> б <strong>Зад.2)</strong> б <strong>Зад.3)</strong> в <strong>Зад.4)</strong> а) F>f в) F=f <strong>Зад.5)</strong> а) 8N б) 8N в) 0,8kg<br/>
+                    <strong>Зад.6)</strong> а) G, N б) G=m.g=200N; N=200N противоположни посоки и перпендикулярни на земната повърхност в) f=60N</p>
+                    <p><a href="zad11.html">Назад</a> | <a href="zad7.html">Упътване</a></p>
+                </div>
+
+                <div class="test-section">
+                    <h3>Тест №3: ДЕЙСТВИЕ НА НЯКОЛКО СИЛИ</h3>
+                    <p><strong>Зад.1)</strong> б и г <strong>Зад.2)</strong> б <strong>Зад.3)</strong> Да <strong>Зад.4)</strong> в <strong>Зад.5)</strong> а) 120N; б) 60N; <strong>Зад.6)</strong> б <strong>Зад.7)</strong> F=m.g/2; m=15кg</p>
+                    <p><a href="zad10.html">Назад</a> | <a href="zad7.html">Упътване</a></p>
+                </div>
+
+                <div class="test-section">
+                    <h3>Тест №4: СИЛИ И НАЛЯГАНЕ</h3>
+                    <p><strong>Зад.1)</strong> в <strong>Зад.2)</strong> г <strong>Зад.3)</strong> а <strong>Зад.4)</strong> г <strong>Зад.5)</strong> 3600 Pa <strong>Зад.6)</strong> в <strong>Зад.7)</strong> б <strong>Зад.8)</strong> 12000 Pa</p>
+                    <p><a href="zad13.html">Назад</a> | <a href="zad7.html">Упътване</a></p>
+                </div>
+
+                <div class="test-section">
+                    <h3>Тест №5: Плътност. Плаване на телата</h3>
+                    <p><strong>Зад.1)</strong> г <strong>Зад.2)</strong> а <strong>Зад.3)</strong> 40,5 g <strong>Зад.4)</strong> 210 g <strong>Зад.5)</strong> б <strong>Зад.6)</strong> 154,4 g <strong>Зад.7)</strong> в <strong>Зад.8)</strong> 8 kPa; 2 kPa; 1 MPa - най-голямо е хидростатичното налягане върху дъното на третия съд. <strong>Зад.9)</strong> F = p . S = 2 N <strong>Зад.10)</strong> 1,545 kg</p>
+                    <p><a href="zad36.html">Назад</a> | <a href="zad7.html">Упътване</a></p>
+                </div>
+
+                <div class="test-section">
+                    <h3>Тест №6: ЕЛЕКТРИЧЕСТВО И МАГНЕТИЗЪМ</h3>
+                    <p><strong>Зад.1)</strong> б <strong>Зад.2)</strong> г <strong>Зад.3)</strong> Имат равен брой протони и електрони <strong>Зад.4)</strong> б <strong>Зад.5)</strong> в <strong>Зад.6)</strong> в <strong>Зад.7)</strong> б</p>
+                    <p><a href="zad12.html">Назад</a> | <a href="zad7.html">Упътване</a></p>
+                </div>
+
+                <div class="test-section">
+                    <h3>ВХОДНО РАВНИЩЕ</h3>
+                    <p><strong>Зад.1)</strong></p>
+                    
+                    <div class="table-container">
+                        <table class="units-table">
+                            <thead>
+                                <tr>
+                                    <th>Величина</th>
+                                    <th>Означение</th>
+                                    <th>Осн. мерна ед.</th>
+                                    <th>Дробни</th>
+                                    <th>Кратни</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Време</td>
+                                    <td>t</td>
+                                    <td>s</td>
+                                    <td>-</td>
+                                    <td>min, h</td>
+                                </tr>
+                                <tr>
+                                    <td>Обем</td>
+                                    <td>V</td>
+                                    <td>m<sup>3</sup></td>
+                                    <td>mm<sup>3</sup>; cm<sup>3</sup>; l</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Дължина</td>
+                                    <td>l</td>
+                                    <td>m</td>
+                                    <td>dm; cm; mm</td>
+                                    <td>km</td>
+                                </tr>
+                                <tr>
+                                    <td>Налягане</td>
+                                    <td>p</td>
+                                    <td>Pa</td>
+                                    <td>-</td>
+                                    <td>hPa; kPa; N/cm<sup>2</sup>; MPa</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><strong>Зад.2)</strong> б <strong>Зад.3)</strong> а) 2; б) 1; в) 4; г) 3 <strong>Зад.4)</strong> а) 4; б) 1; в) 2; г) 3 <strong>Зад.5)</strong> г <strong>Зад.6)</strong> б <strong>Зад.7)</strong> 3,6 km <strong>Зад.8)</strong> в <strong>Зад.9)</strong> 3 s <strong>Зад.10)</strong> б <strong>Зад.11)</strong> 5kg <strong>Зад.12)</strong> 2,1kg</p>
+                    <p><a href="zad14.html">Назад</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

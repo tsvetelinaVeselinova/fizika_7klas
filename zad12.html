@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Електричен ток - Тест № 6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%);
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .sidebar-left {
+            border-right: 2px solid #ddd;
+        }
+
+        .sidebar-right {
+            border-left: 2px solid #ddd;
+        }
+
+        .main-content {
+            background-color: #ffffff;
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            padding: 20px;
+            margin: -30px -30px 30px -30px;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-box {
+            background-color: white;
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .nav-box a {
+            display: block;
+            color: #4a90e2;
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            transition: color 0.3s ease;
+        }
+
+        .nav-box a:hover {
+            color: #357abd;
+            background-color: #f8f9fa;
+            padding-left: 10px;
+        }
+
+        .nav-box a:last-child {
+            border-bottom: none;
+        }
+
+        .review-section {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .review-section h4 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .question {
+            background-color: #fff;
+            border-left: 4px solid #4a90e2;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .question h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            margin-left: 20px;
+        }
+
+        .options div {
+            margin: 8px 0;
+            padding: 5px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 1px solid #2196f3;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h4 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .attention {
+            background: linear-gradient(135deg, #fff3e0, #ffcc02);
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .attention strong {
+            color: #e65100;
+        }
+
+        .units {
+            background-color: #f1f8e9;
+            border: 1px solid #8bc34a;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .navigation {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .navigation a {
+            display: inline-block;
+            color: #4a90e2;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: 1px solid #4a90e2;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background-color: #4a90e2;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .image-placeholder {
+            width: 150px;
+            height: 190px;
+            background: linear-gradient(135deg, #ddd, #f0f0f0);
+            border: 7px solid #999;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+            
+            .sidebar {
+                background: linear-gradient(90deg, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Лява странична лента -->
+        <div class="sidebar sidebar-left">
+            <div class="nav-box">
+<a href="zad1.html">Начална страница</a>
+                <a href="Upr1.html">Начало</a>
+                <a href="zad69.html">Речник</a>
+            </div>
+            
+            <div class="review-section">
+                
+                Някои от най-интересните и необичайни явления, свързани с наелектризирането на телата (статично електричество),
+ които се срещат както в природата, такъв и в ежедневието ни:</p>
+<h3> ⚡ Природни феномени</h3>
+
+<img src="89.jpg" width="230" height="180" alt=".">
+ <p>•	<b>Огньовете на Свети Елм:</b></br> Това е красиво и сияйно синьо-виолетово сияние, което се появява по острите върхове на високи обекти 
+(корабни мачти, църковни кули, крила на самолети) по време на гръмотевична буря. Дължи се на силното наелектризиране на въздуха и образуването на коронно разряд.</p>
+ <p>•	<b>Вулканични светкавици:</b> </br>По време на мощни вулканични изригвания се генерират огромни светкавици директно в облака от пепел.</p>
+ Търкането между милионите микроскопични частици пепел, камъни и лед създава колосално статично електричество.
+<img src="90.jpg" width="230" height="180" alt=".">
+ <p>•	<b>Наелектризиране на пясъчни дюни:</b> </br>При силни пустинни бури, триенето на пясъчните зърна едно в друго ги наелектризира. 
+<img src="88.jpg" width="230" height="180" alt=".">
+Това понякога причинява феномена „пеещи дюни“, при който пустинята издава нисък, бръмчащ звук, придружен от микроскопични електрически искри.
+</p>
+               
+        </div>
+
+
+           
+  </div>
+  
+
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <div class="header">
+                <h1>ЕЛЕКТРИЧЕН ТОК</h1>
+            </div>
+
+            
+<img src="7006[1].jpg" width="630" height="430" alt="Ампер">
+
+ <p><strong>Наелектризиране на телата:</strong> Процесът се осъществява чрез триене или допир. 
+Телата могат да се наелектризират (зареждат) по два начина:</p
+<div class="sidebar sidebar-right">
+                <div class="sidebar-item">
+                
+                  
+           
+        </div>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li><strong>положително</strong></li>
+                    <li><strong>отрицателно</strong></li>
+                </ul>
+                <p>Две едноименно заредени тела се отблъскват, а разноименно заредените се привличат.</p>
+
+            <div class="question">
+
+
+
+
+
+
+
+
+
+<h1 style="color: #2c3e50; margin-bottom: 30px;">Тест № 6</h1>
+                <h3>Зад. 1. Единицата за измерване големината на електричния заряд е:</h3>
+                <div class="options">
+                    <div>а) N;</div>
+                    <div>б) С;</div> 
+                    <div>в) km/h;</div>
+                    <div>г) A.</div>
+                </div>
+                <p style="margin-top: 15px;"><a href="zad63.html">Справочник</a></p>
+            </div>
+
+            <div class="question">
+                <h3>Зад. 2. От какво зависи дали две наелектризирани тела ще се привлекат?</h3>
+                <div class="options">
+                    <div>а) от големината на заряда;</div>
+                    <div>б) от разстоянието между тях;</div>
+                    <div>в) дали са едноименно заредени;</div>
+                    <div>г) дали са разноименно заредени.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Зад. 3. Защо твърдим, че атомите са неутрални, щом в тях има заредени частици?</h3>
+            </div>
+
+            <div class="question">
+                <h3>Зад. 4. Ще се промени ли силата, с която си взаимодействат две наелектризирани тела, ако ги отдалечим едно от друго?</h3>
+                <div class="options">
+                    <div>а) не</div>
+                    <div>б) да, ще намалее</div>
+                    <div>в) да, ще се увеличи</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Зад. 5. Кое от изброените вещества не е проводник?</h3>
+                <div class="options">
+                    <div>а) мед;</div>
+                    <div>б) сребро;</div>
+                    <div>в) стъкло;</div>
+                    <div>г) алуминий.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Зад. 6. За да протече ток е необходимо:</h3>
+                <div class="options">
+                    <div>а) наличие на проводник;</div>
+                    <div>б) наличие на източник;</div>
+                    <div>в) наличие на проводник и източник.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h3>Зад. 7. Какво представлява електромагнитът?</h3>
+                <div class="options">
+                    <div>а) постоянен магнит;</div>
+                    <div>б) намотка с желязна сърцевина;</div>
+                    <div>в) П-образен магнит;</div>
+                    <div>г) намотка с ток.</div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <a href="zad1.html">Начална страница</a>
+                <a href="zad36.html">Предишен</a>
+                <a href="zad7.html">Упътване</a>
+                <a href="zad9.html">Ключ</a>
+<a href="zad14.html">Входно ниво</a>
+                <a href="zad15.html">Следващ</a>
+            </div>
+        </div>
+
+        <!-- Дясна странична лента -->
+        <div class="sidebar sidebar-right">
+            
+
+            <div class="info-box">
+                <h4>Електричен ток</h4>
+                <p>Насоченото движение на електроните в металите</p>
+                
+                <div class="units">
+                    <strong>Мерни единици за:</strong>
+                    <p>• големина на заряда - кулон (озн. С)</p>
+                    <p>• големина на тока - ампер (озн. А)</p>
+
+
+<p>.</p>
+ <a href="zad33.html">Вижте повече</a>
+
+<p>.</p>
+                
+                    <img src="962[1].jpeg" width="130" height="130" alt="ел. схема">
+                    <p>Електрическа схема</p>
+           
+               
+           <p>.</p>
+
+            
+               
+             <h3>🏠 Ежедневни и забавни явления</h3>
+<p><b>„Живата“ коса и дрехи: </b></br>Класически пример е пуловерът, който „бие ток“ или кара косата ви да щръкне във всички посоки, когато го събличате.
+ Това се случва най-често през зимата, тъй като сухият въздух е отличен изолатор и позволява натрупването на сериозен статичен заряд.</p>
+<p><b>Левитиращият балон: </b></br>Ако натриете обикновен балон в косата си или във вълнен парцал, той може да залепне за стената или тавана за часове. 
+Още по-забавно е, че с такъв балон можете да накарате тънки струйки вода от чешмата буквално да се огъват към него без докосване.</p>
+<p><b>Ефектът на котешката козина:</br> </b>Котките лесно натрупват статично електричество, докато се чистят или когато ги галите.
+ В тъмна стая, ако погалите котка (особено през зимата), можете да чуете леко пукане и дори да видите миниатюрни искри между пръстите си и козината ѝ.</p>
+
+
+           
+        </div>
+
+           
+        </div>
+    </div>
+</body>
+</html>

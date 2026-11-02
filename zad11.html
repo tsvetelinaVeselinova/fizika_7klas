@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физика - Сили</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            gap: 0;
+        }
+
+        /* Заглавие */
+        .header {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Навигация */
+        .navigation {
+            grid-column: 1 / -1;
+            background-color: #333;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: #555;
+        }
+
+        /* Ляво странично поле */
+        .sidebar-left {
+            background: linear-gradient(180deg, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%);
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar-left h3 {
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .sidebar-left p {
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .sidebar-left ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-left li {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            background-color: white;
+            padding: 30px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .test-section h1 {
+            color: #333;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+            padding-left: 15px;
+        }
+
+        .question {
+            background-color: #f9f9f9;
+            border-left: 3px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .question b {
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .question p {
+            margin-bottom: 10px;
+        }
+
+        .answer-options {
+            margin-left: 20px;
+        }
+
+        /* Дясно странично поле */
+        .sidebar-right {
+            background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
+            padding: 20px;
+            border-left: 1px solid #ddd;
+        }
+
+        .image-section {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+
+        .story-section {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .story-section h4 {
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+
+        .story-section p {
+            font-size: 0.9em;
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+
+        /* Долна навигация */
+        .bottom-nav {
+            grid-column: 1 / -1;
+            background-color: #333;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .bottom-nav a:hover {
+            background-color: #555;
+        }
+
+        /* Отзивчив дизайн */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar-left,
+            .sidebar-right {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="blink">СИЛИ</h1>
+        </header>
+
+        <nav class="navigation">
+            <a href="zad69.html">Речник</a>
+            <a href="zad1.html">Начална страница</a>
+<a href="Upr1.html">Начало</a>
+        </nav>
+
+        <aside class="sidebar-left">
+            <h3>Видове сили:</h3>
+            <p>-мускулна сила, тегло, сила на тежестта, сила на еластичност, сила на триене, сила на съпротивление на средата</p>
+            
+            <p><strong>Основна мерна единица:</strong> N (Нютон)</p>
+            
+            <p><strong>Други мерни единици:</strong><br>
+            kN = 1000N<br>
+            MN = 1 000 000N</p>
+
+            <h3>Елементи на силата:</h3>
+            <ul>
+                <li>големина;</li>
+                <li>посока;</li>
+                <li>приложна точка.</li>
+            </ul>
+
+            <p><strong>Големина</strong> на изучените в 6 клас сили:<br>
+            P = m.g ; G = m.g</p>
+
+            <p><strong>Посока:</strong><br>
+            <strong>-Надолу и перпендикулярно на земната повърхност:</strong></br> тегло, сила на тежестта<br>
+            <strong>- По посока на движението</strong> - мускулна сила, движеща сила<br>
+            <strong>- в посока противоположна на посоката на движението:</strong> сила на триене и сила на съпротивление на средата</p>
+        </aside>
+
+        <main class="main-content">
+            <section class="test-section">
+                <h1>Тест №2</h1>
+
+                <div class="question">
+                    <b>Задача 1: Каква е разликата между силата на тежестта и теглото?</b>
+                    <div class="answer-options">
+                        а) различават се по големина;<br>
+                        б) различават се приложните си точки;<br>
+                        в) няма разлика;<br>
+                        г) различават се по посоките си.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Задача 2: Да се определи теглото на тяло, изработено от мед, ако обемът му е 0,5 m³</b>
+                    <a href="zad63.html">Справочник>></a><br>
+                    <div class="answer-options">
+                        А) 400кg;<br>
+                        Б) 44500N;<br>
+                        В) 43 610N;<br>
+                        Г) 8900кg
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Задача 3: Автомобил се движи равномерно и праволинейно. Какво е съотношението на теглителната сила и силата на триене?</b>
+                    <div class="answer-options">
+                        а) силата на триене е по-голяма от теглителната сила;<br>
+                        б) силата на триене е по-малка от теглителната сила;<br>
+                        в) двете сили са равни.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.4. На камион действат две сили: теглителна и сила на триене. Сравнете силите:</b>
+                    <div class="answer-options">
+                        а) при потегляне;<br>
+                        б) при спиране;<br>
+                        в) при равномерно движение.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.5. Книга стои върху опора. Силата на тежестта, която действа на тази книга е 8 N.</b>
+                    <div class="answer-options">
+                        а) Колко нютона е реакцията на опората?<br>
+                        б) Колко е теглото на книгата?<br>
+                        в) Колко килограма е масата на книгата?
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.6. Сандък с маса 20 kg е поставен на пода.</b>
+                    <div class="answer-options">
+                        а) Кои сили му действат когато е в покой?<br>
+                        б) Определете големините и посоките на тези сили;<br>
+                        в) Ако човек започне да движи сандъка равномерно със сила 60 N, коя сила уравновесява мускулната сила на човека и колко нютона е тази сила?
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="image-section">
+                <img src="940[1].jpg" alt="Силомери" width="150" height="200">
+                <p><strong>Силомери</strong></p>
+            </div>
+
+            <div class="image-section">
+                <img src="941[1].jpg" alt="Физически прибор" width="150" height="200">
+            </div>
+
+            <div class="story-section">
+                <h4>Приказка с поука</h4><img src="418.jpg" width="130" height="130" alt=""> 
+                <p>Един гарван, търсейки вода видял в един кладенец, че на дъното му има малка локва, но как да стигне до нея? Той мислил, мислил и решил да хвърля камъни в кладенеца. Дълго хвърлял той камъните и накрая до него стигнала вода? Какво се е досетил гарванът?</p>
+                <p><strong>Направете физичен анализ</strong></p>
+            </div>
+        </aside>
+
+        <nav class="bottom-nav">
+            
+            <a href="zad2.html">Предишен</a> |
+            <a href="zad7.html">Упътване</a> |
+            <a href="zad9.html">Ключ</a> |
+            <a href="zad10.html">Следващ</a>
+        </nav>
+    </div>
+</body>
+</html>

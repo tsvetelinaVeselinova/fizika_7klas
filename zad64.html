@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пълно вътрешно отражение</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .sidebar-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar h2 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        .sidebar img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .sidebar p {
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .main-content {
+            background: #ffffff;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .navigation {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .mirages-section h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin: 30px 0 20px 0;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        
+        .mirages-text {
+            font-size: 1.1em;
+            text-align: justify;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .test-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        
+        .test-section h1 {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .question p {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .question-options {
+            margin-left: 20px;
+        }
+        
+        .question-options br {
+            margin-bottom: 8px;
+        }
+        
+        .bottom-navigation {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+        
+        .bottom-navigation a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .bottom-navigation a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .sidebar {
+                order: 2;
+                margin: 10px;
+            }
+            
+            .main-content {
+                order: 1;
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Лява странична колона -->
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <h2>Оптични кабели</h2>
+                <p><strong>През 1966 г. Чарлз Као изчислява, че за да бъдат полезни за предаване на информация на дълги разстояния,
+ стъклените влакна трябва да имат затихване по–ниско от 20 dB на километър. Първото използваемо оптично влакно е изобретено през 1970 година от изследователите Маурер,
+ Кек, Шулц и Зимар, които работили в американската "Corning Glass Works". Те произвеждат влакно със затихване от 17 dB на километър като легират силициево стъкло с титан. 
+Затихването на сегашните влакна е 0,3 – 0,5 dB на км, а на съответстващите им медни коаксиални кабели – 40 – 60 dB на км. 
+Първият трансатлантически оптичен кабел, предназначен за телефонна връзка, е влязъл в употреба през 1988г.</strong></p>
+            </div>
+            
+            <div class="sidebar-card">
+                <div style="width: 100%; height: 150px; background: linear-gradient(45deg, #3498db, #2980b9); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-bottom: 10px;">
+                   <img src ="7784.jpg" align="left" width="180" border="7" height="182"> .<p> Оптични влакна </p>
+                </div>
+                
+            </div>
+
+<h2>Пълно вътрешно отражение</h2> 
+            <p>Пълно вътрешно отражение е оптично явление, при което светлинният лъч се отразява изцяло обратно в първата среда и не се пречупва във втората.</p>
+ <p>Това се случва на границата между две прозрачни среди.</p>
+<h2>Условия за настъпване</h2>1)Светлината се движи от оптично по-плътна към оптично по-рядка среда.</p>
+<p>2)Ъгълът на падане е по-голям от определения граничен ъгъл за съответните две среди.
+
+            <div class="sidebar-card">
+                <div style="width: 100%; height: 150px; background: linear-gradient(45deg, #f39c12, #e67e22); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin-bottom: 10px;">
+                   <img src ="7783.jpg" align="left" width="180" border="7" height="182"> .<p> Светлоотразители </p>  
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Пълно вътрешно отражение</h1>
+                <div class="navigation">
+                    <a href="zad54.html" class="nav-link">Речник</a>
+ <a href="zad63.html" class="nav-link">Справочник</a>
+                    <a href="zad56.html" class="nav-link">Начало</a>
+                </div>
+            </div>
+            
+            <div class="mirages-section">
+                <h1>Миражите</h1>
+                <div class="mirages-text">
+ 
+                    <p>Трудно е да намериш човек, който никога в живота си не е виждал мираж. Милиони хора са наблюдавали в небето причудливи замъци, непознати градове и дори цели армии. Науката има обяснение на този природен феномен, макар че изследването му практически е невъзможно - миражът не възниква по поръчка.</p>
+<p>. </p>
+          
+                    <p>Хората са наблюдавали миражи още в древността - за това свидетелстват редица предания и писмени документи. Особено интересни са разказите от Ориента, останали още от времената на Кръстоносните походи. Е, малцина им вярвали, защото рицарите обичали да послъгват.</p>
+<p>. </p>
+          
+                    <p>През 1840 г. жителите на малко островче край Северна Англия пък видели в небето прекрасни бели здания. Тъй като постройките силно се различавали от тези в тяхната родина, хората предположили, че Господ им е изпратил хубавата гледка, за да повярват на приказката за финския народ, обитаващ кристален град. Това видение се повторило след 17 години и престояло във въздуха три часа.</p>
+<p>. </p>
+          
+                    <p>Като <strong>шампион по продължителност</strong> и брой на миражите обаче се слави Аляска.
+ Колкото по-силен е студът там, толкова по-ясни и красиви са въздушните видения.
+ Честата поява на миражи на този полуостров е регистрирана едва в началото на XIX в. 
+
+<p>. </p>
+          
+                    
+                </div>
+            </div>
+
+            <div class="test-section">
+                <h1>Тест №18:</h1>
+                <p>. </p>
+          
+                <div class="question">
+                    <p>Зад.1. В кой случай не би настъпило пълно вътрешно отражение?</p>
+                    <div class="question-options">
+                        а) светлинният лъч преминава от стъкло във вода;<br/>
+                        б) светлинният лъч преминава от рубин в стъкло;<br/>
+                        в) светлинният лъч преминава от рубин в диамант;<br/>
+                        г) светлинният лъч преминава от вода във въздух.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>Зад.2. В кой случай не се използва пълно вътрешно отражение?</p>
+                    <div class="question-options">
+                        а) изработване на очила;<br/>
+                        б) изработване на оптични влакна;<br/>
+                        в) изработване на светлоотражатели.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>Зад.3. Защо не се наблюдава пълно вътрешно отражение на слънчеви лъчи от стъклата на прозорците? Обосновете отговора си.</p>
+                </div>
+
+                <div class="question">
+                    <p>Зад.4. Защо през лятото асфалтът пред нас изглежда мокър?</p>
+                    <div class="question-options">
+                        а) светлинният лъч пада перпендикулярно на земната повърхност;<br/>
+                        б) светлинният лъч пада успоредно на земната повърхност;<br/>
+                        в) въздухът близо до земната повърхност е нагорещен и с по-малка плътност;<br/>
+                        г) въздухът близо до земната повърхност е по-студен и с по-голяма плътност.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>Зад.5. Светлинен лъч пада под ъгъл 28° в първата среда. Ъгълът на пречупване е 31°. Определете коя среда е оптически по-плътна.</p>
+                    <div class="question-options">
+                        а) първата;<br/>
+                        б) втората;<br/>
+                        в) двете среди са с еднаква плътност;<br/>
+                        г) няма верен отговор.
+                    </div>
+                </div>
+            </div>
+<img src ="7784[1].jpg" align="left" width="350" border="7" height="300">  <img src ="7780.jpg" align="left" width="350" border="7" height="300"> 
+            <div class="bottom-navigation">
+                <a href="zad56.html">Начална страница</a> |
+                <a href="zad26.html">Предишен</a> |
+                <a href="zad50.html">Упътване</a> |
+                <a href="zad52.html">Ключ</a> |
+                <a href="zad27.html">Следващ</a>
+            </div>
+        </div>
+
+<div class="container">
+        <!-- Дясна странична колона -->
+        <div class="sidebar">
+            <div class="sidebar-card"><img src ="482[1].jpg" align="left" width="180" border="7" height="182"> 
+<p>Ако в горещ летен ден застанете <strong>на шосе с лице към Слънцето</strong> сигурно ще забележите, 
+че на известно разстояние от вас пътното платно като че ли се потапя в блестящо езеро.
+ Опитайте да приближите езерото и ще ударите на камък - то непрекъснато ще се отдалечава.</p>
+ 
+
+
+  <img src ="483[1].jpg" align="left" width="180" border="7" height="182">      
+<p>През 1889 г. например, разхождайки се близо до планината Фъруетър, местен жител наблюдавал голям град с небостъргачи, високи кули, храмове и др. 
+По всяка вероятност източникът на оптичната илюзия се намирал на хиляди километри от Аляска. 
+Леденият полуостров до ден днешен остава едно от най-подходящите за поява на миражи места в света.</p>
+<img src ="504[1].jpeg" align="left" width="180" border="7" height="182">. <p>Мираж  </p>
+ <img src ="484[1].jpg" align="left" width="180" border="7" height="182"> 
+
+ <img src ="485[1].jpg" align="left" width="180" border="7" height="182">
+
+  <img src ="613[1].jpg" align="left" width="180" border="7" height="182">
+  <p>  Демонстрация на пълно вътрешно отражение </p>  
+
+<h3>Приложение на явлението: </h3>
+<p>1)Волооптика и оптични кабели  (интернет и пренос на данни)</p>
+<p>2)Медицински ендоскопи.</p>
+<p> 3)Призмата в бинокли и перископи.</p>
+
+
+
+
+        
+</body>
+</html>

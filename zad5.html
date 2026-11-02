@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АТОМ - Строеж и Свойства</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eeccff;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            grid-template-areas: 
+                "header header header"
+                "nav nav nav"
+                "sidebar-left main sidebar-right"
+                "footer footer footer";
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .header {
+            grid-area: header;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #eeccff, #ffffff);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+            to { text-shadow: 2px 2px 20px rgba(238, 204, 255, 0.8); }
+        }
+
+        .nav {
+            grid-area: nav;
+            background: #eeeeee;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #ddd;
+        }
+
+        .sidebar-left {
+            grid-area: sidebar-left;
+            background: linear-gradient(to right, #gray, #ffffff);
+            background: linear-gradient(to right, #808080, #ffffff);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-right {
+            grid-area: sidebar-right;
+            background: linear-gradient(to left, #808080, #ffffff);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .main {
+            grid-area: main;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-box {
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            background: #f9f9f9;
+        }
+
+        .info-box h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .info-box img {
+            float: left;
+            margin: 0 15px 15px 0;
+            border: 3px solid #333;
+            border-radius: 5px;
+        }
+
+        .test-section {
+            background: #f0f8ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .test-section h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+        }
+
+        .question p {
+            margin: 10px 0;
+        }
+
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+
+        .options div {
+            margin: 5px 0;
+            padding: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .options div:hover {
+            background-color: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .formula-box {
+            background: #e8f5e8;
+            border: 2px solid #4CAF50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .formula-box h4 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+
+        .formula-box p {
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer-nav {
+            grid-area: footer;
+            background: #eeeeee;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .footer-nav a {
+            color: #333;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            background-color: #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "nav"
+                    "sidebar-left"
+                    "main"
+                    "sidebar-right"
+                    "footer";
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="blink">АТОМ</h1>
+        </header>
+
+        <nav class="nav">
+            <a href="zad60.html">Речник</a> |
+            <a href="Upr1.html">Начало</a>
+        </nav>
+
+        <aside class="sidebar-left">
+            <div class="info-box">
+               <img src="480[1].jpg" alt="Строеж на атома" width="130" height="130"> 
+    <p>1869 г. Руският химик Дмитрий Менделеев публикува периодичната система</p>
+
+<img src="920[1].jpg" alt="Строеж на атома" width="130" height="130"> 
+    <p>1887 г. Дж. Томсън  открива електрона </p>
+                <img src="133[1].jpg" alt="Строеж на атома" width="130" height="130">
+                 <a href="zad37.html"> 1911г. Ръдърфорд </a>  създава планетарния модел на атома</p>
+                <p>Той прави опити със златно фолио, което обстрелва с алфа-частици и наблюдава движението им. Само малка част от тях се отклоняват от праволинейното си движение.</p>
+                <div style="clear: both;"></div>
+            </div>
+
+            <div class="info-box">
+                <p>Едва 1932 година е открита още една частица в ядрото - неутронът. Неин откривател е <strong>Чадуик</strong>. Това откритие обяснява различните физични свойства на някои химични елементи - изотопите.</p>
+                <img src="6667.jpg" alt="Чадуик" width="160" height="190">
+                <div style="clear: both;"></div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="test-section">
+                <h1>Тест №24</h1>
+
+                <div class="question">
+                    <p><strong>Зад.1.</strong> Химичен елемент има масово число 25 и пореден номер 12. Определете броя на протоните, неутроните и електроните, ако той е електронеутрален.</p>
+                </div>
+ <div class="question">
+                    <p><strong>Зад.2.</strong> Два от изотопите на урана са с масови числа съответно 235 и 238. Определете броя на протоните и неутроните на всеки от тях.
+Потърсете информация за физичните им свойства.
+
+ <a href="zad72.html">Менделеева таблица</a></p>
+                </div>
+                <div class="question">
+                    <p><strong>Зад.3.</strong> В природата се срещат три изотопа на кислорода, които имат съответно 8, 9, 10 неутрона в атомното ядро. Определете масовото число на тези изотопи. 
+ <a href="zad72.html">Менделеева таблица</a></p>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.4.</strong> Кое твърдение НЕ е вярно?</p>
+                    <div class="options">
+                        <div>а) изотопите имат равен брой протони;</div>
+                        <div>б) изотопите имат различен брой неутрони;</div>
+                        <div>в) изотопите имат еднакви химични свойства;</div>
+                        <div>г) изотопите имат еднакви физични свойства.</div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.5.</strong> Деутерият и тритият са:</p>
+                    <div class="options">
+                        <div>а) различни химични елементи;</div>
+                        <div>б) изотопи на хелия;</div>
+                        <div>в) изотопи на водорода;</div>
+                        <div>г) изотопи на въглерода.</div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.6.</strong> Кое ядро е тежко?</p>
+                    <div class="options">
+                        <div>а) тритий;</div>
+                        <div>б) протий;</div>
+                        <div>в) деутерий;</div>
+                        <div>г) уран.</div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.7.</strong> От атома на хелия се е откъснал един електрон. Атомът се е превърнал в:</p>
+                    <div class="options">
+                        <div>а) положителен йон;</div>
+                        <div>б) отрицателен йон;</div>
+                        <div>в) тритий;</div>
+                        <div>г) деутерий.</div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.8.</strong> Коя е основната разлика между протона и неутрона? Посочете вярното твърдение.</p>
+                    <div class="options">
+                        <div>а) значителната разлика в масите;</div>
+                        <div>б) разлика в зарядите;</div>
+                        <div>в) едната частица се намира в ядрото, а другата в обвивката;</div>
+                        <div>г) няма разлика.</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="formula-box">
+                <h4>Масово число</h4>
+                <p><strong>A = Z + N</strong></p>
+                <p>A - масово число</p>
+                <p>Z - пореден номер в таблицата на Менделеев (показва броя на протоните)</p>
+                <p>N - брой неутрони</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Хайзенберг и Иваненко</strong> създават модел на атома</p>
+                <img src="505[1].jpg" alt="Модел на атома" width="160" height="190">
+                <div style="clear: both;"></div>
+            </div>
+
+            <div class="info-box">
+                <img src="iv24-17[1].jpg" alt="Атомна структура" width="160" height="190">
+                <div style="clear: both;"></div>
+            </div>
+        </aside>
+
+        <footer class="footer-nav">
+            <a href="zad62.html">Начална страница</a> |
+            <a href="zad51.html">Упътване</a> |
+            <a href="zad68.html">Ключ</a> |
+            <a href="zad40.html">Следващ урок</a>
+        </footer>
+    </div>
+</body>
+</html>

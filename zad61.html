@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интересни факти от древността</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимирани странични полета */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            width: 150px;
+            height: 100vh;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff, #f0f0f0, #e8e8e8);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            z-index: 1;
+        }
+
+        .sidebar-left {
+            left: 0;
+        }
+
+        .sidebar-right {
+            right: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимирани елементи в страничните полета */
+        .animated-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(102, 126, 234, 0.7);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animated-element:nth-child(1) { top: 10%; left: 20px; animation-delay: 0s; }
+        .animated-element:nth-child(2) { top: 30%; right: 20px; animation-delay: 2s; }
+        .animated-element:nth-child(3) { top: 50%; left: 30px; animation-delay: 4s; }
+        .animated-element:nth-child(4) { top: 70%; right: 30px; animation-delay: 6s; }
+        .animated-element:nth-child(5) { top: 90%; left: 15px; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Електрически мълнии анимация */
+        .lightning {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffff00, #ff6600);
+            animation: lightning 3s ease-in-out infinite;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+        }
+
+        .lightning:nth-child(6) { top: 15%; left: 50px; animation-delay: 1s; }
+        .lightning:nth-child(7) { top: 45%; right: 50px; animation-delay: 3s; }
+        .lightning:nth-child(8) { top: 75%; left: 60px; animation-delay: 5s; }
+
+        @keyframes lightning {
+            0%, 90%, 100% { opacity: 0; transform: scaleY(0); }
+            5%, 85% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Основен контейнер */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-left: 150px;
+            margin-right: 150px;
+        }
+
+        /* Заглавие с мигане */
+        .main-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #764ba2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Основно съдържание */
+        .content-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .theory-panel {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .theory-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .formula {
+            background: #e8f2ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .test-panel {
+            flex: 2;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-panel h1 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question {
+            background: #f8f9ff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e8ff;
+        }
+
+        .question b {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .question p {
+            margin: 5px 0;
+            padding-left: 15px;
+        }
+
+        /* Долна навигация */
+        .bottom-navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .bottom-navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-navigation a:hover {
+            color: #764ba2;
+        }
+
+        /* Пулсиращи частици във фона */
+        .particle {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+            z-index: 0;
+        }
+
+        .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            left: 20%;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            left: 90%;
+            animation-delay: 10s;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 1300px) {
+            .sidebar { display: none; }
+            .container {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фонови частици -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- Лява странична лента -->
+    <div class="sidebar sidebar-left">
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <!-- Дясна странична лента -->
+    <div class="sidebar sidebar-right">
+
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <div class="container">
+        <!-- Заглавие -->
+        <div class="main-title">
+            Интересни факти от древността
+        </div>
+
+        <!-- Навигация -->
+        <div class="navigation">
+              <a href="#Vavilfnski tablichki">Вавилонски таблички</a>
+            <a href="#Eratosten">Ератостен</a>
+            <a href="#Hiparh">Хипарх</a>
+           
+            <a href="Upr1.html">Начало</a>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Теоретична част -->
+            <div class="theory-panel">
+              
+
+  Xронологична линия на времето:
+
+</div>
+ 
+     
+
+
+
+
+
+
+
+
+
+  
+
+            <!-- Тестова част -->
+            <div class="test-panel">
+                
+ <div class="scientist-card" id="Vavilfnski tablichki">
+
+   </br>
+ <div class="scientist-card" id="Eratosten">                       
+<h2>Ератостен</h2>
+<img src="16[1].jpg" alt="." width="900" height="480">
+
+</br>
+Всички числа, които останат незадраскани, са прости.</br>
+
+<p>.</p>
+ <div class="scientist-card" id="Hiparh">          
+<h2>Хипарх Никейски – човекът, който подреди звездите</h2>
+<img src="22.jpg" alt="." width="900" height="480">
+
+
+
+
+.</br>
+
+Интересно за личността: Хипарх бил известен със своето трудолюбие и стремеж към истината.
+ Той вярвал, че природата може да бъде разбрана чрез внимателни наблюдения, точни измервания и математически изчисления. Затова често е смятан за един от най-великите астрономи на Античността.
+
+
+
+
+
+            </div></div>
+            </div>
+        
+
+        <!-- Долна навигация -->
+        <div class="bottom-navigation">
+           
+            <a href="zad31.html">Назад</a> |
+            <a href="Upr1.html">Начало</a>
+        </div>
+    </div>
+</body>
+</html>

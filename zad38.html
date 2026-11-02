@@ -1,0 +1,359 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Период на махалото</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+/* Layout: три полета в редица (уреди | задачи | понятия), синя лента отгоре, сиви полета, махала в движение */
+:root {
+  --bg: #e4e9f0;
+  --field-side: #d7dee8;
+  --field-main: #f6f9fd;
+  --fig: #cbd5e1;
+  --edge: #b5c1d0;
+  --ink: #1b2a3a;
+  --ink-soft: #46586b;
+  --blue: #0f6fb8;
+  --blue-deep: #0a4a80;
+  --blue-soft: #d2e5f6;
+  --btn: #0c61a3;
+  --on-blue: #ffffff;
+  --glow: rgba(15, 111, 184, .38);
+  --brass: #8a6a3a;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c131c; --field-side: #18222e; --field-main: #121b27; --fig: #0f1823; --edge: #2b3846;
+    --ink: #e3eaf2; --ink-soft: #9db0c4; --blue: #4aa3ea; --blue-deep: #14578f; --blue-soft: #17324d;
+    --btn: #1d6cb0; --glow: rgba(74, 163, 234, .45); --brass: #c9a56a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c131c; --field-side: #18222e; --field-main: #121b27; --fig: #0f1823; --edge: #2b3846;
+  --ink: #e3eaf2; --ink-soft: #9db0c4; --blue: #4aa3ea; --blue-deep: #14578f; --blue-soft: #17324d;
+  --btn: #1d6cb0; --glow: rgba(74, 163, 234, .45); --brass: #c9a56a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  padding-block: 20px 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 16px; }
+
+.band {
+  position: relative; overflow: hidden;
+  background: linear-gradient(100deg, var(--blue-deep), var(--blue));
+  color: var(--on-blue);
+  padding: 18px 22px 24px;
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px;
+  animation: rise .6s ease-out backwards;
+}
+.band h1 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; text-wrap: balance; }
+.band p { margin: 0; font-size: .95rem; opacity: .92; }
+.band::after { /* вълна, която пулсира по долния ръб */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.9) 0 24px, transparent 24px 60px);
+  background-size: 120px 100%;
+  animation: flow 2.4s linear infinite;
+}
+
+.fields { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 960px) { .fields { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr); align-items: start; } }
+
+.field { border: 1px solid var(--edge); background: var(--field-side); animation: rise .7s ease-out backwards; }
+.field:nth-child(1) { animation-delay: .1s; }
+.field:nth-child(2) { animation-delay: .22s; }
+.field:nth-child(3) { animation-delay: .34s; }
+.field.main { background: var(--field-main); border-color: var(--blue); }
+.field > header {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  font-size: .8rem; padding: 9px 16px; background: var(--edge); color: var(--ink);
+}
+.field.main > header { background: var(--blue); color: var(--on-blue); }
+.field .body { padding: 16px; display: grid; gap: 14px; }
+h2 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.2; text-wrap: balance; }
+p { margin: 0; }
+.soft { color: var(--ink-soft); }
+
+.formula {
+  font-family: var(--font-mono); font-weight: 600; font-size: 1rem;
+  background: var(--fig); border-left: 4px solid var(--blue);
+  padding: 8px 12px; overflow-x: auto; white-space: nowrap;
+}
+.formula b { color: var(--blue); }
+.formula.key { animation: glow 2.6s ease-in-out infinite; font-size: 1.15rem; }
+
+.units { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-variant-numeric: tabular-nums; margin: 0; }
+.units dt { font-family: var(--font-mono); font-weight: 600; color: var(--blue); }
+.units dd { margin: 0; }
+
+figure { margin: 0; background: var(--fig); padding: 8px; }
+figure svg { display: block; width: 100%; height: auto; max-height: 260px; }
+figcaption { text-align: center; font-size: .85rem; color: var(--ink-soft); padding-top: 4px; }
+
+/* SVG */
+.sym { stroke: var(--ink); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.thin { stroke: var(--ink-soft); stroke-width: 1.5; fill: none; }
+.dash { stroke: var(--ink-soft); stroke-width: 1.5; stroke-dasharray: 4 5; fill: none; }
+.ball { fill: var(--blue); }
+.body-fill { fill: var(--blue-deep); }
+.weight { fill: var(--brass); }
+.water { fill: var(--blue-soft); }
+.svg-label { fill: var(--ink-soft); font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
+.swing { animation: swing var(--T, 2s) ease-in-out infinite; transform-origin: 100px 16px; }
+.swing.metro { transform-origin: 80px 140px; --A: 20deg; animation-duration: 1.2s; }
+.spring { animation: spring 1.6s ease-in-out infinite alternate; transform-origin: 60px 14px; }
+.spring-ball { animation: springball 1.6s ease-in-out infinite alternate; }
+.deck { animation: deck .32s ease-in-out infinite alternate; }
+.runner { animation: run .32s ease-in-out infinite alternate; }
+
+.period { display: grid; gap: 6px; padding-top: 4px; }
+.period label { font-weight: 600; font-size: .9rem; }
+.period input[type=range] { width: 100%; accent-color: var(--blue); }
+.period .out { font-family: var(--font-mono); font-weight: 600; color: var(--blue); font-variant-numeric: tabular-nums; }
+
+/* Задачи */
+.task { display: grid; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--edge); }
+.task:last-of-type { border-bottom: 0; padding-bottom: 0; }
+.task h3 { margin: 0; font-size: 1rem; font-weight: 600; text-wrap: pretty; }
+.task h3 span { color: var(--blue); font-family: var(--font-display); margin-right: 6px; }
+.task ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.task li { padding: 4px 10px; border-left: 3px solid transparent; transition: background .2s, border-color .2s, transform .2s; }
+.task li:hover { background: var(--blue-soft); border-left-color: var(--blue); transform: translateX(4px); }
+button {
+  justify-self: start; font: inherit; font-size: .88rem; font-weight: 500; color: #fff; background: var(--btn);
+  border: 0; padding: 7px 14px; cursor: pointer; transition: filter .2s, transform .1s;
+}
+button:hover { filter: brightness(1.12); }
+button:active { transform: translateY(1px); }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.solution { background: var(--blue-soft); border-left: 4px solid var(--blue); padding: 10px 14px; display: grid; gap: 4px; animation: reveal .35s ease-out; }
+.solution .formula { background: transparent; border: 0; padding: 2px 0; }
+.note { font-size: .85rem; color: var(--ink-soft); }
+.nav { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .9rem; color: var(--ink-soft); }
+
+@keyframes rise { from { opacity: .3; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes flow { to { background-position: 120px 0; } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 50% { box-shadow: 0 0 18px 2px var(--glow); } }
+@keyframes swing { 0%, 100% { transform: rotate(var(--A, 24deg)); } 50% { transform: rotate(calc(var(--A, 24deg) * -1)); } }
+@keyframes spring { from { transform: scaleY(1.23); } to { transform: scaleY(.77); } }
+@keyframes springball { from { transform: translateY(14px); } to { transform: translateY(-14px); } }
+@keyframes deck { from { transform: translateY(-1.5px); } to { transform: translateY(2px); } }
+@keyframes run { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+@keyframes reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<main class="wrap">
+  <div class="band">
+    <h1>Трептения. Период на махало</h1>
+    <p>Тест № 22</p>
+  </div>
+
+  <div class="fields">
+
+    <!-- Поле 1: уреди -->
+    <section class="field" aria-labelledby="f1">
+      <header id="f1">Махала</header>
+      <div class="body">
+        <figure>
+          <svg viewBox="0 0 160 170" role="img" aria-label="Метроном с махало, което се движи наляво и надясно">
+            <polygon class="body-fill" points="48,156 112,156 95,18 65,18"/>
+            <g class="swing metro">
+              <line class="sym" x1="80" y1="140" x2="80" y2="30" style="stroke: var(--field-main)"/>
+              <rect class="weight" x="73" y="58" width="14" height="18" rx="2"/>
+            </g>
+            <circle cx="80" cy="140" r="5" fill="var(--field-main)"/>
+          </svg>
+          <figcaption>Метрономът е уред, който отброява равномерни интервали от време (такт). Използва се от музиканти, за да поддържат постоянен темп при свиране.</figcaption>
+        </figure>
+<img src="560[1].jpg" width="360" height="330" alt="."> 
+        <figure>
+          <svg viewBox="0 0 200 170" role="img" aria-label="Математическо махало, чийто период се задава с плъзгача">
+            <line class="sym" x1="60" y1="14" x2="140" y2="14"/>
+            <line class="dash" x1="100" y1="16" x2="100" y2="160"/>
+            <g class="swing" id="pend">
+              <line class="thin" x1="100" y1="16" x2="100" y2="124" style="stroke-width: 2"/>
+              <circle class="ball" cx="100" cy="136" r="12"/>
+            </g>
+            <text class="svg-label" x="108" y="164">m</text>
+          </svg>
+          <figcaption><strong>Математическо махало:</strong> топче, окачено на неразтеглива нишка (движи се по дъга от окръжност)</figcaption>
+        </figure>
+
+        <div class="period">
+          <label for="per">Период на трептене T</label>
+          <input id="per" type="range" min="0.5" max="4" step="0.1" value="2">
+          <div class="out" id="perOut" aria-live="polite">T = 2,0 s · f = 0,50 Hz</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Поле 2: задачи -->
+    <section class="field main" aria-labelledby="f2">
+      <header id="f2">Задачи</header>
+      <div class="body">
+
+        <article class="task">
+          <h3><span>Зад. 1</span>Кое от изброените движения не е трептене?</h3>
+          <ul>
+            <li>а) движението на часовниковата стрелка;</li>
+            <li>б) движението на махалото на стенния часовник;</li>
+            <li>в) движението на махалото на метронома.</li>
+          </ul>
+         
+        </article>
+
+        <article class="task">
+          <h3><span>Зад. 2</span>Периодът на махалото нараства два пъти. Ще се измени ли честотата и как?</h3>
+          <ul>
+            <li>а) не;</li>
+            <li>б) да, ще намалее два пъти;</li>
+            <li>в) да, ще се увеличи два пъти;</li>
+            <li>г) да, ще намалее 4 пъти.</li>
+          </ul>
+         
+        </article>
+
+        <article class="task">
+          <h3><span>Зад. 3</span>Теглилка, окачена на пружина, извършва трептене. Разстоянието между най-ниската и най-високата точка е 8 cm.</h3>
+          <ul>
+            <li>а) Колко сантиметра е амплитудата на трептене?</li>
+            <li>б) Определете честотата на трептене, ако периодът му е 2 секунди.</li>
+          </ul>
+          <button type="button" aria-expanded="false" data-target="s3">Покажи решение</button>
+          <div class="solution" id="s3" hidden>
+            <div class="formula">а) A = 8 cm / 2 = 4 cm</div>
+            <div class="formula">б) ν = 1 / T = 1 / 2 s = 0,5 Hz</div>
+          </div>
+        </article>
+
+        <article class="task">
+          <h3><span>Зад. 4</span>Определете честотата на пружинно махало, ако периодът му е 0,02 секунди.</h3>
+          <button type="button" aria-expanded="false" data-target="s4">Покажи решение</button>
+          <div class="solution" id="s4" hidden>
+            <div class="formula">ν = 1 / 0,02 s = 50 Hz</div>
+          </div>
+        </article>
+
+        <article class="task">
+          <h3><span>Зад. 5</span>Определете честотата и периода на пружинно махало, което за 50 секунди извършва 20 трептения.</h3>
+          <button type="button" aria-expanded="false" data-target="s5">Покажи решение</button>
+          <div class="solution" id="s5" hidden>
+            <div class="formula">T = t / N = 50 s / 20 = 2,5 s</div>
+            <div class="formula">ν = N / t = 20 / 50 s = 0,4 Hz</div>
+          </div>
+        </article>
+
+        <article class="task">
+          <h3><span>Зад. 6</span>Попълнете празните места:</h3>
+          <ul>
+            <li>а) 7 kHz = ……. Hz</li>
+            <li>б) 0,8 MHz = ……. kHz</li>
+            <li>в) 9 000 Hz = ……. kHz</li>
+          </ul>
+         
+        </article>
+
+       <a href="zad56.html"> Начална страница</a>|<a href="zad29.html">Предишен </a> |<a href="zad39.html"> Следващ</a>
+
+
+<a href="zad50.html"> Упътване</a>|<a href="zad52.html"> Ключ</a>|
+<a href="zad63.html"> Справочник </a>|<a href="zad54.html">Речник </a>
+
+<a href="zad30.html">Обобщителен тест </a>
+
+      </div>
+    </section>
+
+    <!-- Поле 3: понятия -->
+    <section class="field" aria-labelledby="f3">
+      <header id="f3">Понятия</header>
+      <div class="body">
+        <div>
+          <h2>Амплитуда</h2>
+          <p class="soft">Максималното отклонение от равновесното положение.</p>
+        </div>
+
+        <figure>
+          <svg viewBox="0 0 120 150" role="img" aria-label="Пружинно махало, чието топче се движи нагоре и надолу">
+            <line class="sym" x1="20" y1="10" x2="100" y2="10"/>
+            <line class="dash" x1="14" y1="84" x2="106" y2="84"/>
+            <g class="spring">
+              <path class="sym" style="stroke-width: 2" d="M60 14 L72 17.75 L48 21.5 L72 25.25 L48 29 L72 32.75 L48 36.5 L72 40.25 L48 44 L72 47.75 L48 51.5 L72 55.25 L48 59 L72 62.75 L48 66.5 L60 70 L60 74"/>
+            </g>
+            <circle class="ball spring-ball" cx="60" cy="84" r="10"/>
+            <text class="svg-label" x="82" y="130">m</text>
+            <text class="svg-label" x="88" y="88">x</text>
+          </svg>
+          <figcaption><strong>Пружинно махало:</strong> топче, окачено на еластична пружина (движи се по права линия)</figcaption>
+        </figure>
+
+        <div class="formula key"><b>f = 1 / T</b></div>
+        <div class="formula">T = t / N</div>
+        <div class="formula">ν = N / t</div>
+        <dl class="units">
+          <dt>T</dt><dd>период, s</dd>
+          <dt>ν</dt><dd>честота, Hz</dd>
+          <dt>1 kHz</dt><dd>1 000 Hz</dd>
+          <dt>1 MHz</dt><dd>1 000 000 Hz</dd>
+        </dl>
+
+        <figure>
+          <svg viewBox="0 0 200 100" role="img" aria-label="Мост, който се люлее под крачките на бягащи момчета">
+            <rect class="water" x="0" y="62" width="200" height="38"/>
+            <rect class="body-fill" x="14" y="38" width="10" height="46"/>
+            <rect class="body-fill" x="176" y="38" width="10" height="46"/>
+            <g class="deck"><rect class="body-fill" x="14" y="38" width="172" height="6"/>
+              <g class="runner"><circle class="weight" cx="55" cy="30" r="4"/><line class="sym" x1="55" y1="34" x2="55" y2="38" style="stroke-width: 2"/></g>
+              <g class="runner" style="animation-delay: -.1s"><circle class="weight" cx="80" cy="30" r="4"/><line class="sym" x1="80" y1="34" x2="80" y2="38" style="stroke-width: 2"/></g>
+              <g class="runner"><circle class="weight" cx="105" cy="30" r="4"/><line class="sym" x1="105" y1="34" x2="105" y2="38" style="stroke-width: 2"/></g>
+              <g class="runner" style="animation-delay: -.1s"><circle class="weight" cx="130" cy="30" r="4"/><line class="sym" x1="130" y1="34" x2="130" y2="38" style="stroke-width: 2"/></g>
+            </g>
+          </svg>
+          <figcaption>Бягащите момчета предизвикват трептене.</figcaption>
+<img src="1142[1].jpeg" width="260" height="230" alt="."> 
+<a href="zad6.html"> Интересни явления</a>
+        </figure>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+document.querySelectorAll('button[data-target]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var box = document.getElementById(btn.dataset.target);
+    var open = box.hidden;
+    box.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Скрий решението' : 'Покажи решение';
+  });
+});
+var per = document.getElementById('per');
+var out = document.getElementById('perOut');
+var pend = document.getElementById('pend');
+function fmt(n, d) { return n.toFixed(d).replace('.', ','); }
+function update() {
+  var T = parseFloat(per.value);
+  pend.style.setProperty('--T', T + 's');
+  out.textContent = 'T = ' + fmt(T, 1) + ' s;  ν = ' + fmt(1 / T, 2) + ' Hz';
+}
+per.addEventListener('input', update);
+update();
+</script>
+
+</body></html>

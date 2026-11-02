@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Движение на телата - Тест №1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        #blink {
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .main-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navigation {
+            background-color: #ffffff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 0 20px 20px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navigation a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: bold;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background-color: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .content-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .sidebar h4 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sidebar td {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .sidebar b {
+            color: #4a5568;
+        }
+
+        .sidebar img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            border-radius: 8px;
+            border: 3px solid #667eea;
+            margin: 10px 0;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .main-content h1 {
+            color: #2d3748;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .main-content h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .task {
+            background-color: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .task b {
+            color: #2d3748;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .task p {
+            margin: 5px 0;
+        }
+
+        .task img {
+            width: 150px;
+            height: 180px;
+            border-radius: 8px;
+            border: 3px solid #667eea;
+            margin: 10px 10px 10px 0;
+            float: left;
+        }
+
+        .options {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .options li {
+            margin: 5px 0;
+            padding: 5px 0;
+        }
+
+        .links {
+            margin: 15px 0;
+        }
+
+        .links a {
+            background-color: #667eea;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .links a:hover {
+            background-color: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .right-sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .right-sidebar h4 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .formula {
+            background-color: #edf2f7;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #2d3748;
+            margin: 5px 0;
+            display: inline-block;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+            
+            .sidebar, .right-sidebar {
+                width: 100%;
+            }
+            
+            .navigation {
+                margin: 0 10px 20px 10px;
+            }
+            
+            .navigation a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-header">
+        <h1 id="blink">ДВИЖЕНИЕ НА ТЕЛАТА</h1>
+    </div>
+
+    <div class="navigation">
+        <h3>
+              <a href="zad1.html">Начална страница на раздела</a>
+            <a href="Upr1.html">Начало на сайта</a>
+        </h3>
+    </div>
+
+    <div class="content-container">
+        <div class="sidebar">
+            <h4>1. ОСНОВНИ ПОНЯТИЯ:</h4>
+            <table>
+                <tr>
+                    <td>
+                        <p><b>1.1. Движения и покой:</b> Ако тялото променя положението си с времето - то е в движение, ако не го променя - е в покой.</p>
+                        
+                        <p><b>1.2. Траектория:</b> Мислената линия, която тялото описва при движението си</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="891[1].jpg" alt="Движение на тела">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><b>1.3. Равномерно движение:</b><br>
+                        За еднакви интервали от време, тялото изминава еднакви пътища</p>
+                        
+                        <p><b>1.4. Спирачен път:</b> Разстоянието, което автомобилът изминава от задействането на спирачката до пълното спиране.</p>
+<p>......</p>
+<p>Спирането е един от най-важните елементи на пътната безопасност. Трябва да се знае колко дълъг може да бъде спирачният път на едно превозно средство и
+ какви фактори влияят на дължината му. Често обаче се забравя, че спирачният път не зависи само от времето за реакция и ефективността на  спирачките.
+ Много други фактори, като скорост, състояние на пътната настилка, метеорологични условия и състоянието на  автомобила, влияят върху него. </p>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="893[1].jpg" alt="Спирачен път">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="main-content">
+            
+            <h2>ТЕСТ № 1</h2>
+            
+            <img src="147[1].jpg" alt="Автомобил" style="float: left; width: 150px; height: 180px; border: 3px solid #667eea; border-radius: 8px; margin: 0 15px 15px 0;">
+
+            <div class="task">
+                <b>Задача 1: Автомобил се движи със скорост </br>12 m/s. Какъв път ще измине за 20 секунди?</b>
+            </div>
+
+            <div class="task">
+                <b>Задача 2: При кои условия автомобил би имал най-малък спирачен път?</b>
+                <div class="options">
+                    <div>а) сух асфалт, автомобилът е с товар 750 kg;</div>
+                    <div>б) сух асфалт, автомобилът е без товар;</div>
+                    <div>в) мокър асфалт, автомобилът е с товар;</div>
+                    <div>г) сняг, автомобилът е без товар.</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Задача 3: Самолет се движи със скорост 144 km/h. За колко време (в минути) ще измине 72 000 m?</b>
+                <div class="links">
+                    <a href="zad63.html">Справочник</a>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Задача 4: Автомобил се движи със скорост 21,6 km/h. Пресметнете пътя, който ще измине автомобилът за 3 минути и 20 секунди.</b>
+            </div>
+
+            <div class="task">
+                <b>Задача 5: Каква е траекторията (права или крива линия) на:</b>
+                <div>а) топка, която е хвърлена вертикално нагоре;</div>
+                <div>б) топка, която е хвърлена под ъгъл спрямо земята;</div>
+                <div>в) катер, който прави завой.</div>
+                <div class="links">
+                    <a href="zad69.html">Речник</a>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Задача 6: Каква е скоростта на камион, който за 3 часа и 20 минути изминава 240 km?</b>
+                <div class="options">
+                    <div>а) 20 km/h</div>
+                    <div>б) 27 km/h</div>
+                    <div>в) 72 km/h</div>
+                    <div>г) 7,5 km/h</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <b>Задача 7: Спортист прави пет обиколки на стадион с диаметър 200 m. За колко време е направил обиколките, ако средната му скорост е 9 km/h?</b>
+            </div>
+
+            <div class="links">
+<a href="zad1.html">Начална страница</a>
+<a href="zad7.html">Упътване</a>
+                
+                <a href="zad9.html">Ключ</a>
+                <a href="zad11.html">Следващ</a>
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <h4>2. Основни типове задачи:</h4>
+            
+            <p><b>2.1.</b> По зададени скорост и време да се пресметне изминатият път:</p>
+            <p>а) когато величините са в основни мерни единици се замества по формулата</p>
+            <div class="formula">s = v.t</div>
+            
+            <p>б) когато едната или двете величини не са в основни мерни единици (например скоростта е в m/s, а времето в минути) тогава се превръщат в основни и се замества по формулата</p>
+            <div class="formula">s = v.t</div>
+
+            <p><b>2.2.</b> По зададени път и време да се определи скоростта:</p>
+            <div class="formula">v = s / t</div>
+            <p><i>! За да се изрази скоростта в km/h се умножава по 3600/1000 (36/10)</i></p>
+
+            <p><b>2.3.</b> По зададени път и скорост да се определи времето:</p>
+            <div class="formula">t = s / v</div>
+            <p><i>! След като се получи времето в секунди, може чрез деление с остатък на 60, да се получи времето в минути и секунди. Например 190s : 60 = 3 остатък 10 т.е. 3 минути и 10 секунди</i></p>
+     <p>......</p>
+<p>Задача:Автомобил се движи със скорост </br>72 km/h.За колко минути ще измине 1 440 m? </p> 
+Дадено: <br>
+   v = 72 km/h =`(72.1000) :3600 = 20m/s </br> 
+  s = 1 440 m</br>
+Да се намери:</br>
+t=? </br>
+t = s : v = 1 440 : 20 = 72 s = 1 min 12 s</br>
+</div>
+    </div>
+
+    <div class="clear"></div>
+</body>
+</html>

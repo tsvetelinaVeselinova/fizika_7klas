@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спектър на светлината</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffd93d, #ff8a80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            animation: rainbow 3s ease-in-out infinite;
+        }
+
+        @keyframes rainbow {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .sidebar, .sidebar-right {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .color-types {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .color-types h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .color-type {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .test-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .test-section h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            background: none;
+            -webkit-text-fill-color: #2c3e50;
+        }
+
+        .question {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .option {
+            margin: 8px 0;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(5px);
+        }
+
+        .image-card {
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: gradient-shift 4s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .spectrum-demo {
+            background: linear-gradient(90deg, 
+                #ff0000 0%, 
+                #ff8000 14.28%, 
+                #ffff00 28.56%, 
+                #00ff00 42.84%, 
+                #0080ff 57.12%, 
+                #0000ff 71.4%, 
+                #8000ff 85.68%, 
+                #ff0080 100%
+            );
+            height: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .navigation {
+                gap: 10px;
+            }
+            
+            .nav-link {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Спектър на светлината</h1>
+            <div class="spectrum-demo"></div>
+            <nav class="navigation">
+                <a href="zad54.html" class="nav-link">Речник</a>
+                <a href="Upr1.html" class="nav-link">Начало</a>
+                <a href="zad34.html" class="nav-link">История на физиката</a>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="info-card">
+                    <h3>Опитът на Нютон</h3>
+                    <p><strong>Нютон за пръв път през 17 век прави опити с тънък сноп светлина, който пада върху стъклена призма и попада върху бял екран. Върху екрана се виждат редуващи се цветни снопове.</strong></p>
+                </div>
+<div class="image-card">
+                   <img src ="116[1].jpg" align="left" width="194" border="7" height="192">  <div class="image-placeholder">.</div>
+                    <p> Нютон</p>
+                </div>
+                <div class="color-types">
+                    <h2>Цвят на телата</h2>
+                    <div class="color-type">
+                        <strong>Прозрачни тела:</strong> Определя се от цвета на преминалите лъчи (останалите се поглъщат)
+                    </div>
+                    <div class="color-type">
+                        <strong>Непрозрачни тела:</strong> Определя се от цвета на отразените лъчи (останалите се поглъщат)
+                    </div>
+                    <div class="color-type">
+                        <strong>Бели непрозрачни тела:</strong> Отразяват почти всички лъчи
+                    </div>
+                    <div class="color-type">
+                        <strong>Черни непрозрачни тела:</strong> Поглъщат почти всички лъчи
+                    </div>
+                    <div class="color-type">
+                        <strong>Защо през лятото е добре да се носят бели дрехи?</strong>
+                    </div>
+                    <div class="color-type">
+                        <strong>Какво представлява цветният филтър?</strong> Това е цветно стъкло (ако е червено пропуска само червени лъчи и т. н.)
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder">.</div>
+<img src ="135[1].jpg" align="left" width="194" border="7" height="192"> 
+                    <p>Светлинно шоу на историческия хълм Царевец</p>
+                </div>
+            </aside>
+
+            <main class="test-section">
+                <h1>Тест №19</h1>
+
+                <div class="question">
+                    <div class="question-title">Зад.1. Кой от изброените цветове не е от спектъра на слънчевата светлина?</div>
+                    <div class="option">а) зелен</div>
+                    <div class="option">б) кафяв</div>
+                    <div class="option">в) виолетов</div>
+                    <div class="option">г) жълт</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Зад.2. Кой от изброените цветове не е основен?</div>
+                    <div class="option">а) жълт</div>
+                    <div class="option">б) син</div>
+                    <div class="option">в) червен</div>
+                    <div class="option">г) зелен</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Зад.3. При преминаването през призмата светлинните лъчи на кой цвят се пречупват най-силно?</div>
+                    <div class="option">а) червен</div>
+                    <div class="option">б) оранжев</div>
+                    <div class="option">в) зелен</div>
+                    <div class="option">г) виолетов</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Зад.4. При смесването на кои цветове се получава жълт?</div>
+                    <div class="option">а) червен и зелен</div>
+                    <div class="option">б) червен и син</div>
+                    <div class="option">в) син и зелен</div>
+                    <div class="option">г) той е основен цвят</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Зад.5. При смесването на кои цветове се получава бял цвят?</div>
+                    <div class="option">а) червен, зелен и син</div>
+                    <div class="option">б) червен, жълт и син</div>
+                    <div class="option">в) червен, оранжев и син</div>
+                    <div class="option">г) червен, зелен и черен</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Зад.6. Кои лъчи определят цвета на листата?</div>
+                    <div class="option">а) преминалите</div>
+                    <div class="option">б) отразените</div>
+                    <div class="option">в) погълнатите</div>
+                    <div class="option">г) всички падащи</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Зад.7. Какво представлява цветният филтър?</div>
+                    <div class="option">а) метална мрежа</div>
+                    <div class="option">б) прозрачна стъклена пластинка</div>
+                    <div class="option">в) плочка от цветно стъкло</div>
+                    <div class="option">г) стъклена призма</div>
+                </div>
+
+                <nav class="footer-nav">
+                    <a href="zad63.html">Справочник</a>
+                    <a href="zad56.html">Начална страница</a>
+                    <a href="zad64.html">Предишен</a>
+                    <a href="zad50.html">Упътване</a>
+                    <a href="zad52.html">Ключ</a>
+                    <a href="zad28.html">Следващ</a>
+                </nav>
+            </main>
+
+            <aside class="sidebar-right">
+                <div class="image-card">
+                  <img src ="606[1].jpg" align="left" width="294" border="7" height="192">  <div class="image-placeholder">.</div>
+                    <a href="zad34.html"> Опит на Нютон</a>
+                </div>
+
+
+                <div class="image-card">
+                   <img src ="607[1].jpeg" align="left" width="294" border="7" height="192">  <div class="image-placeholder">.</div>
+                    <p>Небесна дъга</p>
+                </div>
+
+                <div class="image-card">
+<img src ="608[1].jpeg" align="left" width="294" border="7" height="192">  <div class="image-placeholder">.</div>
+                    <div class="image-placeholder">Дъга</div>
+                  
+                </div>
+
+                <div class="image-card">
+<img src ="1129[1].jpg" align="left" width="294" border="7" height="192">  <div class="image-placeholder">.</div>
+                    <div class="image-placeholder">Залез</div>
+                   
+                </div>
+
+                <div class="image-card">
+                    <img src ="1132[1].jpeg" align="left" width="294" border="7" height="192">  <div class="image-placeholder">.</div><div class="image-placeholder">Цветни филтри</div>
+                    
+                </div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>

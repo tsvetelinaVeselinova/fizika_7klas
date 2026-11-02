@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>От атома до Космоса</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to right, 
+                #f0f0f0 0%, 
+                #ffffff 15%, 
+                #eeccff 15%, 
+                #eeccff 85%, 
+                #ffffff 85%, 
+                #f0f0f0 100%
+            );
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #eeccff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .navigation {
+            background: #eeeeee;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #ddd;
+        }
+
+        .navigation a {
+            color: #4a5568;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #667eea;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: linear-gradient(145deg, #f7fafc, #e2e8f0);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .grading-table {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .grading-table h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        .task-points {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .task-points:last-child {
+            border-bottom: none;
+        }
+
+        .grade-scale {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .grade-scale h4 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .grade-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+        }
+
+        .sidebar-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .sidebar-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .test-content {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .test-title {
+            color: #2d3748;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(145deg, #f8f9ff, #f1f3ff);
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        .question-text {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .answer-option {
+            margin: 8px 0;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .answer-option:hover {
+            background: #e6efff;
+        }
+
+        .answer-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 10px;
+        }
+
+        .footer-navigation {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-navigation a {
+            color: #81e6d9;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-navigation a:hover {
+            color: #4fd1c7;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .test-content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>От атома до Космоса</h1>
+        </div>
+
+        <div class="navigation">
+            <a href="zad60.html">Речник</a> |
+            <a href="Upr1.html">Начало</a>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="grading-table">
+                    <h3>Оценяване на задачите:</h3>
+                    
+                    <div class="task-points">
+                        <span><strong>1 зад.</strong></span>
+                        <span>2 т.</span>
+                    </div>
+                    <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">
+                        За вярно записани брой на протоните-1т, за неутроните-1т
+                    </div>
+                    
+                    <div class="task-points"><span><strong>2 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>3 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>4 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>5 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>6 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>7 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>8 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>9 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>10 зад.</strong></span><span>1 т.</span></div>
+                    <div class="task-points"><span><strong>11 зад.</strong></span><span>5 т.</span></div>
+                    <div style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">
+                        2т за верен отговор + 3т за данни за планетите
+                    </div>
+                    <div class="task-points"><span><strong>12 зад.</strong></span><span>1 т.</span></div>
+                </div>
+
+                <div class="grade-scale">
+                    <h4>Оценка:</h4>
+                    <div class="grade-item"><span>0-5т.</span><span>Слаб (2)</span></div>
+                    <div class="grade-item"><span>6-8т.</span><span>Среден (3)</span></div>
+                    <div class="grade-item"><span>9-11т.</span><span>Добър (4)</span></div>
+                    <div class="grade-item"><span>12-14т.</span><span>Мн. добър (5)</span></div>
+                    <div class="grade-item"><span>15-17т.</span><span>Отличен (6)</span></div>
+                </div>
+
+                <div class="sidebar-image">
+                    <img src="122[1].jpg" alt="Физика илюстрация" width="200" height="160">
+                </div>
+            </div>
+
+            <div class="test-content">
+                <h2 class="test-title">Обобщителен тест</h2>
+
+                <div class="question">
+                    <div class="question-text">Зад.1. Желязото е двадесет и шестият елемент от таблицата на Менделеев. Най-разпространеният в природата изотоп е желязо-56. Колко неутрона има в ядрото му?</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> 26</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> 56</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> 30</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> 82</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.2. Атомното ядро се състои от:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> протони и електрони</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> неутрони и протони</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> неутрони и електрони</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> протони, неутрони и електрони</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.3. Протият и деутерият са:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> различни химични елементи</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> изотопи на въглерода</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> изотопи на водорода</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> изотопи на кислорода</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.4. Ядрените сили действат между:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> електроните и ядрото</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> всички частици на атома</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> протони и електрони</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> протони и неутрони</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.5. Опашатите звезди са:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> планети</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> астероиди</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> комети</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> метеори</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.6. Поток от хелиеви ядра са:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> Бета-лъчите</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> Алфа-лъчите</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> ултравиолетовите лъчи</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> Гама-лъчите</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.7. Бета-лъчите са:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> електрони, които имат малка проникваща способност</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> електрони, които имат голяма проникваща способност</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> хелиеви ядра с голяма йонизираща способност</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> хелиеви ядра с малка йонизираща способност</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.8. Температурата на повърхността на Слънцето е:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> 16 000 °C</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> 7 500 °C</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> 5 500 °C</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> 2 500 °C</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.9. Източници на енергия в звездите са:</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> различни химични реакции</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> верижна ядрена реакция</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> естествена радиоактивност</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> ядрен синтез</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.10. Коя е най-отдалечената от Слънцето планета?</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> Нептун</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> Уран</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> Меркурий</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> Сатурн</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.11. Кои планети нямат спътници?</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> Плутон</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> Марс</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> Меркурий</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> Венера</div>
+                    <div style="margin-top: 15px; font-weight: bold; color: #4a5568;">
+                        Разкажете какво знаете за тези планети.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-text">Зад.12. Каква е формата на Нашата Галактика?</div>
+                    <div class="answer-option"><span class="answer-label">а)</span> неправилна</div>
+                    <div class="answer-option"><span class="answer-label">б)</span> елиптична</div>
+                    <div class="answer-option"><span class="answer-label">в)</span> сферична</div>
+                    <div class="answer-option"><span class="answer-label">г)</span> спирална</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-navigation">
+            <a href="zad62.html">Начална страница</a> |
+            <a href="zad43.html">Предишен урок</a> |
+            <a href="zad48.html">Изходно равнище</a> |
+            <a href="zad68.html">Ключ</a>
+        </div>
+    </div>
+</body>
+</html>

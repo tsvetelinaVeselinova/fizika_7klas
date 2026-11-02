@@ -1,0 +1,288 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Двигателят на Ото</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+/* Layout: a technical plate. Engine section drawing on the left, stroke-by-stroke notes on the right, cycle table below. */
+:root{
+  --bg:#f0f2f3; --panel:#ffffff; --ink:#1b1f23; --ink2:#566069; --line:#c6ccd2;
+  --part:#e4e8eb; --piston:#ffffff;
+  --c-intake:#2c74b8; --c-comp:#6650c0; --c-power:#d4531c; --c-exhaust:#6b747d;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#13171b; --panel:#1b2127; --ink:#e7ebee; --ink2:#99a3ac; --line:#38414a;
+    --part:#2a323a; --piston:#252c33;
+    --c-intake:#5aa2e6; --c-comp:#9a86e8; --c-power:#f0743a; --c-exhaust:#97a1aa;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13171b; --panel:#1b2127; --ink:#e7ebee; --ink2:#99a3ac; --line:#38414a;
+  --part:#2a323a; --piston:#252c33;
+  --c-intake:#5aa2e6; --c-comp:#9a86e8; --c-power:#f0743a; --c-exhaust:#97a1aa;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.55;
+  padding-block:32px 56px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin:0 0 6px}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.08;margin:0 0 10px;text-wrap:balance}
+.lead{margin:0;max-width:62ch;color:var(--ink2)}
+h2{font-family:var(--f-display);font-weight:600;font-size:22px;margin:0 0 12px}
+.stage{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:start}
+.plate{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;min-width:0}
+svg.engine{display:block;width:100%;height:auto}
+.engine .lbl{font-family:var(--f-body);font-size:12px;fill:var(--ink2)}
+.engine .leader{stroke:var(--line);stroke-width:.8;fill:none}
+.engine .part{fill:var(--part);stroke:var(--ink2);stroke-width:.8}
+.engine .wall{stroke:var(--ink2);stroke-width:3}
+.engine .case{fill:none;stroke:var(--line);stroke-width:2}
+.engine .ink{stroke:var(--ink)}
+.engine .inkfill{fill:var(--ink)}
+.engine .pistonbody{fill:var(--piston);stroke:var(--ink);stroke-width:1.5}
+.engine .rodline{stroke:var(--ink2);stroke-width:7;stroke-linecap:round}
+.engine .cap{fill:var(--piston);stroke:var(--ink2);stroke-width:1}
+.engine .pivot{fill:var(--part);stroke:var(--ink);stroke-width:1.5}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+button{font:inherit;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:7px 14px;cursor:pointer;min-width:92px}
+button:hover{border-color:var(--ink2)}
+button:focus-visible,input:focus-visible,.stroke:focus-visible{outline:2px solid var(--c-power);outline-offset:2px}
+.ctl{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink2);min-width:0}
+.ctl input{width:130px;min-width:0;accent-color:var(--c-power)}
+.scrub{display:flex;align-items:center;gap:12px;margin-top:12px}
+.scrub input{flex:1;min-width:0;accent-color:var(--c-power)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+#angle{min-width:5ch;text-align:right;font-size:15px}
+.status{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.status div{border:1px solid var(--line);border-radius:4px;padding:6px 10px;font-size:13px;color:var(--ink2);display:flex;justify-content:space-between;gap:8px}
+.status b{font-weight:500;color:var(--ink)}
+.strokes{display:flex;flex-direction:column;gap:10px}
+.stroke{text-align:left;width:100%;display:block;padding:12px 14px;border-radius:6px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c);min-width:0;opacity:.62}
+.stroke.on{opacity:1;background:color-mix(in srgb, var(--c) 11%, var(--panel));border-color:var(--c)}
+.stroke h3{font-family:var(--f-display);font-weight:600;font-size:18px;margin:0;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.stroke h3 span{font-family:var(--f-mono);font-weight:500;font-size:12px;color:var(--ink2)}
+.stroke p{margin:4px 0 0;font-size:14px;color:var(--ink2)}
+.stroke.on p{color:var(--ink)}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+td:first-child{font-weight:500}
+.note{max-width:68ch;color:var(--ink2);margin:0}
+.note b{font-weight:500;color:var(--ink)}
+@media (max-width:820px){.stage{grid-template-columns:minmax(0,1fr)}.status{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Двигател с вътрешно горене</p>
+    <h1>Четиритактовият двигател на Николаус Ото</h1>
+    <p class="lead">Един цикъл е два оборота на коляновия вал, или 720°. Разрезът показва какво правят буталото, клапаните и свещта във всеки такт.</p>
+  </header>
+<a href ="zad67.html">Назад</a>
+  <section class="stage" aria-label="Анимация на двигателя">
+    <div class="plate">
+      <svg class="engine" viewBox="40 24 570 392" role="img" aria-label="Разрез на цилиндър с бутало, клапани, свещ и колянов вал">
+        <path d="M100 62 H205 Q225 62 225 82 V150" fill="none" stroke="var(--c-intake)" stroke-opacity=".2" stroke-width="22"/>
+        <path d="M275 150 V82 Q275 62 295 62 H590" fill="none" stroke="var(--c-exhaust)" stroke-opacity=".22" stroke-width="22"/>
+        <path id="mIn" d="M100 62 H205 Q225 62 225 82 V215" fill="none" stroke="none"/>
+        <path id="mOut" d="M275 215 V82 Q275 62 295 62 H590" fill="none" stroke="none"/>
+        <rect class="part" x="190" y="118" width="24" height="32"/>
+        <rect class="part" x="236" y="118" width="28" height="32"/>
+        <rect class="part" x="286" y="118" width="24" height="32"/>
+        <rect id="gas" x="201" y="150" width="98" height="50" fill="rgba(110,175,240,0.45)"/>
+        <ellipse id="flame" cx="250" cy="165" rx="40" ry="10" fill="#FFD54A" opacity="0"/>
+        <polyline id="spark" points="250,156 243,162 257,167 246,174" fill="none" stroke="#FFC800" stroke-width="2.5" stroke-linejoin="round" opacity="0"/>
+        <line class="wall" x1="200" y1="150" x2="200" y2="300"/>
+        <line class="wall" x1="300" y1="150" x2="300" y2="300"/>
+        <path class="case" d="M200 300 V385 Q200 398 213 398 H287 Q300 398 300 385 V300"/>
+        <rect class="cap" x="245" y="66" width="10" height="52" rx="2"/>
+        <line class="ink" x1="250" y1="118" x2="250" y2="158" stroke-width="3" stroke-linecap="round"/>
+        <g id="vIn"><line class="ink" x1="225" y1="96" x2="225" y2="151" stroke-width="3"/><rect x="214" y="150" width="22" height="5" rx="1" style="fill:var(--c-intake)"/><rect class="cap" x="219" y="90" width="12" height="6" rx="1"/></g>
+        <g id="vOut"><line class="ink" x1="275" y1="96" x2="275" y2="151" stroke-width="3"/><rect x="264" y="150" width="22" height="5" rx="1" style="fill:var(--c-exhaust)"/><rect class="cap" x="269" y="90" width="12" height="6" rx="1"/></g>
+        <g id="dIn"></g><g id="dOut"></g>
+        <line id="rod" class="rodline" x1="250" y1="250" x2="250" y2="304"/>
+        <g id="piston" transform="translate(0,250)"><rect class="pistonbody" x="202" y="-20" width="96" height="40" rx="3"/><line class="ink" x1="202" y1="-12" x2="298" y2="-12" stroke-width="1"/><line class="ink" x1="202" y1="-7" x2="298" y2="-7" stroke-width="1"/><circle class="pivot" cx="250" cy="0" r="5"/></g>
+        <circle cx="250" cy="340" r="36" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <circle id="cw" cx="250" cy="374" r="12" style="fill:var(--ink2)"/>
+        <line id="arm" class="ink" x1="250" y1="340" x2="250" y2="304" stroke-width="6" stroke-linecap="round"/>
+        <circle id="pin" class="pivot" cx="250" cy="304" r="6"/>
+        <circle class="inkfill" cx="250" cy="340" r="7"/>
+        <text class="lbl" x="250" y="48" text-anchor="middle">Свещ</text>
+        <text class="lbl" x="100" y="40">Смукателен канал</text>
+        <text class="lbl" x="440" y="40">Изпускателен канал</text>
+        <text class="lbl" x="316" y="226">Цилиндър</text>
+        <line class="leader" x1="302" y1="222" x2="312" y2="222"/>
+        <text class="lbl" x="58" y="226">Бутало</text>
+        <line class="leader" x1="108" y1="222" x2="198" y2="222"/>
+        <text class="lbl" x="316" y="344">Колянов вал</text>
+        <line class="leader" x1="302" y1="340" x2="312" y2="340"/>
+      </svg>
+
+      <div class="controls">
+        <button id="pp" type="button"><span id="ppt">Пауза</span></button>
+        <label class="ctl" for="spd">Скорост <input type="range" id="spd" min="20" max="360" step="10" value="80"></label>
+        <span class="ctl mono" id="spdo">80°/с</span>
+      </div>
+      <div class="scrub">
+        <label for="scr" class="ctl">Ъгъл</label>
+        <input type="range" id="scr" min="0" max="719" step="1" value="0">
+        <span class="mono" id="angle">0°</span>
+      </div>
+      <div class="status" aria-live="off">
+        <div>Бутало <b id="sP">слиза</b></div>
+        <div>Свещ <b id="sS">няма искра</b></div>
+        <div>Смукателен клапан <b id="sI">отворен</b></div>
+        <div>Изпускателен клапан <b id="sE">затворен</b></div>
+      </div>
+    </div>
+
+    <div class="strokes">
+      <button type="button" class="stroke" data-i="0" style="--c:var(--c-intake)">
+        <h3>1. Всмукване <span>0°–180°</span></h3>
+        <p>Буталото слиза от горната към долната мъртва точка. Смукателният клапан е отворен и цилиндърът се пълни със смес от бензин и въздух.</p>
+      </button>
+      <button type="button" class="stroke" data-i="1" style="--c:var(--c-comp)">
+        <h3>2. Сгъстяване <span>180°–360°</span></h3>
+        <p>И двата клапана са затворени. Буталото се качва и сгъстява сместа, а налягането и температурата растат.</p>
+      </button>
+      <button type="button" class="stroke" data-i="2" style="--c:var(--c-power)">
+        <h3>3. Работен ход <span>360°–540°</span></h3>
+        <p>Свещта дава искра малко преди горната мъртва точка. Сместа изгаря и разширяващите се газове бутат буталото надолу. Само този такт извършва полезна работа.</p>
+      </button>
+      <button type="button" class="stroke" data-i="3" style="--c:var(--c-exhaust)">
+        <h3>4. Изпускане <span>540°–720°</span></h3>
+        <p>Изпускателният клапан се отваря и буталото изтласква отработените газове навън. След това цикълът започва отначало.</p>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Какво прави всеки детайл</h2><img src="114[2].jpg" width="440" border="7" height="390"></br>
+    <div class="plate tablebox">
+      <table>
+        <thead><tr><th>Такт</th><th>Ъгъл</th><th>Бутало</th><th>Смукателен клапан</th><th>Изпускателен клапан</th><th>Свещ</th></tr></thead>
+        <tbody>
+          <tr><td>Всмукване</td><td class="mono">0°–180°</td><td>надолу</td><td>отворен</td><td>затворен</td><td>няма искра</td></tr>
+          <tr><td>Сгъстяване</td><td class="mono">180°–360°</td><td>нагоре</td><td>затворен</td><td>затворен</td><td>няма искра</td></tr>
+          <tr><td>Работен ход</td><td class="mono">360°–540°</td><td>надолу</td><td>затворен</td><td>затворен</td><td>искра при горната мъртва точка</td></tr>
+          <tr><td>Изпускане</td><td class="mono">540°–720°</td><td>нагоре</td><td>затворен</td><td>отворен</td><td>няма искра</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="note"><b>Малко история.</b> Николаус Ото (1832–1891) построява първия работещ четиритактов двигател с вътрешно горене през 1876 г. Идеята за четирите такта е описана по-рано, през 1862 г., от французина Алфонс Бо дьо Рош. Затова този цикъл се нарича още цикъл на Ото, а бензиновите двигатели в колите работят по същия принцип и днес. В анимацията ходът на буталото, клапаните и цветът на газовете са опростени, за да се виждат ясно.</p>
+</div>
+
+<script>
+(function(){
+var cx=250,cy=340,r=36,L=104;
+var ang=0,playing=true,speed=80;
+var last=null;
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduce)playing=false;
+var $=function(id){return document.getElementById(id)};
+var gas=$('gas'),flame=$('flame'),spark=$('spark'),rod=$('rod'),piston=$('piston'),arm=$('arm'),pin=$('pin'),cw=$('cw'),vIn=$('vIn'),vOut=$('vOut');
+var mIn=$('mIn'),mOut=$('mOut'),lenIn=mIn.getTotalLength(),lenOut=mOut.getTotalLength();
+var NS='http://www.w3.org/2000/svg',dotsIn=[],dotsOut=[],N=6;
+for(var i=0;i<N;i++){
+var a=document.createElementNS(NS,'circle');a.setAttribute('r','3.5');a.style.fill='var(--c-intake)';$('dIn').appendChild(a);dotsIn.push(a);
+var b=document.createElementNS(NS,'circle');b.setAttribute('r','3.5');b.style.fill='var(--c-exhaust)';$('dOut').appendChild(b);dotsOut.push(b);
+}
+var keys=[[0,[110,175,240,0.45]],[180,[110,175,240,0.5]],[350,[105,105,225,0.85]],[375,[245,140,40,0.9]],[540,[205,120,90,0.55]],[560,[150,150,150,0.5]],[700,[150,150,150,0.3]],[720,[110,175,240,0.45]]];
+function gasColor(a){
+for(var i=0;i<keys.length-1;i++){
+var k0=keys[i],k1=keys[i+1];
+if(a>=k0[0]&&a<=k1[0]){
+var t=(a-k0[0])/(k1[0]-k0[0]),c=[];
+for(var j=0;j<4;j++)c.push(k0[1][j]+(k1[1][j]-k0[1][j])*t);
+return 'rgba('+Math.round(c[0])+','+Math.round(c[1])+','+Math.round(c[2])+','+c[3].toFixed(2)+')';
+}}
+return 'rgba(110,175,240,0.45)';
+}
+function pistonY(a){var t=a*Math.PI/180;return cy-(r*Math.cos(t)+Math.sqrt(L*L-r*r*Math.sin(t)*Math.sin(t)));}
+function lift(a,s){if(a<s||a>s+180)return 0;return 10*Math.sin(Math.PI*(a-s)/180);}
+var cards=document.querySelectorAll('.stroke');
+var lastPh=-1;
+function render(){
+var py=pistonY(ang),top=py-20,t=ang*Math.PI/180;
+var ch=Math.max(0,top-150);
+gas.setAttribute('height',ch.toFixed(1));
+gas.setAttribute('fill',gasColor(ang));
+piston.setAttribute('transform','translate(0,'+py.toFixed(1)+')');
+var px=cx+r*Math.sin(t),qy=cy-r*Math.cos(t);
+rod.setAttribute('y1',py.toFixed(1));rod.setAttribute('x2',px.toFixed(1));rod.setAttribute('y2',qy.toFixed(1));
+arm.setAttribute('x2',px.toFixed(1));arm.setAttribute('y2',qy.toFixed(1));
+pin.setAttribute('cx',px.toFixed(1));pin.setAttribute('cy',qy.toFixed(1));
+cw.setAttribute('cx',(cx-0.94*(px-cx)).toFixed(1));cw.setAttribute('cy',(cy-0.94*(qy-cy)).toFixed(1));
+var li=lift(ang,0),lo=lift(ang,540);
+vIn.setAttribute('transform','translate(0,'+li.toFixed(1)+')');
+vOut.setAttribute('transform','translate(0,'+lo.toFixed(1)+')');
+var fo=0;
+if(ang>=360&&ang<=430)fo=0.65*(1-(ang-360)/70);
+flame.setAttribute('opacity',fo.toFixed(2));
+flame.setAttribute('cy',(150+ch*0.4).toFixed(1));
+flame.setAttribute('ry',Math.max(2,ch*0.35).toFixed(1));
+var sp=(ang>=346&&ang<=366);
+spark.setAttribute('opacity',sp?'1':'0');
+var f=ang/180;
+for(var i=0;i<N;i++){
+var p=(f+i/N)%1,pt=mIn.getPointAtLength(p*lenIn);
+dotsIn[i].setAttribute('cx',pt.x.toFixed(1));dotsIn[i].setAttribute('cy',pt.y.toFixed(1));
+dotsIn[i].setAttribute('opacity',(li>1?Math.min(1,li/6):0).toFixed(2));
+var pt2=mOut.getPointAtLength(p*lenOut);
+dotsOut[i].setAttribute('cx',pt2.x.toFixed(1));dotsOut[i].setAttribute('cy',pt2.y.toFixed(1));
+dotsOut[i].setAttribute('opacity',(lo>1?Math.min(1,lo/6):0).toFixed(2));
+}
+var ph=Math.floor(ang/180)%4;
+if(ph!==lastPh){
+for(var k=0;k<cards.length;k++){cards[k].classList.toggle('on',k===ph);cards[k].setAttribute('aria-pressed',k===ph?'true':'false');}
+lastPh=ph;
+}
+var a0=Math.round(ang)%720;
+$('angle').textContent=a0+'°';
+$('scr').value=String(a0);
+$('sP').textContent=(ph===0||ph===2)?'слиза':'се качва';
+$('sS').textContent=sp?'искра':'няма искра';
+$('sI').textContent=li>0?'отворен':'затворен';
+$('sE').textContent=lo>0?'отворен':'затворен';
+}
+function setPlaying(v){
+playing=v;
+$('ppt').textContent=playing?'Пауза':'Старт';
+}
+function loop(ts){
+if(last===null)last=ts;
+var dt=(ts-last)/1000;last=ts;
+if(playing){ang=(ang+speed*Math.min(dt,0.05))%720;render();}
+requestAnimationFrame(loop);
+}
+$('pp').addEventListener('click',function(){setPlaying(!playing);});
+$('spd').addEventListener('input',function(e){
+speed=parseInt(e.target.value,10);
+$('spdo').textContent=speed+'°/с';
+});
+$('scr').addEventListener('input',function(e){
+setPlaying(false);
+ang=parseInt(e.target.value,10);
+render();
+});
+for(var k=0;k<cards.length;k++){(function(k){cards[k].addEventListener('click',function(){ang=k*180+4;render();});})(k);}
+setPlaying(playing);
+render();
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body></html>

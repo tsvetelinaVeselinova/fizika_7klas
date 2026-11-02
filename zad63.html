@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физичен справочник</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #e9ecef 0%, #f8f9fa 50%, #ffffff 100%);
+            padding: 20px 15px;
+            border-right: 1px solid #dee2e6;
+            font-size: 0.9em;
+        }
+
+        .sidebar-right {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+            border-left: 1px solid #dee2e6;
+            border-right: none;
+        }
+
+        .main-content {
+            padding: 30px;
+            background: white;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin: -30px -30px 30px -30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .sidebar h2 {
+            color: #495057;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 5px;
+        }
+
+        .sidebar h3, .sidebar h4 {
+            color: #6c757d;
+            margin: 15px 0 8px 0;
+            font-size: 1em;
+        }
+
+        .sidebar p {
+            margin: 5px 0;
+            padding: 3px 0;
+            border-left: 3px solid transparent;
+            padding-left: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar p:hover {
+            border-left-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 3px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .section h1 {
+            color: #495057;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .formula-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .formula-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .formula-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #dee2e6;
+            transition: background-color 0.3s ease;
+        }
+
+        .formula-table tr:hover td {
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+
+        .formula-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .density-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+        }
+
+        .density-table th {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .density-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .density-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .density-table tr:hover {
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+
+        .material-category {
+            margin: 25px 0;
+        }
+
+        .material-category h2 {
+            color: #28a745;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 2px solid #28a745;
+            display: inline-block;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .formula-highlight {
+            background: rgba(255, 193, 7, 0.1);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            border-left: 3px solid #ffc107;
+            margin: 5px 0;
+        }
+
+        sup {
+            font-size: 0.7em;
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        sub {
+            font-size: 0.7em;
+            color: #007bff;
+        }
+
+        .color-spectrum {
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            height: 30px;
+            border-radius: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+<h2>Обем на паралелепипед</h2><p>.</p>
+
+<p> V = a . b .c </p>
+<h2>Обем на куб </h2><p>.</p>
+
+<p> V = a . a . a = a <sup>3 </sup>  </p>
+<img src="999.jpg" width="140" border="7" height="190">
+Измерения на паралелепипед:</br><p>.</p>
+
+a - дължина </br>
+b - широчина</br>
+c - височина</br>
+<p>.</p>
+            <h2>Връзка между мерните единици</h2>
+            <p>.</p>
+
+            <h4>Линейни</h4>
+            <p>1 km = 1000 m</p>
+            <p>1 m = 10 dm = 100 cm </br> = 1000 mm</p>
+            <p>1 dm = 10 cm</br>  = 100 mm</p>
+            <p>1 cm = 10 mm</p>
+            <p>.</p>
+            <h4>Квадратни</h4>
+            <p>1 m² = 100 dm²</p>
+            <p>1 m² = 10 000 cm²</p>
+            <p>1 m² = 1 000 000 mm²</p>
+            <p>1 dm² = 100 cm² </br>= 10 000 mm²</p>
+            <p>1 cm² = 100 mm²</p>
+            <p>.</p>
+            <h4>Кубични</h4>
+            <p>1 m³ = 1 000 dm³ = 1000 l(литра)</p>
+            <p>1 l(литър) = 1 dm³ </br> = 1000 cm³</p>
+            <p>1 cm³ = 1 000 mm³</p>
+            <p>.</p>
+
+<p>В SI са дефинирани седем основни единици заедно с представки.</br> Всички останали единици са техни производни. </br>
+Седемте основни единици са: </br><font color=”#ff7700”>метър</br> </font> килограм</br> секунда</br> ампер</br> келвин</br>
+ мол</br>  кандела</br> Съответните  физични величини са:</br> <font color=”#ff7700”>дължина</br> </font> маса</br> време</br> електрически ток</br> 
+температура</br> количество вещество</br>  светлинен интензитет.</p><p>.</p>
+
+            <h2>Специални мерни единици</h2>
+            
+            <h4>За скорост:</h4>
+            <p>1 km/h = 1000/3600 m/s</p>
+            <p>1 m/s = 3600/1000 km/h</p>
+            
+            <h4>За налягане:</h4>
+            <p>1 N/cm² = 10 000 Pa</p>
+            <p>1 mm Hg = 133 Pa</p>
+            <p>1 atm = 101 300 Pa</p>
+            
+            <h4>За маса:</h4>
+            <p>1 t = 1000 kg</p>
+            <p>1 kg = 1000 g</p>
+            
+            <h2>Светлинна година</h2><p>.</p>
+
+            <p>Разстоянието, което изминава светлината със скорост 300 000 km/s за време една година.</p>
+            <div class="formula-highlight">
+                9,46 × 10¹² km
+            <h2> Други мерни единици:</h2>
+  <p>1 in = 2,54 сm </p>
+
+  <p>1 ft  ( фут) = 0,3048 m = 12 in</p>
+  <p>1 yd (ярд) = 0,9144 m</p>
+  <p>1 nmi (морска миля)  = 1 862 m </p>
+  <p>1 mi (сухопътна миля)  = 1 609,344 m </p>
+
+</p>
+ <p> 1' = 30 cm</p>
+ <p> </p>
+<p></p>
+
+ </div>
+            <p>.</p>
+            <h2>Спектър на светлината</h2><p>.</p>
+
+            <div class="color-spectrum"></div>
+            <h4>Основни цветове:</h4>
+            <p>червен, зелен, син</p>
+            <p>.</p>
+            <h4>Допълнителни цветове:</h4><p>.</p>
+
+            <p>червен + зелен = жълт</p>
+            <p>червен + син = магента</p>
+            <p>син + зелен = циан</p>
+            <p>червен + зелен + син = бял</p>
+
+
+
+
+
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Физичен справочник</h1>
+<a href="Upr1.html">Начало</a>
+                <div class="nav-links">
+
+
+
+
+
+
+
+                    <a href="#mechanics">Механика</a>
+                    <a href="#electricity">Електричество</a>
+                    <a href="#optics">Светлина и звук</a>
+                    <a href="#density">Плътност</a>
+                </div>
+            </div>
+
+            <!-- Mechanics Section -->
+            <div class="section fade-in" id="mechanics">
+                <h1>Начален преговор - Механика</h1>
+                
+                <table class="formula-table">
+                    <thead>
+                        <tr>
+                            <th>Величина</th>
+                            <th>Означение</th>
+                            <th>Основна мерна единица</th>
+                            <th>Формули</th>
+                            <th>Измервателни уреди</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Път</strong></td>
+                            <td>s</td>
+                            <td>m</td>
+                            <td>s = v·t</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Скорост</strong></td>
+                            <td>v</td>
+                            <td>m/s</td>
+                            <td>v = s/t</td>
+                            <td>скоростомер</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Сила, тегло</strong></td>
+                            <td>F, P</td>
+                            <td>N</td>
+                            <td>P = m·g</td>
+                            <td>силомер</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Маса</strong></td>
+                            <td>m</td>
+                            <td>kg</td>
+                            <td>m = ρ·V</td>
+                            <td>везна</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box">
+                    <strong>Важно:</strong> Винаги работете с еднакви мерни единици. Най-лесният начин е да се използват основните мерни единици.
+                </div>
+                
+                <h3>Прости механизми:</h3>
+                <p>Лост, макара и наклонена равнина. С тях се печели сила - човек действа с по-малка сила и повдига товар с голямо тегло.</p>
+            </div>
+
+            <!-- Electricity Section -->
+            <div class="section fade-in" id="electricity">
+                <h1>Електричество и магнетизъм</h1>
+                
+                <table class="formula-table">
+                    <thead>
+                        <tr>
+                            <th>Величина</th>
+                            <th>Означение</th>
+                            <th>Основна мерна единица</th>
+                            <th>Формули</th>
+                            <th>Измервателни уреди</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Електричен заряд</strong></td>
+                            <td>q</td>
+                            <td>C</td>
+                            <td>q = I·t</td>
+                            <td>електроскоп</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Електричен ток</strong></td>
+                            <td>I</td>
+                            <td>A</td>
+                            <td>I = q/t = U/R</td>
+                            <td>амперметър</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Напрежение</strong></td>
+                            <td>U</td>
+                            <td>V</td>
+                            <td>U = W/q</td>
+                            <td>волтметър</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Съпротивление</strong></td>
+                            <td>R</td>
+                            <td>Ω</td>
+                            <td>R = U/I = ρ·l/S</td>
+                            <td>омметър</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Количество топлина</strong></td>
+                            <td>Q</td>
+                            <td>J</td>
+                            <td>Q = I·U·t = I²·R·t</td>
+                            <td>електрокалориметър</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Мощност</strong></td>
+                            <td>P</td>
+                            <td>W</td>
+                            <td>P = U·I = I²R = U²/R</td>
+                            <td>ватметър</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight-box">
+                    <p><strong>Кулон (C):</strong> Две наелектризирани тела имат заряд по 1С, ако на разстояние 1 m си взаимодействат </br>със сила 9×10⁹ N.</p>
+                    <p><strong>Големина на електричния заряд </strong>Амперчас: Ah = 1 A . 1h = 1A . 3600s = 3600 A.s = 3600 C </p>
+ <p><strong>Енергия:</strong> 1 kWh = 1000 W . 3600 s = 3 600 000 W . s =  3 600 000 J</p>
+                </div>
+            </div>
+
+            <!-- Optics and Sound Section -->
+            <div class="section fade-in" id="optics">
+                <h1>Светлина и звук</h1>
+                
+                <table class="formula-table">
+                    <thead>
+                        <tr>
+                            <th>Величина</th>
+                            <th>Означение</th>
+                            <th>Основна мерна единица</th>
+                            <th>Формули</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Скорост на светлината</strong></td>
+                            <td>c</td>
+                            <td>m/s</td>
+                            <td>c = 300 000 km/s</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Фокусно разстояние</strong></td>
+                            <td>f</td>
+                            <td>m</td>
+                            <td>1/f = 1/a + 1/b</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Оптична сила</strong></td>
+                            <td>D</td>
+                            <td>D</td>
+                            <td>D = 1/f</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Дължина на вълната</strong></td>
+                            <td>λ</td>
+                            <td>m</td>
+                            <td>λ = u·T = u/ν</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Период</strong></td>
+                            <td>T</td>
+                            <td>s</td>
+                            <td>T = 1/ν</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Честота</strong></td>
+                            <td>ν</td>
+                            <td>Hz</td>
+                            <td>ν = 1/T</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Скорост на звука</strong></td>
+                            <td>u</td>
+                            <td>m/s</td>
+                            <td>u = λ·ν</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Density Section -->
+            <div class="section fade-in" id="density">
+                <h1>Плътност на веществата</h1>
+                
+                <div class="material-category">
+                    <h2>Газове</h2>
+                    <table class="density-table">
+                        <thead>
+                            <tr>
+                                <th>Вещество</th>
+                                <th>Плътност (kg/m³)</th>
+                                <th>Плътност (g/cm³)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Въздух</td>
+                                <td>1,3</td>
+                                <td>0,0013</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="material-category">
+                    <h2>Течности</h2>
+                    <table class="density-table">
+                        <thead>
+                            <tr>
+                                <th>Вещество</th>
+                                <th>Плътност (kg/m³)</th>
+                                <th>Плътност (g/cm³)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Ацетон</td><td>720</td><td>0,72</td></tr>
+                            <tr><td>Спирт</td><td>790</td><td>0,79</td></tr>
+                            <tr><td>Бензин</td><td>700-800</td><td>0,7-0,8</td></tr>
+                            <tr><td>Олио</td><td>800</td><td>0,8</td></tr>
+                            <tr><td>Вода</td><td>1000</td><td>1</td></tr>
+                            <tr><td>Мляко</td><td>1030</td><td>1,03</td></tr>
+                            <tr><td>Глицерин</td><td>1260</td><td>1,26</td></tr>
+                            <tr><td>Живак</td><td>13600</td><td>13,6</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="material-category">
+                    <h2>Твърди тела</h2>
+                    <table class="density-table">
+                        <thead>
+                            <tr>
+                                <th>Вещество</th>
+                                <th>Плътност (kg/m³)</th>
+                                <th>Плътност (g/cm³)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Дърва</td><td>300-1200</td><td>0,3-1,2</td></tr>
+                            <tr><td>Бял бор</td><td>500</td><td>0,5</td></tr>
+                            <tr><td>Дъб</td><td>700</td><td>0,7</td></tr>
+                            <tr><td>Лед</td><td>900</td><td>0,9</td></tr>
+                            <tr><td>Стъкло</td><td>2500</td><td>2,5</td></tr>
+                            <tr><td>Алуминий</td><td>2700</td><td>2,7</td></tr>
+                            <tr><td>Диамант</td><td>3500</td><td>3,5</td></tr>
+                            <tr><td>Желязо и стомана</td><td>7800</td><td>7,8</td></tr>
+                            <tr><td>Мед</td><td>8900</td><td>8,9</td></tr>
+                            <tr><td>Сребро</td><td>10500</td><td>10,5</td></tr>
+                            <tr><td>Олово</td><td>11800</td><td>11,8</td></tr>
+                            <tr><td>Злато</td><td>19300</td><td>19,3</td></tr>
+                            <tr><td>Платина</td><td>21450</td><td>21,45</td></tr>
+                        </tbody>
+                    </table>
+<a href = "zad72.html"> Менделеева таблица</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar sidebar-right">
+           <p>.</p>
+ <h2>Представки за мерни единици</h2>
+            
+            <h4>Дробни</h4>
+            <p>n (нано) - 0,000 000 001</p>
+            <p>μ (микро) - 0,000 001</p>
+            <p>m (мили) - 0,001</p>
+            <p>c (санти) - 0,01</p>
+            <p>d (деци) - 0,1</p>
+            <p>.</p>
+
+            <h4>Кратни</h4>
+            <p>da (дека) - 10</p>
+            <p>h (хекто) - 100</p>
+            <p>k (кило) - 1 000</p>
+            <p>M (мега) - 1 000 000</p>
+            <p>G (гига) - 1 000 000 000</p>
+            <p>.</p>
+
+            <h2>Скорост на светлината</h2>
+            <h4>В различни среди:</h4>
+            <p>Въздух: 300 000 km/s</p>
+            <p>Стъкло: 225 000 km/s</p>
+            <p>Вода: 200 000 km/s</p>
+            <p>Рубин: 177 000 km/s</p>
+            <p>Диамант: 125 000 km/s</p>
+            <p>.</p>
+
+            <h2>Скорост на звука</h2>
+            <p>Въздух: 343 m/s</p>
+            <p>Стъкло: 5500 m/s</p>
+            <p>Вода: 1500 m/s</p>
+            <p>Каучук: 50 m/s</p>
+            <p>Стомана: 5000 m/s</p>
+            <p>Глицерин: 1923 m/s</p>
+            <p>Живак: 1453 m/s</p>
+            <p>Етилов спирт: 1170 m/s</p>
+            <p>.</p>
+<h2>Специфично електрично съпротивление  - озн.  ρ</h2>
+Използва се мерната единица<br/>  - (Ω . mm <sup>2</sup>) / m<br/> 
+сребро - 0,016<br/> 
+мед - 0,017 <br/> 
+алуминий - 0,029
+волфрам - 0,055 <br/> 
+манганин - 0,43<br/> 
+нихром  - 1,1<br/> 
+константан - 0,5<br/> 
+кантал - 1,45<br/> 
+            <h2>Формула за леща</h2>
+<p>.</p>
+
+            <div class="formula-highlight">
+                1/f = 1/a + 1/b
+            </div>
+            <p><strong>a</strong> - разстояние от предмета до лещата</p>
+            <p><strong>b</strong> - разстояние от лещата до образа</p>
+            <p><strong>f</strong> - фокусно разстояние</p>
+            <p>.</p>
+
+            <h4>Правила, които трябва да се спазват при построяване на образи:</h4><p>.</p>
+
+            <p>1) Лъч през оптичния център не променя посоката</p>
+            <p>2) Успореден лъч се насочва към фокуса</p><p>.</p>
+
+<img src="33.jpg" width="240" border="7" height="190"><p>.</p>
+
+Когато предметът е на разстояние, по-голямо от двойното фокусно разстояние на събирателната леща, образът му е обърнат, умален и действителен (т.е. получава се при пресичането на пречупените лъчи).
+<img src="32.jpg" width="240" border="7" height="190">        
+<p>.</p>
+Когато предметът е на разстояние по-голямо от фокусното разстояние, но по-малко от двойното фокусно разстояние, образът му е обърнат, уголемен и действителен.
+<img src="619.jpg" width="240" border="7" height="190">     
+<p>.</p>
+Когато предметът се намира на разстояние по-малко от фокусното разстояние на събирателната леща, образът му е прав, уголемен и недействителен 
+(т.е. получава се при пресичането на <b>продълженията</b> на пречупените лъчи).
+<b>Действителните образи могат да бъдат получени върху екран, а недействителните не могат да бъдат получени върху екран. Те се наблюдават само при гледане през лещата.</b>
+
+
+</div>
+    </div>
+
+    <script>
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.section').forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Електронно ръководство по физика - 7 клас</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимирани странични полета */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            width: 150px;
+            height: 100vh;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff, #e0e0e0, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .sidebar-left {
+            left: 0;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff, #e0e0e0, #ffffff);
+        }
+
+        .sidebar-right {
+            right: 0;
+            background: linear-gradient(225deg, #e0e0e0, #ffffff, #e0e0e0, #ffffff);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимирани картинки в страничните полета */
+        .floating-icon {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 30%; right: 20%; animation-delay: 2s; }
+        .floating-icon:nth-child(3) { top: 50%; left: 30%; animation-delay: 4s; }
+        .floating-icon:nth-child(4) { top: 70%; right: 30%; animation-delay: 1s; }
+        .floating-icon:nth-child(5) { top: 85%; left: 10%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Основно съдържание */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            margin-left: 170px;
+            margin-right: 170px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+            min-height: calc(100vh - 80px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(52, 152, 219, 0.5)); }
+            100% { filter: drop-shadow(0 0 20px rgba(231, 76, 60, 0.8)); }
+        }
+
+        .intro {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 30px;
+            text-align: justify;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        /* Анимирана галерия с картинки */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+        }
+
+        .image-placeholder {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            transition: transform 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .image-placeholder:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(116, 185, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(116, 185, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(116, 185, 255, 0); }
+        }
+
+        /* Навигационно меню */
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 15px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Важни бележки */
+        .note {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(192, 57, 43, 0.1));
+            border: 1px solid #e74c3c;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            color: #c0392b;
+            font-size: 1em;
+            line-height: 1.6;
+            position: relative;
+            animation: noteGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes noteGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(231, 76, 60, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(231, 76, 60, 0.4); }
+        }
+
+        .note::before {
+            content: "⚠️";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: white;
+            padding: 0 10px;
+            font-size: 1.5em;
+        }
+
+        /* Контакт секция */
+        .contact {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.1));
+            border-radius: 10px;
+        }
+
+        .contact a {
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .contact a:hover {
+            color: #2ecc71;
+            text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        }
+
+        /* Речници секция */
+        .dictionaries {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .dict-link {
+            display: block;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .dict-link:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Responsive дизайн */
+        @media (max-width: 1200px) {
+            .container {
+                margin-left: 120px;
+                margin-right: 120px;
+            }
+            .sidebar {
+                width: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Лявото странично поле -->
+    <div class="sidebar sidebar-left">
+        <div class="floating-icon">⚛️</div>
+        <div class="floating-icon">🔬</div>
+        <div class="floating-icon">⚡</div>
+        <div class="floating-icon">🌟</div>
+        <div class="floating-icon">🔭</div>
+    </div>
+
+    <!-- Дясното странично поле -->
+    <div class="sidebar sidebar-right">
+        <div class="floating-icon">🧪</div>
+        <div class="floating-icon">💡</div>
+        <div class="floating-icon">🌊</div>
+        <div class="floating-icon">🎵</div>
+        <div class="floating-icon">🚀</div>
+    </div>
+
+    <!-- Основно съдържание -->
+    <div class="container">
+        <h1>Съдържание на електронното ръководство:</h1>
+
+        <div class="intro">
+            <p>Този сайт съдържа тестове, допълнителна информация, обобщителни таблици, интересни факти и анекдоти, свързани с физиката и с живота на известни физици.
+
+Физиката е наука със сложен характер, тъй като освен добро логическо мислене изисква и добро познаване на математическите формули. Без развитието на тази сложна наука обаче техническият прогрес не би бил възможен.
+
+Сайтът обхваща всички раздели, които се изучават в VII клас. Предложени са тестове по всяка тема, контролни тестове за всеки раздел, както и тестове за входно и изходно равнище.
+ </p>
+
+        </div> 
+<table align="center" border="1" width="90%">
+<tr>
+<td>  <img src="122[1].jpg" align="left" border="7" width="220" height="140"></td>
+<td>  <img src="802[1].png" align="right" border="7" width="220" height="140"></td>
+<td>  <img src="80.jpg" border="7" width="220" height="140" ></td>
+<td>  <img src="135[1].jpg" border="7" width="220" height="140" ></td>
+
+</tr>
+<tr>
+<td>  <img src="112[1].jpg" align="left" border="7" width="220" height="140"></td>
+<td>  <img src="606[1].jpg" align="right" border="7" width="220" height="140"></td>
+<td>  <img src="136[1].jpg" border="7" width="220" height="140" ></td>
+<td>  <img src="4445.jpg" border="7" width="220" height="140" ></td>
+
+</tr>
+
+</table>
+
+       
+        <!-- Навигация -->
+        <nav class="navigation">
+            <a href="zad1.html" class="nav-link">Начален преговор</a>
+            <a href="zad3.html" class="nav-link">Електричество и магнетизъм</a>
+            <a href="zad56.html" class="nav-link">Светлина и звук</a>
+            <a href="zad62.html" class="nav-link">От атома до Космоса</a>
+            <a href="zad23.html" class="nav-link">История на физиката</a>
+            <a href="zad8.html" class="nav-link">Годишен преговор</a>
+<a href="zad72.html" class="nav-link">Периодична система</a>
+        </nav>
+
+        <!-- Важна бележка -->
+        <div class="note">
+            <strong>Забележка: Предложените тестове включват задачи за решаване. Поради тази причина след всеки тест са дадени указания, които могат да ви помогнат да анализирате задачите или да ви насочат към начина на тяхното решаване. Освен упътванията са предоставени и ключове с верните отговори.
+
+Към обобщителните тестове са посочени точките за всяка задача, както и скала за оценяване. В края на учебната година се провежда национално външно оценяване, а в по-горните класове – държавни зрелостни изпити (матури). Затова е полезно учениците да се запознаят с различни видове тестове, задачи и начина на тяхното оценяване.
+
+При решаването на задачи по физика е важно да се знае, че точки се присъждат не само за напълно вярно решена задача, но и за правилно изпълнените отделни етапи от решението.
+
+
+
+
+
+
+        <!-- Речници -->
+        <div class="dictionaries">
+            <a href="zad69.html" class="dict-link">📖 Речник - "Начален преговор"</a>
+            <a href="zad53.html" class="dict-link">⚡ Речник - "Електричество и магнетизъм"</a>
+            <a href="zad54.html" class="dict-link">🔊 Речник - "Светлина и звук"</a>
+            ...........<a href="zad60.html" class="dict-link">🌌 Речник - "От атома до Космоса"</a>...........
+        </div>
+
+        <!-- Допълнителни връзки -->
+        <nav class="navigation">
+            <a href="zad70.html" class="nav-link">📚 Използвана литература</a>
+            <a href="zad71.html" class="nav-link">🎉 Забавна страница</a>
+        </nav>
+
+        <!-- Контакт -->
+        <div class="contact">
+            <p>За въпроси: sasha_sd@abv.bg
+</p>автори: Сашка Дойкова</br>
+       и инж. Цветелина Дойкова
+</p>
+
+        
+        </div>
+    </div>
+</body>
+</html>

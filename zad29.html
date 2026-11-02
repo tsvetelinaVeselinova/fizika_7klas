@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Око, лупа и фотоапарат</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Заглавие */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Навигация */
+        .nav-bar {
+            background-color: #34495e;
+            padding: 15px 0;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .nav-bar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Лява странична колона */
+        .left-sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #e8e8e8, #ffffff, #e8e8e8);
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .left-sidebar .info-box {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .left-sidebar h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        .left-sidebar img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #3498db;
+            margin: 10px 0;
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            flex: 1;
+            padding: 20px 30px;
+            background-color: white;
+            margin: 0 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .test-section {
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .test-section h1 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .question {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question p {
+            margin: 8px 0;
+        }
+
+        .question b {
+            color: #2c3e50;
+        }
+
+        .formula {
+            background: #e8f4fd;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* Дясна странична колона */
+        .right-sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #e8e8e8, #ffffff, #e8e8e8);
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .right-sidebar .image-box {
+            background: white;
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .right-sidebar img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #e74c3c;
+        }
+
+        .right-sidebar .image-caption {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        /* Долна навигация */
+        .bottom-nav {
+            text-align: center;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .bottom-nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .bottom-nav a:hover {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        /* Адаптивен дизайн */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-sidebar, .right-sidebar {
+                width: 100%;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Око, лупа и фотоапарат</h1>
+    </div>
+
+    <div class="nav-bar">
+        <a href="zad4.html">Светлина</a>
+        <a href="zad54.html">Речник</a>
+        <a href="Upr1.html">Начало</a>
+    </div>
+
+    <div class="container">
+        <!-- Лява странична колона -->
+        <div class="left-sidebar">
+            <div class="info-box">
+                <h3>ОКО</h3>
+                <p><strong>Човешкото око се състои от:</strong></p>
+                <ul>
+                    <li>ретина (светлочувствителни клетки)</li>
+                    <li>роговица</li>
+                    <li>прозрачно тяло</li>
+                    <li>ирис</li>
+                    <li>зеница</li>
+                    <li>мускули</li>
+                </ul>
+                
+                <p>Всички предмети за окото са далечни. Окото фокусира като чрез мускулите променя дебелината на лещите. Зеницата контролира падащото количество светлина.</p>
+                
+                <h4>Недостатъците на окото са:</h4>
+                <ul>
+                    <li>късогледство</li>
+                    <li>далекогледство</li>
+                    <li>астигматизъм</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Увеличение на лупа</h3>
+                <p>Означава се с буквата <strong>m</strong> и означава колко пъти образът върху ретината, получен при наблюдение с дадена лупа е по-голям от образа, който ще се получи върху ретината с невъоръжено око.</p>
+                
+                <div class="formula">
+                    <strong>m = 250/ f </strong>
+                </div>
+                
+                <p>където f е фокусното разстояние на лещата и е в сантиметри</p>
+            </div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <div class="test-section">
+                <h1>Тест №21</h1>
+<img src ="614[1].jpg" align="left" width="600" border="7"height="400">
+                <div class="question">
+                    <p><strong>Зад.1. Коя част от окото играе роля на екран?</strong></p>
+                    <p><strong>а)</strong> роговицата;</p>
+                    <p><strong>б)</strong> ретината;</p>
+                    <p><strong>в)</strong> ириса;</p>
+                    <p><strong>г)</strong> зеницата.</p>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.2. С какъв тип лещи се коригира късогледство?</strong></p>
+                    <p><strong>а)</strong> събирателни;</p>
+                    <p><strong>б)</strong> плоско-изпъкнали;</p>
+                    <p><strong>в)</strong> разсейвателни;</p>
+                    <p><strong>г)</strong> с форма на полумесец.</p>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.3. С лещите на кои очила (за далекогледство, късогледство или други) можете да фокусирате слънчевите лъчи в една точка?</strong></p>
+                    <p><strong>а)</strong> късогледство;</p>
+                    <p><strong>б)</strong> далекогледство;</p>
+                    <p><strong>в)</strong> астигматизъм.</p>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.4. Колко сантиметра е разстоянието на най-ясно виждане?</strong></p>
+                    <p><strong>а)</strong> 10cm;</p>
+                    <p><strong>б)</strong> 15cm;</p>
+                    <p><strong>в)</strong> 20cm;</p>
+                    <p><strong>г)</strong> 25cm.</p>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.5. Коя част от фотоапарата играе ролята, която играе ириса в човешкото око?</strong></p>
+                    <p><strong>а)</strong> обектив;</p>
+                    <p><strong>б)</strong> визьор;</p>
+                    <p><strong>в)</strong> бленда;</p>
+                    <p><strong>г)</strong> светкавица.</p>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.6. Оптичната сила на разсейвателна леща се пресмята по формулата: D=1/f. Ваньо носи очила с оптична сила -4D.</strong></p>
+                    <p><strong>а)</strong> Какъв недостатък на очите коригират тези очила?</p>
+                    <p><strong>б)</strong> Колко сантиметра е фокусното разстояние на лещите им?</p>
+                </div>
+
+                <div class="question">
+                    <p><strong>Зад.7. Пресметнете увеличението на лупа с фокусно разстояние 6,5 cm. Колко милиметра ще е големината на буквите, гледани с тази лупа, ако височината им е 2 mm?</strong></p>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <a href="zad63.html">Справочник</a>
+                <a href="zad56.html">Начална страница</a>
+                <a href="zad28.html">Предишен</a>
+                <a href="zad50.html">Упътване</a>
+                <a href="zad52.html">Ключ</a>
+                <a href="zad38.html">Следващ</a>
+            </div>
+        </div>
+  </body>
+        <!-- Дясна странична колона -->
+        <div class="right-sidebar">
+            
+               
+                    <img src ="1150[1].jpg" align="left" width="400" border="7"height="350">
+<p>Очила</p>
+                
+                
+<img src ="612[1].jpg" align="left" width="400" border="7"height="350">
+ ояо          
+ 
+<img src ="612.jpg" align="left" width="400" border="7"height="350">
+    яоо        
+     
+               
+                    <img src ="616[1].jpeg" align="left" width="400" border="7"height="350">.
+               ЯЬЙА
+             
+<a href="zad57.html">За изобретателя на фотоапарата </a>
+         
+
+           
+                
+                    <img src ="915[1].jpeg" align="left" width="180" border="7"height="210">.
+                
+           Ьяя
+                    
+            
+       
+        
+    
+
+</html>

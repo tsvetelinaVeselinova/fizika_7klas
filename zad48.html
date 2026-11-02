@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изходно равнище - Физика</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eeccff;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 25px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Navigation */
+        .navigation {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .navigation a {
+            color: #4a4a4a;
+            text-decoration: none;
+            margin: 0 12px;
+            padding: 10px 18px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .navigation a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Sidebar styling with gradient */
+        .sidebar {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar-left {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+        }
+
+        .sidebar-right {
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 50%, #ffffff 100%);
+        }
+
+        .sidebar-box {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .sidebar h2 {
+            color: #4a4a4a;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        .sidebar img {
+            width: 100%;
+            max-width: 140px;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Main content */
+        .main-content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .test-title {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Table styling */
+        .physics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .physics-table th,
+        .physics-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .physics-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        .physics-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .physics-table tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Question styling */
+        .question {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .question-options {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .question-options div {
+            margin: 5px 0;
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .question-options div:hover {
+            background: rgba(255,255,255,0.9);
+        }
+
+        /* Bottom navigation */
+        .bottom-nav {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .bottom-nav a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 250px 1fr 250px;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .sidebar {
+                order: 3;
+                position: static;
+            }
+            
+            .main-content {
+                order: 2;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .navigation a {
+                margin: 5px;
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Изходно равнище</h1>
+            <p>Тест по физика</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+          <a href="Upr1.html">Начало</a>  
+        </div>
+
+        <!-- Left Sidebar -->
+        <div class="sidebar sidebar-left">
+            <div class="sidebar-box">
+                <h2>Оценяване на задачите</h2>
+                <img src="607[1].jpeg" alt="Оценяване">
+                <p><strong>1 зад.</strong> - всеки попълнен ред от таблицата носи по 0,5 точки; цялата таблица - 2 точки</p>
+                <p><strong>2 зад.</strong> - 1 точка</p>
+                <p><strong>3 зад.</strong> - за всяка вярна формула по 0,5 точки. Общо - 2 точки</p>
+                <p><strong>4 зад.</strong> - за всеки вярно определен уред по 0,5 точки. Общо 2 точки</p>
+                <p><strong>5-12 зад.</strong> - по 1 точка всяка</p>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 8px;">
+                    <strong>Оценка:</strong><br>
+                    0-6т. - Слаб (2)<br>
+                    7-9т. - Среден (3)<br>
+                    10-13т. - Добър (4)<br>
+                    14-17т. - Мн. добър (5)<br>
+                    18-21т. - Отличен (6)
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2 class="test-title">Тест за изходно равнище</h2>
+
+            <div class="question">
+                <p>Зад.1. Попълнете таблицата:</p>
+                <table class="physics-table">
+                    <tr>
+                        <th>Величина</th>
+                        <th>Означение</th>
+                        <th>Осн. мерна ед.</th>
+                        <th>Дробни</th>
+                        <th>Кратни</th>
+                    </tr>
+                    <tr>
+                        <td>Големина на ел. ток</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>Q</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>D</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>ly</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="question">
+                <p>Зад.2. Кое от посочените понятия е пример за измервателен уред?</p>
+                <div class="question-options">
+                    <div>а) резистор</div>
+                    <div>б) диоптър</div>
+                    <div>в) електроскоп</div>
+                    <div>г) батерия</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.3. Срещу всяка физична величина запишете номера на формулата, по която се пресмята:</p>
+                <div class="question-options">
+                    <div>а) големина на електричния ток (...) 1) D=1/f</div>
+                    <div>б) мощност (...) 2) v=1/T</div>
+                    <div>в) оптична сила на леща (...) 3) P=I.U</div>
+                    <div>г) честота на звукова вълна (...) 4) I=U/R</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.4. Срещу всяка физична величина запишете номера на нейния измервателен уред:</p>
+                <div class="question-options">
+                    <div>а) тегло (...) 1) амперметър</div>
+                    <div>б) маса (...) 2) силомер</div>
+                    <div>в) големина на електричния ток (...) 3) волтметър</div>
+                    <div>г) напрежение (...) 4) везна</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.5. Как ще се измени мощността на нагревател, ако приложим три пъти по-голямо напрежение?</p>
+                <div class="question-options">
+                    <div>а) няма да се промени</div>
+                    <div>б) ще намалее 9 пъти</div>
+                    <div>в) ще се увеличи 3 пъти</div>
+                    <div>г) ще се увеличи 9 пъти</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.6. Намотките на електромагнит се отблъскват от постоянен магнит. При какви условия електромагнитът ще се привлече от постоянния магнит?</p>
+                <div class="question-options">
+                    <div>а) ако увеличим тока през намотката</div>
+                    <div>б) ако намалим тока през намотката</div>
+                    <div>в) ако отдалечим намотката</div>
+                    <div>г) променим посоката на тока</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.7. Колко е мощността на котлон, който за 20 минути консумира 2 kWh електроенергия?</p>
+                <div class="question-options">
+                    <div>Дадено: ...... Търси се: ...... Решение: ......</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.8. Най-добре отразяват светлината:</p>
+                <div class="question-options">
+                    <div>а) черните тела</div>
+                    <div>б) жълтите тела</div>
+                    <div>в) белите тела</div>
+                    <div>г) сините тела</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.9. За колко време (в часове и минути) светлината от Слънцето ще измине разстоянието до планетата Уран, която е отдалечена на 2 870 000 000 km?</p>
+                <div class="question-options">
+                    <div>Дадено: .... Търси се: ...... Решение: ....</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.10. Оловото (Pb) има три изотопа: олово-206, олово-207, олово-208. В ядрото на кой от трите изотопа има най-много протони?</p>
+                <div class="question-options">
+                    <div>а) олово-208</div>
+                    <div>б) олово-207</div>
+                    <div>в) олово-206</div>
+                    <div>г) броят на протоните на всички изотопи е еднакъв</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.11. Коя от изброените частици има най-малка маса?</p>
+                <div class="question-options">
+                    <div>а) алфа-частици</div>
+                    <div>б) бета-частици</div>
+                    <div>в) протони</div>
+                    <div>г) неутрони</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>Зад.12. Кое от изброените небесни тела е естествен спътник на Марс?</p>
+                <div class="question-options">
+                    <div>а) Церера</div>
+                    <div>б) Титан</div>
+                    <div>в) Деймос</div>
+                    <div>г) Вега</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar sidebar-right">
+            <div class="sidebar-box">
+                <h2>Справочник</h2>
+                <p>Основни физични величини и формули:</p>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin: 8px 0; padding: 8px; background: rgba(102, 126, 234, 0.1); border-radius: 5px;">I = U/R (Закон на Ом)</li>
+                    <li style="margin: 8px 0; padding: 8px; background: rgba(102, 126, 234, 0.1); border-radius: 5px;">P = I·U (Мощност)</li>
+                    <li style="margin: 8px 0; padding: 8px; background: rgba(102, 126, 234, 0.1); border-radius: 5px;">D = 1/f (Оптична сила)</li>
+                    <li style="margin: 8px 0; padding: 8px; background: rgba(102, 126, 234, 0.1); border-radius: 5px;">v = 1/T (Честота)</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <h2>Мерни единици</h2>
+                <p><strong>Ток:</strong> Ампер (A)</p>
+                <p><strong>Заряд:</strong> Кулон (C)</p>
+                <p><strong>Оптична сила:</strong> Диоптър (D)</p>
+                <p><strong>Разстояние:</strong> Светлинна година (ly)</p>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            
+            
+           
+            <a href="zad68.html">Ключ</a>
+            
+        </div>
+    </div>
+</body>
+</html>

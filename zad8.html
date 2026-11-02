@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Годишен преговор по физика</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar-left, .sidebar-right {
+            background: linear-gradient(180deg, #e0e0e0 0%, #ffffff 50%, #e0e0e0 100%);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-left h3, .sidebar-right h3 {
+            color: #4a4a4a;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .sidebar-left a {
+            display: block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar-left a:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .content-area {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .content-area h1 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 10px;
+        }
+
+        .content-area h3 {
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        table tr:hover {
+            background: #e8edff;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        .speed-data, .units-data {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .speed-data p, .units-data p {
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        sup {
+            font-size: 0.8em;
+        }
+
+        .formula-highlight {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .rules-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .rules-section h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .rules-section p {
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Годишен преговор</h1>
+            <div class="nav-links">
+                <a href="zad3.html">Електричество и магнетизъм</a>
+                <a href="zad56.html">Светлина и звук</a>
+                <a href="zad62.html">От атома до Космоса</a>
+                <a href="zad48.html">Изходно равнище</a>
+                <a href="Upr1.html">Начало</a>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar-left">
+                <h3>Речници</h3>
+                <a href="zad69.html">Речник - "Начален преговор"</a>
+                <a href="zad53.html">Речник - "Електричество и магнетизъм"</a>
+                <a href="zad54.html">Речник - "Светлина и звук"</a>
+                <a href="zad60.html">Речник - "От атома до Космоса"</a>
+<p><b>Международната система единици (международно означение SI)</b> е съвременната форма на метричната система 
+(наречена така заради една от основните си мерни единици – метъра)</br>
+ и е най-широко използваната система единици както в науката, така и в стопанството и техниката.</br>
+Три държави не са приели SI като официална мерна система: </br>Либерия,</br> Мианмар</br> и САЩ.</br>
+В SI са дефинирани седем основни единици заедно с представки.</br> Всички останали единици са техни производни. </br>
+Седемте основни единици са: </br>метър</br> килограм</br> секунда</br> ампер</br> келвин</br>
+ мол</br>  кандела</br> Съответните  физични величини са:</br> дължина</br> маса</br> време</br> електрически ток</br> 
+температура</br> количество вещество</br>  светлинен интензитет.</p>
+
+                <div class="speed-data">
+                    <h3>Скорост на светлината в различните прозрачни среди:</h3>
+                    <p>Въздух<br/>300 000 km/s</p>
+                    <p>Вода<br/>200 000 km/s</p>
+                    <p>Стъкло<br/>225 000 km/s</p>
+                    <p>Рубин<br/>177 000 km/s</p>
+                    <p>Диамант<br/>125 000 km/s</p>
+                </div>
+
+                <div class="units-data">
+                    <h3>Връзка между мерните единици</h3>
+                    <h4>ЛИНЕЙНИ</h4>
+                    <p>1km = 1000 m</p>
+                    <p>1 m = 10 dm = 100 cm = 1000 mm</p>
+                    <p>1 dm = 10 cm = 100 mm</p>
+                    <p>1cm = 10 mm</p>
+                    
+                    <h4>КВАДРАТНИ</h4>
+                    <p>1 m² = 100 dm²</p>
+                    <p>1 m² = 10 000 cm²</p>
+                    <p>1 m² = 1 000 000 mm²</p>
+                    <p>1 dm² = 100 cm² = 10 000 mm²</p>
+                    <p>1 cm² = 100 mm²</p>
+                    
+                    <h4>КУБИЧНИ</h4>
+                    <p>1m³ = 1 000 dm³ = 1000 l = 1 000 000 cm³ = 1 000 000 000 mm³</p>
+                    <p>1 l = 1 dm³ = 1000 cm³ = 1 000 000 mm³</p>
+                    <p>1 cm³ = 1 000 mm³</p>
+                </div>
+            </aside>
+
+            <main class="content-area">
+                <h1>Електричество и магнетизъм</h1>
+                <p><strong>Най-важните величини и формули:</strong></p>
+                
+                <table>
+                    <tr>
+                        <th>Величина</th>
+                        <th>Означение</th>
+                        <th>Осн. мерна ед.</th>
+                        <th>Измервателни уреди</th>
+                        <th>Формули</th>
+                       
+                    </tr>
+                    <tr>
+                        <td><strong>Големина на ел. заряд</strong></td>
+                        <td>q</td>
+                        <td>C</td>
+                        <td>електроскоп</td>
+                        <td>q = I.t</td>
+                        
+                    </tr>
+                    <tr>
+                        <td><strong>Големина на ел. ток</strong></td>
+                        <td>I</td>
+                        <td>A</td>
+                        <td>амперметър</td>
+                        <td>I = q / t = U / R</td>
+                       
+                    </tr>
+                    <tr>
+                        <td><strong>Напрежение</strong></td>
+                        <td>U</td>
+                        <td>V</td>
+                        <td>волтметър</td>
+                        <td>U = W / q</td>
+                        
+                    </tr>
+                    <tr>
+                        <td><strong>Съпротивление</strong></td>
+                        <td>R</td>
+                        <td>Ω</td>
+                        <td>омметър</td>
+                        <td>R = U / I = ρ.l / S</td>
+                       
+                    </tr>
+                    <tr>
+                        <td><strong>Количество топлина</strong></td>
+                        <td>Q</td>
+                        <td>J</td>
+                        <td>Ел. калориметър</td>
+                        <td>Q = I.U.t = I².R.t</td>
+                       
+                    </tr>
+                    <tr>
+                        <td><strong>Мощност на тока</strong></td>
+                        <td>P</td>
+                        <td>W</td>
+                        <td>ватметър</td>
+                        <td>P = U.I = I²R = U² / R</td>
+                        
+                    </tr>
+                </table>
+
+                <p><strong>По-особени мерни единици:</strong></p>
+                <p>Амперчас(Ah); 1 Ah = 3600С</p>
+                <p>Киловатчас(kWh); 1 kWh = 1000W.3600s = 3 600 000 J.</p>
+
+                <h3>Електрически вериги</h3>
+                <p><strong>Консуматорите и източниците могат да се свързват по два начина: последователно и успоредно.</strong></p>
+                <p><strong>Измервателните уреди</strong> се свързват последователно(амперметър) и успоредно(волтметър)</p>
+
+                <h1>Светлина и звук</h1>
+                <p><strong>Най-важните величини и формули:</strong></p>
+                
+                <table>
+                    <tr>
+                        <th>Величина</th>
+                        <th>Означение</th>
+                        <th>Осн. мерна ед.</th>
+                        <th>Формули</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Скорост на светлината</strong></td>
+                        <td>c</td>
+                        <td>m/s</td>
+                        <td><span class="formula-highlight">c = 300 000km/s; r = c.t</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Фокусно разстояние</strong></td>
+                        <td>f</td>
+                        <td>m</td>
+                        <td><span class="formula-highlight">1/f = 1/a + 1/b</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Оптична сила</strong></td>
+                        <td>D</td>
+                        <td>D</td>
+                        <td><span class="formula-highlight">D = 1/f</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Дължина на вълната</strong></td>
+                        <td>λ</td>
+                        <td>m</td>
+                        <td><span class="formula-highlight">λ = u.T = u / ν</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Период</strong></td>
+                        <td>T</td>
+                        <td>s</td>
+                        <td><span class="formula-highlight">T = 1 / ν</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Честота</strong></td>
+                        <td>ν</td>
+                        <td>Hz</td>
+                        <td><span class="formula-highlight">ν = λ / u</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Скорост на звука</strong></td>
+                        <td>u</td>
+                        <td>m/s</td>
+                        <td><span class="formula-highlight">u = λ / T = λ.ν</span></td>
+                    </tr>
+                </table>
+
+                <h3>Основни понятия</h3>
+                <p><strong>Източници на светлина</strong> - Тела, които излъчват светлина</p>
+                <p><strong>Прозрачни среди</strong> - Среди, през които преминава светлината</p>
+                <p><strong>Непрозрачни среди</strong> - Среди, през които не преминава светлината</p>
+                <p><strong>Оптически по-рядка и оптически по-плътна среда</strong> - определя се чрез скоростта на светлината (оптически по-рядка е средата, в която светлината се разпространява с по-голяма скорост)</p>
+
+                <h3>Основни явления</h3>
+                <p><strong>Отражение на светлината:</strong> Явление, което се наблюдава на границата между две среди, където светлината променя посоката си на разпространение и остава в първата среда</p>
+                <p><strong>Пречупване на светлината:</strong> Явление, което се наблюдава на границата между две прозрачни среди, където светлината променя посоката си на разпространение и навлиза във втората среда</p>
+                <p><strong>Пълно вътрешно отражение:</strong> За да настъпи това явление е необходимо да са изпълнени условията:<br/>
+                - светлинният лъч да преминава от оптически по-плътна в оптически по-рядка среда<br/>
+                - Ъгълът на пречупване да е по-голям или равен на 90°. Ъгълът, при който се осъществява това явление, за различните среди е различен, но може да се изчисли (10 клас). Той се нарича граничен ъгъл на падане</p>
+
+                <h1>От атома до Космоса</h1>
+                <p><strong>Планетарен модел на атома</strong> (създаден от Ръдърфорд, по-късно допълнен от Хайзенберг и Иваненко, които 1932 г. откриват неутрона): Ядро, изградено от протони и неутрони. То е съсредоточено в малка част от атома. Електроните се движат по кръгови орбити.</p>
+                <p><strong>Радиоактивни лъчи:</strong> Алфа частици(лъчи) - поток от хелиеви ядра; Бета частици (лъчи) - поток от електрони, гама-лъчи: електронеутрални частици</p>
+                <p><strong>Видове ядрени реакции:</strong> Радиоактивно разпадане; ядрен синтез; делене на ядрата</p>
+                <p><strong>Слънчева система:</strong> 8 планети(земен тип и гиганти), планети-джуджета, спътници на планетите, малки тела(метеори, метеорити, астероиди, комети)</p>
+                <p><strong>Звезди:</strong> Огромни самосветещи кълба от нажежени газове. В недрата на звездите протичат ядрени реакции--термоядрен синтез. Така се генерира енергия.</p>
+            </main>
+
+            <aside class="sidebar-right">
+                <h3>Представки за образуване на десетични дробни</br> и кратни на измерителните единици:</h3>
+                
+                <div style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h4>Дробни</h4>
+                    <p>n (нано) 0,000 000 001</p>
+                    <p>μ (микро) 0,000 001</p>
+                    <p>m (мили) 0,001</p>
+                    <p>c (санти) 0,01</p>
+                    <p>d (деци) 0,1</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 15px; border-radius: 10px;">
+                    <h4>Кратни</h4>
+                    <p>da (дека) 10</p>
+                    <p>h (хекто) 100</p>
+                    <p>k (кило) 1 000</p>
+                    <p>M (мега) 1 000 000</p>
+                    <p>G (гига) 1 000 000 000</p>
+                </div>
+
+                <div class="rules-section">
+                    <h3>Основни правила за решаване на задачи по физика</h3>
+                    <p>1. След като прочетете условието на задачата, запишете дадените и търсените величини, използвайки приетите означения - това ще ви помогне за правилния избор на формула.</p>
+                    <p>2. Ако в условието са дадени или се търсят няколко величини от един и същи вид, можете да ги разграничите с помощта на индекси</p>
+                    <p>3. Ако в условието са използвани десетични дробни и кратни на мерните единици, още при записа на дадените величини ги превърнете в основни. (например </br>5t=5000 kg; </br>20 g=0,020 kg)</p>
+                    <p>4. След намиране на подходящата формула е необходимо да се изрази търсената величина, да се заместят стойностите на величините и да се пресметне полученият израз. Hакрая да се постави мерната единица.</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Електромотор</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: #e9edf1;
+    color: #1d2b3a;
+  }
+
+  /* ===== Заглавие с преливащ се фон ===== */
+  header {
+    text-align: center;
+    padding: 24px 16px;
+    color: #fff;
+    background: linear-gradient(90deg, #0a6fb8, #00aee0, #6b7b8c, #0a6fb8);
+    background-size: 300% 100%;
+    animation: gradientMove 8s ease infinite;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    letter-spacing: 2px;
+    animation: dropIn 1s ease both;
+  }
+
+  @keyframes gradientMove {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Три полета ===== */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 16px;
+    padding: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .panel {
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    opacity: 0;
+    animation: slideUp .8s ease forwards;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .panel:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .25);
+  }
+  .panel h2 { margin-top: 0; }
+
+  /* ляво – сиво */
+  .left   { background: #cfd6dd; border-top: 6px solid #00aee0; animation-delay: .1s; }
+  /* средно – синьо */
+  .center { background: #00aee0; color: #fff; border-top: 6px solid #6b7b8c; animation-delay: .3s; }
+  /* дясно – сиво */
+  .right  { background: #cfd6dd; border-top: 6px solid #00aee0; animation-delay: .5s; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== Анимиран електромотор ===== */
+  .motor {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+  }
+  .stator {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 12px solid #6b7b8c;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 12px rgba(0,0,0,.3);
+  }
+  .rotor {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background:
+      conic-gradient(#0a6fb8 0 25%, #cfd6dd 0 50%, #0a6fb8 0 75%, #cfd6dd 0);
+    border: 4px solid #1d2b3a;
+    animation: spin 2.5s linear infinite;
+    position: relative;
+  }
+  .rotor::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 16px; height: 16px;
+    background: #1d2b3a;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== Списъци и бутони ===== */
+  ul { padding-left: 20px; line-height: 1.7; }
+
+  .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #6b7b8c;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .btn:hover { background: #0a6fb8; }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.07); }
+  }
+
+  /* Мигаща стрелка на компаса */
+  .compass {
+    width: 80px; height: 80px;
+    margin: 12px auto;
+    border-radius: 50%;
+    border: 5px solid #6b7b8c;
+    background: #fff;
+    position: relative;
+  }
+  .needle {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 4px; height: 56px;
+    margin-left: -2px; margin-top: -28px;
+    background: linear-gradient(#d62828 50%, #0a6fb8 50%);
+    transform-origin: center;
+    animation: swing 3s ease-in-out infinite;
+  }
+  @keyframes swing {
+    0%, 100% { transform: rotate(-35deg); }
+    50%      { transform: rotate(35deg); }
+  }
+
+  /* Адаптивност */
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Електромотор</h1>
+</header>
+
+<div class="layout">
+
+  <!-- Поле 1: сиво -->
+  <section class="panel left">
+    <h2>Устройство</h2>
+<p>.</p>
+    <ul>
+      <li>Статор – П-образен магнит</li>
+      <li>Ротор – намотка с ток</li>
+      <li>Колектор</li>
+      <li>Четки (сменят посоката на тока)</li>
+    </ul>
+    <div class="motor">
+      <div class="stator"><div class="rotor"></div></div>
+    </div>
+<p>.</p>
+ <img src="570[1].jpg" width="320" height="230">
+
+ <h2>Как работи?</h2>
+    <p>
+      Когато през намотката на ротора протече ток, около нея се създава
+      магнитно поле. То взаимодейства с полето на статора и върти ротора.
+      Колекторът и четките сменят посоката на тока на всеки половин оборот,
+      така че въртенето да продължава в една и съща посока.
+    </p>
+  </section>
+
+  <!-- Поле 2: синьо -->
+  <section class="panel center">
+   
+   <h1> <button class="btn">Тест №15</button> </h1>
+
+
+<b>Зад.1.Какво е предназначението на статора на електромотора?</b><br/>
+а)</b> да сменя посоката на тока;<br/>
+б)</b> да създаде магнитно поле;<br/>
+в)</b> да се върти;<br/>
+г)</b> няма значение.<br/>
+<b>Зад.2.Какво е предназначението на колектора и четките?</b><br/>
+
+<b>а)</b> подават напрежение;<br/>
+б)</b> усилват тока;<br/> 
+в)</b> сменят посоката на тока;<br/>
+г)</b> намаляват тока.<br/>
+<b>Зад.3.Кое правило определя посоката на магнитните сили?</b><br/>
+а) правилото на свитите пръсти на дясната ръка;<br/>
+б) правилото на свитите пръсти на лявата  ръка;<br/>
+в) правилото на опънатите пръсти на дясната ръка;<br/>
+г) правилото на опънатите пръсти на лявата ръка.<br/>
+<b>Зад.4.Магнитната сила е перпендикулярна на :</b><br/>
+а) проводника;<br/>
+б) магнитното поле;<br/>
+в) проводника и магнитното поле;<br/>
+г) тя е успоредна на проводника и магнитното поле.<br/>
+<b>Зад.5.В кой от електроурeдите не се използва електромотор?</b><br/>
+а) миксер;<br/>б) тостер;<br/>в) пералня;<br/>г) микровълнова печка с грил.<br/>
+<b>Зад.6.От какво не зависи големината на магнитната сила, действаща върху проводник:</b><br/>
+а) от посоката на тока;<br/>
+б) от ориентацията на проводника спрямо силовите линии;<br/>
+в) от големината на тока;<br/>
+г) от силата на магнита.<br/><a href="zad3.html"> Начална страница</a>|
+<a href="zad22.html"> Предишен</a>|
+<a href="zad49.html"> Упътване</a>|
+<a href="zad66.html"> Ключ</a>|
+<a href="zad25.html">Обобщителен тест</a>|
+<a href="zad4.html"> Следващ</a>|
+  </section>
+
+  <!-- Поле 3: сиво -->
+  <section class="panel right">
+    <h2>Опит</h2>
+    <p>
+      Постави намотка между полюсите на П-образен магнит и пусни ток.
+      Какво ще се случи?
+    </p>
+    <div class="compass"><div class="needle"></div></div>
+    <p>Когато смениш посоката на тока, посоката на движение също се променя.</p>
+ <b> Принцип на действие на електромотора </b> <br/>
+<p> Ако се направи следният опит ще се демонстрира принципа на действие на елeктромотор.<b>А той е: </b> <br/>да заменим стрелката на компас с намотка и да поставим тази намотка  
+ между полюсите на П-образен магнит.Когато пропуснем ток през намотката тя ще се завърти.Защо? <br/>Докога ще се движи?<br/>Когато спре  променяме посоката на
+ тока.<br/>
+Ще продължи ли да се движи и в каква посока?<br/> 
+
+   
+</section>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Електрическа енергия. Закон на Джаул-Ленц</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимирани странични полета */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            width: 150px;
+            height: 100vh;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff, #f0f0f0, #e8e8e8);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            z-index: 1;
+        }
+
+        .sidebar-left {
+            left: 0;
+        }
+
+        .sidebar-right {
+            right: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимирани елементи в страничните полета */
+        .animated-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(102, 126, 234, 0.7);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animated-element:nth-child(1) { top: 10%; left: 20px; animation-delay: 0s; }
+        .animated-element:nth-child(2) { top: 30%; right: 20px; animation-delay: 2s; }
+        .animated-element:nth-child(3) { top: 50%; left: 30px; animation-delay: 4s; }
+        .animated-element:nth-child(4) { top: 70%; right: 30px; animation-delay: 6s; }
+        .animated-element:nth-child(5) { top: 90%; left: 15px; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Електрически мълнии анимация */
+        .lightning {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffff00, #ff6600);
+            animation: lightning 3s ease-in-out infinite;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+        }
+
+        .lightning:nth-child(6) { top: 15%; left: 50px; animation-delay: 1s; }
+        .lightning:nth-child(7) { top: 45%; right: 50px; animation-delay: 3s; }
+        .lightning:nth-child(8) { top: 75%; left: 60px; animation-delay: 5s; }
+
+        @keyframes lightning {
+            0%, 90%, 100% { opacity: 0; transform: scaleY(0); }
+            5%, 85% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Основен контейнер */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-left: 150px;
+            margin-right: 150px;
+        }
+
+        /* Заглавие с мигане */
+        .main-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #764ba2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Основно съдържание */
+        .content-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .theory-panel {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .theory-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .formula {
+            background: #e8f2ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .test-panel {
+            flex: 2;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-panel h1 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question {
+            background: #f8f9ff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e8ff;
+        }
+
+        .question b {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .question p {
+            margin: 5px 0;
+            padding-left: 15px;
+        }
+
+        /* Долна навигация */
+        .bottom-navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .bottom-navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-navigation a:hover {
+            color: #764ba2;
+        }
+
+        /* Пулсиращи частици във фона */
+        .particle {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+            z-index: 0;
+        }
+
+        .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            left: 20%;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            left: 90%;
+            animation-delay: 10s;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 1300px) {
+            .sidebar { display: none; }
+            .container {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фонови частици -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- Лява странична лента -->
+    <div class="sidebar sidebar-left">
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <!-- Дясна странична лента -->
+    <div class="sidebar sidebar-right">
+
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <div class="container">
+        <!-- Заглавие -->
+        <div class="main-title">
+            Електрическа енергия. Закон на Джаул-Ленц
+        </div>
+
+        <!-- Навигация -->
+        <div class="navigation">
+            <a href="zad15.html">Ел. ток</a> |
+            <a href="zad16.html">Напрежение</a> |
+            <a href="zad17.html">Закон на Ом</a> |
+            <a href="zad53.html">Речник</a> |
+            <a href="Upr1.html">Начало</a>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Теоретична част -->
+            <div class="theory-panel">
+                <p><b>Електричната енергия лесно се преобразува от един вид в друг и по това се различава от другите видове енергия.</b></p>
+                <img src="968[1].jpg" width="130" height="130" alt="Електромер">
+ <i>Електромер</i>
+                <p><b>Например:</b>
+<br>
+                в лампите се преобразува в светлинна,<br>
+                в нагревателите - в топлинна,<br>
+                в електромоторите - в механична.</p>
+                 <p>.</p>
+               <b>В източниците на напрежение (батерии и акумулатори) се превръща от химична в електрична.</b></p>
+                 <p>.</p>
+                <p><b>В другите източници (генератор и динамо) се превръща от механична в електрична.</b></p>
+                 <p>.</p>
+                <p><b>Основна мерна единица за електрична енергия <br>- джаул. (озн. J)</b></p>
+                 <p>.</p>
+                <p><b>Други:</b><br>
+                kJ = 1000 J<br>
+                MJ = 1 000 000 J<br>
+                kWh = 1000 W <b>. </b>3 600 s<br> = 3 600 000 J </p>
+ <p>.</p>
+                <h3>Закон на Джаул-Ленц</h3>
+                
+                <div class="formula">Q = I · U · t</div>
+                <div class="formula">Q = I² · R · t</div>
+                <div class="formula">Q = U² · t / R</div>
+
+<p><b>Задача 1: Омметърът, включен във веригата отчита съпротивление <br>2,5 кΩ,  а напрежението върху резистора е 200 V. 
+Определете количеството топлина, което се отделя за 3 минута и 20 секунди.</b></p>
+<p>Дадено:</br>
+R = 2,5 кΩ = 2500 Ω </br>
+U = 200 V </br>
+
+t= 3 min 20 s= 3 . 60 + 20</br> = 180 + 20 <br>= 200 s</br>
+</p>
+Да се намери:</br>
+
+Q =?</br></p>
+
+Формула:</br>
+
+<p> Q = U <sup>2</sup> . t / R</br></p>
+
+Решение:</br>
+
+
+<p>Заместваме: Q  = 200 <sup>2</sup> . 200 / 2500  </br>= 3 200 J = 3,2 kJ</br></p>
+
+
+Отговор: Количеството топлина, което се отделя е 3,2 kJ </i></br>
+
+
+
+
+
+<p><b>Задача 2: Определете напрежението на нагревателя на електрически бойлер, ако за 2 минута и 40 секунди количеството топлина, отделено от него е 64 kJ.
+ Големината на тока е 2А.
+</b>/<p>
+
+<p>Дадено:</br>
+Q = 64 kJ = 640 00  J </br>
+I  = 2 A </br>
+t= 2 min 40 s= 2 . 60 + 40 </br>= 120 + 40 <br>= 160 s</br>
+
+</p>
+Да се намери:</br>
+
+U =?</br>
+
+Формула:</br>
+
+<p> Q = I .  U . t </p>
+
+Решение:</br>
+
+
+<p>Заместваме:64 000  = 2 . U . 160   </br>=>  = U = 64 000  : (2 . 160 )  = 64 000  : 320 = 200 V</br></p>
+
+
+Отговор: Напрежението е  200 V </i></br>
+
+
+            </div>
+
+            <!-- Тестова част -->
+            <div class="test-panel">
+                
+<img src="462[1].jpg" width="600" height="400" alt="Джеймс Джаул"> <a href="zad33.html"> Джаул и Ленц</a>             
+ <p>.</p> 
+<h1>Тест №12</h1>
+                <div class="question">
+                    <b>Зад.1. От какво НЕ зависи отделеното количество топлина при протичане на ток през един проводник?</b>
+                    <p>а) времето;</p>
+                    <p>б) вида на проводника;</p>
+                    <p>в) вида на източника;</p>
+                    <p>г) големината на тока.</p>
+                </div>
+
+                <div class="question">
+                    <b>Зад.2. В съединителните проводници също се отделя топлина т.нар. топлинни загуби. За да се намалят тези загуби се нуждаем от съединителни проводници с:</b>
+                    <p>а) голямо съпротивление;</p>
+                    <p>б) малко съпротивление?</p>
+                </div>
+
+                <div class="question">
+                    <b>Зад.3. През нагревател със съпротивление 30 Ω тече ток 4А. Определете количеството топлина, което се отделя за 1 минута?</b>
+                </div>
+
+                <div class="question">
+                    <b>Зад.4. Попълнете пропуснатите числа:</b>
+                    <p>а) 4200 J = .......kJ</p>
+                    <p>б) 3,8 kJ = .......J</p>
+                    <p>в) 7,2 MJ = .......kJ</p>
+                    <p>г) 7,2 MJ = .......J</p>
+                </div>
+
+                <div class="question">
+                    <b>Зад.5. Амперметърът на електрическа верига измерва ток 800 mA, а напрежението върху резистора е 200 V. Определете количеството топлина, което се отделя за 1 минута и 20 секунди.</b>
+                </div>
+
+                <div class="question">
+                    <b>Зад.6. Определете съпротивлението на нагревателя на електрическа печка, ако за 1 минута и 20 секунди количеството топлина, отделено от него е 6 MJ. Големината на тока е 5А.</b>
+                </div>
+
+                <div class="question">
+                    <b>Зад.7. За колко време (минути и секунди) нагревател със съпротивление 4 kΩ ще отдели 1,9 kJ количество топлина, ако напрежението между краищата му е 200 V?</b>
+                <div class="olympiad">
+                <h2>Задача от Олимпиада по физика</h2><p><b>Областен кръг 3.04.2005г.</b></p>
+                <p>Източник на напрежение 18 V, лампички 1 и 2, волтметър и амперметър са свързани в електрическа верига. 
+Лампичките са съединени последователно, амперметърът отчита ток във веригата 0,3 А, а волтметърът - напрежение на първата лампичка 6 V.
+ Начертайте схемата на електрическата верига. 
+Определете напрежението на втората лампичка и съпротивлението на двете лампички. Какво количество топлина се отделя във веригата за 40 минути. 
+Съпротивлението на източника се пренебрегва.</p>
+            </div></div>
+            </div>
+        </div>
+
+        <!-- Долна навигация -->
+        <div class="bottom-navigation">
+            <a href="zad63.html">Справочник</a> |
+            <a href="zad3.html">Начална страница</a> |
+            <a href="zad19.html">Предишен</a> |
+            <a href="zad49.html">Упътване</a> |
+            <a href="zad66.html">Ключ</a> |
+            <a href="zad21.html">Следващ</a>
+        </div>
+    </div>
+</body>
+</html>

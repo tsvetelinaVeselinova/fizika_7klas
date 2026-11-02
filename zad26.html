@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отражение и пречупване на светлината</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Странични вертикални полета с градиент */
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #e0e0e0 100%);
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar.right {
+            border-right: none;
+            border-left: 1px solid #ddd;
+            background: linear-gradient(225deg, #f0f0f0 0%, #ffffff 50%, #e0e0e0 100%);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        /* Заглавие */
+        .title {
+            text-align: center;
+            color: #2c5282;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.7; }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: linear-gradient(90deg, #4a90e2, #357abd);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Дефиниции в страничното поле */
+        .definition-box {
+            background: rgba(255,255,255,0.8);
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .definition-box h3 {
+            color: #2c5282;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .definition-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Тест секция */
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .test-section h1 {
+            color: #2c5282;
+            border-bottom: 3px solid #4a90e2;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .question {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4a90e2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .question b {
+            color: #2c5282;
+            font-size: 1.1em;
+        }
+
+        .question br + a,
+        .question br + b {
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        /* Информационна кутия за миражи */
+        .mirage-info {
+            background: linear-gradient(135deg, #fff7e6, #ffe4b3);
+            border: 2px solid #f4a460;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .mirage-info h3 {
+            color: #d2691e;
+            margin-bottom: 10px;
+        }
+
+        .mirage-info h5 {
+            color: #8b4513;
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        /* Хумор секция */
+        .humor-section {
+            background: linear-gradient(135deg, #e6f3ff, #b3d9ff);
+            border: 2px solid #87ceeb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .humor-section h3 {
+            color: #4682b4;
+            margin-bottom: 10px;
+        }
+
+        /* Подвал навигация */
+        .footer-navigation {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .footer-navigation a {
+            color: #4a90e2;
+            text-decoration: none;
+            margin: 0 8px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .footer-navigation a:hover {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        /* Responsive дизайн */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Лява странична лента -->
+        <div class="sidebar">
+            <div class="definition-box">
+                <h3>Отражение</h3>
+                <p>Промяната в посоката на разпространение на светлината, когато тя срещне границата между две среди и се върне в pierwszата.</p>
+                <p><strong>Законът за отражение:</strong> ъгълът на падане е равен на ъгъла на отражение.</p>
+                
+                <h3>Пречупване на светлината</h3>
+                <p>Промяната в посоката на разпространение на светлината, когато тя премине от една в друга прозрачна среда.</p>
+                <img src ="129[1].jpg"  width="394" border="4" height="292"> 
+                
+                <h3>Пълно вътрешно отражение</h3>
+                <p>Явление, при което срещайки граничната повърхност между две прозрачни среди, светлината не навлиза във втората среда, а напълно се отразява в първата.</p>
+                <p><em>(това явление се наблюдава само, ако първата среда е оптически по-плътна от втората)</em></p>
+            </div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <h1 class="title">Отражение и пречупване на светлината</h1>
+            
+            <div class="navigation">
+                <a href="zad56.html">Начална страница</a> |
+                <a href="Upr1.html">Начало</a>
+<a href="zad63.html" onclick="alert('Справочник')">Справочник</a>
+<a href="zad54.html" onclick="alert('Речник')">Речник</a>
+            </div>
+
+            <div class="test-section">
+                <h1>Тест № 17</h1>
+
+                <div class="question">
+                    <b>Зад.1. Коя от изброените среди е оптически по-рядка от стъклото?</b><br><br>
+                    а) рубин;<br>
+                    б) диамант;<br>
+                    в) вода.
+                </div>
+
+                <div class="question">
+                    <b>Зад.2. Ако отразеният лъч е перпендикулярен на падащия, колко градуса е ъгълът на падане?</b><br><br>
+                    а) 90°<br>
+                    б) 0°<br>
+                    в) 45°<br>
+                    г) 30°
+                </div>
+
+                <div class="question">
+                    <b>Зад.3. Отразеният лъч е перпендикулярен на граничната повърхност, когато ъгълът на падане е:</b><br><br>
+                    а) 90°<br>
+                    б) 45°<br>
+                    в) 0°<br>
+                    г) 30°
+                </div>
+
+                <div class="question">
+                    <b>Зад.4. Зависи ли ъгълът на отражение от оптичната плътност на средите, на чиито повърхности протича отражението? Обосновете отговора си.</b>
+                </div>
+
+                <div class="question">
+                    <b>Зад.5. Светлинен лъч навлиза от диамант във вода. Кое твърдение е вярно?</b><br><br>
+                    а) ъгълът на падане е по-голям от ъгъла на пречупване;<br>
+                    б) ъгълът на падане е по-малък от ъгъла на пречупване;<br>
+                    в) ъгълът на падане е равен на ъгъла на пречупване.
+                </div>
+
+                <div class="question">
+                    <b>Зад.6. Като се опитваме да докоснем морското дъно установяваме, че то е по-дълбоко отколкото изглежда. Причината за това е:</b><br><br>
+                    а) отражението на светлината;<br>
+                    б) пречупване на светлината на границата въздух-вода;<br>
+                    в) пречупване на светлината на границата вода-въздух.
+                </div>
+
+                <div class="question">
+                    <b>Зад.7. Под какъв ъгъл са поставени плоските огледала в перископа спрямо кутията и как са разположени едно спрямо друго?</b><br><br>
+                    а) 30° и са перпендикулярни;<br>
+                    б) 45° и са успоредни;<br>
+                    в) 90° и са успоредни;<br>
+                    г) 45° и са перпендикулярни.<a href="zad54.html" onclick="alert('Речник')">Речник</a>
+                </div>
+            </div>
+
+            <div class="footer-navigation">
+                <a href="zad56.html">Начална страница</a> |
+                <a href="zad4.html">Предишен</a> |  
+                <a href="zad50.html">Упътване</a> |
+                <a href="zad52.html">Ключ</a> |
+                <a href="zad64.html">Следващ</a>
+            </div>
+        </div>
+
+        <!-- Дясна странична лента -->
+        <div class="sidebar right">
+            <div class="mirage-info">
+                <h3>Какво представляват миражите?</h3>
+                <p>Те се обясняват с явлението пълно вътрешно отражение.</p>
+                <p>Слънчевите лъчи навлизат от оптически по-плътния по-горен въздушен слой в оптически по-редкия (той е по-рядък, защото e в близост до пустинните пясъци и се е нагрял, и разширил т.е. има по-малка плътност).</p>
+                
+                <div style="width: 100%; height: 120px; background: linear-gradient(180deg, #87ceeb, #f4a460); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin: 15px 0;">
+                   <img src ="484[2].jpg" align="left" width="194" border="7" height="192"> .
+                </div>
+<p> .
+</p>
+
+<p> .
+</p>
+                <h5>Защо в горещ летен ден асфалта пред нас изглежда мокър?<br>Мокър ли е в действителност?</h5>
+                <p>Обяснението на тази оптична измама е същото като обяснението за миражите.</p>
+            </div>
+
+<p> .
+</p>
+            <div class="humor-section">
+                <h3>Ученически хумор</h3>
+                <p>Закон за отражение на светлината<br>- Лъчът се разпространява със закон</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Светлина и звук</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Навигация */
+        .navigation {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Странични панели с градиент */
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+            padding: 20px 15px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-left {
+            background: linear-gradient(45deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #e9ecef 75%, #f8f9fa 100%);
+        }
+
+        .sidebar-right {
+            background: linear-gradient(-45deg, #f8f9fa 0%, #e9ecef 25%, #dee2e6 50%, #e9ecef 75%, #f8f9fa 100%);
+        }
+
+        .sidebar img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-content {
+            background: rgba(255,255,255,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar-content b {
+            color: #2c3e50;
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            margin: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .content-wrapper {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .test-title {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        /* Таблица */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Въпроси */
+        .question {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question b {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .question-options {
+            margin-left: 20px;
+        }
+
+        .question-options > * {
+            margin: 8px 0;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .question-options > *:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 4px;
+            transform: translateX(5px);
+        }
+
+        /* Оценяване */
+        .grading {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #c8e6c9;
+        }
+
+        .grading-scale {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ffcc02;
+        }
+
+        /* Връзки */
+        a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        /* Отзивчив дизайн */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .main-content {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Светлина и звук</h1>
+    
+    <div class="navigation">
+        <a href="zad56.html">Светлина и звук</a>
+        <a href="zad54.html">Речник</a>
+        <a href="Upr1.html">Начало</a>
+    </div>
+
+    <div class="container">
+        <!-- Лява странична лента -->
+        <div class="sidebar sidebar-left">
+            <img src="606[1].jpeg" alt="Физика илюстрация" />
+            
+            <div class="sidebar-content">
+                <b>Оценяване на задачите:</b>
+                <div class="grading">
+                    <p><b>1 зад.</b> - всеки попълнен ред от таблицата носи по 0,5 точки; цялата таблица - 2 точки</p>
+                    <p><b>2 зад.</b> - 1 точка</p>
+                    <p><b>3 зад.</b> - всяка вярна формула по 0,5 точки. Общо - 2 точки</p>
+                    <p><b>4 зад.</b> - за всеки вярно определен уред по 0,5 точки. Общо - 2 точки</p>
+                    <p><b>5 зад.</b> - 1 точка</p>
+                    <p><b>6 зад.</b> - 1 точка</p>
+                    <p><b>7 зад.</b> - за съкратен запис на условието - 1 точка; за вярно написана формула - 1 точка; за вярно превръщане на мерните единици - 1 точка и за вярно пресмятане и написване на мерната единица на получената величина - 1 точка. ОБЩО - 4 точки</p>
+                    <p><b>8 зад.</b> - 1 точка</p>
+                </div>
+            </div>
+            
+            <img src="777[1].jpg" alt="Светлина и звук" />
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <div class="content-wrapper">
+                <h2 class="test-title">Обобщителен тест</h2>
+
+                <div class="question">
+                    <b>Зад.1. Попълнете таблицата:</b>
+                    <table>
+                        <tr>
+                            <th>Величина</th>
+                            <th>Означение</th>
+                            <th>Основна мерна единица</th>
+                            <th>Дробни</th>
+                            <th>Кратни</th>
+                        </tr>
+                        <tr>
+                            <td>Оптична сила на леща</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>с</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>Hz</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr>
+                            <td>фокусно разстояние</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="question">
+                    <b>Зад.2. Кое от посочените понятия е пример за физично явление?</b>
+                    <div class="question-options">
+                        а) диоптър;<br/>
+                        б) ехолот;<br/>
+                        в) фокусно разстояние;<br/>
+                        г) пълно вътрешно отражение.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.3. Срещу всяка физична величина запишете номера на формулата, по която може да се пресметне:</b>
+                    <div class="question-options">
+                        а) разстояние от Слънцето до дадена планета (...) 1) T=1/v<br/>
+                        б) оптична сила на леща (...) 2) v=1/T<br/>
+                        в) честота на звукова вълна (...) 3) r=c.t<br/>
+                        г) период на трептене (...) 4) D=1/f
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.4. Срещу всяка комбинация от основни цветове запишете номера на полученият (при смесването им) допълнителен цвят:</b>
+                    <div class="question-options">
+                        а) червен + син (...) 1) бял<br/>
+                        б) червен + зелен (...) 2) пурпурно червен (магента)<br/>
+                        в) червен + зелен + син (...) 3) синьо-зелен (циан)<br/>
+                        г) син + зелен (...) 4) жълт
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.5. Слънчев лъч пада под ъгъл 22° към граничната повърхност. Ако ъгълът на пречупване е 18°, определете коя от двете прозрачни среди е оптически по-плътна?</b>
+                    <div class="question-options">
+                        а) първата;<br/>
+                        б) втората;<br/>
+                        в) двете среди са с еднаква оптическа плътност.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.6. Кой от изброените източници на светлина е топлинен?</b>
+                    <div class="question-options">
+                        а) неонова лампа;<br/>
+                        б) електронен часовник;<br/>
+                        в) електрическа лампа;<br/>
+                        г) луминесцентна лампа.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.7. Определете разстоянието от Слънцето до планетата Марс, ако светлината достига до нея за 12 минути и 40 секунди.</b>
+                    <div class="question-options">
+                        Дадено: ....... Търси се: ....... Решение: ......
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.8. Приблизително колко пъти скоростта на светлината е по-голяма от скоростта на звука във въздушна среда?</b>
+                    <div class="question-options">
+                        а) 100;<br/>
+                        б) 1920;<br/>
+                        в) 874 635;<br/>
+                        г) 3000.
+                    </div>
+                    <p><a href="zad63.html">Справочник</a></p>
+                </div>
+
+                <div class="question">
+                    <b>Зад.9. Махало извършва 40 трептения за 10 секунди. Определете периода и честотата на махалото.</b>
+                    <div class="question-options">
+                        Дадено: .... Търси се: ...... Решение: ....
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.10. Ако периодът на трептене на махало намалее пет пъти, ще се промени ли честотата му и как?</b>
+                    <div class="question-options">
+                        а) да, ще намалее 5 пъти;<br/>
+                        б) да, ще се увеличи 5 пъти;<br/>
+                        в) да, ще намалее 25 пъти;<br/>
+                        г) не.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.11. Кораб изпраща към подводница ултразвуков сигнал. След колко време ще се приеме отразеният сигнал, ако подводницата е на разстояние 59,2 km?</b>
+                    <div class="question-options">
+                        Дадено: .... Търси се: ...... Решение: ....
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.12. Силата на звука се определя от:</b>
+                    <div class="question-options">
+                        а) периода на звуковата вълна;<br/>
+                        б) честотата на звуковата вълна;<br/>
+                        в) амплитудата на звуковата вълна;<br/>
+                        г) средата, в която се разпространява звука.
+                    </div>
+                    <p><a href="zad56.html">Начална страница</a> | <a href="zad52.html">Ключ</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Дясна странична лента -->
+        <div class="sidebar sidebar-right">
+            <img src="129[1].jpg" alt="Физични явления" />
+            
+            <div class="sidebar-content">
+                <div class="grading">
+                    <p><b>9 зад.</b> - за съкратен запис на условието - 1 точка; за вярно написана формула - 1 точка; за вярно превръщане на мерните единици - 1 точка и за вярно пресмятане и написване на мерната единица на получената величина - 1 точка. ОБЩО - 4 точки</p>
+                    <p><b>10 зад.</b> - 1 точка</p>
+                    <p><b>11 зад.</b> - за съкратен запис на условието - 1 точка; за вярно написана формула - 1 точка; за вярно превръщане на мерните единици - 1 точка, за вярно изразяване на търсената величина - 1 точка и за вярно пресмятане и написване на мерната единица на получената величина - 1 точка. ОБЩО - 5 точки</p>
+                    <p><b>12 зад.</b> - 1 точка</p>
+                </div>
+                
+                <div class="grading-scale">
+                    <p><b>Оценка:</b></p>
+                    <p>0-6т. - Слаб (2)</p>
+                    <p>7-10т. - Среден (3)</p>
+                    <p>11-15т. - Добър (4)</p>
+                    <p>16-20т. - Мн. добър (5)</p>
+                    <p>21-25т. - Отличен (6)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

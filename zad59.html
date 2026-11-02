@@ -1,0 +1,260 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Първообразът на парната машина</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,800;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: a single reading column with a wide opener (text beside a rotating diagram), then steps, inventions and a dated timeline. */
+:root {
+  --bg: #efe9f9;
+  --surface: #f8f5fd;
+  --fg: #2b2142;
+  --muted: #5f5479;
+  --accent: #6a4ca6;
+  --accent-soft: #e0d6f3;
+  --line: #d6cbea;
+  --steam: #9a86c8;
+  --font-display: "Alegreya", Georgia, "Times New Roman", serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d1730;
+    --surface: #271f3c;
+    --fg: #ece6f8;
+    --muted: #b4a8d0;
+    --accent: #bca6f2;
+    --accent-soft: #382d55;
+    --line: #3d3259;
+    --steam: #8f7bc2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d1730;
+  --surface: #271f3c;
+  --fg: #ece6f8;
+  --muted: #b4a8d0;
+  --accent: #bca6f2;
+  --accent-soft: #382d55;
+  --line: #3d3259;
+  --steam: #8f7bc2;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.9rem); font-weight: 800; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 600; }
+h3 { font-size: 1.3rem; font-weight: 600; }
+p { margin: 0; }
+.label {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+}
+
+/* Opener */
+.opener { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.opener-text { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.byline { font-family: var(--font-display); font-style: italic; font-size: 1.45rem; color: var(--muted); }
+.lede { max-width: 60ch; }
+
+figure.rig {
+  margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0;
+}
+figure.rig svg { width: 100%; height: auto; display: block; max-width: 100%; }
+figcaption { font-size: 0.92rem; color: var(--muted); }
+.toggle {
+  align-self: flex-start; font: inherit; font-weight: 700; font-size: 0.95rem; cursor: pointer;
+  background: var(--accent); color: var(--bg); border: 0; border-radius: 4px; padding: 8px 16px;
+}
+.toggle:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.toggle[aria-pressed="true"] { background: var(--accent-soft); color: var(--fg); box-shadow: inset 0 0 0 1px var(--accent); }
+
+/* SVG parts */
+.sphere { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; }
+.tube { fill: none; stroke: var(--accent); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.ink { fill: var(--fg); font-family: var(--font-body); font-size: 13px; }
+.ink-muted { fill: var(--muted); font-family: var(--font-body); font-size: 12px; }
+.puff { fill: var(--steam); opacity: 0; }
+.spin-group { transform-origin: 200px 150px; transform-box: view-box; }
+.running .spin-group { animation: spin 3.2s linear infinite; }
+.running .puff { animation: puff 0.9s ease-out infinite; }
+.running .puff.p2 { animation-delay: 0.3s; }
+.running .puff.p3 { animation-delay: 0.6s; }
+@keyframes spin { to { transform: rotate(-360deg); } }
+@keyframes puff { 0% { opacity: 0.85; transform: scale(0.6); } 100% { opacity: 0; transform: scale(1.7); } }
+.puff { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) {
+  .running .spin-group, .running .puff { animation: none; }
+  .running .puff { opacity: 0.6; }
+}
+
+/* Steps */
+.principle { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 40px; align-items: start; }
+.principle > div { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+ol.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; counter-reset: s; }
+ol.steps li {
+  counter-increment: s; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 12px;
+  padding: 16px 0; border-top: 1px solid var(--line);
+}
+ol.steps li:last-child { border-bottom: 1px solid var(--line); }
+ol.steps li::before {
+  content: counter(s); font-family: var(--font-display); font-size: 1.9rem; font-weight: 800; color: var(--accent); line-height: 1;
+}
+ol.steps strong { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; display: block; }
+ol.steps span { color: var(--muted); }
+
+.note {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.note p { color: var(--muted); font-size: 0.98rem; }
+.note em { font-style: normal; color: var(--fg); font-weight: 700; }
+
+/* Inventions */
+.inventions { display: flex; flex-direction: column; gap: 24px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+.grid article { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.grid article p { color: var(--muted); font-size: 0.98rem; }
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 20px; }
+.tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.tl li { display: grid; grid-template-columns: minmax(5.5rem, 8rem) minmax(0, 1fr); gap: 20px; padding: 16px 0; border-top: 1px solid var(--line); }
+.tl li:last-child { border-bottom: 1px solid var(--line); }
+.tl .when { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+.tl strong { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; }
+.tl p { color: var(--muted); }
+
+footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 780px) {
+  body { font-size: 17px; padding-block: 28px 40px; }
+  .wrap { gap: 44px; }
+  .opener, .principle { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .tl li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+</style>
+
+<main class="wrap">
+  <header class="opener">
+    <div class="opener-text">
+      <span class="label">Първи век от новата ера</span>
+      <h1>Първообразът на парната машина</h1>
+      <p class="byline">Херон Александрийски</p>
+      <p class="lede">Преди почти две хиляди години в Александрия един инженер накарал куха метална сфера да се върти само с помощта на пара. Устройството се нарича еолипил, или „топката на Еол“. Нищо не го движи, освен водата, която кипи в съд под него.</p>
+    </div>
+
+    <figure class="rig running" id="rig">
+      <svg viewBox="0 0 400 300" role="img" aria-labelledby="rig-t rig-d">
+        <title id="rig-t">Схема на еолипила</title>
+        <desc id="rig-d">Кух кълбовиден съд с две извити дюзи на срещуположни страни. Парата излиза през дюзите и върти съда.</desc>
+        <g class="spin-group">
+          <path class="tube" d="M270 150 h20 v34"/>
+          <path class="tube" d="M130 150 h-20 v-34"/>
+          <circle class="sphere" cx="200" cy="150" r="70"/>
+          <circle class="puff p1" cx="290" cy="198" r="7"/>
+          <circle class="puff p2" cx="290" cy="212" r="5"/>
+          <circle class="puff p3" cx="290" cy="224" r="4"/>
+          <circle class="puff p1" cx="110" cy="102" r="7"/>
+          <circle class="puff p2" cx="110" cy="88" r="5"/>
+          <circle class="puff p3" cx="110" cy="76" r="4"/>
+        </g>
+        <circle cx="200" cy="150" r="5" fill="var(--accent)"/>
+        <text class="ink" x="200" y="26" text-anchor="middle">сфера, пълна с пара</text>
+        <text class="ink-muted" x="200" y="44" text-anchor="middle">изглед по оста на въртене</text>
+        <text class="ink" x="360" y="262" text-anchor="end">дюза: парата излиза надолу</text>
+        <text class="ink" x="40" y="262">дюза: парата излиза нагоре</text>
+        <text class="ink-muted" x="200" y="286" text-anchor="middle">сферата се върти обратно на часовниковата стрелка</text>
+      </svg>
+      <button class="toggle" id="toggle" type="button" aria-pressed="true">Спри парата</button>
+      <figcaption>Схематичен чертеж. В оригинала сферата виси на две тръби, които идват от казан с вряща вода.</figcaption>
+    </figure>
+  </header>
+<img src="435[2].jpg" width="540" height="340">
+  <section class="principle" aria-labelledby="how">
+    <div>
+      <span class="label">Принцип</span>
+      <h2 id="how">Как работи еолипилът</h2> 
+   <a href ="zad31.html">Назад </a>
+      <p>Устройството показва в малък мащаб онова, което днес наричаме реактивна сила. Когато нещо се изхвърля в една посока, остатъкът се избутва в обратната.</p>
+      <div class="note">
+        <span class="label">Три закона по-късно</span>
+        <p>Херон не е формулирал закон за движението. Обяснението за действие и противодействие идва чак с <em>Нютон</em> през XVII век.</p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><div><strong>Водата се загрява</strong><span>Под затворен метален казан гори огън. Водата в него завира и се превръща в пара.</span></div></li>
+      <li><div><strong>Парата се издига</strong><span>Две тръби свързват казана със сферата. Парата минава по тях и я изпълва.</span></div></li>
+      <li><div><strong>Парата излиза през дюзите</strong><span>От срещуположните страни на сферата са закрепени два извити накрайника, насочени в противоположни посоки.</span></div></li>
+      <li><div><strong>Сферата се завърта</strong><span>Струите изтласкват сферата в обратната посока. Тя се върти на опорите си, докато в казана има вода.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="inventions" aria-labelledby="more">
+    <div>
+      <span class="label">Авторът</span>
+      <h2 id="more">Инженерът от Александрия</h2>
+    </div>
+    <p style="max-width:65ch">Херон работил в Александрия, град с най-голямата библиотека на древния свят, по времето, когато Египет е римска провинция. За живота му се знае малко, но трудовете му са оцелели, сред тях „Пневматика“, където е описан и еолипилът. Повечето от машините му били предназначени за изумяване на публика.</p>
+    <div class="grid">
+      <article>
+        <h3>Автоматични храмови врати</h3>
+        <p>Огън на олтара загрявал въздух под земята, който изтласквал вода в съд. Тежестта му отваряла вратите без ничия ръка.</p>
+      </article>
+      <article>
+        <h3>Автомат за светена вода</h3>
+        <p>Монета, пусната в съда, натискала лост и отмервала малко течност. Това е един от най-ранните описани автомати за продажба.</p>
+      </article>
+      <article>
+        <h3>Фонтанът на Херон</h3>
+        <p>Струя вода, която бликала с помощта на налягането на затворен въздух, без помпа.</p>
+      </article>
+      <article>
+        <h3>Формулата на Херон</h3>
+        <p>Начин да се намери лицето на триъгълник само по дължините на трите му страни.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="timeline" aria-labelledby="path">
+    <div>
+      <span class="label">Пътят до двигателя</span>
+      <h2 id="path">От играчка до машина</h2>
+    </div>
+    <ul class="tl">
+      <li><span class="when">I век</span><div><strong>Херон описва еолипила</strong><p>Парата върти сфера, но устройството остава демонстрация. Няма данни да е вършило полезна работа.</p></div></li>
+      <li><span class="when">1629</span><div><strong>Джовани Бранка</strong><p>Италианският инженер предлага струя пара да удря лопатки на колело. Това е идея за парна турбина.</p></div></li>
+      <li><span class="when">1712</span><div><strong>Томас Нюкомън</strong><p>Първата широко използвана парна машина изпомпва вода от мините.</p></div></li>
+      <li><span class="when">1769</span><div><strong> <a href="zad67.html">Джеймс Уат</a> </strong><p>Патентът за отделен кондензатор прави парните машини много по-икономични и ги пуска в заводите и по релсите.</p></div></li>
+    </ul>
+  </section>
+
+  <footer>Страницата е кратък обзор. Точните години от живота на Херон се оспорват, затова се говори за първи век от новата ера.</footer>
+</main>
+
+<script>
+(function () {
+  var rig = document.getElementById("rig");
+  var btn = document.getElementById("toggle");
+  btn.addEventListener("click", function () {
+    var on = rig.classList.toggle("running");
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.textContent = on ? "Спри парата" : "Пусни парата";
+  });
+})();
+</script>
+
+</body></html>

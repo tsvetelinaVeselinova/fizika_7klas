@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магнитно действие на тока, който тече по намотка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Анимирани странични полета с градиент */
+        .sidebar {
+            background: linear-gradient(45deg, #f5f5f5, #e0e0e0, #d0d0d0, #f0f0f0);
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease-in-out infinite;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+        }
+
+        /* Анимирани картинки */
+        .animated-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(45deg, #4fc3f7, #29b6f6, #03a9f4, #0288d1);
+            background-size: 400% 400%;
+            animation: imageGradient 3s ease-in-out infinite;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(3, 169, 244, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: slideGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes imageGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes slideGlow {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .animated-image:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(3, 169, 244, 0.4);
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header h1 {
+            color: #1976d2;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+            to { text-shadow: 2px 2px 8px rgba(25, 118, 210, 0.3); }
+        }
+
+        .navigation {
+            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation a {
+            color: #1976d2;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .navigation a:hover {
+            background: rgba(25, 118, 210, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .test-section {
+            margin-top: 30px;
+        }
+
+        .test-section h2 {
+            color: #1976d2;
+            border-bottom: 3px solid #1976d2;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            animation: borderGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { border-bottom-color: #1976d2; }
+            50% { border-bottom-color: #42a5f5; }
+        }
+
+        .question {
+            background: linear-gradient(135deg, #f8f9ff, #e8f2ff);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #1976d2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question p {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            margin-left: 15px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #ffb74d;
+            box-shadow: 0 4px 15px rgba(255, 183, 77, 0.2);
+        }
+
+        .info-box h3 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        .footer-nav {
+            background: linear-gradient(45deg, #e3f2fd, #bbdefb);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-nav a {
+            color: #1976d2;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .footer-nav a:hover {
+            background: rgba(25, 118, 210, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive дизайн */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .sidebar {
+                order: 2;
+                height: auto;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Ляво странично поле -->
+        <div class="sidebar">
+            <div class="animated-image">
+                <div>.</div>
+<img src ="401[1].jpg" width="130" height="130" alt=""> 
+            </div>
+            <div class="info-box">
+                <p><strong>Оерстед (1777-1851)</strong></p>
+                <p>
+По време на вечерна лекция в Копенхагенския университет (април 1820г.) Оерстед открива експериментално доказателство за връзката между електричеството и магнетизма. 
+Докато подготвя експеримент за един от часовете си, той открива нещо, което го изненадва.
+ По времето на Оерстед учените са пробвали да открият някаква връзка между електричеството и магнитите, но не са успели. 
+ Докато Оерстед приготвял материалите за експеримента си,
+ той доближил компас до проводник, по който тече ток и стрелката на компаса посочила към проводника. Оерстед се изненадал и повторил експеримента няколко 
+Всеки път стрелката се обръщала към проводника. 
+<p>.</p>
+<p>Земята е огромен магнит. Прочетете повече за полярните сияния и други  <a href="zad65.html">интересни явления.</a><p>
+<img src ="123[1].jpg" width="130" height="130" alt=""> 
+<p>.</p>
+
+
+           </div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Магнитно действие на тока, който тече по намотка</h1>
+            </div>
+
+            <div class="navigation">
+                <a href="zad12.html">Начален преговор</a> |
+                <a href="zad63.html">Справочник</a> |
+                <a href="zad53.html">Речник</a> |
+                <a href="Upr1.html">Начало</a>
+            </div>
+
+            <div class="test-section">
+                <h2>Тест № 14</h2>
+
+                <div class="question">
+                    <p>Зад.1. Коя е мерната единица за магнитна сила?</p>
+                    <div class="options">
+                        а) V;<br>
+                        б) A;<br>
+                        в) W;<br>
+                        г) N.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>Зад.2. Има ли полюси намотка, по която тече ток и как се установяват те?</p>
+                    <div class="options">
+                        а) няма полюси;<br>
+                        б) чрез поставяне на волтметър;<br>
+                        в) поставя се амперметър и се сменя посоката на тока;<br>
+                        г) поставя се магнитна стрелка и се сменя посоката на тока.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>Зад.3. По кое правило може да се установи кой е северният полюс на намотката?</p>
+                    <div class="options">
+                        а) правило на опънатите пръсти на лявата ръка;<br>
+                        б) правило на опънатите пръсти на дясната ръка;<br>
+                        в) правило на свитите пръсти на дясната ръка;<br>
+                        г) правило на свитите пръсти на лявата ръка.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>Зад.4. Ако поставим постоянен магнит в близост до намотка с ток и те се привлекат, а после сменим посоката на тока през намотката ще се промени ли нещо? Какво ще стане? Защо?</p>
+                </div>
+
+                <div class="question">
+                    <p>Зад.5. Ще се промени ли магнитната сила, с която си взаимодействат две намотки с ток, ако увеличим тока през първата намотка два пъти?</p>
+                    <div class="options">
+                        а) силата ще намалее два пъти;<br>
+                        б) силата ще намалее четири пъти;<br>
+                        в) силата ще се увеличи четири пъти;<br>
+                        г) силата ще се увеличи два пъти.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>Зад.6. Силовите линии на намотка с ток са:</p>
+                    <div class="options">
+                        а) успоредни една на друга;<br>
+                        б) прави линии, радиално разположени;<br>
+                        в) криви затворени линии;<br>
+                        г) концентрични окръжности.<br>
+<p>.</p>
+
+<img src ="572[1].jpg" width="800" height="490" alt=""> 
+<p>.</p><p>.</p>
+                    Опит на Оерстед<br>Магнитна стрелка и проводник </div>
+                </div>
+
+          
+
+                  
+              
+            </div>
+
+            <div class="footer-nav">
+                <a href="zad3.html">Начална страница</a> |
+                <a href="zad21.html">Предишен</a> |
+                <a href="zad49.html">Упътване</a> |
+                <a href="zad66.html">Ключ</a> |
+                <a href="zad24.html">Следващ</a>
+            </div>
+        </div>
+
+        <!-- Дясно странично поле -->
+        <div class="sidebar">
+            <div class="info-box">
+                <h3>Правило на свитите пръсти</h3>
+                <p><strong>За определяне полюсите на намотка с ток:</strong> Свитите пръсти сочат посоката на тока, а палецът - северния полюс на намотката.</p>
+            </div>
+
+            <div class="animated-image">
+                <div>.</div>
+<img src="958[1].jpg" width="130" height="130" alt=""> 
+            </div>
+
+            <div class="info-box">
+                <h3>Правило на опънатите пръсти</h3>
+                <p><strong>За определяне посоката на магнитната сила:</strong> Палецът сочи посоката на тока, опънатите пръсти - силовите линии на магнитното поле.</p>
+<img src="959[1].jpeg" width="130" height="130" alt=""> 
+            </div>
+ <p> Друг вариант:</p>
+ <p>Във физиката правилото на дясната ръка е често срещано. То служи за 
+ориентацията на осите в триизмерното пространство.  </p>
+
+          
+<img src="959.jpg" width="130" height="130" alt=""> 
+<p>.</p>
+         
+<img src ="124[1].jpg" width="130" height="130" alt=""> 
+<p>.</p>
+<img src ="125[1].jpg" width="130" height="130" alt=""> 
+<p>.</p>
+<img src ="126[1].jpg" width="130" height="130" alt="">  
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Лост и макара</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: three equal fields side by side (gray / blue / yellow), stacking to one column on phones. Each field has its own looping animation. */
+:root {
+  --bg: #eceef2;
+  --ink: #1d2330;
+  --gray-bg: #dde1e7;
+  --gray-ink: #29303c;
+  --gray-line: #8d96a5;
+  --blue-bg: #d3e4fb;
+  --blue-ink: #10305c;
+  --blue-accent: #2f6fd6;
+  --yellow-bg: #fce45a;
+  --yellow-ink: #3f3200;
+  --yellow-accent: #c98f00;
+  --card: rgba(255, 255, 255, 0.62);
+  --font-display: "Unbounded", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Golos Text", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151b; --ink: #e8ebf0;
+    --gray-bg: #2a2f38; --gray-ink: #e1e5ea; --gray-line: #7c8695;
+    --blue-bg: #1b3258; --blue-ink: #d6e6fb; --blue-accent: #6ea4f5;
+    --yellow-bg: #5b4b08; --yellow-ink: #ffeea0; --yellow-accent: #f2c230;
+    --card: rgba(0, 0, 0, 0.28);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151b; --ink: #e8ebf0;
+  --gray-bg: #2a2f38; --gray-ink: #e1e5ea; --gray-line: #7c8695;
+  --blue-bg: #1b3258; --blue-ink: #d6e6fb; --blue-accent: #6ea4f5;
+  --yellow-bg: #5b4b08; --yellow-ink: #ffeea0; --yellow-accent: #f2c230;
+  --card: rgba(0, 0, 0, 0.28);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-block: 28px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1180px; margin: 0 auto; }
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+  line-height: 1.15;
+  margin: 0 0 6px;
+  text-wrap: balance;
+}
+.lead { margin: 0 0 24px; max-width: 60ch; opacity: 0.8; }
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+@media (max-width: 860px) { .fields { grid-template-columns: minmax(0, 1fr); } }
+
+.field {
+  border-radius: 22px;
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  animation: rise 0.7s cubic-bezier(.2,.8,.2,1) both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.field:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16); }
+.field:nth-child(2) { animation-delay: 0.12s; }
+.field:nth-child(3) { animation-delay: 0.24s; }
+@keyframes rise { from { transform: translateY(26px); } to { transform: translateY(0); } }
+
+.gray { background: var(--gray-bg); color: var(--gray-ink); }
+.blue { background: var(--blue-bg); color: var(--blue-ink); }
+.yellow { background: var(--yellow-bg); color: var(--yellow-ink); }
+
+.tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  margin: 0;
+  line-height: 1.2;
+}
+.stage {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 10px;
+}
+.stage svg { display: block; width: 100%; height: auto; max-height: 220px; }
+p { margin: 0; }
+.rule {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 500;
+}
+.rule b { font-family: var(--font-display); font-weight: 500; }
+
+/* Lever animation */
+.beam { transform-origin: 150px 120px; animation: tilt 5s ease-in-out infinite; }
+.wl { animation: wl 5s ease-in-out infinite; }
+@keyframes tilt { 0%,100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
+.g-fill { fill: var(--gray-ink); }
+.g-line { stroke: var(--gray-ink); }
+.g-soft { fill: var(--gray-line); }
+
+/* Pulley animation */
+.wheel { transform-origin: 150px 62px; animation: spin 6s linear infinite; }
+.load { animation: lift 6s ease-in-out infinite; }
+.rope-l { animation: ropel 6s ease-in-out infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes lift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-34px); } }
+.y-fill { fill: var(--yellow-ink); }
+.y-line { stroke: var(--yellow-ink); }
+.y-acc { fill: var(--yellow-accent); }
+
+/* Quiz */
+.q { font-weight: 600; }
+.opts { display: grid; gap: 8px; }
+.opt {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: var(--card);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.opt:hover { transform: translateX(4px); border-color: var(--blue-accent); }
+.opt:focus-visible { outline: 3px solid var(--blue-accent); outline-offset: 2px; }
+.opt.ok { border-color: #2a9d5c; background: rgba(42, 157, 92, 0.22); animation: pop 0.4s ease; }
+.opt.no { border-color: #d64545; background: rgba(214, 69, 69, 0.18); animation: shake 0.35s ease; }
+@keyframes pop { 50% { transform: scale(1.03); } }
+@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.feedback { min-height: 1.6em; font-weight: 500; }
+.pulse-dot {
+  display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--blue-accent); margin-right: 8px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.7); opacity: 0.4; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<div class="wrap">
+  <h1>Лост и макара</h1>
+  <p class="lead">Тест върху прости механизми: лост и макара</p>
+
+  <div class="fields">
+
+    <section class="field gray" aria-labelledby="t1">
+      <span class="tag">Прости механизми</span>
+      <h2 id="t1">Лост</h2>
+      <div class="stage">
+        <svg viewBox="0 0 300 190" role="img" aria-label="Двустранен лост, който се накланя наляво и надясно около опорна точка">
+          <polygon points="150,120 124,172 176,172" class="g-fill"/>
+          <rect x="20" y="172" width="260" height="6" rx="3" class="g-soft"/>
+          <g class="beam">
+            <rect x="20" y="115" width="260" height="10" rx="5" class="g-fill"/>
+            <circle cx="150" cy="120" r="5" fill="var(--gray-bg)"/>
+            <g>
+              <rect x="38" y="82" width="34" height="33" rx="4" fill="var(--blue-accent)"/>
+              <text x="55" y="104" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Golos Text, sans-serif">F₁</text>
+            </g>
+            <g>
+              <rect x="228" y="82" width="34" height="33" rx="4" fill="#d64545"/>
+              <text x="245" y="104" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Golos Text, sans-serif">F₂</text>
+            </g>
+          </g>
+          <text x="150" y="150" text-anchor="middle" font-size="11" class="g-fill" font-family="Golos Text, sans-serif">опорна точка</text>
+        </svg>
+      </div>
+      <p>Лостът е неогъваем прът, който може да се върти около опорната си ос. Лостът има опорна точка, рамене и приложни точки на силите.</p>
+      <p class="rule"><b>F₁ · l₁ = F₂ · l₂</b><br>С лоста се печели най-много сила, когато рамото на силата е най-дълго.</p>
+
+ <p><b>Видове лостове:</b> Едностранни</p>
+                <p>.</p>
+                <img src="890[1].jpg" width="240" height="180" alt="Едностранен лост" style="display: block; margin: 10px 0;">
+                <p>.</p>
+                <p>и двустранни лостове (с еднакви и различни рамене):</p>
+                <p>.</p>
+                <img src="998.jpg" width="440" height="280" alt="Двустранен лост" style="display: block; margin: 10px 0;">
+                <p>.</p>
+                <p><b>Елементи на лоста:</b></p>
+                <ul>
+                    <li>Опорна точка;</li>
+                    <li>рамене;</li>
+                    <li>приложни точки на силите</li>
+          <p>.</p>      </ul>
+
+<p>Примери:  лост, колело и ос, макара, наклонена равнина, клин, винт</p>
+<p>Това са елементарните градивни механизми, от които се строят по-сложните машини.
+ Историята им датира още от <a href="zad31.html"> Архимед,</a> който е изучавал лоста, макарата и винта. </p>
+                <div class="golden-rule">
+<p>.</p>
+                    <h4>Златно правило:</h4>
+                    <p>С лоста се печели най-много сила, когато:</p>
+                    <p>1) товарът е поставен колкото се може по-близо до опорната точка на лоста;</p
+                    <p>2) силата се прилага колкото може по-далече от опорната точка.</p>
+
+ </div>
+              
+    </section>
+
+    <section class="field blue" aria-labelledby="t2">
+      <span class="tag">Тест №3</span>
+      
+  <div class="question">
+                    <b>Зад.1: Кои от изброените инструменти са едностранни лостове?</b>
+                    <div class="answers">
+                        А) клещи;<br>
+                        Б) количка с едно колело;<br>
+                        В) детска люлка;<br>
+                        Г) тесла.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.2: Къде се намира опорната точка на количка с едно колело?</b>
+                    <div class="answers">
+                        а) в дръжките;<br>
+                        б) в колелото;<br>
+                        в) в товара.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.3: Възможно ли е човек да повдигне товар 500 kg? Къде трябва да постави товара и къде да действа с мускулна сила? С колко дълъг прът трябва да се разполага, ако нормалните човешки възможности за вдигане на тежест са 500 N?</b>
+                </div>
+
+      <p class="q"><span class="pulse-dot"></span>Зад.4: Кой от изброените предмети действа като двустранен, равнораменен лост?</p>
+      <div class="opts" id="opts">
+        <button class="opt" type="button" data-ok="0">а) количка с едно колело</button>
+        <button class="opt" type="button" data-ok="0">б) тесла</button>
+        <button class="opt" type="button" data-ok="1">в) детска люлка</button>
+        <button class="opt" type="button" data-ok="0">г) подвижна макара</button>
+      
+
+
+
+<b>Зад.5: С каква сила ще изтеглим товар с маса 12 kg, ако използваме:</b>
+                    <div class="answers">
+                        а) неподвижна макара;<br>
+                        б) подвижна макара.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.6: С върха или с вътрешната част на ножица ще отрежем по-лесно картон? Защо?</b>
+                    <div class="answers">
+                        а) с върха;<br>
+                        б) с вътрешната част;<br>
+                        в) няма значение.
+                    </div>
+                </div>
+
+                <div class="question">
+                    <b>Зад.7: Строителен работник тегли кофа с помощта на подвижна макара. Колко е масата на кофата, ако той прилага сила 75N?</b>
+                </div>
+
+                <div class="humor-section">
+                    <h2>Ученически хумор</h2>
+                    <p>1) Макарата представлява колело с шлем, по който минава въже.</p>
+                    <p>2) Макарата е колело с жлези.</p>
+                    <p>3) Въпрос: – Каква величина е силата?(В смисъл скаларна/има само големина/ или векторна/има големина и посока/)</p>
+                    <p> Отговор: – Грамадна.</p>
+                </div>
+<img src="400[1].jpg" width="440" height="280">
+                <div class="footer-nav">
+                    <a href="zad63.html">Справочник</a> |
+<a href="zad69.html">Речник</a> |
+                    <a href="zad1.html">Начална страница</a> |
+                    <a href="zad11.html">Предишен</a> |
+                    <a href="zad7.html">Упътване</a> |
+                    <a href="zad9.html">Ключ</a> |
+                    <a href="zad13.html">Следващ</a>
+                </div>
+            
+         
+
+      <p class="feedback" id="fb" aria-live="polite"></p>
+      <div class="stage">
+        <svg viewBox="0 0 300 120" role="img" aria-label="Детска люлка, която се люлее">
+          <rect x="20" y="104" width="260" height="6" rx="3" fill="var(--blue-ink)" opacity="0.35"/>
+          <polygon points="150,70 132,104 168,104" fill="var(--blue-ink)"/>
+          <g style="transform-origin:150px 70px;animation:tilt 3.2s ease-in-out infinite">
+            <rect x="40" y="66" width="220" height="8" rx="4" fill="var(--blue-accent)"/>
+            <circle cx="60" cy="50" r="10" fill="var(--blue-ink)"/>
+            <rect x="52" y="58" width="16" height="8" rx="3" fill="var(--blue-ink)"/>
+            <circle cx="240" cy="50" r="10" fill="var(--blue-ink)"/>
+            <rect x="232" y="58" width="16" height="8" rx="3" fill="var(--blue-ink)"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+
+
+
+
+
+<script>
+(function () {
+  var box = document.getElementById('opts');
+  var fb = document.getElementById('fb');
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('.opt');
+    if (!b) return;
+    var all = box.querySelectorAll('.opt');
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('ok', 'no');
+    void b.offsetWidth;
+    if (b.getAttribute('data-ok') === '1') {
+      b.classList.add('ok');
+      fb.textContent = 'Вярно! Люлката има равни рамене от двете страни на опорната точка.';
+    } else {
+      b.classList.add('no');
+      fb.textContent = 'Не е точно. Потърси предмет с еднакви рамене.';
+    }
+  });
+})();
+  </script> 
+    <section class="field yellow" aria-labelledby="t3">
+      <span class="tag">Прости механизми</span>
+      <h2 id="t3">Макара</h2>
+      <div class="stage">
+        <svg viewBox="0 0 300 220" role="img" aria-label="Макара, която се върти и вдига товар">
+          <rect x="60" y="10" width="180" height="8" rx="4" class="y-fill"/>
+          <line x1="150" y1="18" x2="150" y2="40" class="y-line" stroke-width="3"/>
+          <line x1="132" y1="62" x2="132" y2="150" class="y-line" stroke-width="3"/>
+          <line x1="168" y1="62" x2="168" y2="110" class="y-line" stroke-width="3"/>
+          <g class="wheel">
+            <circle cx="150" cy="62" r="24" class="y-fill"/>
+            <circle cx="150" cy="62" r="19" fill="var(--yellow-bg)"/>
+            <line x1="150" y1="43" x2="150" y2="81" class="y-line" stroke-width="3"/>
+            <line x1="131" y1="62" x2="169" y2="62" class="y-line" stroke-width="3"/>
+            <circle cx="150" cy="62" r="4" class="y-fill"/>
+          </g>
+          <g class="load">
+            <line x1="132" y1="150" x2="132" y2="156" class="y-line" stroke-width="3"/>
+            <rect x="108" y="156" width="48" height="40" rx="5" class="y-fill"/>
+            <text x="132" y="181" text-anchor="middle" font-size="12" font-weight="700" fill="var(--yellow-bg)" font-family="Golos Text, sans-serif">50 kg</text>
+          </g>
+          <polygon points="168,110 160,122 176,122" class="y-acc"/>
+          <text x="186" y="118" font-size="12" font-weight="600" class="y-fill" font-family="Golos Text, sans-serif">F</text>
+        </svg>
+      </div>
+      <p>Макарата е колело с жлеб, по който минава въже. Има два вида: неподвижна и подвижна.</p>
+<p>.</p>
+      <p class="rule">Неподвижната макара <b>не печели сила</b>. Подвижната печели два пъти: товар от 50 kg (500 N) се вдига със сила 250 N.</p>
+<p>.</p>
+   <img src="972[1].jpg" width="294" height="190" alt="Неподвижна макара" style="display: block; margin: 10px 0;">
+          <p>Неподвижна макара</p>       
+<p>.</p>
+                
+                <img src="972.jpg" width="294" height="190" alt="Неподвижна макара" style="display: block; margin: 10px 0;">
+              <p>Подвижна макара</p>
+                <p><b>Товарът може да се издигне със сила, която е два пъти по-малка от теглото му.</b></p>
+                <p>.</p>
+                <img src="509[1].jpg" width="294" height="190" alt="Подвижна макара" style="display: block; margin: 10px 0;">
+                
+                <p><b>Полиспаст </b>– уред, състоящ се от подвижни и неподвижни макари </p>
+<p>.....</p>
+ <p>Намира широко приложение за повдигане или теглене на тежести. Използва се, както като отделно средство с ръчно задвижване, така и като част от конструкцията на различни устройства – кранове, но най-вече в строителството, за асансьори и др.
+ </p><p>.</p>
+Особено често се използва във ветроходството, където в голяма степен се разчита на механизми, задвижени изцяло ръчно от екипажа.
+        </div>
+</body></html> </section>
+
+  </div>
+
+<script>
+(function () {
+  var box = document.getElementById('opts');
+  var fb = document.getElementById('fb');
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('.opt');
+    if (!b) return;
+    var all = box.querySelectorAll('.opt');
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('ok', 'no');
+    void b.offsetWidth;
+    if (b.getAttribute('data-ok') === '1') {
+      b.classList.add('ok');
+      fb.textContent = 'Вярно! Люлката има равни рамене от двете страни на опорната точка.';
+    } else {
+      b.classList.add('no');
+      fb.textContent = 'Не е точно. Потърси предмет с еднакви рамене.';
+    }
+  });
+})();
+  </script> 
+
+        </div>
+</body></html>

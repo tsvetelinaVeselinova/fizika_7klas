@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Речник на физичните термини</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.2); }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.4); }
+        }
+
+        .navigation {
+            background-color: #333;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: #555;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #f8f8f8 50%, #e0e0e0 100%);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sidebar td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .sidebar img {
+            width: 100%;
+            max-width: 160px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.05);
+        }
+
+        .sidebar td:last-child {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .content h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .content p {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .content p:hover {
+            background-color: #ecf0f1;
+        }
+
+        .content b {
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+
+        .right-sidebar {
+            width: 200px;
+            background: linear-gradient(180deg, #e0e0e0 0%, #f8f8f8 50%, #e0e0e0 100%);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .right-sidebar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .right-sidebar td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .right-sidebar img {
+            width: 100%;
+            max-width: 160px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .right-sidebar img:hover {
+            transform: scale(1.05);
+        }
+
+        .right-sidebar td:last-child {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar, .right-sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Речник на физичните термини</h1>
+        </div>
+        
+        <div class="navigation">
+            <a href="Upr1.html">Начало</a> | <a href="zad56.html">Начална страница</a>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <table>
+                    <tr>
+                        <td><img src="561[1].jpg" alt="Амплитуда на математично махало"></td>
+                    </tr>
+                    <tr>
+                        <td>Амплитуда на математично махало</td>
+                    </tr>
+                    <tr>
+                        <td><img src="562[1].jpg" alt="Пружинно махало"></td>
+                    </tr>
+                    <tr>
+                        <td>Пружинно махало</td>
+                    </tr>
+                    <tr>
+                        <td><img src="503[1].jpeg" alt="Вдлъбнато огледало"></td>
+                    </tr>
+                    <tr>
+                        <td>Вдлъбнато огледало</td>
+                    </tr>
+
+
+                    <tr>
+                        <td><img src="612[1].jpg" alt="Събирателни и разсейвателни лещи"></td>
+                    </tr>
+                    <tr>
+                        <td>Събирателни и разсейвателни лещи</td>
+                    </tr> <tr>
+                        <td><img src="33.jpg" alt="Образ, получен в изпъкнала леща"></td>
+                    </tr>
+                    <tr>
+                        <td>Образ, получен в изпъкнала леща - действителен, умален и обърнат</td>
+                    </tr>
+                    <tr>
+                        <td><img src="32.jpg" alt="Образ, получен в изпъкнала леща"></td>
+                    </tr>
+                    <tr>
+                        <td>Образ, получен в изпъкнала леща - действителен, уголемен и обърнат</td>
+                    </tr>
+
+<tr>
+                        <td><img src="619.jpg" alt="Образ, получен в изпъкнала леща"></td>
+                    </tr>
+                    <tr>
+                        <td>Образ, получен в изпъкнала леща - недействителен, уголемен и прав</td>
+                    </tr>
+                    <tr>
+                        <td><img src="560[1].jpg" alt="Метроном"></td>
+                    </tr>
+                    <tr>
+                        <td>Метроном</td>
+                    </tr>
+                    <tr>
+                        <td><img src="614[1].jpg" alt="Устройство на човешкото око"></td>
+                    </tr>
+                    <tr>
+                        <td>Устройство на човешкото око</td>
+                    </tr>
+                    <tr>
+                        <td><img src="1117[1].jpg" alt="Перископ"></td>
+                    </tr>
+                    <tr>
+                        <td>Перископ</td>
+                    </tr>
+                    <tr>
+                        <td><img src="36.jpg" alt="Криво огледало"></td>
+                    </tr>
+                    <tr>
+                        <td>Криво огледало</td>
+                    </tr>
+                    <tr>
+                        <td><img src="609.jpg" alt="Око"></td>
+                    </tr>
+                    <tr>
+                        <td>Око</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Main Content -->
+            <div class="content">
+                <h1>Светлина и звук</h1>
+                
+                <p><b>амплитуда</b> - максимaлното отклонение на махалото от равновесното му положение</p>
+                <p><b>вакуум</b> - безвъздушно пространство</p>
+                <p><b>вдлъбната леща</b> - леща, която е по-тънка в средата, отколкото в края</p>
+                <p><b>височина на тона</b> - качество на един тон, което се определя от неговата честота; по-голяма честота означава по-висок тон</p>
+                <p><b>главна оптична ос (на леща)</b> - права, която свързва центровете на сферите, ограничаващи лещата</p>
+                <p><b>граничен ъгъл</b> - ъгълът на падане на границата между оптично по-плътна и оптично по-рядка среда, при който ъгълът на пречупване е 90°</p>
+                <p><b>далекогледство</b> - недостатък на окото, при който сноп успоредни лъчи се фокусира не върху, а зад ретината</p>
+                <p><b>действителен образ</b> - образ, получен от пресичането на лъчи след тяхното пречупване или отражение (такъв образ може да се наблюдава върху екран)</p>
+                <p><b>децибел</b> - единица за сила на звука</p>
+                <p><b>диоптър (озн. D)</b> - единица за оптична сила на леща (например 1 D е силата на леща с фокусно разстояние 1 m)</p>
+                <p><b>допълнителен цвят</b> - цвят, който се получава при смесване на два основни цвята</p>
+                <p><b>ехо</b> - слухово възприятие, което получаваме от звук, който сме произвели и след отражението му в преграда се е върнал при нас</p>
+                <p><b>ехолот</b> - уред, използван на корабите за измерване на дълбочината на водата. Разстоянието до морското дъно се определя от времето, за което ултразвуков сигнал отива до дъното и се връща до кораба</p>
+                <p><b>ехограф</b> - медицински уред за изследване на вътрешните органи на човешкото тяло. Работи с ултразвук</p>
+                <p><b>затихване на звук</b> - отслабване на звука при отдалечаване от източника</p>
+                <p><b>звук</b> - явление, представляващо трептене на частиците на дадена среда, в която се разпространява</p>
+                <p><b>зеница</b> - кръгъл отвор в средата на ириса</p>
+                <p><b>изпъкнала леща</b> - леща, която е по-дебела в средата, отколкото по края</p>
+                <p><b>източник на звук</b> - всяко тяло, което поражда слухово усещане</p>
+                <p><b>източник на светлина</b> - всяко тяло, което излъчва светлина</p>
+                <p><b>инфразвук</b> - трептения на частиците на една среда с честоти по-малки от честотите на звуците, които чува нормалното човешко ухо</p>
+                <p><b>ирис</b> - най-предноразположената част на увеята и представлява отвесно разположена мембрана с кръгъл отвор в средата, наречен зеница</p>
+                <p><b>късогледство</b> - недостатък на окото, при който сноп успоредни лъчи се фокусира не върху, а пред ретината</p>
+                <p><b>леща</b> - оптичен елемент, който пропуска и пречупва светлината и променя сходимостта на преминаващите през нея лъчи</p>
+                <p><b>лъч (светлинен лъч)</b> - тънък светлинен сноп</p>
+                <p><b>метроном</b> - механичен уред с махало за определяне темпото в музиката</p>
+                <p><b>мираж</b> - природно атмосферно оптично явление, при което слънчевите лъчи се пречупват различно поради различната плътност на слоевете въздух</p>
+                <p><b>недействителен образ</b> - образ, получен от пресичането на продълженията на лъчи след тяхното пречупване или отражение</p>
+                <p><b>оптика</b> - част от физиката, изучаваща явленията при излъчване и разпространение на светлината</p>
+                <p><b>оптичен център (на леща)</b> - точката от главната оптична ос, минавайки през която лъчите не променят посоката си</p>
+                <p><b>перископ</b> - уред, предназначен за наблюдаване на земната повърхност от закрити места. Състои се от кутия с две успоредни, плоски огледала под ъгъл 45° спрямо кутията</p>
+                <p><b>разсейвателна леща</b> - леща, която преобразува успоредния сноп светлина в разходящ. Вдлъбната леща</p>
+                <p><b>ретина</b> - тънката покривка върху задната част на окото, съставена от клетки, които „улавят" лъчите</p>
+                <p><b>роговица</b> - образува предната прозрачна част на очната ябълка</p>
+                <p><b>светлинен сноп</b> - светлина, излъчена от източник на светлина и преминала през тесен отвор</p>
+                <p><b>сферично огледало</b> - огледало, чиято повърхност е част от сфера</p>
+                <p><b>събирателна леща</b> - леща, която преобразува успоредния сноп светлина в сходящ. Изпъкнала леща</p>
+                <p><b>ултразвук</b> - трептения на частиците на една среда с честоти по-големи от честотите на звуците, които чува нормалното човешко ухо</p>
+                <p><b>фокус (на леща)</b> - точка, през която минава след пречупване успореден на главната оптична ос лъч</p>
+                <p><b>фокусиране</b> - процесът на преместване на лещата по главната оптична ос, докато се получи ясен образ</p>
+                <p><b>херц</b> - единица за честота на трептене</p>
+<p><b>цветни филтри</b> - цветни стъкла (ако е червено пропуска само червени лъчи, ако е зелено - само зелени лъчи  и т. н.)</p>
+                <p><b>цвят на светлината</b> - определя се от цветовете на преобладаващите в снопа едноцветни лъчи</p>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="right-sidebar">
+                <table>
+                    <tr>
+                        <td><img src="484[1].jpg" alt="Мираж"></td>
+                    </tr>
+                    <tr>
+                        <td>Мираж</td>
+                    </tr>
+                    <tr>
+                        <td><img src="607[1].jpeg" alt="Дъга"></td>
+                    </tr>
+                    <tr>
+                        <td>Дъга</td>
+                    </tr>
+                    <tr>
+                        <td><img src="116[1].jpg" alt="Нютон"></td>
+                    </tr>
+                    <tr>
+                        <td>Нютон</td>
+                    </tr>
+
+<tr>
+                        <td><img src="606[1].jpeg" alt="Спектър на светлината"></td>
+                    </tr>
+                    <tr>
+                        <td>Спектър на светлината</td>
+                    </tr>
+ <tr>
+                        <td><img src="1132[1].jpeg" alt="Цветни филтри"></td>
+                    </tr>
+                    <tr>
+                        <td>Цветни филтри</td>
+                    </tr>
+                    <tr>
+                        <td><img src="777[1].jpg" alt="Ехолот"></td>
+                    </tr>
+                    <tr>
+                        <td>Ехолот</td>
+                    </tr>
+                    <tr>
+                        <td><img src="775[1].jpg" alt="Екран на ехолот"></td>
+                    </tr>
+                    <tr>
+                        <td>Екран на ехолот</td>
+                    </tr>
+                    <tr>
+                        <td><img src="603[1].jpeg" alt="Ехограф"></td>
+                    </tr>
+                    <tr>
+                        <td>Ехограф</td>
+                    </tr>
+                    <tr>
+                        <td><img src="615[1].jpg" alt="Устройство на човешко ухо"></td>
+                    </tr>
+                    <tr>
+                        <td>Устройство на човешко ухо</td>
+                    </tr>
+<tr>
+                        <td><img src="1150[1].jpg" alt="Очила"></td>
+                    </tr>
+                    <tr>
+                        <td>Очила</td>
+                    </tr>
+
+<tr>
+                        <td><img src="501[1].png" alt="Сферично огледало"></td>
+                    </tr>
+                    <tr>
+                        <td>Сферично огледало</td>
+                    </tr>
+                    <tr>
+                        <td><img src="915[1].jpeg" alt="Лупа"></td>
+                    </tr>
+                    <tr>
+                        <td>Лупа</td>
+                    </tr>
+                    <tr>
+                        <td><img src="483[1].jpg" alt="Мираж"></td>
+                    </tr>
+                    <tr>
+                        <td>Мираж</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

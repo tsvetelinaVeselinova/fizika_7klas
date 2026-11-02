@@ -1,0 +1,467 @@
+                                              <!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Последователно и успоредно свързване на консуматорите</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #87CEEB, #E0F6FF);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            gap: 20px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Анимирано заглавие */
+        h1 {
+            text-align: center;
+            color: #2C3E50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            grid-column: 1 / -1;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+            to { text-shadow: 0 0 20px rgba(52, 152, 219, 0.8), 2px 2px 4px rgba(0,0,0,0.3); }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            grid-column: 1 / -1;
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            color: #3498DB;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background: #3498DB;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Лява странична лента - градиент */
+        .sidebar-left {
+            background: linear-gradient(180deg, #BDC3C7, #FFFFFF, #95A5A6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .sidebar-left h3 {
+            color: #2C3E50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .sidebar-left p {
+            margin-bottom: 10px;
+            line-height: 1.4;
+            color: #34495E;
+        }
+
+        .formula {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 8px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+            border-left: 4px solid #3498DB;
+        }
+
+        /* Основно съдържание */
+        .main-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .main-content h2 {
+            color: #E74C3C;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .question {
+            background: rgba(52, 152, 219, 0.05);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498DB;
+            transition: transform 0.3s ease;
+        }
+
+        .question:hover {
+            transform: translateX(10px);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .question b {
+            color: #2C3E50;
+        }
+
+        .options {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .olympiad {
+            background: linear-gradient(135deg, #F39C12, #E67E22);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .olympiad h2 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Дясна странична лента с анимирани картинки */
+        .sidebar-right {
+            background: linear-gradient(180deg, #FFFFFF, #BDC3C7, #FFFFFF);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .image-container {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Симулирани анимирани картинки */
+        .animated-image {
+            width: 130px;
+            height: 130px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .circuit-image {
+            background: linear-gradient(45deg, #3498DB, #2980B9);
+            animation: pulse 2s infinite;
+        }
+
+        .ammeter-image {
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            animation: rotate 3s linear infinite;
+        }
+
+        .garland-image {
+            background: linear-gradient(45deg, #F1C40F, #F39C12, #E74C3C, #8E44AD);
+            background-size: 400% 400%;
+            animation: rainbow 2s ease-in-out infinite;
+            height: 180px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes rainbow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Електрически ефекти */
+        .electric-spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #F1C40F;
+            border-radius: 50%;
+            animation: spark 1.5s infinite;
+        }
+
+        @keyframes spark {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 10px;
+            color: #34495E;
+            font-size: 0.9em;
+            line-height: 1.3;
+        }
+
+        /* Навигационни бутони */
+        .bottom-navigation {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .bottom-navigation a {
+            background: linear-gradient(135deg, #3498DB, #2980B9);
+            color: white;
+            padding: 12px 20px;
+            margin: 0 10px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .bottom-navigation a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Респонсив дизайн */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ПОСЛЕДОВАТЕЛНО И УСПОРЕДНО СВЪРЗВАНЕ НА КОНСУМАТОРИТЕ</h1>
+        
+        <div class="navigation">
+            <a href="zad12.html" onclick="alert('Електрически ток')">Ел. ток</a>
+            <a href="zad16.html" onclick="alert('Напрежение')">Напрежение</a>
+            <a href="zad53.html" onclick="alert('Речник')">Речник</a>
+ <a href="zad63.html" onclick="alert('Речник')">Справочник</a>
+            <a href="Upr1.html" onclick="alert('Начало')">Начало</a>
+        </div>
+
+        <div class="sidebar-left">
+            <h3><b>Последователно свързване:</b></h3>
+            <p>При този начин на свързване токът през отделните консуматори е един и същ, напрежението се разпределя между краищата на отделните консуматори.</p>
+            <p>Ако се прекъсне токът през един от консуматорите, ток не тече и през останалите.</p>
+             <img src="102[1].jpg" width="180" height="170" alt="ел. схема ">
+            <div class="formula">I = I₁ = I₂</div>
+            <div class="formula">U = U₁ + U₂</div>
+            <div class="formula">R = R₁ + R₂</div>
+
+            <h3><b>Успоредно свързване на консуматори</b></h3>
+            <p>При този начин на свързване токът през отделните консуматори е различен, а напрежението между краищата на отделните консуматори е едно и също.</p>
+            <p>Ако се прекъсне токът през един от консуматорите, ток продължава да тече през останалите.</p>
+             <img src="101[1].jpg" width="180" height="170" alt="ел. схема ">
+            <div class="formula">I = I₁ + I₂</div>
+            <div class="formula">U = U₁ = U₂</div>
+            <div class="formula">1/R = 1/R₁ + 1/R₂</div>
+        </div>
+
+        <div class="main-content">
+            <h2>Тест № 11</h2>
+
+            <div class="question">
+                <p><b>Зад.1. Кое твърдение НЕ е вярно?</b></p>
+                <div class="options">
+                    а) при последователно свързване напреженията между краищата на консуматорите са едни и същи.<br/>
+                    б) при последователно свързване токовете през консуматорите са едни и същи.<br/>
+                    в) при прекъсване на тока през един от консуматорите, ток не тече и през останалите, ако те са свързани последователно.
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>Зад.2 Коя от посочените зависимости не се отнася за успоредно свързване на консуматори?</b></p>
+                <div class="options">
+                    а) I = I₁ + I₂<br/>
+                    б) R = R₁ + R₂<br/>
+                    в) U = U₁ = U₂
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>Зад.3. Колко е еквивалентното съпротивление на три резистора при последователно свързване, ако R₁ = 3 Ω, R₂ = 5 Ω и R₃ = 4 Ω?</b></p>
+                <div class="options">
+                    а) 10 Ω<br/>
+                    б) 9 Ω<br/>
+                    в) 12 Ω<br/>
+                    г) 11 Ω
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>Зад.4. Колко е напрежението в краищата на всеки резистор, ако първият има съпротивление 4 Ω, вторият - 6 Ω, а общото напрежение е 12V?</b></p>
+                <div class="options">
+                    а) ако резисторите са свързани последователно;<br/>
+                    б) ако резисторите са свързани успоредно.
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>Зад.5. Гирлянда от колко последователно свързани лампи може да се включи към електрическата мрежа (напрежението е 220V), ако за нормалното светене на всяка лампа е необходимо напрежение 5 V?</b></p>
+            </div>
+
+            <div class="question">
+                <p><b>Зад.6. Колко е еквивалентното съпротивление на две успоредно свързани лампи със съпротивления съответно: 8 Ω и 24 Ω?</b></p>
+                <div class="options">
+                    а) ако напрежението е 48 V, определете тока във веригата.<br/>
+                    б) определете токовете през отделните лампи.
+                </div>
+            </div>
+
+            <div class="question">
+                <p><b>Зад.7. В електрическа верига са свързани последователно два резистора с различни съпротивления (първият има по-голямо съпротивление от втория). Върху кой от тях напрежението ще е по-голямо? Обосновете отговора си.</b></p>
+            </div>
+<p>.</p>
+  <div class="question">
+                <p><b>Зад.8. В електрическа верига са свързани последователно четири еднакви лампи със съпротивление 25 Ω и две еднакви лампи със </br>съпротивление 50 Ω, 
+които са свързани успоредно. Намерете напрежението на веригата, ако амперметърът показва  500 mА.  </b></p>
+<p>.</p>
+           Дадено: ............ Да се намери:...........               Решение:.............. </div>
+<p>.</p>
+<div class="question">
+                <p><b>Зад.9. В електрическа верига (виж електрическата схема вдясно) са свързани успоредно два резистора със съпротивления всеки по 20 Ω и два резистора с по 10 Ω, свързани  последователно. Напрежението на източника е</br> 60 V.Намерете тока, който отчита амперметърът. </b></p>
+           <p>.</p> Дадено: ............ Да се намери:...........               Решение:..............</div>
+
+<div class="olympiad">
+                
+            </div>
+        </div>
+
+        <div class="sidebar-right">
+            <div class="image-container">
+                <div class="animated-image circuit-image">
+                    ⚡ СХЕМА ⚡
+                    <div class="electric-spark" style="top: 20px; left: 30px; animation-delay: 0s;"></div>
+                    <div class="electric-spark" style="top: 60px; right: 25px; animation-delay: 0.5s;"></div>
+                    <div class="electric-spark" style="bottom: 30px; left: 50px; animation-delay: 1s;"></div>
+                </div><div class="sidebar-item">
+                    <img src="962[1].jpeg" width="130" height="130" alt="ел. схема ">
+                    <p>.</p>
+           
+        </div>
+
+                <div class="image-caption">Електрическа верига с последователно и успоредно свързани консуматори</div>
+            </div>
+
+            <div class="image-container">
+
+                <div class="animated-image ammeter-image">
+ 
+                    📏 
+                    <div class="electric-spark" style="top: 40px; left: 40px; animation-delay: 0.3s;"></div>
+                    <div class="electric-spark" style="top: 80px; right: 40px; animation-delay: 0.8s;"></div>
+                </div>
+<div class="sidebar-item"> <img src="963[1].jpg" width="130" height="130" alt=".">
+                    
+                    <p>Свързване на амперметър</p>
+           <img src="967[1].jpg" width="130" height="130" alt=".">
+ <p>Свързване на волтметър</p>
+        </div>
+
+                <div class="image-caption">.</div>
+            </div>
+
+            <div class="image-container">
+                <div class="animated-image garland-image">
+                    🎄 ГИРЛЯНДА 🎄
+                    <div class="electric-spark" style="top: 30px; left: 20px; animation-delay: 0.2s;"></div>
+                    <div class="electric-spark" style="top: 90px; left: 60px; animation-delay: 0.7s;"></div>
+                    <div class="electric-spark" style="top: 140px; right: 30px; animation-delay: 1.2s;"></div>
+                    <div class="electric-spark" style="bottom: 40px; left: 80px; animation-delay: 1.5s;"></div>
+                </div><div class="sidebar-item">
+                    <img src="1131[1].jpg" width="130" height="130" alt="Гирлянда">
+                    <p>.</p>
+           
+        </div>
+
+                <div class="image-caption">Гирляндите на коледната елха са направени от множество последователно свързани разноцветни лампички.</div>
+            </div>
+        </div>
+
+        <div class="bottom-navigation">
+            <a href="zad3.html" onclick="alert('Начална страница')">Начална страница</a>
+            <a href="zad18.html" onclick="alert('Предишен урок')">Предишен</a>
+            <a href="zad49.html" onclick="alert('Упътване')">Упътване</a>
+            <a href="zad66.html" onclick="alert('Ключ с отговори')">Ключ</a>
+            <a href="zad20.html" onclick="alert('Следващ урок')">Следващ</a>
+        </div>
+    </div>
+</body>
+</html>

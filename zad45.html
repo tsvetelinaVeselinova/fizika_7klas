@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Принцип на действие на парната машина</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:#fff;
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);background-attachment:fixed}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 16px 48px;text-align:center}
+  h1{margin:0 0 22px;font-size:clamp(26px,5vw,44px);font-weight:800;
+    background:linear-gradient(90deg,#ff6b6b,#4ecdc4);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35))}
+  nav{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+  nav a{display:inline-block;padding:14px 26px;border-radius:999px;color:#fff;text-decoration:none;font-size:17px;
+    background:linear-gradient(90deg,#ff7e7e,#4ecdc4);box-shadow:0 6px 16px rgba(0,0,0,.25);
+    transition:transform .15s,box-shadow .15s}
+  nav a:hover,nav a:focus-visible{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.3);outline:none}
+  section{background:rgba(255,255,255,.12);border-radius:18px;padding:20px;margin-bottom:28px;
+    box-shadow:0 8px 24px rgba(0,0,0,.2)}
+  h2{margin:0 0 16px;font-size:22px;font-weight:700}
+  figure{margin:0}
+  figure img{max-width:100%;height:auto;border-radius:12px;display:block;margin:0 auto;background:#fff}
+  figcaption{margin-top:10px;font-size:14px;opacity:.9}
+  .card{background:#fff;border-radius:14px;padding:14px;color:#2c2c2a}
+  svg{display:block;width:100%;height:auto}
+  .t{font-size:14px;fill:#2c2c2a}
+  .ts{font-size:12px;fill:#5f5e5a}
+  .th{font-size:14px;font-weight:600;fill:#712b13}
+  .flow{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:3 7;transition:opacity .12s}
+  @media (prefers-reduced-motion:no-preference){.flow{animation:dash .5s linear infinite}}
+  @keyframes dash{to{stroke-dashoffset:-10}}
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:10px;color:#444441;font-size:15px}
+  .controls button{font:inherit;padding:8px 18px;border-radius:999px;border:0;color:#fff;cursor:pointer;
+    background:linear-gradient(90deg,#ff7e7e,#4ecdc4)}
+  .controls label{display:flex;align-items:center;gap:10px;flex:1;min-width:220px}
+  .controls input{flex:1}
+  #status{font-size:15px;color:#444441;margin:10px 0 6px;min-height:46px;text-align:left}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:#5f5e5a;text-align:left}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+  .text{text-align:left;line-height:1.7;font-size:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Принцип на действие на парната машина</h1>
+
+  <nav>
+    <a href="index.html">🏠 НАЧАЛО НА САЙТА</a>
+    <a href="zad67.html">Назад</a>
+  </nav>
+
+  <section>
+     <img src="8.jpg" width="800" height="630">
+    <figure>
+     
+      <figcaption>Парната машина на Джеймс Уат (1736 – 1819) – усъвършенствана през 1769 г.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Анимация на парната машина</h2>
+    <div class="card">
+      <svg viewBox="0 0 680 400" role="img" aria-labelledby="ttl dsc">
+        <title id="ttl">Парната машина на Джеймс Уат</title>
+        <desc id="dsc">Котел подава пара към цилиндър с бутало. Клапани насочват парата към двете страни на буталото, а отработената пара отива в отделен кондензатор. Буталото върти маховика чрез мотовилка и кривошип.</desc>
+
+        <rect x="24" y="72" width="70" height="66" rx="8" fill="#faece7" stroke="#993c1d" stroke-width="0.5"/>
+        <text class="th" x="59" y="105" text-anchor="middle" dominant-baseline="central">Котел</text>
+        <text class="ts" x="166" y="90" text-anchor="middle">Пара</text>
+
+        <rect x="40" y="285" width="70" height="70" rx="6" fill="#e6f1fb" stroke="#185fa5" stroke-width="0.5"/>
+        <rect x="42" y="327" width="66" height="26" rx="4" fill="#378ADD" opacity="0.35"/>
+        <text class="ts" x="75" y="372" text-anchor="middle">Кондензатор</text>
+        <text class="ts" x="120" y="340">Отработена пара</text>
+
+        <rect x="112" y="190" width="146" height="80" rx="6" fill="#f1efe8" stroke="#b4b2a9" stroke-width="1"/>
+        <rect x="126" y="200" width="118" height="60" fill="#fff" stroke="#d3d1c7" stroke-width="0.5"/>
+        <rect id="chL" x="126" y="200" width="40" height="60"/>
+        <rect id="chR" x="180" y="200" width="40" height="60"/>
+
+        <g fill="none" stroke="#b4b2a9" stroke-width="8" opacity="0.7">
+          <path d="M94 105H238"/>
+          <path d="M132 105V200"/>
+          <path d="M238 105V200"/>
+          <path d="M132 260V320H110"/>
+          <path d="M238 260V320H110"/>
+        </g>
+        <path id="fM"  class="flow" stroke="#D85A30" d="M94 105H238"/>
+        <path id="fIL" class="flow" stroke="#D85A30" d="M132 105V200"/>
+        <path id="fIR" class="flow" stroke="#D85A30" d="M238 105V200"/>
+        <path id="fEL" class="flow" stroke="#378ADD" d="M132 260V320H110"/>
+        <path id="fER" class="flow" stroke="#378ADD" d="M238 260V320H110"/>
+
+        <rect id="vIL" x="122" y="145" width="20" height="10" rx="2"/>
+        <rect id="vIR" x="228" y="145" width="20" height="10" rx="2"/>
+        <rect id="vEL" x="122" y="287" width="20" height="10" rx="2"/>
+        <rect id="vER" x="228" y="287" width="20" height="10" rx="2"/>
+
+        <text class="ts" x="185" y="304" text-anchor="middle">Цилиндър</text>
+        <line x1="185" y1="294" x2="185" y2="273" stroke="#888780" stroke-width="0.8" stroke-dasharray="3 3"/>
+
+        <line x1="325" y1="219" x2="432" y2="219" stroke="#b4b2a9" stroke-width="3"/>
+        <line x1="325" y1="241" x2="432" y2="241" stroke="#b4b2a9" stroke-width="3"/>
+
+        <circle cx="530" cy="230" r="90" fill="none" stroke="#888780" stroke-width="8" opacity="0.6"/>
+        <g id="fw">
+          <g stroke="#888780" stroke-width="4" opacity="0.8">
+            <line x1="530" y1="230" x2="616" y2="230"/>
+            <line x1="530" y1="230" x2="573" y2="304.5"/>
+            <line x1="530" y1="230" x2="487" y2="304.5"/>
+            <line x1="530" y1="230" x2="444" y2="230"/>
+            <line x1="530" y1="230" x2="487" y2="155.5"/>
+            <line x1="530" y1="230" x2="573" y2="155.5"/>
+          </g>
+          <circle cx="606" cy="230" r="5" fill="#EF9F27"/>
+        </g>
+        <text class="ts" x="530" y="348" text-anchor="middle">Маховик</text>
+
+        <line id="prod" x1="224" y1="230" x2="400" y2="230" stroke="#5f5e5a" stroke-width="5"/>
+        <rect id="piston" x="217" y="202" width="14" height="56" rx="2" fill="#5f5e5a"/>
+        <text id="lblP" class="ts" x="185" y="170" text-anchor="middle">Бутало</text>
+        <line id="ldP" x1="185" y1="177" x2="185" y2="199" stroke="#888780" stroke-width="0.8" stroke-dasharray="3 3"/>
+
+        <rect id="xh" x="400" y="221" width="20" height="18" rx="3" fill="#5f5e5a"/>
+        <line id="rod" x1="410" y1="230" x2="570" y2="230" stroke="#2c2c2a" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+        <line id="crank" x1="530" y1="230" x2="570" y2="230" stroke="#EF9F27" stroke-width="8" stroke-linecap="round"/>
+        <circle id="pin" cx="570" cy="230" r="7" fill="#EF9F27" stroke="#2c2c2a" stroke-width="1"/>
+        <circle id="jx" cx="410" cy="230" r="4" fill="#fff" stroke="#2c2c2a" stroke-width="1"/>
+        <circle cx="530" cy="230" r="12" fill="#5f5e5a"/>
+        <circle cx="530" cy="230" r="4" fill="#fff"/>
+      </svg>
+
+      <div class="controls">
+        <button id="pp" type="button">⏸ Пауза</button>
+        <label>Скорост
+          <input type="range" id="spd" min="1" max="10" step="1" value="3">
+          <span id="rpm" style="min-width:76px;text-align:right">11 об/мин</span>
+        </label>
+      </div>
+      <p id="status"></p>
+      <div class="legend">
+        <span><span class="sw" style="background:#D85A30"></span>Пара под налягане</span>
+        <span><span class="sw" style="background:#378ADD"></span>Отработена пара</span>
+        <span><span class="sw" style="background:#1D9E75"></span>Клапан отворен</span>
+        <span><span class="sw" style="background:#888780"></span>Клапан затворен</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="text">
+    <h2>Как работи?</h2>
+    <p>В котела водата се нагрява и се превръща в пара под налягане. Парата влиза в цилиндъра през отворен клапан и тласка буталото. Клапаните се сменят в края на всеки ход, затова парата тласка буталото ту отляво, ту отдясно. Мотовилката и кривошипът превръщат движението на буталото във въртене на маховика.</p>
+    <p>Новото при Джеймс Уат е <strong>отделният кондензатор</strong>: отработената пара се охлажда извън цилиндъра, който остава горещ. Така машината харчи много по-малко гориво и дава началото на индустриалната революция.</p>
+  </section>
+
+</div>
+
+<script>
+var CX=530,CY=230,R=40,L=150,OFF=196;
+var theta=0.3,omega=1.2,last=null;
+var playing=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $=function(id){return document.getElementById(id)};
+function setA(id,o){var e=$(id);for(var k in o)e.setAttribute(k,o[k])}
+
+function render(){
+  var s=Math.sin(theta),c=Math.cos(theta);
+  var px=CX+R*c,py=CY+R*s;
+  var xx=px-Math.sqrt(L*L-R*R*s*s);
+  var pc=xx-OFF;
+  $('fw').setAttribute('transform','rotate('+(theta*180/Math.PI).toFixed(2)+' '+CX+' '+CY+')');
+  setA('crank',{x2:px.toFixed(2),y2:py.toFixed(2)});
+  setA('pin',{cx:px.toFixed(2),cy:py.toFixed(2)});
+  setA('rod',{x1:xx.toFixed(2),y1:230,x2:px.toFixed(2),y2:py.toFixed(2)});
+  setA('xh',{x:(xx-10).toFixed(2)});
+  setA('jx',{cx:xx.toFixed(2)});
+  setA('prod',{x1:pc.toFixed(2),x2:(xx-10).toFixed(2)});
+  setA('piston',{x:(pc-7).toFixed(2)});
+  setA('chL',{width:Math.max(0,pc-7-126).toFixed(2)});
+  setA('chR',{x:(pc+7).toFixed(2),width:Math.max(0,244-(pc+7)).toFixed(2)});
+  var lx=Math.min(205,Math.max(165,pc));
+  setA('lblP',{x:lx.toFixed(2)});
+  setA('ldP',{x1:pc.toFixed(2),x2:pc.toFixed(2)});
+
+  var right=s>0;
+  setA('chR',{fill:right?'#E24B4A':'#378ADD','fill-opacity':right?0.38:0.2});
+  setA('chL',{fill:right?'#378ADD':'#E24B4A','fill-opacity':right?0.2:0.38});
+  var on='#1D9E75',off='#888780';
+  $('vIR').setAttribute('fill',right?on:off);
+  $('vEL').setAttribute('fill',right?on:off);
+  $('vIL').setAttribute('fill',right?off:on);
+  $('vER').setAttribute('fill',right?off:on);
+  $('fIR').style.opacity=right?1:0;
+  $('fEL').style.opacity=right?1:0;
+  $('fIL').style.opacity=right?0:1;
+  $('fER').style.opacity=right?0:1;
+  $('status').textContent=right
+    ?'Ход наляво: парата под налягане влиза отдясно и тласка буталото, а отляво отработената пара отива в кондензатора.'
+    :'Ход надясно: клапаните се сменят – парата влиза отляво и тласка буталото, а отдясно отработената пара отива в кондензатора.';
+}
+
+function loop(t){
+  if(last===null)last=t;
+  var dt=Math.min(0.05,(t-last)/1000);last=t;
+  if(playing){theta=(theta+omega*dt)%(Math.PI*2);render()}
+  requestAnimationFrame(loop);
+}
+function updPP(){$('pp').textContent=playing?'⏸ Пауза':'▶ Старт'}
+$('pp').addEventListener('click',function(){playing=!playing;updPP()});
+$('spd').addEventListener('input',function(){
+  omega=0.4*(+this.value);
+  $('rpm').textContent=Math.round(omega*60/(2*Math.PI))+' об/мин';
+});
+updPP();render();requestAnimationFrame(loop);
+</script>
+</body>
+</html>

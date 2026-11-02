@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интересни явления</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимирани странични полета */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            width: 150px;
+            height: 100vh;
+            background: linear-gradient(45deg, #e0e0e0, #ffffff, #f0f0f0, #e8e8e8);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            z-index: 1;
+        }
+
+        .sidebar-left {
+            left: 0;
+        }
+
+        .sidebar-right {
+            right: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Анимирани елементи в страничните полета */
+        .animated-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(102, 126, 234, 0.7);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animated-element:nth-child(1) { top: 10%; left: 20px; animation-delay: 0s; }
+        .animated-element:nth-child(2) { top: 30%; right: 20px; animation-delay: 2s; }
+        .animated-element:nth-child(3) { top: 50%; left: 30px; animation-delay: 4s; }
+        .animated-element:nth-child(4) { top: 70%; right: 30px; animation-delay: 6s; }
+        .animated-element:nth-child(5) { top: 90%; left: 15px; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Електрически мълнии анимация */
+        .lightning {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ffff00, #ff6600);
+            animation: lightning 3s ease-in-out infinite;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+        }
+
+        .lightning:nth-child(6) { top: 15%; left: 50px; animation-delay: 1s; }
+        .lightning:nth-child(7) { top: 45%; right: 50px; animation-delay: 3s; }
+        .lightning:nth-child(8) { top: 75%; left: 60px; animation-delay: 5s; }
+
+        @keyframes lightning {
+            0%, 90%, 100% { opacity: 0; transform: scaleY(0); }
+            5%, 85% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Основен контейнер */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            margin-left: 150px;
+            margin-right: 150px;
+        }
+
+        /* Заглавие с мигане */
+        .main-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            to { box-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+
+        /* Навигация */
+        .navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #764ba2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Основно съдържание */
+        .content-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .theory-panel {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .theory-panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .formula {
+            background: #e8f2ff;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .test-panel {
+            flex: 2;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-panel h1 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question {
+            background: #f8f9ff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e8ff;
+        }
+
+        .question b {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .question p {
+            margin: 5px 0;
+            padding-left: 15px;
+        }
+
+        /* Долна навигация */
+        .bottom-navigation {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .bottom-navigation a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-navigation a:hover {
+            color: #764ba2;
+        }
+
+        /* Пулсиращи частици във фона */
+        .particle {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+            z-index: 0;
+        }
+
+        .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            left: 20%;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            left: 90%;
+            animation-delay: 10s;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 1300px) {
+            .sidebar { display: none; }
+            .container {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фонови частици -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- Лява странична лента -->
+    <div class="sidebar sidebar-left">
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <!-- Дясна странична лента -->
+    <div class="sidebar sidebar-right">
+
+
+
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="animated-element"></div>
+        <div class="lightning"></div>
+        <div class="lightning"></div>
+    </div>
+
+    <div class="container">
+        <!-- Заглавие -->
+        <div class="main-title">
+           Звук -  интересни явления
+        </div>
+
+        <!-- Навигация -->
+        <div class="navigation">
+                        <a href="Upr1.html">Начало</a>  <a href="zad38.html">Назад</a>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Теоретична част -->
+            <div class="theory-panel">
+               
+                
+              <h1> Резонанс</h1>
+    
+           
+                 <p>Резонансът е явление, при което една система започва да трепти с много голяма сила (амплитуда), защото върху нея действа външна сила,</br> 
+която я „бута“ точно в същия ритъм (честота), в който системата обича да си трепти сама.</br>
+Представете си, че засилвате приятел на люлка. Люлката си има собствен естествен ритъм на люлеене.</br>
+ Ако я бутате напред точно в момента, в който тя е достигнала най-задната си точка и тръгва напред, </br>
+с всяко следващо бутане тя ще се издига все по-високо и по-високо. </br>
+Това е резонанс – вашето бутане съвпада с ритъма на люлката и засилва движението ѝ до максимум.</br>
+ Ако обаче бутате хаотично – понякога в гърба, понякога докато тя още се движи към вас – люлката ще спре.
+
+<video controls playsinline preload="metadata" style="vidth: 100%;max - width:900px; height:auto;">      
+                
+<source src = "83.mp4" type = "video/mp4">
+                                                                                                   
+Вашият браузър не поддържа <video>
+            <div class="rule-item">
+                <div class="rule-image">
+                   
+<p> !!! Разгледайте отклонението на махалото от равновесното положение. Другата част на видеото ще разберете по-добре в 9. клас.</p> 
+               <b></b></p>
+                 <h2>Разрушителната сила на резонанса: Мостът в Такома (1940 г.)</h2>
+ <p>Един от най-известните и драматични примери в историята се случва на 7 ноември 1940 г. в САЩ с моста Такома Нароус (Tacoma Narrows Bridge). </p>
+•	Какво се случва: Ветрове със скорост от около 64 км/ч започват да духат на пресекулки. </br>
+Тези пориви на вятъра започват да „бутат“ моста в същия ритъм, в който той има естествена склонност да се усуква и люлее.</br>
+•	Резултатът: Мостът изпада в силен резонанс.</br>
+ Огромната бетонна и стоманена конструкция започва да се вълнува и усуква като течна лента, издигайки се на метри нагоре и надолу. </br>
+Само няколко часа по-късно мостът не издържа на огромното напрежение и се срутва в реката. </br>
+Днес този случай се изучава от всички инженери, за да не се повтаря същата грешка при строежа на съвременни мостове.
+
+</p>
+               
+                
+<img src="84.jpg" width="700" height="400" alt=".">         
+ <p>.</p> 
+
+
+
+<h2>🔊 Други интересни примери за резонанс</h2>
+•	<b>🍷 Счупване на чаша с глас: </b>Сигурно сте виждали по филмите как оперен певец взема висока нота и тънка кристална чаша за вино се пръсва. </br> 
+Това не е магия. Чашата има своя собствена честота на трептене (ако я чукнете леко с нокът, тя издава определен звук).</br> 
+ Ако певецът изпее точно същата нота достатъчно силно, звуковите вълни започват да „бутат“ молекулите на стъклото в техния собствен ритъм. </br> 
+Чашата изпада в резонанс, започва да трепти твърде силно и се пръсва.</br> 
+•	<b>📻 Настройване на радиото:</b> Когато въртите копчето на радиото в колата, за да хванете любимата си станция (например на честота 101.6 MHz),</br> 
+ вие всъщност променяте собствената честота на трептене на електроните в антената на вашето радио.</br> 
+ Когато я изравните точно с честотата, на която излъчва предавателят на радиостанцията, възниква електрически резонанс.</br> 
+ Сигналът рязко се засилва и вие чувате чиста музика.</br> 
+•	<b>👟 Войниците на моста: </b></br> Когато армия от войници преминава по мост, винаги се дава команда „Свободен ход!“ (да не ходят в маршова стъпка).</br> 
+</br>  Ако стотици войници маршируват перфектно в един и същ такс, техните стъпки могат да съвпаднат с естествения ритъм на трептене на моста.</br> 
+ Мостът ще изпадне в резонанс, ще започне да се люлее силно и може да се срути под краката им (нещо, което се е случвало в историята, например с моста в Анже,
+  Франция през 1850 г.).</br> 
+•	<b>🏥 Магнитен резонанс (ЯМР):</b> </br> В медицината лекарите използват този принцип, за да виждат какво има вътре в човешкото тяло без операция. 
+</br> Огромни магнити карат водородните атоми в тялото ни да изпаднат в резонанс и да излъчат сигнали, от които компютърът сглобява перфектна
+</br>  триизмерна снимка на органите ни.
+<img src="86.jpg" width="700" height="400" alt=".">         
+ <p>.</p> 
+
+
+<h2>Суперсилите на инфразвука (Под 20 Hz)</h2>
+•	Тайната социална мрежа на слоновете:</br> Слоновете могат да си комуникират от разстояние над 10 километра!
+</br>  Те издават много ниски инфразвуци, които пътуват по земята и въздуха. </br> 
+Другите слонове ги „чуват“ не само с ушите си, но и чрез чувствителните възглавнички на краката си.</br> 
+<img src="87.jpg" width="700" height="400" alt=".">         
+ <p>.</p> 
+•	<b>Гласът на разярената Земя:</b></br>  Когато се задава природно бедствие като земетресение, цунами или изригване на вулкан,</br> 
+</br>  Земята генерира мощни инфразвукови вълни. Животни като гълъбите, кучетата и медузите усещат тези вълни много преди нас и затова бягат на безопасно място. 
+</br> Учените използват специални микрофони, за да улавят тези звуци и да предсказват бедствия.</br> 
+•	<b>Призраци и обитавани от духове къщи:</b> Случвало ли ти се е да влезеш в някоя стара сграда и изведнъж да настръхнеш или да усетиш безпокойство? </br> 
+Често виновник за това е инфразвукът! Стари вентилационни тръби или вятърът, преминаващ през коридорите, могат да създадат звук с честота около 19 Hz.</br> 
+ Точно тази честота кара човешката очна ябълка да вибрира леко, което може да причини оптични илюзии („сиви петна“ или „призраци“) и чувство на страх.</br> 
+
+<h2>🦇 Суперсилите на ултразвука (Над 20 000 Hz)</h2>
+•<b>	Ехолокация или как да „виждаш“ в тъмното:</b></br> 
+ Прилепите и делфините са истински нинджи в използването на ултразвук. </br> 
+Те изпращат ултразвукови сигнали, които се отразяват от плячката (например муха или малка рибка) и се връщат обратно при тях.</br> 
+ Така те съставят перфектна 3D карта на пространството около себе си, дори в пълен мрак.</br> 
+•	<b>Първата снимка на бебето:</b></br>  В медицината ултразвукът е незаменим. </br> 
+Тъй като е напълно безопасен (за разлика от рентгена), лекарите го използват, за да „надникнат“ в корема на бременна майка и да видят как расте бебето. </br> 
+Уредът се нарича ехограф и работи точно като ехолокацията на делфините.</br> 
+<img src="423.jpg" width="700" height="400" alt=".">   
+
+ <p>.</p> 
+•	<b>Звукова пералня за бижута и очила:</b></br>  Ултразвукът може да почиства предмети! Когато се пусне в специална вана с вода, </br> 
+той създава милиони микроскопични мехурчета, които се пукат с огромна сила. </br> 
+<img src="422.jpg" width="700" height="400" alt=".">    <p>.</p> 
+Това буквално „избива“ и най-финия прах от труднодостъпните места на очила, часовници и бижута, без да ги надраска.</br> 
+•<b>	Рязане без нож: </b></br> В заводите силен фокусиран ултразвук се използва за рязане на пластмаса и дори за заваряване на метали. </br>
+ Методът е толкова точен, че се използва дори в хранителната индустрия, за да се режат перфектни парчета торта или сирене, без те да се смачкват.</br> 
+
+<img src="21.jpg" width="700" height="400" alt=".">  
+<a href="zad38.html">Назад</a>
+
+
+
+
+                
+                </div>
+            </div>
+        </div>
+
+        <!-- Долна навигация -->
+         
+    </div>
+</body>
+</html>

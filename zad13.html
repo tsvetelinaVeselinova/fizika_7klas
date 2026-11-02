@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сили и налягане</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            min-height: 100vh;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, #808080 0%, #ffffff 50%, #808080 100%);
+            padding: 20px;
+            border-right: 2px solid #ccc;
+        }
+
+        .sidebar.right {
+            border-right: none;
+            border-left: 2px solid #ccc;
+        }
+
+        .main-content {
+            background-color: #ffffff;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .theory-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .test-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            background-color: #e8f4f8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .question-title {
+            font-weight: bold;
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .options span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .navigation {
+            margin-top: 30px;
+            text-align: center;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        .navigation a {
+            color: #2196F3;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border: 1px solid #2196F3;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .humor-section {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
+        }
+
+        .sidebar-content {
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .sidebar-content a {
+            color: #2196F3;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-content a:hover {
+            background-color: rgba(33, 150, 243, 0.1);
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border: 1px solid #2196F3;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .formula {
+            font-family: 'Courier New', monospace;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Ляво вертикално поле -->
+        <div class="sidebar">
+            <div class="sidebar-content">
+<a href="zad1.html">Начална страница</a>
+                <a href="Upr1.html">Начало</a>
+                <a href="zad11.html">Сили</a>
+                
+                <div class="info-box">
+
+<p><strong>Налягането</strong> е величина, числено равна на натиска, действащ на единица площ. Натискът може да бъде породен от различни сили: сила на тежестта, мускулна сила, сила на съпротивление на средата и т.н.</p>
+                   
+                </div> <strong>Формулa:</strong><br>
+                    <div class="formula">p = F/S</div>
+                <p><strong>Основна мерна единица за налягане:</strong> <span class="formula">Pa = N/m²</span> (паскал)</p>
+<p><strong>Други единици:</strong></p>
+               
+                 hPa = 100 Pa</br>
+                 kPa = 1000 Pa</br>
+                 N/cm² = 10 000 Pa</br>
+                 MPa = 1 000 000 Pa</br>
+               
+                <div class="info-box">
+                    <strong>Манометър</strong><br>
+                    Уред за измерване на налягане
+<img src="883.jpg" width="200" height="200"></br>
+                </div>
+                
+                <div class="info-box">
+                    <strong>Приложения:</strong><br>
+                    
+                    • Намаляване на налягането
+<img src="888[1].jpg" width="200" height="200"></br>
+     верижен трактор       </br>
+<img src="884.jpg" width="200" height="200"></br>
+           снегоходки     
+                
+                </div>
+            </div>
+        </div>
+
+        <!-- Основно съдържание -->
+        <div class="main-content">
+            <h1>Сили и налягане</h1>
+            
+            
+            <div class="test-section">
+                <h2>Тест № 4</h2>
+                
+                <div class="question">
+                    <div class="question-title">Задача 1: Коя е мерната единица за налягане?</div>
+                    <div class="options">
+                        <span>а)</span> N<br>
+                        <span>б)</span> J<br>
+                        <span>в)</span> N/m²<br>
+                        <span>г)</span> m
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Задача 2: Защо със ски човек потъва по-малко в снега, отколкото с обувки?</div>
+                    <div class="options">
+                        <span>а)</span> намалява натиска<br>
+                        <span>б)</span> увеличава натиска<br>
+                        <span>в)</span> намалява се допирната площ<br>
+                        <span>г)</span> увеличава се допирната площ
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Задача 3: Кое равенство е невярно?</div>
+                    <div class="options">
+                        <span>а)</span> 7,5 hPa = 7500 Pa<br>
+                        <span>б)</span> 20 kPa = 20 000 Pa<br>
+                        <span>в)</span> 300 kPa = 0,3 MPa<br>
+                        <span>г)</span> 700 MN = 700 000 kN
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Задача 4: От какво НЕ зависи хидростатичното налягане?</div>
+                    <div class="options">
+                        <span>а)</span> вида на течността<br>
+                        <span>б)</span> височината на течния стълб<br>
+                        <span>в)</span> силата на тежестта<br>
+                        <span>г)</span> площта на дъното на съда
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Задача 5: Колко е хидростатичното налягане, което упражнява олиото върху дъното на съда, ако височината на течния стълб е 4 dm?</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Задача 6: Върху няколко повърхности действат еднакви сили (10N). В кой от случаите налягането е най-малко?</div>
+                    <div class="options">
+                        <span>А)</span> площта е 1 cm²<br>
+                        <span>Б)</span> площта е 1 mm²<br>
+                        <span>В)</span> площта е 25 dm²<br>
+                        <span>Г)</span> площта е 0,2 m²
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Задача 7: Защо верижният трактор може да се движи в мочурлива местност, а обикновеният - не?</div>
+                    <div class="options">
+                        <span>А)</span> по-лек е<br>
+                        <span>Б)</span> има по-голяма площ<br>
+                        <span>В)</span> има по-малка площ<br>
+                        <span>Г)</span> по-тежък е
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-title">Задача 8: Пресметнете налягането, което упражнява верижен трактор с маса 2,4 t, ако допирната площ между веригите и земята е 1,2 m²</div>
+                </div>
+            </div>
+
+            
+
+            <div class="navigation">
+                <a href="zad1.html">Начална страница</a>
+                <a href="zad10.html">Предишен</a>
+                <a href="zad7.html">Упътване</a>
+                <a href="zad9.html">Ключ</a>
+                <a href="zad36.html">Следващ</a>
+            </div>
+        </div>
+
+        <!-- Дясно вертикално поле -->
+        <div class="sidebar right">
+            <div class="sidebar-content">
+                <div class="info-box">
+                   
+            
+       
+ 
+ <p><strong>Хидростатичното налягане</strong> е налягането, което течностите упражняват върху дъното на съда, в който са поставени. Това налягане се поражда от силата на тежестта.</p>
+   <strong>Хидростатично налягане</strong><br>
+                    Равно на произведението от плътността на течността, земното ускорение и височината на течния стълб
+ <p>където:</br> ρ - плътност на течността,</br> g - земно ускорение, </br>h - височина на течния стълб</p>             </div>
+                
+                <div class="info-box">
+                    <div class="formula">p = ρ.g.h</div>
+                </div>
+
+                <div class="sidebar-content">
+                <p>.</p>
+                <div class="info-box">
+                    <strong>Приложения:</strong><br>
+<p>.</p>
+                    • Хидравлични системи<br>
+                    • Манометри<br>
+                    • Барометри
+                </div>
+
+  <div class="info-box">
+                    <strong>Приложения:</strong><br>
+                    • Увеличаване на налягането<br>
+                    
+<img src="888.jpg" width="200" height="200"></br>
+                <p>.</p>
+                <a href="zad63.html">Справочник</a>
+<p>.</p>
+                <a href="zad69.html">Речник</a>
+
+<body>
+  <p>.</p>
+<div class="humor-section">
+                <h3>Ученически хумор</h3>
+                
+                <p><strong>Видове лостове:</strong><br>
+                равномерни и равнострадни.</p>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

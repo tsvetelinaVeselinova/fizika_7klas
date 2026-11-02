@@ -1,0 +1,390 @@
++<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слънце и звезди</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #eeccff, #f0d7ff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .navigation {
+            text-align: center;
+            padding: 15px;
+            background: rgba(238, 238, 238, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            color: #4f46e5;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navigation a:hover {
+            color: #7c3aed;
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .sidebar-left {
+            width: 250px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef, #dee2e6, #ced4da);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease-in-out infinite;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .sidebar-right {
+            width: 250px;
+            background: linear-gradient(-45deg, #f8f9fa, #e9ecef, #dee2e6, #ced4da);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease-in-out infinite reverse;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .main-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 2px solid #0891b2;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(8, 145, 178, 0.1);
+        }
+
+        .info-box h3 {
+            color: #0891b2;
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+
+        .star-types {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
+        }
+
+        .star-types h3 {
+            color: #f59e0b;
+            margin-top: 0;
+        }
+
+        .constellation-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .constellation-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .constellation-item h4 {
+            color: #4f46e5;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .constellation-item img {
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .test-section {
+            background: linear-gradient(135deg, #fef7ff, #f3e8ff);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .test-section h1 {
+            color: #7c3aed;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .question {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+        }
+
+        .question b {
+            color: #7c3aed;
+            font-size: 1.1em;
+        }
+
+        .answer-option {
+            margin: 8px 0;
+            padding: 5px 0;
+            color: #4b5563;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(238, 238, 238, 0.8);
+            border-radius: 10px;
+        }
+
+        .footer-links a {
+            color: #4f46e5;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #7c3aed;
+            text-decoration: underline;
+        }
+
+        .supernova-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .supernova-section img {
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .supernova-section img:hover {
+            transform: scale(1.05);
+        }
+
+        .proxima-info {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            color: #065f46;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar-left, .sidebar-right {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Слънце и звезди</h1>
+    </div>
+
+    <div class="navigation">
+        <a href="zad60.html">Речник</a> |
+        <a href="Upr1.html">Начало</a>
+    </div>
+
+    <div class="main-container">
+        <div class="sidebar-left">
+            <div class="info-box">
+                <h3>Нашата звезда - Слънцето:</h3>
+                <p>Огромно огнено кълбо от нажежени газове (водород и хелий). Това състояние се нарича плазма. Радиусът на Слънцето е 109 пъти по-голям от радиуса на Земята.</p>
+                
+                <p>Ядрото на Слънцето има температура 16 000 000 K и в него протича ядрен синтез, при който водородни ядра се сливат, превръщат се в хелиеви и се освобождава енергия.</p>
+                
+                <p>Над ядрото се намира <strong>ФОТОСФЕРАТА</strong> (видимата повърхност на Слънцето с температура 5 500°C = 5773 K). Над фотосферата е слънчевата корона и тя се разпростира на милиони километри.</p>
+            </div>
+
+            <div class="star-types">
+                <h3>Други звезди</h3>
+                <p><strong>Според размера:</strong> Свръхгиганти, гиганти, джуджета</p>
+                <p><strong>Според цвета (температурата):</strong> Сини, синкавобели, бели, жълтобели, жълти, оранжеви и червени.</p>
+                <p><strong>Най-горещи</strong> са сините (50 000 К), а <strong>най-студени</strong> - червените (3000К)</p>
+                <p>Видими за човешкото око са звездите с температура от 3 000 К до 25 000 К</p>
+            </div>
+
+            <div class="supernova-section">
+                <img src="136[1].jpg" alt="Свръхнова звезда" width="194" height="192">
+                <h4>Свръхнова звезда</h4>
+            </div>
+        </div>
+<div class="test-section">
+                
+                <div class="question">
+        
+<body>
+
+  <!-- Увери се, че GIF файлът се намира в същата папка -->
+  <img src="sun-18283_128.gif" alt="Слънце" class="sun-gif">
+
+</body>
+<div class="main-content"> <h1>Тест №27</h1>
+            
+                    <p><b>Зад.1. Какъв е цветът на Нашата звезда?</b></p>
+                    <div class="answer-option">а) син;</div>
+                    <div class="answer-option">б) червен;</div>
+                    <div class="answer-option">в) оранжев;</div>
+                    <div class="answer-option">г) жълт.</div>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.2. Кои небесни тела наричаме звезди?</b></p>
+                    <div class="answer-option">а) които светят на нощното небе;</div>
+                    <div class="answer-option">б) които имат големи размери;</div>
+                    <div class="answer-option">в) които излъчват собствена светлина.</div>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.3. Какъв е източникът на енергия в Слънцето и звездите?</b></p>
+                    <div class="answer-option">а) делене на ядра;</div>
+                    <div class="answer-option">б) естествена радиоактивност;</div>
+                    <div class="answer-option">в) сливане на ядра.</div>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.4. Какво представлява светлинната година?</b></p>
+                    <div class="answer-option">а) физично явление;</div>
+                    <div class="answer-option">б) мерна единица за време;</div>
+                    <div class="answer-option">в) мерна единица за разстояние;</div>
+                    <div class="answer-option">г) физична величина.</div>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.5. Какво се нарича фотосфера?</b></p>
+                    <div class="answer-option">а) недрата на звезда;</div>
+                    <div class="answer-option">б) видимата повърхност на Слънцето;</div>
+                    <div class="answer-option">в) най-горният слой на Слънцето.</div>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.6. Плътността на веществото в ядрото на Слънцето е 150 kg/cm³. Ако се напълни съд с вместимост един литър, колко ще тежи?</b></p>
+                </div>
+
+                <div class="question">
+                    <p><b>Зад.7. Когато Слънцето се превърне в бяло джудже (това е етап от еволюцията на звездата) неговата плътност ще бъде 1000 kg/cm³. Колко би тежал съд с вместимост един литър, ако е напълнен с това вещество?</b></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-right">
+            <h5  style="text-align: center; color: #4f46e5; margin-bottom: 25px;">Ден и нощ </h5>
+<body>
+
+  <!-- Увери се, че GIF файлът се намира в същата папка -->
+  <img src="85.gif" alt="." class="sun-gif">
+
+</body>
+ <h2 style="text-align: center; color: #4f46e5; margin-bottom: 25px;">Съзвездията</h2>
+           
+
+            <div class="constellation-item">
+                <img src="455[1].jpg" alt="Орел" width="230" height="230">
+                <h4>Орел</h4>
+            </div>
+
+            <div class="constellation-item">
+                <img src="132[1].jpg" alt="Рак" width="230" height="230">
+                <h4>Рак</h4>
+            </div>
+
+            <div class="constellation-item">
+                <img src="144[1].jpg" alt="Центавър" width="230" height="230">
+                <h4>Центавър</h4>
+                <div class="proxima-info">
+                    В това съзвездие се намира най-близката до Слънцето звезда - Проксима. Тя е на 4,3 светлинни години.
+                </div>
+            </div>
+
+            <div class="constellation-item">
+                <h4>Орион</h4>
+                <img src="420[1].jpg" alt="Орион" width="230" height="230">
+                <p style="font-size: 0.9em; color: #6b7280;">Звездна карта на съзвездието Орион</p>
+
+
+        
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <a href="zad63.html">Справочник</a> |
+        <a href="zad62.html">Начална страница</a> |
+        <a href="zad41.html">Предишен урок</a> |
+        <a href="zad51.html">Упътване</a> |
+        <a href="zad68.html">Ключ</a> |
+        <a href="zad43.html">Следващ урок</a>
+    </div>
+</body>
+</html>

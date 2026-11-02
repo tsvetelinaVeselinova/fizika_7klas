@@ -1,0 +1,356 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Мощност на тока</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+/* Layout: три полета в редица (понятия | задачи | формули), синя лента отгоре, сиви полета, синьо оживяване на тока */
+:root {
+  --bg: #e4e9f0;
+  --field-side: #d7dee8;
+  --field-main: #f6f9fd;
+  --fig: #cbd5e1;
+  --edge: #b5c1d0;
+  --ink: #1b2a3a;
+  --ink-soft: #46586b;
+  --blue: #0f6fb8;
+  --blue-deep: #0a4a80;
+  --blue-soft: #d2e5f6;
+  --btn: #0c61a3;
+  --on-blue: #ffffff;
+  --glow: rgba(15, 111, 184, .38);
+  --lamp: #f3c64a;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c131c;
+    --field-side: #18222e;
+    --field-main: #121b27;
+    --fig: #0f1823;
+    --edge: #2b3846;
+    --ink: #e3eaf2;
+    --ink-soft: #9db0c4;
+    --blue: #4aa3ea;
+    --blue-deep: #14578f;
+    --blue-soft: #17324d;
+    --btn: #1d6cb0;
+    --glow: rgba(74, 163, 234, .45);
+    --lamp: #f0c24a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c131c;
+  --field-side: #18222e;
+  --field-main: #121b27;
+  --fig: #0f1823;
+  --edge: #2b3846;
+  --ink: #e3eaf2;
+  --ink-soft: #9db0c4;
+  --blue: #4aa3ea;
+  --blue-deep: #14578f;
+  --blue-soft: #17324d;
+  --btn: #1d6cb0;
+  --glow: rgba(74, 163, 234, .45);
+  --lamp: #f0c24a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  padding-block: 20px 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 16px; }
+
+/* Лента */
+.band {
+  position: relative;
+  background: linear-gradient(100deg, var(--blue-deep), var(--blue));
+  color: var(--on-blue);
+  padding: 18px 22px 22px;
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px;
+  overflow: hidden;
+  animation: rise .6s ease-out backwards;
+}
+.band h1 {
+  margin: 0; font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.1; text-wrap: balance;
+}
+.band p { margin: 0; font-size: .95rem; opacity: .92; }
+.band::after {            /* ток, който тече по долния ръб */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.9) 0 18px, transparent 18px 46px);
+  background-size: 92px 100%;
+  animation: flow 1.6s linear infinite;
+}
+
+/* Полета */
+.fields { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 960px) { .fields { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr); align-items: start; } }
+
+.field {
+  border: 1px solid var(--edge);
+  background: var(--field-side);
+  animation: rise .7s ease-out backwards;
+}
+.field:nth-child(1) { animation-delay: .1s; }
+.field:nth-child(2) { animation-delay: .22s; }
+.field:nth-child(3) { animation-delay: .34s; }
+.field.main { background: var(--field-main); border-color: var(--blue); }
+.field > header {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  font-size: .8rem; padding: 9px 16px; background: var(--edge); color: var(--ink);
+}
+.field.main > header { background: var(--blue); color: var(--on-blue); }
+.field .body { padding: 16px; display: grid; gap: 14px; }
+h2 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.2; text-wrap: balance; }
+p { margin: 0; }
+.soft { color: var(--ink-soft); }
+
+/* Формули */
+.formula {
+  font-family: var(--font-mono); font-weight: 600; font-size: 1rem;
+  background: var(--fig); border-left: 4px solid var(--blue);
+  padding: 8px 12px; overflow-x: auto; white-space: nowrap;
+}
+.formula b { color: var(--blue); }
+.formula.key { animation: glow 2.6s ease-in-out infinite; font-size: 1.2rem; }
+
+.units { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-variant-numeric: tabular-nums; margin: 0; }
+.units dt { font-family: var(--font-mono); font-weight: 600; color: var(--blue); }
+.units dd { margin: 0; }
+
+/* Схема */
+figure { margin: 0; background: var(--fig); padding: 8px; }
+figure svg { display: block; width: 100%; height: auto; }
+figcaption { text-align: center; font-size: .85rem; color: var(--ink-soft); padding-top: 4px; }
+.wire { stroke: var(--blue); stroke-width: 4; stroke-dasharray: 2 11; stroke-linecap: round; fill: none; animation: dash 1.1s linear infinite; }
+.sym { stroke: var(--ink); stroke-width: 3; fill: none; stroke-linecap: round; }
+.lamp { fill: var(--lamp); transform-origin: 210px 75px; animation: lamp 1.8s ease-in-out infinite; }
+.svg-label { fill: var(--ink-soft); font-family: var(--font-mono); font-size: 13px; font-weight: 600; }
+
+/* Задачи */
+.task { display: grid; gap: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--edge); }
+.task:last-child { border-bottom: 0; padding-bottom: 0; }
+.task h3 { margin: 0; font-size: 1rem; font-weight: 600; text-wrap: pretty; }
+.task h3 span { color: var(--blue); font-family: var(--font-display); margin-right: 6px; }
+.task ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.task li { padding: 4px 10px; border-left: 3px solid transparent; transition: background .2s, border-color .2s, transform .2s; }
+.task li:hover { background: var(--blue-soft); border-left-color: var(--blue); transform: translateX(4px); }
+button {
+  justify-self: start; font: inherit; font-size: .88rem; font-weight: 500; color: #fff; background: var(--btn);
+  border: 0; padding: 7px 14px; cursor: pointer; transition: filter .2s, transform .1s;
+}
+button:hover { filter: brightness(1.12); }
+button:active { transform: translateY(1px); }
+button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.solution { background: var(--blue-soft); border-left: 4px solid var(--blue); padding: 10px 14px; animation: reveal .35s ease-out; }
+.solution .formula { background: transparent; border: 0; padding: 2px 0; }
+
+.nav { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .9rem; color: var(--ink-soft); }
+
+@keyframes rise { from { opacity: .3; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes flow { to { background-position: 92px 0; } }
+@keyframes dash { to { stroke-dashoffset: -13; } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 transparent; } 50% { box-shadow: 0 0 18px 2px var(--glow); } }
+@keyframes lamp { 0%, 100% { opacity: .55; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<main class="wrap">
+  <div class="band">
+    <h1> Мощност на електрическия ток</h1>
+   <h3>Тест № 13</h3>
+  </div>
+
+  <div class="fields">
+
+    <!-- Поле 1 -->
+    <section class="field" aria-labelledby="f1">
+      <header id="f1">Понятия</header>
+      <div class="body">
+        <p><strong>Мощност на тока</strong> се нарича преобразуваната за една секунда електрична енергия.</p>
+
+        <div>
+          <h2>Мерни единици</h2>
+          <dl class="units">
+            <dt>W</dt><dd>ват</dd>
+            <dt>1 kW</dt><dd>1 000 W</dd>
+            <dt>1 MW</dt><dd>1 000 000 W</dd>
+            <dt>1 GW</dt><dd>1 000 000 000 W</dd>
+          </dl>
+        </div>
+
+        <div class="formula">P = A / t = W / t</div>
+        <div class="formula">P = I·U·t / t = I·U</div>
+        <div class="formula key"><b>P = I·U</b> (1)</div>
+
+        <figure>
+          <svg viewBox="0 0 240 150" role="img" aria-label="Проста електрическа верига с източник и крушка">
+            <path class="wire" d="M30 30 H210 V120 H30 Z"/>
+            <rect x="14" y="56" width="32" height="38" fill="var(--fig)"/>
+            <path class="sym" d="M22 62 H38 M26 70 H34 M22 80 H38 M26 88 H34"/>
+            <rect x="192" y="55" width="36" height="40" fill="var(--fig)"/>
+            <circle class="lamp" cx="210" cy="75" r="14"/>
+            <path class="sym" d="M200 65 L220 85 M220 65 L200 85"/>
+            <text class="svg-label" x="108" y="22">I →</text>
+            <text class="svg-label" x="48" y="78">U</text>
+            <text class="svg-label" x="222" y="52">R</text>
+          </svg>
+          <figcaption>Ватметър измерва мощността</figcaption>
+        </figure>
+   </div>
+
+
+<img src="512[1].jpg" width="260" height="230" alt="."> 
+<p>уред за измерване на мощността на електричния ток</p>
+    </section>
+
+
+
+     
+
+
+
+    <!-- Поле 2 -->
+    <section class="field main" aria-labelledby="f2">
+      <header id="f2">Задачи</header>
+      <div class="body">
+
+        <article class="task">
+          <h3><span>Зад. 1</span>Коя е мерната единица за мощност?</h3>
+          <ul><li>а) J</li><li>б) J·s</li><li>в) J/s</li><li>г) kWh</li></ul>
+         
+
+        <article class="task">
+          <h3><span>Зад. 2</span>Уредът, който измерва консумираната електроенергия, е:</h3>
+          <ul><li>а) ватметър</li><li>б) електромер</li><li>в) електрометър</li><li>г) волтметър</li></ul>
+          
+        <article class="task">
+          <h3><span>Зад. 3</span>Направете необходимите пресмятания и подредете електроуредите по мощност в нарастващ ред:</h3>
+          <ul>
+            <li>а) котлон, който за 4 минути преобразува 48 kJ електроенергия;</li>
+            <li>б) телевизор, който за 1 час преобразува 432 kJ електроенергия;</li>
+            <li>в) прахосмукачка, която за 30 секунди преобразува 48 kJ електроенергия.</li>
+          </ul>
+          
+
+        <article class="task">
+          <h3><span>Зад. 4</span>Каква е мощността на нагревател със съпротивление 4000 Ω, ако през него тече ток 250 mA?</h3>
+          <button type="button" aria-expanded="false" data-target="s4">Покажи решение</button>
+          <div class="solution" id="s4" hidden>
+            <div class="formula">I = 250 mA = 0,25 A</div>
+            <div class="formula">P = I²·R = 0,0625 · 4000 = 250 W</div>
+          </div>
+        </article>
+
+        <article class="task">
+          <h3><span>Зад. 5</span>Колко ома е съпротивлението на електрическа лампа, която е предназначена за напрежение 4,2 V и мощност 12 W?</h3>
+          <button type="button" aria-expanded="false" data-target="s5">Покажи решение</button>
+          <div class="solution" id="s5" hidden>
+            <div class="formula">R = U² / P = 17,64 / 12 ≈ 1,47 Ω</div>
+          </div>
+        </article>
+
+        <article class="task">
+          <h3><span>Зад. 6</span>Попълнете пропуснатите числа:</h3>
+          <ul>
+            <li>а) 7,2 GW = ….. kW</li>
+            <li>б) 80 000 W = ….. MW</li>
+            <li>в) 5 kWh = ….. J</li>
+            <li>г) 7,2 MJ = ….. kWh</li>
+          </ul>
+        </article>
+  <a href="zad63.html" class="nav-button">Справочник</a>
+        <article class="task">
+          <h3><span>Зад. 7</span>Резистор със съпротивление 5 Ω консумира мощност 8 W. Каква е мощността на резистор със съпротивление 15 Ω? Обосновете отговора си.</h3>
+        </article>
+  <a href="zad53.html" class="nav-button">Речник</a>
+                <div class="navigation">
+                    <a href="zad15.html" class="nav-button">Ел. ток</a>
+                    <a href="zad16.html" class="nav-button">Напрежение</a>
+                     <a href="zad20.html" class="nav-button">Предишен</a>
+                     <a href="zad22.html" class="nav-button">Следващ</a>
+ <a href="zad49.html" class="nav-button">Упътване</a>
+<a href="zad66.html" class="nav-button">Ключ</a>
+                </div>
+            </div>
+        
+        
+        
+    </section>
+
+    <!-- Поле 3 -->
+    <section class="field" aria-labelledby="f3">
+      <header id="f3">Други формули</header>
+      <div class="body">
+        <h2>Мощност на консуматорите</h2>
+
+        <p class="soft">Ако заместим закона на Ом във формула (1), ще получим:</p>
+        <div class="formula">P = U / R · U</div>
+        <div class="formula"><b>P = U² / R</b> (2)</div>
+
+        <p class="soft">Ако изразим напрежението от закона на Ом (U = I·R) и го заместим във формула (1):</p>
+        <div class="formula">P = I·I·R</div>
+        <div class="formula"><b>P = I²·R</b> (3)</div>
+
+        <p class="soft">Ако разгледаме формулите за количеството топлина (закон на Джаул–Ленц), стигаме до извода:</p>
+        <div class="formula"><b>P = Q / t</b> (4)</div>
+      </div>
+   
+<p><b>Задача: Омметърът, включен във веригата отчита съпротивление <br> 4 кΩ,  а напрежението върху резистора е 220 V. 
+Определете мощността на тока.</b></p>
+<p>Дадено:</br>
+R = 4 кΩ = 4 000 Ω </br>
+U = 220 V </br>
+
+
+</p>
+Да се намери:</br>
+
+Р =?</br></p>
+
+Формула:</br>
+
+<p> Р  = U <sup>2</sup> / R</br></p>
+
+Решение:</br>
+
+
+<p>Заместваме: Р  = 220 <sup>2</sup>  / 4 000  </br>= 48 400 : 4 000 = 12,1  </br></p>
+
+
+Отговор: Мощността на тока е 12,1 W </br>
+            </div>
+
+   </div>
+  </div>
+</main>
+ </section>
+<script>
+document.querySelectorAll('button[data-target]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var box = document.getElementById(btn.dataset.target);
+    var open = box.hidden;
+    box.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Скрий решението' : 'Покажи решение';
+  });
+});
+</script>
+
+</body></html>
